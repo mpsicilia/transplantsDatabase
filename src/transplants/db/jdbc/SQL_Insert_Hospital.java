@@ -1,11 +1,9 @@
 package transplants.db.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.io.*;
+import java.sql.*;
 
-public class SQL_Insert_Animal {
-
+public class SQL_Insert_Hospital {
 	public static void main(String args[]) {
 		try {
 			// Open database connection
@@ -16,14 +14,15 @@ public class SQL_Insert_Animal {
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO Animal_tissues (name, tissue_type, patient_pathology,"
-					+ " time_that_lasts) VALUES ('" + name + "', '" + tissue_type + "',"
-					+ " '" + patient_pathology + "', '" + time_that_lasts + "');";
+			String sql = "INSERT INTO hospital (name, Phone number, address, city"
+					+ "postcode, country) VALUES ('" + name + "', '" + phone_number + "',"
+					+ " '" + address + "', '" + city + "', '" + postcode + "', '" + country + "');";
 			
 			
 			stmt.executeUpdate(sql);
 			stmt.close();
-
+			System.out.println("Department info processed");
+			System.out.println("Records inserted.");
 			// Insert new record: end
 
 			

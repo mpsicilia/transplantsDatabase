@@ -15,7 +15,11 @@ public class SQL_Insert_Request {
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
+<<<<<<< HEAD
 			String sql = "INSERT INTO Requested_organ (name, max_weight, min_weight) "
+=======
+			String sql = "INSERT INTO requested_organ (name, max_weight, min_weight) "
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 					+ "VALUES ('" + name + "', '" + max_weight + "', '" + min_weight + "');";
 			
 			
