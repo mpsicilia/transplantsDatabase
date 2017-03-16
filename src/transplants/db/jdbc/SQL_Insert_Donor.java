@@ -9,15 +9,15 @@ public class SQL_Insert_Donor {
 		try {
 			// Open database connection
 			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplants.db");//CAMBIARRRR
+			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//CAMBIARRRR
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO donor (birth_date, weight, height, gender"
-					+ "physical_state, blood_type) VALUES ('" + birth_date + "', '" + weight + "',"
-					+ " '" + height + "', '" + gender + "', '" + physical_state + "', '" + blood_type + "');";
+			String sql = "INSERT INTO Donors (birth_date, weight, height, gender"
+					+ "dead_alive, blood_type) VALUES ('" + birth_date + "', '" + weight + "',"
+					+ " '" + height + "', '" + gender + "', '" + dead_alive + "', '" + blood_type + "');";
 			
 			
 			stmt.executeUpdate(sql);

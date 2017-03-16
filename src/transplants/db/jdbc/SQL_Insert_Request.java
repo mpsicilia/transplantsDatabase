@@ -9,17 +9,14 @@ public class SQL_Insert_Request {
 		try {
 			// Open database connection
 			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplants.db");//CAMBIARRRR
+			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//CAMBIARRRR
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-<<<<<<< HEAD
-			String sql = "INSERT INTO Requested_organ (name, max_weight, min_weight) "
-=======
-			String sql = "INSERT INTO requested_organ (name, max_weight, min_weight) "
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
+
+			String sql = "INSERT INTO Requested_organs (name, max_weight, min_weight) "
 					+ "VALUES ('" + name + "', '" + max_weight + "', '" + min_weight + "');";
 			
 			

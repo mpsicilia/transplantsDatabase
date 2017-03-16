@@ -9,13 +9,13 @@ public class SQL_Insert_Organ {
 		try {
 			// Open database connection
 			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplants.db");//CAMBIARRRR
+			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//CAMBIARRRR
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO organ (name, weight, type_of_donation) "
+			String sql = "INSERT INTO Organs (name, weight, type_of_donation) "
 					+ " VALUES ('" + name + "', '" + weight + "',"
 					+ " '" + type_of_donation + "');";
 			

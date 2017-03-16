@@ -10,13 +10,13 @@ public class SQL_Insert_Patient {
 		try {
 			// Open database connection
 			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplants.db");//CAMBIARRRR
+			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//CAMBIARRRR
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO patient (birth_date, weight, height, gender"
+			String sql = "INSERT INTO Patients (birth_date, weight, height, gender"
 					+ "pathology, blood_type, addition_date, life_expectancy) "
 					+ "VALUES ('" + bith_date + "', '" + weight + "', '" + height + "', '"
 					+ "'" + gender + "', '" + pathology + "', '" + blood_type + "', "

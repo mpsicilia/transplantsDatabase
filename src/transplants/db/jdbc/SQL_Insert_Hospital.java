@@ -8,13 +8,13 @@ public class SQL_Insert_Hospital {
 		try {
 			// Open database connection
 			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplants.db");//CAMBIARRRR
+			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//CAMBIARRRR, cambiado
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO hospital (name, Phone number, address, city"
+			String sql = "INSERT INTO Hospitals (name, phone_number, address, city"
 					+ "postcode, country) VALUES ('" + name + "', '" + phone_number + "',"
 					+ " '" + address + "', '" + city + "', '" + postcode + "', '" + country + "');";
 			
