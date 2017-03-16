@@ -1,5 +1,5 @@
 package transplants.db.pojos;
 
-public class Donors {
+public class Patient {
 
 }
