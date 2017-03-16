@@ -102,14 +102,14 @@ public class Animal_tissue implements Serializable {
 	
 	
 	//Add to the list
-	public void addRequestedOrgan(RequestedOrgan organ) {
+	public void addRequestedOrgan(Requested_organ organ) {
 		if (!requestedOrgans.contains(organ)) {
 			this.requestedOrgans.add(organ);
 		}
 	}
 
 	//Remove from the list
-	public void removeRequestedOrgan(RequestedOrgan organ) {
+	public void removeRequestedOrgan(Requested_organ organ) {
 		if (requestedOrgans.contains(organ)) {
 			this.requestedOrgans.remove(organ);
 		}
