@@ -2,6 +2,8 @@ package transplants.db.ui;
 
 import java.io.*;
 
+import transplants.db.pojos.Hospital;
+
 public class Insert_Hospitals {
 	public static void main(String args[]){
 		try{
@@ -26,7 +28,7 @@ public class Insert_Hospitals {
 			
 			System.out.print("Country: ");
 			String country = reader.readLine();
-		
+			Hospital hospital= new Hospital(name, phone_number, address, city, post_code, country);
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
