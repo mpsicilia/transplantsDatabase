@@ -17,9 +17,8 @@ public class Hospital implements Serializable{
 	public Hospital (){
 		}
 	
-	public Hospital(Integer id, String name, String phone_number, String address, String city, String postcode,
+	public Hospital(String name, String phone_number, String address, String city, String postcode,
 			String country) {
-		this.id = id;
 		this.name = name;
 		this.phone_number = phone_number;
 		this.address = address;
@@ -109,6 +108,12 @@ public class Hospital implements Serializable{
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	@Override
+	public String toString() {
+		return "Hospital [name=" + name + ", phone_number=" + phone_number + ", address=" + address + ", city=" + city
+				+ ", postcode=" + postcode + ", country=" + country + "]";
 	}
 	
 	

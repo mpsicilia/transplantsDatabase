@@ -4,9 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class SQL_Insert_Doctor {
+public class SQL_Insert_Doctor {{
 
-	public static void main(String args[]) {
 		try {
 			// Open database connection
 			Class.forName("org.sqlite.JDBC");
@@ -19,7 +18,6 @@ public class SQL_Insert_Doctor {
 			String sql = "INSERT INTO Doctors (registration_number, specialization"
 					+ " VALUES ('" + registration_number + "', '" + specialization + "')";
 			
-			
 			stmt.executeUpdate(sql);
 			stmt.close();
 			System.out.println("Department info processed");
@@ -30,5 +28,5 @@ public class SQL_Insert_Doctor {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-}
+}}
+
