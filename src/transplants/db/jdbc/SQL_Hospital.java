@@ -10,14 +10,14 @@ public class SQL_Hospital {
 	Connection c;
 	List <Hospital> hospital= new ArrayList<Hospital>();
 	
-	private void SQL_Hospital(){
+	private SQL_Hospital(){
 		this.Connect();
 	}
 	
 	private void Connect(){
 		try{
 			Class.forName("org.sqlite.JDBC");
-			this.c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//CAMBIARRRR, cambiado
+			this.c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
        }catch(Exception e){
@@ -51,11 +51,8 @@ public class SQL_Hospital {
 			Statement stmt = c.createStatement();
 			String sql = "SELECT * FROM HOSPITAL";
 			ResultSet rs = stmt.executeQuery(sql);
-			if {
-				//si coinciden los hospitales devolver el que estoy buscando
-			}else{
-				//si no coinciden devolver una lista vacia
-			}
+		
+
 			rs.close();
 		    stmt.close();
 		}catch(Exception e){

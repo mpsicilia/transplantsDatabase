@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class SQL_Insert_Donor {
+public class SQL_Donor {
 	public static void main(String args[]) {
 		try {
 			// Open database connection
