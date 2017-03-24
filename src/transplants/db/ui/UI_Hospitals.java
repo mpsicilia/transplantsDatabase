@@ -1,16 +1,22 @@
 package transplants.db.ui;
 
 import java.io.*;
+import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.SQL_Hospital;
 import transplants.db.pojos.Hospital;
 
-public class Insert_Hospitals {
+public class UI_Hospitals {
+	private SQL_Hospital hospital;
 	
+	public static void main(String args[]){	
+		UI_Hospitals ui = new UI_Hospitals();
+	}
 	
-	public static void main(String args[]){		
-		SQL_Hospital hospital= new SQL_Hospital();
+	private UI_Hospitals(){		
+		hospital=new SQL_Hospital();
+		
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
 	        int opcion=0;
@@ -28,6 +34,7 @@ public class Insert_Hospitals {
 	        	 	case 1: 
 	        	 		Hospital hosp= Add_Hospital();
 	        	 		hospital.Insert_Hospital(hosp);
+	        	 		break;
 	        	 	case 2: {
 	                      String name_hospital;
 	                        do{
@@ -35,12 +42,12 @@ public class Insert_Hospitals {
 	                            name_hospital= console.readLine();
 	                            try{
 	                               List< Hospital> hospToShow= hospital.Search_Hospital(name_hospital);
-	                               //Hay que arreglar esto... pensarlo mañana en clase
 	                               printList(hospToShow);
-	                                break;
+	                                
 	                            }catch (Exception ex){
 	                                ex.printStackTrace();
 	                            }
+	                            break;
 	                        }while (name_hospital!=null);
 	                        break;
 	        	 	}
@@ -53,11 +60,17 @@ public class Insert_Hospitals {
 			ex.printStackTrace();
 		}
 	}
-	public static void printList(List <Hospital> hospToShow){
-		//printearlo como en el de bacterias desde el toString
+	
+
+	public void printList(List <Hospital> hospToShow){
+		 System.out.println("The information is: ");
+		 System.out.println(hospToShow.toString());//how to show if the user only writes
+		 //saint instead of the full name. because how it is now only shows 1 hosp if you 
+		 //write the exact name
+		 
 	}
 
-	public static Hospital Add_Hospital(){
+	public Hospital Add_Hospital(){
 		Hospital hosp=null;
 		try{
 			System.out.println("Please, introduce the hospital information: ");

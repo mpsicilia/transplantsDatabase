@@ -10,7 +10,7 @@ public class SQL_Hospital {
 	Connection c;
 	List <Hospital> hospital= new ArrayList<Hospital>();
 	
-	private void SQL_Hospital(){
+	public SQL_Hospital(){
 		this.Connect();
 	}
 	
@@ -36,7 +36,7 @@ public class SQL_Hospital {
 	public void Insert_Hospital(Hospital hospital){
 		try{
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO Hospitals (name, phone_number, address, city"
+			String sql = "INSERT INTO Hospitals (name, phone_number, address, city, "
 					+ "postcode, country) VALUES ('" + hospital.getName() + "', '" + hospital.getPhone_number() + "',"
 					+ " '" + hospital.getAddress() + "', '" + hospital.getCity() + "', '" + hospital.getPostcode() + "', '" + hospital.getCountry() + "');";
 			stmt.executeUpdate(sql);
@@ -47,23 +47,33 @@ public class SQL_Hospital {
 	}
 	
 	public List<Hospital> Search_Hospital(String name){
+		List <Hospital> lookForHospital=new ArrayList<Hospital>();
 		try{
 			Statement stmt = c.createStatement();
-			String sql = "SELECT * FROM HOSPITAL";
+			String sql = "SELECT * FROM Hospitals WHERE name LIKE '%"+ name+ "%'";
 			ResultSet rs = stmt.executeQuery(sql);
-			if {
-				//si coinciden los hospitales devolver el que estoy buscando
-			}else{
-				//si no coinciden devolver una lista vacia
+			while(rs.next()){
+				int id= rs.getInt("id");
+				String name1=rs.getString("name");
+				if (name.equals(name1)){					
+					String phone_number1= rs.getString("phone_number");
+					String address1= rs.getString("address");
+					String city1= rs.getString("city");
+					String postcode1= rs.getString("postcode");
+					String country1= rs.getString("country");
+					Hospital hospitalToShow=new Hospital(id,name1, phone_number1,address1, city1, postcode1, country1);
+				    lookForHospital.add(hospitalToShow);					
+				}				
 			}
 			rs.close();
-		    stmt.close();
+			stmt.close();
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		
 		}
-		//return //buscar todo entre los hospitales y devolver dentro del try y despues
-				//pasarle el string con loque quiere buscar
+		return lookForHospital;
+
 	}
 		
 	public void Create_Table(){

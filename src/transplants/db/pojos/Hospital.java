@@ -29,6 +29,17 @@ public class Hospital implements Serializable{
 	
 	
 
+	public Hospital(int id, String name, String phone_number, String address, String city, String postcode,
+			String country) {
+		this.id=id;
+		this.name = name;
+		this.phone_number = phone_number;
+		this.address = address;
+		this.city = city;
+		this.postcode = postcode;
+		this.country = country;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
