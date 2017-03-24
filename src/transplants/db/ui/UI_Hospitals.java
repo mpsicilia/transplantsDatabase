@@ -60,7 +60,6 @@ public class UI_Hospitals {
 			ex.printStackTrace();
 		}
 	}
-	
 
 	public void printList(List <Hospital> hospToShow){
 		 System.out.println("The information is: ");
