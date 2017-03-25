@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class SQL_Insert_Doctor {{
+public class SQL_Doctor {{
 
 		try {
 			// Open database connection
@@ -15,10 +15,10 @@ public class SQL_Insert_Doctor {{
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO Doctors (registration_number, specialization"
+			/*String sql = "INSERT INTO Doctors (registration_number, specialization"
 					+ " VALUES ('" + registration_number + "', '" + specialization + "')";
 			
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(sql);*/
 			stmt.close();
 			System.out.println("Department info processed");
 			System.out.println("Records inserted.");

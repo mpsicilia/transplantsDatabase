@@ -2,8 +2,6 @@ package transplants.db.pojos;
 
 import java.io.Serializable;
 
-import sample.db.pojos.Report;
-
 public class Animal_tissue implements Serializable {
 	
 	private static final long serialVersionUID = 2350829857786761680L;
@@ -14,25 +12,25 @@ public class Animal_tissue implements Serializable {
 	private String pathology;
 	private int time;
 	
-	private List<Requested_organ> requestedOrgans;
+	/*private List<Requested_organ> requestedOrgans;
 	
 	
 	
 	public Animal_tissue() {
 		super();
 		this.requestedOrgans = new ArrayList <Requested_organ>();
-	}
+	}*/
 	
 		
-	public Animal_tissue(int id, String name, String type_of_tissue, String pathology, int time,
-			List<Requested_organ> requestedOrgans) {
+	public Animal_tissue(int id, String name, String type_of_tissue, String pathology, int time
+			/*List<Requested_organ> requestedOrgans*/) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.type_of_tissue = type_of_tissue;
 		this.pathology = pathology;
 		this.time = time;
-		this.requestedOrgans = requestedOrgans;
+		//this.requestedOrgans = requestedOrgans;
 	}
 
 
@@ -102,7 +100,7 @@ public class Animal_tissue implements Serializable {
 	
 	
 	//Add to the list
-	public void addRequestedOrgan(Requested_organ organ) {
+	/*public void addRequestedOrgan(Requested_organ organ) {
 		if (!requestedOrgans.contains(organ)) {
 			this.requestedOrgans.add(organ);
 		}
@@ -112,6 +110,6 @@ public class Animal_tissue implements Serializable {
 	public void removeRequestedOrgan(Requested_organ organ) {
 		if (requestedOrgans.contains(organ)) {
 			this.requestedOrgans.remove(organ);
-		}
-	}
+		}*/
+	
 }

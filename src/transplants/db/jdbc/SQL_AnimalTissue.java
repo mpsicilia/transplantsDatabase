@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class SQL_Insert_AnimalTissues {
+public class SQL_AnimalTissue {
 
 	public static void main(String args[]) {
 		try {
@@ -16,12 +16,12 @@ public class SQL_Insert_AnimalTissues {
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO Animal_tissues (name, type_of_tissue, pathology,"
+			/*String sql = "INSERT INTO Animal_tissues (name, type_of_tissue, pathology,"
 					+ " time) VALUES ('" + name + "', '" + type_of_tissue + "',"
-					+ " '" + pathology + "', '" + time + "');";
+					+ " '" + pathology + "', '" + time + "');";*/
 			
 			
-			stmt.executeUpdate(sql);
+			//stmt.executeUpdate(sql);
 			stmt.close();
 
 			// Insert new record: end

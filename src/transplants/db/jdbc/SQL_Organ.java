@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class SQL_Insert_Organ {
+public class SQL_Organ {
 	public static void main(String args[]) {
 		try {
 			// Open database connection
@@ -15,12 +15,12 @@ public class SQL_Insert_Organ {
 			
 			// Insert new record: begin
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO Organs (name, weight, type_of_donation) "
+			/*String sql = "INSERT INTO Organs (name, weight, type_of_donation) "
 					+ " VALUES ('" + name + "', '" + weight + "',"
 					+ " '" + type_of_donation + "');";
 			
 			
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(sql);*/
 			stmt.close();
 			System.out.println("Department info processed");
 			System.out.println("Records inserted.");

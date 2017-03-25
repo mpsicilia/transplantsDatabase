@@ -1,6 +1,6 @@
 package transplants.db.pojos;
 
-public class Organs {
+public class Organ {
 
 	
 }
