@@ -8,33 +8,24 @@ public class Animal_tissue implements Serializable {
 	
 	private int id;
 	private String name;
-	private String type_of_tissue;
+	private String typeOfTissue;
 	private String pathology;
-	private int time;
-	
-	/*private List<Requested_organ> requestedOrgans;
-	
-	
+	private int timeItLasts;
 	
 	public Animal_tissue() {
 		super();
-		this.requestedOrgans = new ArrayList <Requested_organ>();
-	}*/
+	}
 	
 		
-	public Animal_tissue(int id, String name, String type_of_tissue, String pathology, int time
-			/*List<Requested_organ> requestedOrgans*/) {
+	public Animal_tissue(int id, String name, String typeOfTissue, String pathology, int time) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.type_of_tissue = type_of_tissue;
+		this.typeOfTissue = typeOfTissue;
 		this.pathology = pathology;
-		this.time = time;
-		//this.requestedOrgans = requestedOrgans;
+		this.timeItLasts = time;
 	}
 
-
-	
 
 	@Override
 	public int hashCode() {
@@ -62,8 +53,8 @@ public class Animal_tissue implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Animal_tissue [id=" + id + ", name=" + name + ", type_of_tissue=" + type_of_tissue + ", pathology="
-				+ pathology + ", time=" + time + "]";
+		return "Animal_tissue [id=" + id + ", name=" + name + ", type_of_tissue=" + typeOfTissue + ", pathology="
+				+ pathology + ", time=" + timeItLasts + "]";
 	}
 
 
@@ -79,11 +70,11 @@ public class Animal_tissue implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getType_of_tissue() {
-		return type_of_tissue;
+	public String getTypeOfTissue() {
+		return typeOfTissue;
 	}
-	public void setType_of_tissue(String type_of_tissue) {
-		this.type_of_tissue = type_of_tissue;
+	public void setTypeOfTissue(String typeOfTissue) {
+		this.typeOfTissue = typeOfTissue;
 	}
 	public String getPathology() {
 		return pathology;
@@ -91,25 +82,11 @@ public class Animal_tissue implements Serializable {
 	public void setPathology(String pathology) {
 		this.pathology = pathology;
 	}
-	public int getTime() {
-		return time;
+	public int getTimeItLasts() {
+		return timeItLasts;
 	}
-	public void setTime(int time) {
-		this.time = time;
+	public void setTimeItLasts(int timeItLasts) {
+		this.timeItLasts = timeItLasts;
 	}
-	
-	
-	//Add to the list
-	/*public void addRequestedOrgan(Requested_organ organ) {
-		if (!requestedOrgans.contains(organ)) {
-			this.requestedOrgans.add(organ);
-		}
-	}
-
-	//Remove from the list
-	public void removeRequestedOrgan(Requested_organ organ) {
-		if (requestedOrgans.contains(organ)) {
-			this.requestedOrgans.remove(organ);
-		}*/
 	
 }
