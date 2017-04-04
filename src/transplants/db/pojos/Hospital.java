@@ -122,8 +122,9 @@ public class Hospital implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Hospital [name=" + name + ", phone_number=" + phone_number + ", address=" + address + ", city=" + city
-				+ ", postcode=" + postcode + ", country=" + country + "]";
+	
+		return "Hospital: \nname=" + name + ", \nphone_number=" + phone_number + ", \naddress=" + address + ", \ncity=" + city
+				+ ", \npostcode=" + postcode + ", \ncountry=" + country + "]\n";
 	}
 	
 	

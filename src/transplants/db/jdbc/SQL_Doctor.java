@@ -4,29 +4,50 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class SQL_Doctor {{
+import transplants.db.pojos.Doctor;
 
+public class SQL_Doctor {
+	
+	public SQL_Doctor(){
+		
+	}
+	
+	public String insertDoctor(Doctor doctor){
+		String sql="";
 		try {
-			// Open database connection
-			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//CAMBIARRRR
-			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			System.out.println("Database connection opened.");
-			
-			// Insert new record: begin
-			Statement stmt = c.createStatement();
-			/*String sql = "INSERT INTO Doctors (registration_number, specialization"
-					+ " VALUES ('" + registration_number + "', '" + specialization + "')";
-			
-			stmt.executeUpdate(sql);*/
-			stmt.close();
-			System.out.println("Department info processed");
-			System.out.println("Records inserted.");
-			// Insert new record: end
-
+			sql = "INSERT INTO Doctors (registration_number, specialization"
+					+ " VALUES ('" + doctor.getRegistrationNumber() + "', '" + doctor.getSpecialization() + "')";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-}}
+		return sql;
+		
+	}
+	public void Create_Table() {
+		DBManager db=new DBManager ();
+		try {
+			Statement stmt2 = db.getC().createStatement();
+			String doctors = "CREATE TABLE Doctors "
+					   + "(id       			INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					   + " registration_number 	TEXT,"
+					   + " specialization 		TEXT,"
+					   + " hospital_id			INTEGER REFERENCES Hospitals(id))";
+			stmt2.executeUpdate(doctors);
+			stmt2.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+
+
+			
+
+			
+
+
+}
 
