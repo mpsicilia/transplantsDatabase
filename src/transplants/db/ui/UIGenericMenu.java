@@ -52,6 +52,7 @@ public class UIGenericMenu {
 	        			String country = console.readLine();
 	        			
 	        			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
+	        			
 	        	 		//Hospital hosp= db.Add_Hospital();
 	        			boolean ok=db.insert(hosp);
 	        			if (ok){

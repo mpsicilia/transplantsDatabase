@@ -63,7 +63,7 @@ public class DBManager implements DBManagerInterface{
 				Hospital hospital=(Hospital)obj;			
 				sql=hosp.insertHospital(hospital);
 			}
-			if (doct.getClass()==obj.getClass()){
+			if (Doctor.class==obj.getClass()){
 				Doctor doctor=(Doctor)obj;			
 				sql=doct.insertDoctor(doctor);
 			}

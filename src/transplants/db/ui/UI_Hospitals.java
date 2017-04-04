@@ -33,7 +33,7 @@ public class UI_Hospitals {
 	        	 switch (opcion){
 	        	 	case 1: 
 	        	 		Hospital hosp= Add_Hospital();
-	        	 		hospital.Insert_Hospital(hosp);
+	        	 		hospital.insertHospital(hosp);
 	        	 		break;
 	        	 	case 2: {
 	                      String name_hospital;
