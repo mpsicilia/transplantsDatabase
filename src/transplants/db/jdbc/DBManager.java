@@ -3,6 +3,7 @@ package transplants.db.jdbc;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -55,35 +56,34 @@ public class DBManager implements DBManagerInterface{
 
 	@Override
 	public boolean insert(Object obj) {
-		String sql="";		
+			
 		try{
 			hosp = new SQL_Hospital(this); //create connection
-			Statement stmt = c.createStatement();//not parameter 
-	
+				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;			
-				sql=hosp.insertHospital(hospital);
-				
-			}
-			if (Doctor.class==obj.getClass()){
-				Doctor doctor=(Doctor)obj;			
-				sql=doct.insertDoctor(doctor);
+				return hosp.insertHospital(hospital);
 			}
 			
-			stmt.executeUpdate(sql);			
-			stmt.close();			
-			return true;
+			/*if (Doctor.class==obj.getClass()){
+				Doctor doctor=(Doctor)obj;			
+				sql=doct.insertDoctor(doctor);
+			}*/
+						
+			
 		
-		}catch (SQLException e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
 
 	@Override
-	public List<Object> search(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Object> search(String name, Object obj) {
+		
+		
+		
+		
 	}
 
 	@Override

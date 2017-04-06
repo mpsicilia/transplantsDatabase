@@ -12,7 +12,7 @@ public interface DBManagerInterface {
 	
 	public boolean insert(Object obj);
 	
-	public List<Object> search(String name); 
+	public List<Object> search(String name, Object obj); 
 	
 	public boolean update (Object obj);
 	

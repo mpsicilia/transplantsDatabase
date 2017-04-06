@@ -14,24 +14,29 @@ public class SQL_Hospital {
 		dmanager.connect();
 	}
 
-	public String insertHospital(Hospital hospital) {
+	public boolean insertHospital(Hospital hospital) {
 		String sql="";
 		try {
+			Statement stmt = dmanager.getC().createStatement();
 			sql = "INSERT INTO Hospitals (name, phone_number, address, city, " + "postcode, country) VALUES ('"
 					+ hospital.getName() + "', '" + hospital.getPhone_number() + "'," + " '" + hospital.getAddress()
 					+ "', '" + hospital.getCity() + "', '" + hospital.getPostcode() + "', '" + hospital.getCountry()
 					+ "');";
+			stmt.executeUpdate(sql);			
+			stmt.close();
+			return true;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return sql;
+		return false;
 	}
+	
 
-	/*public List<Hospital> Search_Hospital(String name) {
+	public List<Hospital> Search_Hospital(String name) {
 		List<Hospital> lookForHospital = new ArrayList<Hospital>();
 		try {
-			Statement stmt = c.createStatement();
+			Statement stmt = dmanager.getC().createStatement();
 			String sql = "SELECT * FROM Hospitals WHERE name LIKE '%" + name + "%'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -54,7 +59,7 @@ public class SQL_Hospital {
 		}
 		return lookForHospital;
 
-	}*/
+	}
 
 	public void Create_Table() {
 		try {
