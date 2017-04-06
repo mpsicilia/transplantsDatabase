@@ -41,8 +41,8 @@ public class UI_Hospitals {
 	                            System.out.println("Introduce the name of the hospital that you want: ");
 	                            name_hospital= console.readLine();
 	                            try{
-	                               List< Hospital> hospToShow= hospital.Search_Hospital(name_hospital);
-	                               printList(hospToShow);
+	                              // List< Hospital> hospToShow= hospital.Search_Hospital(name_hospital);
+	                              // printList(hospToShow);
 	                                
 	                            }catch (Exception ex){
 	                                ex.printStackTrace();
