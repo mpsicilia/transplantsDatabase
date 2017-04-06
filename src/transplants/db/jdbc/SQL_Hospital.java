@@ -14,7 +14,6 @@ public class SQL_Hospital {
 		dmanager.connect();
 	}
 
-
 	public String insertHospital(Hospital hospital) {
 		String sql="";
 		try {

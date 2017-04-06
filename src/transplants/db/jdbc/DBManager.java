@@ -71,8 +71,7 @@ public class DBManager implements DBManagerInterface{
 			}
 			
 			stmt.executeUpdate(sql);			
-			stmt.close();
-			
+			stmt.close();			
 			return true;
 		
 		}catch (SQLException e) {
