@@ -1,7 +1,11 @@
 package transplants.db.pojos;
 
-public class Requested_organ {
+import java.io.Serializable;
+
+public class Requested_organ implements Serializable {
 	
+	
+	private static final long serialVersionUID = -2088889973279102023L;
 	private Integer id;
 	private String name;
 	private Float maxWeight;

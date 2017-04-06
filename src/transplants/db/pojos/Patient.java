@@ -3,7 +3,9 @@ package transplants.db.pojos;
 import java.sql.Date;
 
 public class Patient extends Person{
-//should this one implement Serializable? Should person? Or both?
+
+	private static final long serialVersionUID = -6077511442892940517L;
+	//should this one implement Serializable? Should person? Or both?
 	private String lifeExpectancy;
 	private Date additionDate;
 	

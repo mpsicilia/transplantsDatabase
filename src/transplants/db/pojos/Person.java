@@ -1,8 +1,11 @@
 package transplants.db.pojos;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Person {
+public class Person implements Serializable {
+	
+	private static final long serialVersionUID = 8117129296546913171L;
 	protected Integer id;
 	protected Date birthDate;
 	protected Float weight;
