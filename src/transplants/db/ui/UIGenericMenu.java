@@ -11,50 +11,54 @@ import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 
 public class UIGenericMenu {
-
-	//private BufferedReader reader;
-	//private Integer option;
 	
-	public static void main (String []args){
-		DBManager db=new DBManager();
+	private BufferedReader reader;
+	private Integer option=0;
+	private DBManager dbM;
+	
+	public static void main(String [] args){
+		UIGenericMenu genericM= new UIGenericMenu();
+	}
+	
+	private UIGenericMenu(){
+		dbM=new DBManager();
 		
 		try{
-			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
-	        int opcion=0;
+			reader = new BufferedReader (new InputStreamReader (System.in));
 	        while(true){
 	        	System.out.println("MENU: ");
 	        	System.out.println("1. Introduce a new hospital ");
 	        	System.out.println("2. Introduce a new doctor ");
 	        	 do{
 	                    System.out.println("option[1-3]:");
-	                    String leido= console.readLine();
-	                    opcion= Integer.parseInt(leido);            
-	                }while (opcion<0|| opcion>3);
-	        	 switch (opcion){
+	                    String leido= reader.readLine();
+	                    option= Integer.parseInt(leido);            
+	                }while (option<0|| option>3);
+	        	 switch (option){
 	        	 	case 1: {
 	        	 		System.out.print("Name: ");
-	        			String name = console.readLine();
+	        			String name = reader.readLine();
 	        			//We are going to make phone number, address and postcode Strings to give the 
 	        			//user more freedom for ex: (216)444-2200
 	        			System.out.print("Phone number: ");
-	        			String phone_number = console.readLine();
+	        			String phone_number = reader.readLine();
 	        			
 	        			System.out.print("Address: ");
-	        			String address = console.readLine();
+	        			String address = reader.readLine();
 	        			
 	        			System.out.print("City: ");
-	        			String city = console.readLine();
+	        			String city = reader.readLine();
 	        			
 	        			System.out.print("Postcode: ");
-	        			String post_code = console.readLine();
+	        			String post_code = reader.readLine();
 	        			
 	        			System.out.print("Country: ");
-	        			String country = console.readLine();
+	        			String country = reader.readLine();
 	        			
 	        			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
 	        			
 	        	 		//Hospital hosp= db.Add_Hospital();
-	        			boolean ok=db.insert(hosp);
+	        			boolean ok=dbM.insert(hosp);
 	        			if (ok){
 	        				System.out.print("Hospital introduced");
 	        			}else{
@@ -65,12 +69,12 @@ public class UIGenericMenu {
 	        	 	}
 	        	 	case 2:{
 	        	 		System.out.print("Registration number");
-	        			String reg = console.readLine();
+	        			String reg = reader.readLine();
 	        			
 	        			System.out.print("Specialization ");
-	        			String spe = console.readLine();
+	        			String spe = reader.readLine();
 	        			Doctor doct= new Doctor(reg, spe);
-	        			if (db.insert(doct)){
+	        			if (dbM.insert(doct)){
 	        				System.out.print("Doctor introduced");
 	        			}else{
 	        				System.out.print("Doctor not introduced");
@@ -85,5 +89,6 @@ public class UIGenericMenu {
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
+	}
 	
-}}
+}
