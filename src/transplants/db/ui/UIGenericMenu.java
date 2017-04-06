@@ -27,8 +27,8 @@ public class UIGenericMenu {
 	        	System.out.println("2. Introduce a new doctor ");
 	        	 do{
 	                    System.out.println("option[1-3]:");
-	                    String leido= console.readLine();
-	                    opcion= Integer.parseInt(leido);            
+	                    String read= console.readLine();
+	                    opcion= Integer.parseInt(read);            
 	                }while (opcion<0|| opcion>3);
 	        	 switch (opcion){
 	        	 	case 1: {
