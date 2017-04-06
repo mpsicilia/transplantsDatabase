@@ -7,8 +7,11 @@ import transplants.db.pojos.Hospital;
 
 public class SQL_Hospital {
 
+	private DBManager dmanager;
 
-	public SQL_Hospital() {
+	public SQL_Hospital(DBManager dbmanager) {
+		this.dmanager = dbmanager;
+		dmanager.connect();
 	}
 
 
@@ -55,9 +58,8 @@ public class SQL_Hospital {
 	}*/
 
 	public void Create_Table() {
-		DBManager db= new DBManager();
 		try {
-			Statement stmt1 = db.getC().createStatement();
+			Statement stmt1 = dmanager.getC().createStatement();
 			String hospitals = "CREATE TABLE Hospitals " 
 					+ "(id      		INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " name     		TEXT     NOT NULL, " 

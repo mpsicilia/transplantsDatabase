@@ -14,11 +14,11 @@ public class DBManager implements DBManagerInterface{
 	private Connection c;
 	private SQL_Hospital hosp;
 	private SQL_Doctor doct;
-	private SQL_Patient pat;
+	/*private SQL_Patient pat;
 	private SQL_AnimalTissue animalT;
 	private SQL_Organ org;
 	private SQL_Donor don;
-	private SQL_Request req;
+	private SQL_Request req;*/
 
 	
 	public DBManager() {
@@ -35,8 +35,8 @@ public class DBManager implements DBManagerInterface{
 			Class.forName("org.sqlite.JDBC");//to create a connection
 			this.c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//specific directory(.: actual current directory)
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			hosp=new SQL_Hospital();
-			doct=new SQL_Doctor();
+			//hosp=new SQL_Hospital();
+			//doct=new SQL_Doctor();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -57,6 +57,7 @@ public class DBManager implements DBManagerInterface{
 	public boolean insert(Object obj) {
 		String sql="";		
 		try{
+			hosp = new SQL_Hospital(this); //create connection
 			Statement stmt = c.createStatement();//not parameter 
 	
 			if (Hospital.class==obj.getClass()){

@@ -16,7 +16,7 @@ public class UIGenericMenu {
 	//private Integer option;
 	
 	public static void main (String []args){
-		DBManager db=new DBManager();
+		DBManager dmanager = new DBManager();
 		
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
@@ -53,8 +53,8 @@ public class UIGenericMenu {
 	        			
 	        			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
 	        			
-	        	 		//Hospital hosp= db.Add_Hospital();
-	        			boolean ok=db.insert(hosp);
+	        	 		//Hospital hosp= dmanager.Add_Hospital();
+	        			boolean ok=dmanager.insert(hosp);
 	        			if (ok){
 	        				System.out.print("Hospital introduced");
 	        			}else{
@@ -70,7 +70,7 @@ public class UIGenericMenu {
 	        			System.out.print("Specialization ");
 	        			String spe = console.readLine();
 	        			Doctor doct= new Doctor(reg, spe);
-	        			if (db.insert(doct)){
+	        			if (dmanager.insert(doct)){
 	        				System.out.print("Doctor introduced");
 	        			}else{
 	        				System.out.print("Doctor not introduced");
