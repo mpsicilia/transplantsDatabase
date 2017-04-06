@@ -15,7 +15,7 @@ public class UIGenericMenu {
 	private BufferedReader reader;
 	private Integer option=0;
 	private DBManager dbM;
-	
+	//
 	public static void main(String [] args){
 		UIGenericMenu genericM= new UIGenericMenu();
 	}
