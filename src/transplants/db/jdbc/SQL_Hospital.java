@@ -15,10 +15,10 @@ public class SQL_Hospital {
 	}
 
 	public boolean insertHospital(Hospital hospital) {
-		String sql="";
+		
 		try {
 			Statement stmt = dmanager.getC().createStatement();
-			sql = "INSERT INTO Hospitals (name, phone_number, address, city, " + "postcode, country) VALUES ('"
+			String sql = "INSERT INTO Hospitals (name, phone_number, address, city, " + "postcode, country) VALUES ('"
 					+ hospital.getName() + "', '" + hospital.getPhone_number() + "'," + " '" + hospital.getAddress()
 					+ "', '" + hospital.getCity() + "', '" + hospital.getPostcode() + "', '" + hospital.getCountry()
 					+ "');";
@@ -33,7 +33,7 @@ public class SQL_Hospital {
 	}
 	
 
-	public List<Hospital> Search_Hospital(String name) {
+	public List<Hospital> searchHospital(String name) {
 		List<Hospital> lookForHospital = new ArrayList<Hospital>();
 		try {
 			Statement stmt = dmanager.getC().createStatement();
@@ -60,8 +60,49 @@ public class SQL_Hospital {
 		return lookForHospital;
 
 	}
+	
+	public boolean updateHospital (Hospital hosp){		
+		try {
+			String sql = "UPDATE Hospitals SET name=?, phone_number=?, address=?,"
+					+ "city =?, postcode=?, country=? WHERE id=?";
+			PreparedStatement prep = dmanager.getC().prepareStatement(sql);
+			prep.setString(1, hosp.getName());
+			prep.setString(2, hosp.getPhone_number());
+			prep.setString(3, hosp.getAddress());
+			prep.setString(4, hosp.getCity());
+			prep.setString(5, hosp.getPostcode());
+			prep.setString(6, hosp.getCountry());
+			prep.setInt(7, hosp.getId());
+			prep.executeUpdate();
+			prep.close();
+			
+		return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 
-	public void Create_Table() {
+		}
+		return false;
+	}
+	
+	public boolean deleteHospital (Hospital hospital){
+		try{
+			String sql = "DELETE FROM Hospitals WHERE id=?";
+			PreparedStatement prep = dmanager.getC().prepareStatement(sql);
+			prep.setInt(1, hospital.getId());
+			prep.executeUpdate(sql);
+			prep.close();
+			
+			return true;
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	public void CreateTable() {
 		try {
 			Statement stmt1 = dmanager.getC().createStatement();
 			String hospitals = "CREATE TABLE Hospitals " 
@@ -74,6 +115,14 @@ public class SQL_Hospital {
 					+ " country			TEXT)";
 			stmt1.executeUpdate(hospitals);
 			stmt1.close();
+			
+			Statement stmt2 = dmanager.getC().createStatement();
+			String hospitalsDoctors = "CREATE TABLE HospitalsDoctors " 
+					+ "(doctor_id   INTEGER  REFERENCES Doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					+ "hospital_id	INTEGER  REFERENCES Hospitals(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+				    + "PRIMARY KEY (doctor_id,hospital_id))";
+			stmt2.executeUpdate(hospitalsDoctors);
+			stmt2.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

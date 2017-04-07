@@ -53,7 +53,7 @@ public class SQL_Create {
 			
 			Statement stmt4 = c.createStatement(); //table for n-n relationship between doctors and patients
 			String doctors_patients = "CREATE TABLE Doctors_patients "
-					   + "(registration_number      INTEGER  REFERENCES Doctors(registration_number) ON UPDATE CASCADE ON DELETE CASCADE,"
+					   + "(dosctor_id    INTEGER  REFERENCES Doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " patient_id  				INTEGER  REFERENCES Patients(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " PRIMARY KEY (registration_number,patient_id))";
 			stmt4.executeUpdate(doctors_patients);
