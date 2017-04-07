@@ -53,7 +53,7 @@ public class SQL_Doctor {
 		}
 	}
 	
-	/*public List<Doctor> selectAll(){
+	/*public List<Doctor> selectAllDoctors(){//esto esta mal pq es n-n
 		try{
 		Statement stmt= dbmanager.getC().createStatement();
 		String sql= "SELECT * FROM Doctors";

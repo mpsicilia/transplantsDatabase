@@ -58,7 +58,20 @@ public class SQL_Hospital {
 
 		}
 		return lookForHospital;
-
+	}
+	
+	public String searchInSQL (Integer id){
+		String searchSql = "";
+		try{
+			Statement stmt = dmanager.getC().createStatement();
+			searchSql = "SELECT name FROM Hospitals WHERE id=" + id + "";
+			stmt.executeUpdate(searchSql);
+			stmt.close();
+			return searchSql;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return searchSql;
 	}
 	
 	public boolean updateHospital (Hospital hosp){		
@@ -100,6 +113,33 @@ public class SQL_Hospital {
 		}
 		
 		return false;
+	}
+	
+	public List<Hospital> selectAllHospitals() {
+		List<Hospital> lookForHospital = new ArrayList<Hospital>();
+		try {
+			Statement stmt = dmanager.getC().createStatement();
+			String sql = "SELECT * FROM Hospitals";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name1 = rs.getString("name");
+				String phone_number1 = rs.getString("phone_number");
+				String address1 = rs.getString("address");
+				String city1 = rs.getString("city");
+				String postcode1 = rs.getString("postcode");
+				String country1 = rs.getString("country");
+				Hospital hospitalToShow = new Hospital(id, name1, phone_number1, address1, city1, postcode1, country1);
+				lookForHospital.add(hospitalToShow);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return lookForHospital;
 	}
 
 	public void CreateTable() {
