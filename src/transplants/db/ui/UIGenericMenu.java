@@ -3,7 +3,9 @@ package transplants.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
+
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jdbc.SQL_Hospital;
@@ -25,6 +27,7 @@ public class UIGenericMenu {
 	        	System.out.println("MENU: ");
 	        	System.out.println("1. Introduce a new hospital ");
 	        	System.out.println("2. Introduce a new doctor ");
+	        	System.out.println("3. Search a hospital ");
 	        	 do{
 	                    System.out.println("option[1-3]:");
 	                    String read= console.readLine();
@@ -77,6 +80,18 @@ public class UIGenericMenu {
 	        			}
 	        	 		break;
 	        	 	}
+	        	 	case 3:
+	        	 		System.out.println("Introduce the name of the hospital: ");
+	        	 		String name = console.readLine();
+	        	 		
+	        	 		List <Hospital> hospitals = dmanager.searchHosp(name);
+	        	 		//para acordarme de como recorrer la lista he mirado como lo hice en la practica de java
+	        	 		Iterator <Hospital> it = hospitals.iterator();
+	        	 		while (it.hasNext()){
+	        	 			Hospital h = it.next();
+	        	 			System.out.println(h);
+	        	 		}
+	        	 		
 	        	 	}
 	        	 		 		System.exit(0);
 	        	 }
