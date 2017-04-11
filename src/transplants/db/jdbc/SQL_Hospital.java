@@ -3,6 +3,7 @@ package transplants.db.jdbc;
 import java.sql.*;
 import java.util.*;
 
+import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 
 public class SQL_Hospital {
@@ -60,11 +61,15 @@ public class SQL_Hospital {
 		return lookForHospital;
 	}
 	
-	public String searchInSQL (Integer id){
+	//method that tell us given a specific doctor, in which hospital he works
+	public String searchDoctorInHospital (String doctorName){
 		String searchSql = "";
 		try{
 			Statement stmt = dmanager.getC().createStatement();
-			searchSql = "SELECT name FROM Hospitals WHERE id=" + id + "";
+			searchSql = "SELECT Hosp.name, Doct.name FROM Hospitals "
+					+ "AS Hosp JOIN HospitalsDoctors AS HospDocts ON Hosp.id=HospDocts.hospital_id "
+					+ "RIGHT JOIN Doctors AS Doct ON Doct.id=HospDocts.doctor_id "
+					+ "WHERE Doct.name LIKE '" + doctorName + "'";
 			stmt.executeUpdate(searchSql);
 			stmt.close();
 			return searchSql;
@@ -142,7 +147,7 @@ public class SQL_Hospital {
 		return lookForHospital;
 	}
 
-	public void CreateTable() {
+	public void createTable() {
 		try {
 			Statement stmt1 = dmanager.getC().createStatement();
 			String hospitals = "CREATE TABLE Hospitals " 
@@ -152,7 +157,7 @@ public class SQL_Hospital {
 					+ " address  		TEXT	 NOT NULL, " 
 					+ " city 			TEXT," 
 					+ " postcode		TEXT,"
-					+ " country			TEXT)";
+					+ " country			TEXT     NOT NULL)";
 			stmt1.executeUpdate(hospitals);
 			stmt1.close();
 			
