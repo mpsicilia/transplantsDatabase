@@ -73,11 +73,11 @@ public class UIGenericMenu {
 	        	 		
 	        	 	}
 	        	 	case 2:{	        	 		
-	        	 		System.out.print("1. Search a specific hospital.");
-	        	 		System.out.print("2. Check the information of a specific patient.");
-	        	 		System.out.print("3. Check the information of a specific donor.");
-	        	 		System.out.print("4. Check the information of a specific doctor.");
-	        	 		System.out.print("5. Check the characteristics of an organ.");
+	        	 		System.out.print("\n1. Search a specific hospital. ");
+	        	 		System.out.print("\n2. Check the information of a specific patient. ");
+	        	 		System.out.print("\n3. Check the information of a specific donor. ");
+	        	 		System.out.print("\n4. Check the information of a specific doctor. ");
+	        	 		System.out.print("\n5. Check the characteristics of an organ. "); 
 	        	 		//cuando hagamos esta opcion tenia pensado hacer que el usuario decidiese si quiere 
 	        	 		//un organo para donar o para recibir, o nose como veais vosotras, en plan mostrar no modificar
 	        	 		System.out.println("\nChoose an option[1-5]:");
@@ -85,14 +85,38 @@ public class UIGenericMenu {
 	                    int option2= Integer.parseInt(read2); 
 	                    switch(option2){
 	                    	case 1:
-	                    		uiHospital.searchHospital();
+	                    		List<Hospital> hosps = uiHospital.searchHospital();
+	                    		//para acordarme de como recorrer la lista he mirado como lo hice en la practica de java
+	                    		Iterator <Hospital> it = hosps.iterator();
+	                	 		int n = 1;
+	                	 		while (it.hasNext()){
+	                	 			Hospital h = it.next();
+	                	 			System.out.println(n + ". " + h);
+	                	 			n++;
+	                	 		}
+	                	 		
 	                    		System.out.print("RELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
-	                    		System.out.print("1. Update information.");
-	                    		System.out.print("2. Delete information.");
+	                    		System.out.print("\n1. Update information.");
+	                    		System.out.print("\n2. Delete hospital.");
 	                    		System.out.print("\nChoose an option[1-2]:");
 	                    		String opt = console.readLine();
 	                    		int op = Integer.parseInt(opt);
+	                    		switch (op){
+	                    			case 1:
+	                    				System.out.println("Introduce the number of the hospital: ");
+	                    				int numHosp = Integer.parseInt(console.readLine());
+	                    				Hospital hospUp = hosps.get(numHosp-1);
+	                    				uiHospital.updateHospital(hospUp);
+	                    				break;
+	                    			case 2:
+	                    				System.out.println("Introduce the number of the hospital: ");
+	                    				int num = Integer.parseInt(console.readLine());
+	                    				Hospital hospDel = hosps.get(num-1);
+	                    				uiHospital.deleteHospital(hospDel);
+	                    				break;
+	                    		}
 	                    		break;
+	                    		
 	                    	case 2:
 	                    	case 3:
 	                    	case 4:
@@ -100,6 +124,7 @@ public class UIGenericMenu {
 	                    }
 	        	 		
 	        	 	}
+	        	 	break;
 	        	 	//al igual podemos hacer solo dos opciones generales y a partir de ahi poner
 	        	 	//todas estas opciones. Seguro que lo vamos viendo a medida que lo vayamos haciendo
 	        	 	//pero he apuntado las ideas aqui para que no se nos olviden
