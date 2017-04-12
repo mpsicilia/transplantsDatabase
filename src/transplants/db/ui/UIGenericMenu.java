@@ -22,7 +22,7 @@ public class UIGenericMenu {
 	}	
 	
 	public UIGenericMenu(){
-		DBManager dmanager = new DBManager();
+		//DBManager dmanager = new DBManager(); //xq haria falta crear este dbmanager si en cada ui_entity lo creamos??
 		UI_Hospitals uiHospital=new UI_Hospitals();
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
@@ -36,7 +36,7 @@ public class UIGenericMenu {
 	        	System.out.println("Tables should be already created");
 	        }
 	        while(true){
-	        	System.out.println("MENU: ");
+	        	System.out.println("\nMENU: ");
 	        	System.out.println("1. Introduce new information to the database. ");
 	        	System.out.println("2. Search for specific information in the database. ");
 	        	System.out.println("3. Options that this database offers in order to make "
@@ -44,20 +44,20 @@ public class UIGenericMenu {
 	        	System.out.println("4. Exit from the database. ");
 	        		        	
 	        	 do{
-	                    System.out.println("option[1-4]:");
+	                    System.out.println("\nChoose an option[1-4]:");
 	                    String read= console.readLine();
 	                    option= Integer.parseInt(read);            
 	                }while (option<0|| option>4);
 	        	 switch (option){
 	        	 	case 1: {
-	        	 		System.out.println("MENU: ");
+	        	 		System.out.println("\nMENU: ");
 	    	        	System.out.println("1. Introduce a new hospital. ");
 	    	        	System.out.println("2. Introduce a new patient. ");
 	    	        	System.out.println("3. Introduce a new donor.");
 	    	        	System.out.println("4. Introduce a new doctor. ");
 	    	        	System.out.println("5. Introduce a new request for an organ. ");
 	    	        	System.out.println("6. Introduce a new organ in order to be donanted. ");
-	    	        	System.out.println("option[1-6]:");
+	    	        	System.out.println("\nChoose an option[1-6]:");
 	                    String read1= console.readLine();
 	                    int option1= Integer.parseInt(read1); 
 	                    switch (option1){
@@ -79,8 +79,8 @@ public class UIGenericMenu {
 	        	 		System.out.print("4. Check the information of a specific doctor.");
 	        	 		System.out.print("5. Check the characteristics of an organ.");
 	        	 		//cuando hagamos esta opcion tenia pensado hacer que el usuario decidiese si quiere 
-	        	 		//un organo para donar o para recibir, o nose como veais vosotras
-	        	 		System.out.println("option[1-5]:");
+	        	 		//un organo para donar o para recibir, o nose como veais vosotras, en plan mostrar no modificar
+	        	 		System.out.println("\nChoose an option[1-5]:");
 	                    String read2= console.readLine();
 	                    int option2= Integer.parseInt(read2); 
 	                    switch(option2){
@@ -89,6 +89,9 @@ public class UIGenericMenu {
 	                    		System.out.print("RELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("1. Update information.");
 	                    		System.out.print("2. Delete information.");
+	                    		System.out.print("\nChoose an option[1-2]:");
+	                    		String opt = console.readLine();
+	                    		int op = Integer.parseInt(opt);
 	                    		break;
 	                    	case 2:
 	                    	case 3:
