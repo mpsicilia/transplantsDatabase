@@ -10,14 +10,13 @@ import transplants.db.pojos.Hospital;
 public class UI_Hospitals {
 	
 	private DBManager dbManager=new DBManager();
-	BufferedReader console;
+	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	
 	public UI_Hospitals(){		
 	}
 	
 	public void introduceNewHospital(){
 		try{
-			console= new BufferedReader (new InputStreamReader (System.in));
 			System.out.print("Name: ");
 			String name = console.readLine();
 			//We are going to make phone number, address and postcode Strings to give the 
@@ -53,7 +52,9 @@ public class UI_Hospitals {
 	public List<Hospital> searchHospital(){
 		try{
 			System.out.println("Introduce the name of the hospital: ");
-	 		String name = console.readLine();	 		
+	 		System.out.println("si");
+			String name = console.readLine();	 	
+			System.out.println("si");
 	 		List<Hospital> hospitals = dbManager.searchHosp(name);
 	 		return hospitals;
 		}catch (IOException ex){
@@ -109,7 +110,7 @@ public class UI_Hospitals {
 			
 			boolean updated = dbManager.update(hosp);
 			if(updated){
-				System.out.println("Hospital has been updated. "
+				System.out.println("Hospital has been updated. \n"
 						+ hosp.toString());
 			}
 			else{
