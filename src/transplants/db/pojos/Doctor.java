@@ -3,21 +3,30 @@ package transplants.db.pojos;
 import java.io.Serializable;
 
 public class Doctor implements Serializable{
-	
-	private static final long serialVersionUID = -7672023348972074686L;//generated verdad?
+
+	private static final long serialVersionUID = -1701687912909197672L;
 	private Integer id;
 	private String registrationNumber;
 	private String specialization;
+	private String nameOfDoctor;
 	
 	//our default constructor
 	public Doctor (){
 	}
 	
-	public Doctor(String registrationNumber, String specialization){
+	public Doctor(String registrationNumber, String specialization,String nameOfDoctor){
 		this.registrationNumber=registrationNumber;
 		this.specialization=specialization;
+		this.nameOfDoctor=nameOfDoctor;
 	}
 	
+	public Doctor(Integer id, String nameOfDoctor,String registrationNumber, String specialization){
+		this.id=id;
+		this.nameOfDoctor=nameOfDoctor;
+		this.registrationNumber=registrationNumber;
+		this.specialization=specialization;
+		
+	}
 	
 	
 	@Override
@@ -64,6 +73,20 @@ public class Doctor implements Serializable{
 	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
 	}
+	public String getNameOfDoctor() {
+		return nameOfDoctor;
+	}
+	public void setNameOfDoctor(String nameOfDoctor) {
+		this.nameOfDoctor = nameOfDoctor;
+	}
+
+	@Override
+	public String toString() {
+		return "Doctor [\nregistrationNumber=" + registrationNumber + ", \nspecialization=" + specialization
+				+ ", \nnameOfDoctor=" + nameOfDoctor + "]";
+	}
+	
+	
 	
 	
 }

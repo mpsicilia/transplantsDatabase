@@ -71,10 +71,10 @@ public class DBManager implements DBManagerInterface{
 				return hosp.insertHospital(hospital);
 			}
 			
-			/*if (Doctor.class==obj.getClass()){
+			if (Doctor.class==obj.getClass()){
 				Doctor doctor=(Doctor)obj;			
-				sql=doct.insertDoctor(doctor);
-			}*/
+				return doct.insertDoctor(doctor);
+			}
 						
 			
 		
@@ -98,7 +98,18 @@ public class DBManager implements DBManagerInterface{
 		return null;
 }
 		
-
+	@Override
+	public List<Doctor> searchDoctor(String name) {
+		try{
+			doct = new SQL_Doctor(this); //create connection
+			List<Doctor> doctList= doct.searchDoctor(name);
+			return doctList;
+			}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Override
 	public List<Animal_tissue> searchAnimalT(String name) {
@@ -106,11 +117,7 @@ public class DBManager implements DBManagerInterface{
 		return null;
 	}
 
-	@Override
-	public List<Doctor> searchDoctor(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public List<Donor> searchDonor(String name) {
@@ -142,9 +149,13 @@ public class DBManager implements DBManagerInterface{
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
-				return hosp.updateHospital(hospital);
-				
+				return hosp.updateHospital(hospital);				
 			}
+			if (Doctor.class==obj.getClass()){
+				Doctor doctor=(Doctor)obj;			
+				return doct.updateDoctor(doctor);
+			}
+			
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -159,8 +170,11 @@ public class DBManager implements DBManagerInterface{
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
 				return hosp.deleteHospital(hospital);
-				
 			}
+			/*if (Doctor.class==obj.getClass()){
+				Doctor doctor=(Doctor)obj;			
+				return doct.deleteDoctor(doctor);
+			}*/
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}

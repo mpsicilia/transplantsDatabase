@@ -3,7 +3,6 @@ package transplants.db.jdbc;
 import java.sql.*;
 import java.util.*;
 
-import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 
 public class SQL_Hospital {
@@ -15,8 +14,7 @@ public class SQL_Hospital {
 		dmanager.connect();
 	}
 
-	public boolean insertHospital(Hospital hospital) {
-		
+	public boolean insertHospital(Hospital hospital) {		
 		try {
 			Statement stmt = dmanager.getC().createStatement();
 			String sql = "INSERT INTO Hospitals (name, phone_number, address, city, " + "postcode, country) VALUES ('"
@@ -70,6 +68,29 @@ public class SQL_Hospital {
 					+ "AS Hosp JOIN HospitalsDoctors AS HospDocts ON Hosp.id=HospDocts.hospital_id "
 					+ "RIGHT JOIN Doctors AS Doct ON Doct.id=HospDocts.doctor_id "
 					+ "WHERE Doct.name LIKE '" + doctorName + "'";
+			stmt.executeUpdate(searchSql);
+			stmt.close();
+			return searchSql;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return searchSql;
+	}
+	
+	//method that tell us the hospital in which the transplant is taking place
+	//in order to know where is taking place, the user will introduce the name of the patient
+	//and the organ that that patient is going to receive.
+	//Shoud we put any other conditions????????????????????????????????????
+	public String searchHospitalByTransplantation (String patientName, String organReciving ){
+		String searchSql = "";
+		try{
+			Statement stmt = dmanager.getC().createStatement();
+			searchSql = "SELECT Hosp.name, Pat.name, Org.name FROM Hospitals "
+					+ "AS Hosp JOIN Patients AS Pat ON Hosp.id=Pat.hospital_id "
+					+ "JOIN Requested_organs AS Req ON Pat.id=Req.patient_id "
+					+ "JOIN Organs AS Org ON Req.id=Org.requested_id "
+					+ "WHERE Pat.name LIKE '" + patientName + "' AND Org.name "
+				    + "LIKE '"+ organReciving+ "'";
 			stmt.executeUpdate(searchSql);
 			stmt.close();
 			return searchSql;

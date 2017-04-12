@@ -1,48 +1,130 @@
 package transplants.db.jdbc;
 
-import java.util.List;
-import java.sql.Connection;
-import java.sql.DriverManager;
+
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import transplants.db.pojos.Doctor;
 
 public class SQL_Doctor {
 	
-	private DBManager dbmanager;
+	private DBManager dbManager;
 	
 	public SQL_Doctor(DBManager dbmanager){
-		this.dbmanager= dbmanager;
+		this.dbManager= dbmanager;
 		dbmanager.connect();
 	}
 	
-	public boolean insertDoctor(Doctor doctor){
-		
+	public boolean insertDoctor(Doctor doctor){		
 		try {
-			Statement stmt= dbmanager.getC().createStatement();
-			String sql = "INSERT INTO Doctors (registration_number, specialization"
-					+ " VALUES ('" + doctor.getRegistrationNumber() + "', '" + doctor.getSpecialization() + "')";
+			Statement stmt= dbManager.getC().createStatement();
+			String sql = "INSERT INTO Doctors (name, registrationNumber, specialization"
+					+ " VALUES ('" + doctor.getNameOfDoctor() + "', '" + doctor.getRegistrationNumber() + "', "
+					+ "'" + doctor.getSpecialization() + "')";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
-		
+		return false;	
 	}
 	
+	public List<Doctor> searchDoctor(String nameDoct) {
+		List<Doctor> lookForDoctor = new ArrayList<Doctor>();
+		try {
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Doctors WHERE name LIKE '%" + nameDoct + "%'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String nameDoctor = rs.getString("name");
+				String regNumber = rs.getString("registrationNumber");
+				String specializ = rs.getString("specialization");
+				Doctor doctorToShow = new Doctor(id, nameDoctor, regNumber, specializ);
+				lookForDoctor.add(doctorToShow);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return lookForDoctor;
+	}
+	
+	public boolean updateDoctor (Doctor doct){		
+		try {
+			String sql = "UPDATE Doctors SET name=?, registrationNumber=?, specialization=?"
+					+ " WHERE id=?";
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setString(1, doct.getNameOfDoctor());
+			prep.setString(2, doct.getRegistrationNumber());
+			prep.setString(3, doct.getSpecialization());
+			prep.setInt(4, doct.getId());
+			prep.executeUpdate();
+			prep.close();			
+		return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return false;
+	}
+	
+	/*public boolean deleteDoctor (Doctor doctor){
+		try{
+			String sql = "DELETE FROM Doctors WHERE id=?";
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setInt(1, doctor.getId());
+			prep.executeUpdate(sql);
+			prep.close();			
+			return true;
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return false;
+	}*/
+	
+	public List<Doctor> selectAllDoctors() {
+		List<Doctor> lookForDoctor = new ArrayList<Doctor>();
+		try {
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Doctors";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String nameDoctor = rs.getString("name");
+				String regNumber = rs.getString("registrationNumber");
+				String specializ = rs.getString("specialization");
+				Doctor doctorToShow = new Doctor(id, nameDoctor,regNumber,specializ);
+				lookForDoctor.add(doctorToShow);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return lookForDoctor;
+	}
+
 	
 	public void createTable() {
-		DBManager db=new DBManager ();
 		try {
-			Statement stmt2 = db.getC().createStatement();
+			Statement stmt2 = dbManager.getC().createStatement();
 			String doctors = "CREATE TABLE Doctors "
 					   + "(id       			INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					   + " registration_number 	TEXT,"
+					   + " name                 TEXT NOT NULL"
+					   + " registrationNumber 	TEXT NOT NULL,"
 					   + " specialization 		TEXT,"
 					   + " hospital_id			INTEGER REFERENCES Hospitals(id))";
 			stmt2.executeUpdate(doctors);
@@ -52,33 +134,5 @@ public class SQL_Doctor {
 			e.printStackTrace();
 		}
 	}
-	
-	/*public List<Doctor> selectAllDoctors(){//esto esta mal pq es n-n
-		try{
-		Statement stmt= dbmanager.getC().createStatement();
-		String sql= "SELECT * FROM Doctors";
-		ResultSet rs= stmt.executeQuery(sql);
-		List<Doctor> doctorsList= new ArrayList<Doctor>();
-		
-		while(rs.next()){
-			int id= rs.getInt("id");
-			String name= rs.getString("name");
-			String registration_number= rs.getString("registration_number");
-			String specialization= rs.getString("specialization");
-			//we have to create a getHospitals para la foreign kew
-	}
-	
-	
-		 
-	}catch(SQLException ex){
-		ex.printStackTrace();
-	}
-	}*/
-
-			
-
-			
-
-
 }
 
