@@ -14,10 +14,10 @@ public class Doctor implements Serializable{
 	public Doctor (){
 	}
 	
-	public Doctor(String registrationNumber, String specialization,String nameOfDoctor){
-		this.registrationNumber=registrationNumber;
-		this.specialization=specialization;
+	public Doctor(String nameOfDoctor,String registrationNumber, String specialization){
 		this.nameOfDoctor=nameOfDoctor;
+		this.registrationNumber=registrationNumber;
+		this.specialization=specialization;		
 	}
 	
 	public Doctor(Integer id, String nameOfDoctor,String registrationNumber, String specialization){

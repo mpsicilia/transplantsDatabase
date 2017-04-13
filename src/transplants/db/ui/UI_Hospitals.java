@@ -1,7 +1,6 @@
 package transplants.db.ui;
 
 import java.io.*;
-import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
@@ -52,10 +51,8 @@ public class UI_Hospitals {
 	public List<Hospital> searchHospital(){
 		try{
 			System.out.println("Introduce the name of the hospital: ");
-	 		System.out.println("si");
-			String name = console.readLine();	 	
-			System.out.println("si");
-	 		List<Hospital> hospitals = dbManager.searchHosp(name);
+	 		String name = console.readLine();	 	
+			List<Hospital> hospitals = dbManager.searchHosp(name);
 	 		return hospitals;
 		}catch (IOException ex){
 			ex.printStackTrace();

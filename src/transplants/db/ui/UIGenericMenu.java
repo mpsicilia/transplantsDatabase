@@ -8,7 +8,6 @@ import java.util.List;
 
 
 import transplants.db.jdbc.DBManager;
-import transplants.db.jdbc.SQL_Hospital;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 
@@ -24,6 +23,7 @@ public class UIGenericMenu {
 	public UIGenericMenu(){
 		//DBManager dmanager = new DBManager(); //xq haria falta crear este dbmanager si en cada ui_entity lo creamos??
 		UI_Hospitals uiHospital=new UI_Hospitals();
+		UI_Doctor uiDoctor=new UI_Doctor();
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
 	        int option=0;
@@ -52,9 +52,9 @@ public class UIGenericMenu {
 	        	 	case 1: {
 	        	 		System.out.println("\nMENU: ");
 	    	        	System.out.println("1. Introduce a new hospital. ");
-	    	        	System.out.println("2. Introduce a new patient. ");
+	    	        	System.out.println("2. Introduce a new doctor. ");
 	    	        	System.out.println("3. Introduce a new donor.");
-	    	        	System.out.println("4. Introduce a new doctor. ");
+	    	        	System.out.println("4. Introduce a new patient. ");
 	    	        	System.out.println("5. Introduce a new request for an organ. ");
 	    	        	System.out.println("6. Introduce a new organ in order to be donanted. ");
 	    	        	System.out.println("\nChoose an option[1-6]:");
@@ -65,6 +65,8 @@ public class UIGenericMenu {
 		                    	uiHospital.introduceNewHospital();
 		                    	break;
 		                    case 2:
+		                    	uiDoctor.introduceNewDoctor();
+		                    	break;
 		                    case 3:
 		                    case 4:
 		                    case 5:
@@ -74,9 +76,9 @@ public class UIGenericMenu {
 	        	 	}
 	        	 	case 2:{	        	 		
 	        	 		System.out.print("\n1. Search a specific hospital. ");
-	        	 		System.out.print("\n2. Check the information of a specific patient. ");
+	        	 		System.out.print("\n2. Check the information of a specific doctor. ");
 	        	 		System.out.print("\n3. Check the information of a specific donor. ");
-	        	 		System.out.print("\n4. Check the information of a specific doctor. ");
+	        	 		System.out.print("\n4. Check the information of a specific patient. ");
 	        	 		System.out.print("\n5. Check the characteristics of an organ. "); 
 	        	 		//cuando hagamos esta opcion tenia pensado hacer que el usuario decidiese si quiere 
 	        	 		//un organo para donar o para recibir, o nose como veais vosotras, en plan mostrar no modificar
@@ -88,13 +90,12 @@ public class UIGenericMenu {
 	                    		List<Hospital> hosps = uiHospital.searchHospital();
 	                    		//para acordarme de como recorrer la lista he mirado como lo hice en la practica de java
 	                    		Iterator <Hospital> it = hosps.iterator();
-	                	 		int n = 1;
+	                	 		int counter = 1;
 	                	 		while (it.hasNext()){
-	                	 			Hospital h = it.next();
-	                	 			System.out.println(n + ". " + h);
-	                	 			n++;
-	                	 		}
-	                	 		
+	                	 			Hospital hospi = it.next();
+	                	 			System.out.println(counter + ". " + hospi);
+	                	 			counter++;
+	                	 		}	                	 		
 	                    		System.out.print("RELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete hospital.");
@@ -118,6 +119,42 @@ public class UIGenericMenu {
 	                    		break;
 	                    		
 	                    	case 2:
+	                    		List <Doctor> doct= uiDoctor.searchDoctor();
+	                    		Iterator <Doctor> it1 = doct.iterator();
+	                	 		int counterDoctor = 1;
+	                	 		while (it1.hasNext()){
+	                	 			Doctor doctor = it1.next();
+	                	 			System.out.println(counterDoctor + ". " + doctor);
+	                	 			counterDoctor++;
+	                	 		}
+	                	 		System.out.print("RELATED WITH THE DOCTOR THAT YOU JUST LOOKED FOR:");
+	                    		System.out.print("\n1. Update information.");
+	                    		System.out.print("\n2. Delete information.");
+	                    		System.out.print("\n3. See the hospital in which the doctor works.");
+	                    		System.out.print("\nChoose an option[1-3]:");
+	                    		String optDoctor = console.readLine();
+	                    		int opDoctor = Integer.parseInt(optDoctor);
+	                    		switch (opDoctor){
+                    			case 1:
+                    				System.out.println("Introduce the number of the doctor: ");
+                    				int numDoct = Integer.parseInt(console.readLine());
+                    				Doctor DoctUp = doct.get(numDoct-1);
+                    				uiDoctor.updateDoctor(DoctUp);
+                    				break;
+                    			case 2:
+                    				System.out.println("Introduce the number of the doctor: ");
+                    				numDoct = Integer.parseInt(console.readLine());
+                    				Doctor doctDel = doct.get(numDoct-1);
+                    				//uiDoctor.deleteDoctor(doctDel);
+                    				break;
+                    			case 3: 
+                    				System.out.println("Introduce the number of the doctor: ");
+                    				numDoct = Integer.parseInt(console.readLine());
+                    				Doctor DoctSearch = doct.get(numDoct-1);
+                    				
+                    		}
+                    		break;
+	                    			
 	                    	case 3:
 	                    	case 4:
 	                    	case 5:
