@@ -21,11 +21,11 @@ public class DBManager implements DBManagerInterface{
 	private Connection c;
 	private SQL_Hospital hosp;
 	private SQL_Doctor doct;
-	/*private SQL_Patient pat;
+	private SQL_Patient pat;
 	private SQL_AnimalTissue animalT;
 	private SQL_Organ org;
 	private SQL_Donor don;
-	private SQL_Request req;*/
+	private SQL_Request req;
 
 	
 	public DBManager() {
@@ -59,12 +59,15 @@ public class DBManager implements DBManagerInterface{
 		}
 		
 	}
+	
 
 	@Override
 	public boolean insert(Object obj) {
 			
 		try{
-			hosp = new SQL_Hospital(this); //create connection
+			//create connections
+			hosp = new SQL_Hospital(this); 
+			doct = new SQL_Doctor (this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;			
@@ -145,7 +148,9 @@ public class DBManager implements DBManagerInterface{
 	@Override
 	public boolean update(Object obj) {
 		try{
-			hosp = new SQL_Hospital(this); //create connection
+			//create connections
+			hosp = new SQL_Hospital(this); 
+			doct = new SQL_Doctor (this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -166,15 +171,16 @@ public class DBManager implements DBManagerInterface{
 	public boolean delete(Object obj) {
 		try{
 			hosp = new SQL_Hospital (this);
+			doct = new SQL_Doctor (this);
 			
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
 				return hosp.deleteHospital(hospital);
 			}
-			/*if (Doctor.class==obj.getClass()){
+			if (Doctor.class==obj.getClass()){
 				Doctor doctor=(Doctor)obj;			
 				return doct.deleteDoctor(doctor);
-			}*/
+			}
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}

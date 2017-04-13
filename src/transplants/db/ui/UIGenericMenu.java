@@ -74,6 +74,7 @@ public class UIGenericMenu {
 	                    }	                         	 		        			
 	        	 		
 	        	 	}
+	        	 	break;
 	        	 	case 2:{	        	 		
 	        	 		System.out.print("\n1. Search a specific hospital. ");
 	        	 		System.out.print("\n2. Check the information of a specific doctor. ");
@@ -151,6 +152,7 @@ public class UIGenericMenu {
                     				System.out.println("Introduce the number of the doctor: ");
                     				numDoct = Integer.parseInt(console.readLine());
                     				Doctor DoctSearch = doct.get(numDoct-1);
+                    				break;
                     				
                     		}
                     		break;
@@ -187,4 +189,6 @@ public class UIGenericMenu {
 			ex.printStackTrace();
 		}
 	
-}}
+}
+
+}

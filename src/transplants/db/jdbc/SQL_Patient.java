@@ -6,6 +6,13 @@ import java.sql.Statement;
 
 public class SQL_Patient {
 
+	private DBManager dmanager;
+
+	public SQL_Patient(DBManager dbmanager) {
+		this.dmanager = dbmanager;
+		dmanager.connect();
+	}
+
 	public static void main(String args[]) {
 		try {
 			// Open database connection

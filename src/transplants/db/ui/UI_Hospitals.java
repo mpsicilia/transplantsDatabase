@@ -14,6 +14,7 @@ public class UI_Hospitals {
 	public UI_Hospitals(){		
 	}
 	
+	
 	public void introduceNewHospital(){
 		try{
 			System.out.print("Name: ");

@@ -21,7 +21,7 @@ public class SQL_Doctor {
 	public boolean insertDoctor(Doctor doctor){		
 		try {
 			Statement stmt= dbManager.getC().createStatement();
-			String sql = "INSERT INTO Doctors (name, registrationNumber, specialization"
+			String sql = "INSERT INTO Doctors (name, registrationNumber, specialization)"
 					+ " VALUES ('" + doctor.getNameOfDoctor() + "', '" + doctor.getRegistrationNumber() + "', "
 					+ "'" + doctor.getSpecialization() + "')";
 			stmt.executeUpdate(sql);
@@ -77,7 +77,7 @@ public class SQL_Doctor {
 		return false;
 	}
 	
-	/*public boolean deleteDoctor (Doctor doctor){
+	public boolean deleteDoctor (Doctor doctor){
 		try{
 			String sql = "DELETE FROM Doctors WHERE id=?";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
@@ -91,7 +91,7 @@ public class SQL_Doctor {
 		}
 		
 		return false;
-	}*/
+	}
 	
 	public List<Doctor> selectAllDoctors() {
 		List<Doctor> lookForDoctor = new ArrayList<Doctor>();

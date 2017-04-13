@@ -16,7 +16,8 @@ import transplants.db.pojos.Patient;
 public interface DBManagerInterface {
 	
 	public void connect();
-	public void disconnect();	
+	public void disconnect();
+	
 	public boolean insert(Object obj);
 	
 	public List<Hospital> searchHosp(String name); 
