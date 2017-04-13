@@ -130,6 +130,14 @@ public class SQL_Doctor {
 			stmt2.executeUpdate(doctors);
 			stmt2.close();
 			
+			Statement stmt4 = dbManager.getC().createStatement(); //table for n-n relationship between doctors and patients
+			String doctors_patients = "CREATE TABLE Doctors_patients "
+					   + "(dosctor_id    INTEGER  REFERENCES Doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					   + " patient_id  				INTEGER  REFERENCES Patients(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					   + " PRIMARY KEY (registration_number,patient_id))";
+			stmt4.executeUpdate(doctors_patients);
+			stmt4.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

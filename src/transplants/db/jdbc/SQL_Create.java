@@ -14,8 +14,9 @@ public class SQL_Create {
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			
+			//lo comentado es que esta en otra clase, en su sql
 			//Table creation
-			Statement stmt1 = c.createStatement();
+			/*Statement stmt1 = c.createStatement();
 			String hospitals = "CREATE TABLE Hospitals "
 					   + "(id      		 	INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     		TEXT     NOT NULL, "
@@ -25,18 +26,18 @@ public class SQL_Create {
 					   + " postcode			TEXT,"
 					   + " country			TEXT)";
 			stmt1.executeUpdate(hospitals);
-			stmt1.close();
+			stmt1.close();*/
 			
-			Statement stmt2 = c.createStatement();
+			/*Statement stmt2 = c.createStatement();
 			String doctors = "CREATE TABLE Doctors "
 					   + "(id       			INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " registration_number 	TEXT,"
 					   + " specialization 		TEXT,"
 					   + " hospital_id			INTEGER REFERENCES Hospitals(id))";
 			stmt2.executeUpdate(doctors);
-			stmt2.close();
+			stmt2.close();*/
 			
-			Statement stmt3 = c.createStatement();
+			/*Statement stmt3 = c.createStatement();
 			String patients = "CREATE TABLE Patients "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " birth_date		DATE,"
@@ -49,17 +50,17 @@ public class SQL_Create {
 					   + " life_expectancy 	INTEGER,"
 					   + " hospital_id		INTEGER REFERENCES Hospitals (id))";
 			stmt3.executeUpdate(patients);
-			stmt3.close();
+			stmt3.close();*/
 			
-			Statement stmt4 = c.createStatement(); //table for n-n relationship between doctors and patients
+			/*Statement stmt4 = c.createStatement(); //table for n-n relationship between doctors and patients
 			String doctors_patients = "CREATE TABLE Doctors_patients "
 					   + "(dosctor_id    INTEGER  REFERENCES Doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " patient_id  				INTEGER  REFERENCES Patients(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " PRIMARY KEY (registration_number,patient_id))";
 			stmt4.executeUpdate(doctors_patients);
-			stmt4.close();
+			stmt4.close();*/
 			
-			Statement stmt5 = c.createStatement();
+			/*Statement stmt5 = c.createStatement();
 			String donors = "CREATE TABLE Donors "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " birth_date		DATE,"
@@ -69,9 +70,9 @@ public class SQL_Create {
 					   + " dead_alive		TEXT,"
 					   + " blood_type		TEXT)";
 			stmt5.executeUpdate(donors);
-			stmt5.close();
+			stmt5.close();*/
 			
-			Statement stmt6 = c.createStatement();
+			/*Statement stmt6 = c.createStatement();
 			String organs = "CREATE TABLE Organs "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name				TEXT,"
@@ -82,9 +83,9 @@ public class SQL_Create {
 					   + " FOREIGN KEY (requested_id) REFERENCES Requested_organs(id),"
 					   + " FOREIGN KEY (donor_id) REFERENCES Donors (id))";
 			stmt6.executeUpdate(organs);
-			stmt6.close();
+			stmt6.close();*/
 			
-			Statement stmt7 = c.createStatement();
+			/*Statement stmt7 = c.createStatement();
 			String requested_organs = "CREATE TABLE Requested_organs "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name				TEXT,"
@@ -93,9 +94,9 @@ public class SQL_Create {
 					   + " patient_id		INTEGER,"
 					   + " FOREIGN KEY (patient_id) REFERENCES Patients(id))";
 			stmt7.executeUpdate(requested_organs);
-			stmt7.close();
+			stmt7.close();*/
 			
-			Statement stmt8 = c.createStatement();
+			/*Statement stmt8 = c.createStatement();
 			String animal_tissues = "CREATE TABLE Animal_tissues "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name				TEXT,"
@@ -103,15 +104,15 @@ public class SQL_Create {
 					   + " pathology 		TEXT,"
 					   + " time				INTEGER)";
 			stmt8.executeUpdate(animal_tissues);
-			stmt8.close();
+			stmt8.close();*/
 			
-			Statement stmt9 = c.createStatement();
+			/*Statement stmt9 = c.createStatement();
 			String requested_animals = "CREATE TABLE Requested_Animals "
 					   + "(requested_id     INTEGER  REFERENCES Requested_organs(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " animal_id   		INTEGER  REFERENCES Animal_tissues(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " PRIMARY KEY (requested_id,animal_id))";
 			stmt9.executeUpdate(requested_animals);
-			stmt9.close();
+			stmt9.close();*/
 			System.out.println("Tables created.");
 
 			

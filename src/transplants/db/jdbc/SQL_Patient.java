@@ -41,4 +41,27 @@ public class SQL_Patient {
 			e.printStackTrace();
 		}
 	}
+	
+	public void createTable(){
+		try{
+			
+			Statement stmt3 = dmanager.getC().createStatement();
+			String patients = "CREATE TABLE Patients "
+					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					   + " birth_date		DATE,"
+					   + " weight 			REAL ,"
+					   + " height 			REAL,"
+					   + " gender			TEXT,"
+					   + " pathology 		TEXT,"
+					   + " blood_type		TEXT,"
+					   + " addition_date 	DATE,"
+					   + " life_expectancy 	INTEGER,"
+					   + " hospital_id		INTEGER REFERENCES Hospitals (id))";
+			stmt3.executeUpdate(patients);
+			stmt3.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 }

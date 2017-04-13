@@ -5,6 +5,15 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class SQL_Request {
+
+
+	private DBManager dmanager;
+
+	public SQL_Request(DBManager dbmanager) {
+		this.dmanager = dbmanager;
+		dmanager.connect();
+	}
+	
 	public static void main(String args[]) {
 		try {
 			// Open database connection
@@ -28,6 +37,25 @@ public class SQL_Request {
 
 			
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createTable (){
+		try{
+			
+			Statement stmt7 = dmanager.getC().createStatement();
+			String requested_organs = "CREATE TABLE Requested_organs "
+					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					   + " name				TEXT,"
+					   + " max_weight 		REAL ,"
+					   + " min_weight 		REAL,"
+					   + " patient_id		INTEGER,"
+					   + " FOREIGN KEY (patient_id) REFERENCES Patients(id))";
+			stmt7.executeUpdate(requested_organs);
+			stmt7.close();
+			
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}

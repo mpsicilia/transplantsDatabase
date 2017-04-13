@@ -21,7 +21,7 @@ public class UIGenericMenu {
 	}	
 	
 	public UIGenericMenu(){
-		//DBManager dmanager = new DBManager(); //xq haria falta crear este dbmanager si en cada ui_entity lo creamos??
+		DBManager dmanager = new DBManager();
 		UI_Hospitals uiHospital=new UI_Hospitals();
 		UI_Doctor uiDoctor=new UI_Doctor();
 		try{
@@ -30,8 +30,15 @@ public class UIGenericMenu {
 	        System.out.println("Do you want to create the tables?: [yes/no]");
 	        String decider= console.readLine();
 	        if (decider.equals("yes")){
+	        	boolean created = dmanager.createTables();
+	        	if(created){
+	        		System.out.println("Tables have been created. ");
+	        	}
+	        	else{
+	        		System.out.println("Tables have not been created. ");
+	        	}
 	        	//llamar a un metodo que te cree las tablas...pero no podemos llamar
-	        	//diractamente a las clases SQL...
+	        	//diractamente a las clases SQL...como esto de arriba?
 	        }else{
 	        	System.out.println("Tables should be already created");
 	        }

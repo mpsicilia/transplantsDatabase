@@ -18,6 +18,8 @@ public interface DBManagerInterface {
 	public void connect();
 	public void disconnect();
 	
+	public boolean createTables();
+	
 	public boolean insert(Object obj);
 	
 	public List<Hospital> searchHosp(String name); 

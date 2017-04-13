@@ -6,6 +6,13 @@ import java.sql.Statement;
 
 public class SQL_AnimalTissue {
 
+	private DBManager dmanager;
+	
+	public SQL_AnimalTissue(DBManager dbmanager) {
+		this.dmanager = dbmanager;
+		dmanager.connect();
+	}
+
 	public static void main(String args[]) {
 		try {
 			// Open database connection
@@ -28,6 +35,32 @@ public class SQL_AnimalTissue {
 
 			
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createTable(){
+		try{
+
+			Statement stmt8 = dmanager.getC().createStatement();
+			String animal_tissues = "CREATE TABLE Animal_tissues "
+					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					   + " name				TEXT,"
+					   + " type_of_tissue	TEXT,"
+					   + " pathology 		TEXT,"
+					   + " time				INTEGER)";
+			stmt8.executeUpdate(animal_tissues);
+			stmt8.close();
+			
+			Statement stmt9 = dmanager.getC().createStatement();
+			String requested_animals = "CREATE TABLE Requested_Animals "
+					   + "(requested_id     INTEGER  REFERENCES Requested_organs(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					   + " animal_id   		INTEGER  REFERENCES Animal_tissues(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					   + " PRIMARY KEY (requested_id,animal_id))";
+			stmt9.executeUpdate(requested_animals);
+			stmt9.close();
+			
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}
