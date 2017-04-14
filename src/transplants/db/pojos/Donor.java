@@ -1,5 +1,6 @@
 package transplants.db.pojos;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Donor extends Person{
@@ -12,18 +13,19 @@ public class Donor extends Person{
 	}
 	
 	public Donor (String name, LocalDate birthDate, Float weight, Float height, String gender, 
-			      String bloodType, String deadOrAlive){
-		super( name, birthDate, weight, height, gender, bloodType);
+			      String deadOrAlive, String bloodType){
+		super(name, birthDate, weight, height, gender, bloodType);
 		this.deadOrAlive=deadOrAlive;
+		super.setLocalDateDob(birthDate);
 		
 	}
 	
 	public Donor (Integer id, String name, LocalDate birthDate, Float weight, Float height, String gender, 
-		      String bloodType, String deadOrAlive){
-	super(id, name, birthDate, weight, height, gender, bloodType);
-	this.deadOrAlive=deadOrAlive;
-	
-}
+		      String deadOrAlive, String bloodType){
+		super(id, name, birthDate, weight, height, gender, bloodType);
+		this.deadOrAlive=deadOrAlive;
+		super.setLocalDateDob(birthDate);
+    }
 
 	public String getDeadOrAlive() {
 		return deadOrAlive;

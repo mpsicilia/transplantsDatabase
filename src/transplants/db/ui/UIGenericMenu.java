@@ -9,6 +9,7 @@ import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.pojos.Doctor;
+import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
 
 public class UIGenericMenu {
@@ -24,6 +25,7 @@ public class UIGenericMenu {
 		DBManager dmanager = new DBManager();
 		UI_Hospitals uiHospital=new UI_Hospitals();
 		UI_Doctor uiDoctor=new UI_Doctor();
+		UI_Donor uiDonor=new UI_Donor();
 		UI_Patient uiPatient=new UI_Patient();
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
@@ -87,8 +89,11 @@ public class UIGenericMenu {
 		                    	uiDoctor.introduceNewDoctor();
 		                    	break;
 		                    case 3:
+		                    	uiDonor.introduceNewDonor();
+		                    	break;
 		                    case 4:
 		                    	uiPatient.introduceNewPatient();
+		                    	break;
 		                    case 5:
 		                    case 6:
 	                    }	                         	 		        			
@@ -182,6 +187,39 @@ public class UIGenericMenu {
                     		break;
 	                    			
 	                    	case 3:
+	                    		List <Donor> donor= uiDonor.searchDonor();
+	                    		Iterator <Donor> it2 =donor.iterator();
+	                	 		int counterDonor = 1;
+	                	 		while (it2.hasNext()){
+	                	 			Donor don = it2.next();
+	                	 			System.out.println(counterDonor + ". " + don);
+	                	 			counterDonor++;
+	                	 		}
+	                	 		System.out.print("RELATED WITH THE DONOR THAT YOU JUST LOOKED FOR:");
+	                    		System.out.print("\n1. Update information.");
+	                    		System.out.print("\n2. Delete information.");
+	                    		System.out.print("\n3. See in what hospital he is and who is taking care of him.");
+	                    		System.out.print("\nChoose an option[1-3]:");
+	                    		String optDonor = console.readLine();
+	                    		int opDonor = Integer.parseInt(optDonor);
+	                    		switch (opDonor){
+                    			case 1:
+                    				System.out.println("Introduce the number of the donor: ");
+                    				int numDon = Integer.parseInt(console.readLine());
+                    				Donor donUp = donor.get(numDon-1);
+                    				uiDonor.updateDonor(donUp);
+                    				break;
+                    			case 2:
+                    				System.out.println("Introduce the number of the donor: ");
+                    				numDon = Integer.parseInt(console.readLine());
+                    				Donor donDel = donor.get(numDon-1);
+                    				uiDonor.deleteDonor(donDel);
+                    				break;
+                    			case 3:
+                    				break;
+                    				
+                    		}
+                    		break;
 	                    	case 4:
 	                    	case 5:
 	                    }

@@ -1,23 +1,120 @@
 package transplants.db.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import transplants.db.pojos.Donor;
+import transplants.db.pojos.Hospital;
 
 public class SQL_Donor {
 	
-	private DBManager dmanager;
+	private DBManager dbManager;
 
 	public SQL_Donor(DBManager dbmanager) {
-		this.dmanager = dbmanager;
-		dmanager.connect();
+		this.dbManager = dbmanager;
+		dbManager.connect();
+	}
+	
+	public boolean insertDonor (Donor donor){
+		try{
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "INSERT INTO Donors (name, birthDate, weight, height, gender, deadAlive, bloodType) "
+					+ "VALUES ('"+ donor.getName() + "','" + donor.getBirthDate() + "' , '" + donor.getWeight() +
+					"' , '" + donor.getHeight() + "' , '" + donor.getGender() + "' , '" + donor.getDeadOrAlive()+ "' , '" +
+					donor.getBloodType() + "');";
+			stmt.executeUpdate(sql);			
+			stmt.close();
+			return true;
+					
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public List <Donor> searchDonor(String name){
+		List<Donor> lookForDonor = new ArrayList<Donor>();
+		try {
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Donors WHERE name LIKE '%" + name + "%'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String nameDon = rs.getString("name");
+				Date birthDate = rs.getDate("birthDate");
+				Float weight = rs.getFloat("weight");
+				Float height = rs.getFloat("height");
+				String gender = rs.getString("gender");
+				String deadAlive = rs.getString("deadAlive");
+				String bloodType= rs.getString("bloodType");
+				Donor donorToShow = new Donor(id, nameDon, birthDate, weight, height, gender, deadAlive, bloodType);
+				//como que supuestamente tiene que ser LocalDate... si lo consigues haz este tambn. mira codigo 
+				//de rodrigo
+				lookForDonor.add(donorToShow);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return lookForDonor;
+	}
+	
+	public boolean updateDonor (Donor donor){
+		try {
+			String sql = "UPDATE Donors SET name=?, birhDate=?, weight=?,"
+					+ "height =?, gender=?, deadAlive=?, bloodType=? WHERE id=?";
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setString(1, donor.getName());
+			prep.setDate  (2, donor.getBirthDate());
+			prep.setFloat(3, donor.getWeight());
+			prep.setFloat(4, donor.getHeight());
+			prep.setString(5, donor.getGender());
+			prep.setString(6, donor.getDeadOrAlive());
+			prep.setString(7, donor.getBloodType());
+			prep.setInt(8, donor.getId());
+			prep.executeUpdate();
+			prep.close();			
+		return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return false;
+	}
+	
+	public boolean deleteDonor(Donor donor){
+		try{
+			String sql = "DELETE FROM Donors WHERE id=?";
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setInt(1, donor.getId());
+			prep.executeUpdate();
+			prep.close();
+			
+			return true;
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 
 	
 	public void createTable(){
 		try{
 			
-			Statement stmt5 = dmanager.getC().createStatement();
+			Statement stmt5 = dbManager.getC().createStatement();
 			String donors = "CREATE TABLE Donors "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name             TEXT NOT NULL,"
@@ -30,7 +127,7 @@ public class SQL_Donor {
 			stmt5.executeUpdate(donors);
 			stmt5.close();
 			
-			Statement stmtSeq5 = dmanager.getC().createStatement();
+			Statement stmtSeq5 = dbManager.getC().createStatement();
 			String sqlSeq5 = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Donors', 1)";
 			stmtSeq5.executeUpdate(sqlSeq5);
 			stmtSeq5.close();
@@ -43,7 +140,7 @@ public class SQL_Donor {
 	
 	public void dropTable() {
 		try{
-			Statement stm = dmanager.getC().createStatement();
+			Statement stm = dbManager.getC().createStatement();
 			String drop = "DROP TABLE Donors";
 			stm.executeUpdate(drop);
 			stm.close();

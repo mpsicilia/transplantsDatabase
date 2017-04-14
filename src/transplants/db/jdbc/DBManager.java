@@ -67,7 +67,8 @@ public class DBManager implements DBManagerInterface{
 			//create connections
 			hosp = new SQL_Hospital(this); 
 			doct = new SQL_Doctor (this);
-			pat = new SQL_Patient (this);			
+			pat = new SQL_Patient (this);
+			don = new SQL_Donor (this); 
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;			
@@ -83,7 +84,10 @@ public class DBManager implements DBManagerInterface{
 				Patient patient=(Patient)obj;
 				return pat.insertPatient(patient);
 			}			
-			
+			if (Donor.class==obj.getClass()){
+				Donor donor=(Donor)obj;
+				return don.insertDonor(donor);
+			}
 		
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -128,7 +132,14 @@ public class DBManager implements DBManagerInterface{
 
 	@Override
 	public List<Donor> searchDonor(String name) {
-		// TODO Auto-generated method stub
+		try{
+			don = new SQL_Donor(this); //create connection
+			List<Donor> donorList= don.searchDonor(name);
+			return donorList;
+			}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -155,6 +166,8 @@ public class DBManager implements DBManagerInterface{
 			//create connections
 			hosp = new SQL_Hospital(this); 
 			doct = new SQL_Doctor (this);
+			pat = new SQL_Patient (this);
+			don =new SQL_Donor (this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -164,6 +177,11 @@ public class DBManager implements DBManagerInterface{
 				Doctor doctor=(Doctor)obj;			
 				return doct.updateDoctor(doctor);
 			}
+			if (Donor.class==obj.getClass()){
+				Donor donor=(Donor)obj;
+				return don.updateDonor(donor);
+			}
+			
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -176,6 +194,7 @@ public class DBManager implements DBManagerInterface{
 		try{
 			hosp = new SQL_Hospital (this);
 			doct = new SQL_Doctor (this);
+			don  = new SQL_Donor(this);
 			
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -184,6 +203,10 @@ public class DBManager implements DBManagerInterface{
 			if (Doctor.class==obj.getClass()){
 				Doctor doctor=(Doctor)obj;			
 				return doct.deleteDoctor(doctor);
+			}
+			if (Donor.class==obj.getClass()){
+				Donor donor=(Donor)obj;
+				return don.deleteDonor(donor);
 			}
 		}catch (Exception ex){
 			ex.printStackTrace();

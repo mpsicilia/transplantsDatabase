@@ -1,15 +1,15 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Person implements Serializable {
 	
-
-	private static final long serialVersionUID = -244654246333453095L;
+	private static final long serialVersionUID = 6256446381306555938L;
 	protected Integer id;
 	protected String name;
-	protected LocalDate birthDate;
+	protected Date birthDate;
 	protected Float weight;
 	protected Float height;
 	protected String gender;
@@ -22,7 +22,7 @@ public class Person implements Serializable {
 	public Person(String name, LocalDate birthDate, Float weight, Float height, String gender, String bloodType) {
 		super();
 		this.name=name;
-		this.birthDate = birthDate;
+		this.setLocalDateDob(birthDate);
 		this.weight = weight;
 		this.height = height;
 		this.gender = gender;
@@ -33,7 +33,7 @@ public class Person implements Serializable {
 		super();
 		this.id = id;
 		this.name=name;
-		this.birthDate = birthDate;
+		this.setLocalDateDob(birthDate);
 		this.weight = weight;
 		this.height = height;
 		this.gender = gender;
@@ -55,11 +55,20 @@ public class Person implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	// Additional method to use LocalDate objects
+	public void setLocalDateDob(LocalDate ldate) {
+		this.birthDate = Date.valueOf(ldate);
+	}
 
-	public LocalDate getBirthDate() {
+	// Additional method to use LocalDate objects
+	public LocalDate getLocalDateDob() {
+		return this.birthDate.toLocalDate();
+	}
+
+	public Date getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(LocalDate birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 	public Float getWeight() {
