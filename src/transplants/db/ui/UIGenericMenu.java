@@ -24,6 +24,7 @@ public class UIGenericMenu {
 		DBManager dmanager = new DBManager();
 		UI_Hospitals uiHospital=new UI_Hospitals();
 		UI_Doctor uiDoctor=new UI_Doctor();
+		UI_Patient uiPatient=new UI_Patient();
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
 	        int option=0;
@@ -87,6 +88,7 @@ public class UIGenericMenu {
 		                    	break;
 		                    case 3:
 		                    case 4:
+		                    	uiPatient.introduceNewPatient();
 		                    case 5:
 		                    case 6:
 	                    }	                         	 		        			

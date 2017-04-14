@@ -49,7 +49,7 @@ public class UI_Patient {
 			int life = Integer.parseInt(console.readLine());
 			
 			Patient p = new Patient (birthDate, weight, height, gender, path, bt, life, addition);
-			boolean introduced = dbManager.insert(p); //hacer en dbmanager
+			boolean introduced = dbManager.insert(p);
 			if(introduced){
 				System.out.println("Patient has been introduced. ");
 			}

@@ -67,6 +67,7 @@ public class DBManager implements DBManagerInterface{
 			//create connections
 			hosp = new SQL_Hospital(this); 
 			doct = new SQL_Doctor (this);
+			pat = new SQL_Patient (this);			
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;			
@@ -77,7 +78,11 @@ public class DBManager implements DBManagerInterface{
 				Doctor doctor=(Doctor)obj;			
 				return doct.insertDoctor(doctor);
 			}
-						
+			
+			if(Patient.class==obj.getClass()){
+				Patient patient=(Patient)obj;
+				return pat.insertPatient(patient);
+			}			
 			
 		
 		}catch (Exception e) {
