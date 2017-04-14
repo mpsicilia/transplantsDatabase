@@ -42,8 +42,6 @@ public class DBManager implements DBManagerInterface{
 			Class.forName("org.sqlite.JDBC");//to create a connection
 			this.c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//specific directory(.: actual current directory)
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			//hosp=new SQL_Hospital();
-			//doct=new SQL_Doctor();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -206,31 +204,40 @@ public class DBManager implements DBManagerInterface{
 			org.createTable();
 			don.createTable();
 			req.createTable();
-			
-			/*
-			//Initialize primary keys, donde lo ponemos???
-			Statement stmtSeq = c.createStatement();
-			String sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Hospitals', 1)";
-			stmtSeq.executeUpdate(sqlSeq);
-			sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Doctors', 1)";
-			stmtSeq.executeUpdate(sqlSeq);
-			sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Patients', 1)";
-			stmtSeq.executeUpdate(sqlSeq);
-			sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Donors', 1)";
-			stmtSeq.executeUpdate(sqlSeq);
-			sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Organs', 1)";
-			stmtSeq.executeUpdate(sqlSeq);
-			sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Requested_organs', 1)";
-			stmtSeq.executeUpdate(sqlSeq);
-			sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Animal_tissues', 1)";
-			stmtSeq.executeUpdate(sqlSeq);
-			stmtSeq.close();*/
-			
+					
 			return true;
 			
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
+		return false;
+	}
+	
+	public boolean dropTables(){
+		try{
+			
+			hosp = new SQL_Hospital(this);
+			doct = new SQL_Doctor(this);
+			pat = new SQL_Patient(this);
+			animalT = new SQL_AnimalTissue(this);
+			org = new SQL_Organ(this);
+			don = new SQL_Donor(this);
+			req = new SQL_Request(this);
+			
+			hosp.dropTable();
+			doct.dropTable();
+			pat.dropTable();
+			animalT.dropTable();
+			org.dropTable();
+			don.dropTable();
+			req.dropTable();
+					
+			return true;
+			
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		
 		return false;
 	}
 }

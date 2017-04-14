@@ -82,7 +82,7 @@ public class SQL_Doctor {
 			String sql = "DELETE FROM Doctors WHERE id=?";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
 			prep.setInt(1, doctor.getId());
-			prep.executeUpdate(sql);
+			prep.executeUpdate();
 			prep.close();			
 			return true;
 			
@@ -120,25 +120,46 @@ public class SQL_Doctor {
 	
 	public void createTable() {
 		try {
-			Statement stmt2 = dbManager.getC().createStatement();
+			Statement stmt1 = dbManager.getC().createStatement();
 			String doctors = "CREATE TABLE Doctors "
 					   + "(id       			INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					   + " name                 TEXT NOT NULL"
+					   + " name                 TEXT NOT NULL,"
 					   + " registrationNumber 	TEXT NOT NULL,"
 					   + " specialization 		TEXT,"
 					   + " hospital_id			INTEGER REFERENCES Hospitals(id))";
-			stmt2.executeUpdate(doctors);
+			stmt1.executeUpdate(doctors);
+			stmt1.close();
+			
+			Statement stmt2 = dbManager.getC().createStatement(); //table for n-n relationship between doctors and patients
+			String doctors_patients = "CREATE TABLE Doctors_patients "
+					   + "(doctor_id    INTEGER  REFERENCES Doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					   + " patient_id  				INTEGER  REFERENCES Patients(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					   + " PRIMARY KEY (doctor_id,patient_id))";
+			stmt2.executeUpdate(doctors_patients);
 			stmt2.close();
 			
-			Statement stmt4 = dbManager.getC().createStatement(); //table for n-n relationship between doctors and patients
-			String doctors_patients = "CREATE TABLE Doctors_patients "
-					   + "(dosctor_id    INTEGER  REFERENCES Doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
-					   + " patient_id  				INTEGER  REFERENCES Patients(id) ON UPDATE CASCADE ON DELETE CASCADE,"
-					   + " PRIMARY KEY (registration_number,patient_id))";
-			stmt4.executeUpdate(doctors_patients);
-			stmt4.close();
+			Statement stmtSeq2 = dbManager.getC().createStatement();
+			String sqlSeq2 = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Doctors', 1)";
+			stmtSeq2.executeUpdate(sqlSeq2);
+			stmtSeq2.close();
 			
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void dropTable(){
+		try{
+			Statement stm1 = dbManager.getC().createStatement();
+			String drop1 = "DROP TABLE Doctors";
+			stm1.executeUpdate(drop1);
+			stm1.close();
+			
+			Statement stm2 = dbManager.getC().createStatement();
+			String drop2 = "DROP TABLE Doctors_patients";
+			stm2.executeUpdate(drop2);
+			stm2.close();
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}

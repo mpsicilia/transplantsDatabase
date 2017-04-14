@@ -19,6 +19,7 @@ public interface DBManagerInterface {
 	public void disconnect();
 	
 	public boolean createTables();
+	public boolean dropTables();
 	
 	public boolean insert(Object obj);
 	

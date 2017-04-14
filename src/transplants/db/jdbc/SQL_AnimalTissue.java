@@ -13,31 +13,6 @@ public class SQL_AnimalTissue {
 		dmanager.connect();
 	}
 
-	public static void main(String args[]) {
-		try {
-			// Open database connection
-			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//CAMBIARRRR, cambiado
-			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			System.out.println("Database connection opened.");
-			
-			// Insert new record: begin
-			Statement stmt = c.createStatement();
-			/*String sql = "INSERT INTO Animal_tissues (name, type_of_tissue, pathology,"
-					+ " time) VALUES ('" + name + "', '" + type_of_tissue + "',"
-					+ " '" + pathology + "', '" + time + "');";*/
-			
-			
-			//stmt.executeUpdate(sql);
-			stmt.close();
-
-			// Insert new record: end
-
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public void createTable(){
 		try{
@@ -60,6 +35,27 @@ public class SQL_AnimalTissue {
 			stmt9.executeUpdate(requested_animals);
 			stmt9.close();
 			
+			Statement stmtSeq8 = dmanager.getC().createStatement();
+			String sqlSeq8 = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Animal_tissues', 1)";
+			stmtSeq8.executeUpdate(sqlSeq8);
+			stmtSeq8.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void dropTable() {
+		try{
+			Statement stm1 = dmanager.getC().createStatement();
+			String drop1 = "DROP TABLE Animal_tissues";
+			stm1.executeUpdate(drop1);
+			stm1.close();
+			
+			Statement stm2 = dmanager.getC().createStatement();
+			String drop2 = "DROP TABLE Requested_Animals";
+			stm2.executeUpdate(drop2);
+			stm2.close();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
