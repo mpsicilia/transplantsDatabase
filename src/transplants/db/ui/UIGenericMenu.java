@@ -21,17 +21,37 @@ public class UIGenericMenu {
 	}	
 	
 	public UIGenericMenu(){
-		//DBManager dmanager = new DBManager(); //xq haria falta crear este dbmanager si en cada ui_entity lo creamos??
+		DBManager dmanager = new DBManager();
 		UI_Hospitals uiHospital=new UI_Hospitals();
 		UI_Doctor uiDoctor=new UI_Doctor();
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
 	        int option=0;
+	        
+	        /*System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
+	        String drop = console.readLine();
+	        if(drop.equalsIgnoreCase("Y")){
+	        	boolean dropped = dmanager.dropTables();
+	        	if(dropped){
+	        		System.out.println("Tables have been dropped. ");
+	        	}
+	        	else{
+	        		System.out.println("Tables have not been dropped. ");
+	        	}
+	        }*/
+	        
 	        System.out.println("Do you want to create the tables?: [yes/no]");
 	        String decider= console.readLine();
 	        if (decider.equals("yes")){
+	        	boolean created = dmanager.createTables();
+	        	if(created){
+	        		System.out.println("Tables have been created. ");
+	        	}
+	        	else{
+	        		System.out.println("Tables have not been created. ");
+	        	}
 	        	//llamar a un metodo que te cree las tablas...pero no podemos llamar
-	        	//diractamente a las clases SQL...
+	        	//diractamente a las clases SQL...como esto de arriba?
 	        }else{
 	        	System.out.println("Tables should be already created");
 	        }
@@ -74,6 +94,7 @@ public class UIGenericMenu {
 	                    }	                         	 		        			
 	        	 		
 	        	 	}
+	        	 	break;
 	        	 	case 2:{	        	 		
 	        	 		System.out.print("\n1. Search a specific hospital. ");
 	        	 		System.out.print("\n2. Check the information of a specific doctor. ");
@@ -99,7 +120,8 @@ public class UIGenericMenu {
 	                    		System.out.print("RELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete hospital.");
-	                    		System.out.print("\nChoose an option[1-2]:");
+	                    		System.out.print("\n3. Go back to the menu. ");
+	                    		System.out.print("\nChoose an option[1-3]:");
 	                    		String opt = console.readLine();
 	                    		int op = Integer.parseInt(opt);
 	                    		switch (op){
@@ -114,6 +136,8 @@ public class UIGenericMenu {
 	                    				int num = Integer.parseInt(console.readLine());
 	                    				Hospital hospDel = hosps.get(num-1);
 	                    				uiHospital.deleteHospital(hospDel);
+	                    				break;
+	                    			case 3:
 	                    				break;
 	                    		}
 	                    		break;
@@ -145,12 +169,13 @@ public class UIGenericMenu {
                     				System.out.println("Introduce the number of the doctor: ");
                     				numDoct = Integer.parseInt(console.readLine());
                     				Doctor doctDel = doct.get(numDoct-1);
-                    				//uiDoctor.deleteDoctor(doctDel);
+                    				uiDoctor.deleteDoctor(doctDel);
                     				break;
                     			case 3: 
                     				System.out.println("Introduce the number of the doctor: ");
                     				numDoct = Integer.parseInt(console.readLine());
                     				Doctor DoctSearch = doct.get(numDoct-1);
+                    				break;
                     				
                     		}
                     		break;
@@ -178,8 +203,12 @@ public class UIGenericMenu {
 	        	 		System.out.print("8. Number of organs of a specific organ that can be donated.");
 	        	 		System.out.print("9. Check the waiting list.");
 	        	 		
+	        	 		break;
+	        	 	
+	        	 	case 4:
+	        	 		System.exit(0);
 	        	 	}
-	        	 		 		System.exit(0);
+	        	 		 		
 	        	 }
 	        
 			
@@ -187,4 +216,6 @@ public class UIGenericMenu {
 			ex.printStackTrace();
 		}
 	
-}}
+}
+
+}

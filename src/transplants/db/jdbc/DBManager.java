@@ -21,11 +21,11 @@ public class DBManager implements DBManagerInterface{
 	private Connection c;
 	private SQL_Hospital hosp;
 	private SQL_Doctor doct;
-	/*private SQL_Patient pat;
+	private SQL_Patient pat;
 	private SQL_AnimalTissue animalT;
 	private SQL_Organ org;
 	private SQL_Donor don;
-	private SQL_Request req;*/
+	private SQL_Request req;
 
 	
 	public DBManager() {
@@ -42,8 +42,6 @@ public class DBManager implements DBManagerInterface{
 			Class.forName("org.sqlite.JDBC");//to create a connection
 			this.c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");//specific directory(.: actual current directory)
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			//hosp=new SQL_Hospital();
-			//doct=new SQL_Doctor();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,12 +57,15 @@ public class DBManager implements DBManagerInterface{
 		}
 		
 	}
+	
 
 	@Override
 	public boolean insert(Object obj) {
 			
 		try{
-			hosp = new SQL_Hospital(this); //create connection
+			//create connections
+			hosp = new SQL_Hospital(this); 
+			doct = new SQL_Doctor (this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;			
@@ -145,7 +146,9 @@ public class DBManager implements DBManagerInterface{
 	@Override
 	public boolean update(Object obj) {
 		try{
-			hosp = new SQL_Hospital(this); //create connection
+			//create connections
+			hosp = new SQL_Hospital(this); 
+			doct = new SQL_Doctor (this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -166,18 +169,75 @@ public class DBManager implements DBManagerInterface{
 	public boolean delete(Object obj) {
 		try{
 			hosp = new SQL_Hospital (this);
+			doct = new SQL_Doctor (this);
 			
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
 				return hosp.deleteHospital(hospital);
 			}
-			/*if (Doctor.class==obj.getClass()){
+			if (Doctor.class==obj.getClass()){
 				Doctor doctor=(Doctor)obj;			
 				return doct.deleteDoctor(doctor);
-			}*/
+			}
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
+		return false;
+	}
+
+	@Override
+	public boolean createTables() {
+		try{
+			
+			hosp = new SQL_Hospital(this);
+			doct = new SQL_Doctor(this);
+			pat = new SQL_Patient(this);
+			animalT = new SQL_AnimalTissue(this);
+			org = new SQL_Organ(this);
+			don = new SQL_Donor(this);
+			req = new SQL_Request(this);
+			
+			hosp.createTable();
+			doct.createTable();
+			pat.createTable();
+			animalT.createTable();
+			org.createTable();
+			don.createTable();
+			req.createTable();
+					
+			return true;
+			
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean dropTables(){
+		try{
+			
+			hosp = new SQL_Hospital(this);
+			doct = new SQL_Doctor(this);
+			pat = new SQL_Patient(this);
+			animalT = new SQL_AnimalTissue(this);
+			org = new SQL_Organ(this);
+			don = new SQL_Donor(this);
+			req = new SQL_Request(this);
+			
+			hosp.dropTable();
+			doct.dropTable();
+			pat.dropTable();
+			animalT.dropTable();
+			org.dropTable();
+			don.dropTable();
+			req.dropTable();
+					
+			return true;
+			
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		
 		return false;
 	}
 }

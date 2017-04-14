@@ -2,6 +2,7 @@ package transplants.db.jdbc;
 
 import java.sql.*;
 import java.util.*;
+import java.sql.PreparedStatement;
 
 import transplants.db.pojos.Hospital;
 
@@ -129,7 +130,7 @@ public class SQL_Hospital {
 			String sql = "DELETE FROM Hospitals WHERE id=?";
 			PreparedStatement prep = dmanager.getC().prepareStatement(sql);
 			prep.setInt(1, hospital.getId());
-			prep.executeUpdate(sql);
+			prep.executeUpdate();
 			prep.close();
 			
 			return true;
@@ -189,7 +190,30 @@ public class SQL_Hospital {
 				    + "PRIMARY KEY (doctor_id,hospital_id))";
 			stmt2.executeUpdate(hospitalsDoctors);
 			stmt2.close();
+			
+			//initialize primary key
+			Statement stmtSeq1 = dmanager.getC().createStatement();
+			String sqlSeq1 = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Hospitals', 1)";
+			stmtSeq1.executeUpdate(sqlSeq1);
+			stmtSeq1.close();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void dropTable() {
+		try{
+			Statement stm1 = dmanager.getC().createStatement();
+			String drop1 = "DROP TABLE Hospitals";
+			stm1.executeUpdate(drop1);
+			stm1.close();
+			
+			Statement stm2 = dmanager.getC().createStatement();
+			String drop2 = "DROP TABLE HospitalsDoctors";
+			stm2.executeUpdate(drop2);
+			stm2.close();
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}

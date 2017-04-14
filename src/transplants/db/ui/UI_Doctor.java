@@ -93,4 +93,19 @@ public class UI_Doctor {
 				ex.printStackTrace();
 			}
 	}
+	
+	public void deleteDoctor (Doctor doc){
+		try{
+			boolean deleted = dbManager.delete(doc);
+			if(deleted){
+				System.out.println("Doctor has been deleted.");
+			}
+			else{
+				System.out.println("Doctor has not been deleted. ");
+			}
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+	
+	}
 }
