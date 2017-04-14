@@ -2,8 +2,12 @@ package transplants.db.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 
 public class SQL_Patient {
@@ -30,6 +34,17 @@ public class SQL_Patient {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public List<Patient> searchPatient(String patho) {
+		
+		try {
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	}
 	
 	public void createTable(){

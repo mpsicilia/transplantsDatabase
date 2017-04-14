@@ -6,8 +6,10 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 
 public class UI_Patient {
@@ -61,6 +63,18 @@ public class UI_Patient {
 		}catch (IOException ex){
 			ex.printStackTrace();
 		}
+	}
+	
+	public List<Patient> searchPatient(){
+		try{
+			System.out.println("Introduce the pathology of the patient: ");
+	 		String pathology = console.readLine();	 	
+			List<Patient> patients = dbManager.searchPat(pathology);
+	 		return patients;
+		}catch (IOException ex){
+			ex.printStackTrace();
+		}
+		return null; //se puede?
 	}
 
 }
