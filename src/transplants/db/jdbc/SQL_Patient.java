@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+import transplants.db.pojos.Patient;
+
 public class SQL_Patient {
 
 	private DBManager dmanager;
@@ -11,6 +13,23 @@ public class SQL_Patient {
 	public SQL_Patient(DBManager dbmanager) {
 		this.dmanager = dbmanager;
 		dmanager.connect();
+	}
+	
+	public boolean insertPatient (Patient p){
+		try{
+			Statement stmt = dmanager.getC().createStatement();
+			String sql = "INSERT INTO Patients (birth_date, weight, height, gender, pathology, blood_type, "
+					+ "addition_date, life_expectancy) VALUES ('" + p.getBirthDate() + "' , '" + p.getWeight() +
+					"' , '" + p.getHeight() + "' , '" + p.getGender() + "' , '" + p.getPathology() + "' , '" +
+					p.getBloodType() + "' , '" + p.getAdditionDate() + "' , '" + p.getLifeExpectancy() + "');";
+			stmt.executeUpdate(sql);			
+			stmt.close();
+			return true;
+					
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public void createTable(){
