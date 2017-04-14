@@ -1,13 +1,14 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Person implements Serializable {
 	
-	private static final long serialVersionUID = 8117129296546913171L;
+
+	private static final long serialVersionUID = -244654246333453095L;
 	protected Integer id;
+	protected String name;
 	protected LocalDate birthDate;
 	protected Float weight;
 	protected Float height;
@@ -18,8 +19,9 @@ public class Person implements Serializable {
 	public Person (){
 	}
 	
-	public Person(LocalDate birthDate, Float weight, Float height, String gender, String bloodType) {
+	public Person(String name, LocalDate birthDate, Float weight, Float height, String gender, String bloodType) {
 		super();
+		this.name=name;
 		this.birthDate = birthDate;
 		this.weight = weight;
 		this.height = height;
@@ -27,21 +29,33 @@ public class Person implements Serializable {
 		this.bloodType = bloodType;
 	}
 	
-	public Person(Integer id, LocalDate birthDate, Float weight, Float height, String gender, String bloodType) {
+	public Person(Integer id, String name, LocalDate birthDate, Float weight, Float height, String gender, String bloodType) {
 		super();
 		this.id = id;
+		this.name=name;
 		this.birthDate = birthDate;
 		this.weight = weight;
 		this.height = height;
 		this.gender = gender;
 		this.bloodType = bloodType;
 	}
+	
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public LocalDate getBirthDate() {
 		return birthDate;
 	}
