@@ -61,21 +61,28 @@ public class SQL_Hospital {
 	}
 	
 	//method that tell us given a specific doctor, in which hospital he works
-	public String searchDoctorInHospital (String doctorName){
-		String searchSql = "";
+	public List<Hospital> searchDoctorInHospital (String doctorName){
+		List<Hospital> hospitalToPrint = new ArrayList<Hospital>();
 		try{
 			Statement stmt = dmanager.getC().createStatement();
-			searchSql = "SELECT Hosp.name, Doct.name FROM Hospitals "
+			String searchSql = "SELECT Hosp.name, Doct.name FROM Hospitals "
 					+ "AS Hosp JOIN HospitalsDoctors AS HospDocts ON Hosp.id=HospDocts.hospital_id "
-					+ "RIGHT JOIN Doctors AS Doct ON Doct.id=HospDocts.doctor_id "
+					+ "JOIN Doctors AS Doct ON Doct.id=HospDocts.doctor_id "
 					+ "WHERE Doct.name LIKE '" + doctorName + "'";
-			stmt.executeUpdate(searchSql);
+			ResultSet rs = stmt.executeQuery(searchSql);
+			while (rs.next()) {
+				String nameHosp = rs.getString("name");
+				//String nameDoctor = rs.getString("name");
+				Hospital hospi= new Hospital(nameHosp);
+				hospitalToPrint.add(hospi);
+			}
+			rs.close();
 			stmt.close();
-			return searchSql;
+			return hospitalToPrint;
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return searchSql;
+		return hospitalToPrint;
 	}
 	
 	//method that tell us the hospital in which the transplant is taking place

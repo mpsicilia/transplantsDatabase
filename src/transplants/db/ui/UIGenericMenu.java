@@ -44,14 +44,12 @@ public class UIGenericMenu {
 	        String decider= console.readLine();
 	        if (decider.equals("yes")){
 	        	boolean created = dmanager.createTables();
-	        	if(created){
-	        		System.out.println("Tables have been created. ");
-	        	}
-	        	else{
-	        		System.out.println("Tables have not been created. ");
-	        	}
-	        	//llamar a un metodo que te cree las tablas...pero no podemos llamar
-	        	//diractamente a las clases SQL...como esto de arriba?
+		        	if(created){
+		        		System.out.println("Tables have been created. ");
+		        	}
+		        	else{
+		        		System.out.println("Tables have not been created. ");
+		        	}
 	        }else{
 	        	System.out.println("Tables should be already created");
 	        }
@@ -109,9 +107,9 @@ public class UIGenericMenu {
 	                    switch(option2){
 	                    	case 1:
 	                    		List<Hospital> hosps = uiHospital.searchHospital();
-	                    		//para acordarme de como recorrer la lista he mirado como lo hice en la practica de java
 	                    		Iterator <Hospital> it = hosps.iterator();
 	                	 		int counter = 1;
+	                	 		//-->to do/*¡¡¡¡HAY QUE PONER MENSAJE DE QUE SI NO ENCUENTRA EL DOCTOR SI LO DESEA AÑADIR O NO!!!!*/
 	                	 		while (it.hasNext()){
 	                	 			Hospital hospi = it.next();
 	                	 			System.out.println(counter + ". " + hospi);
