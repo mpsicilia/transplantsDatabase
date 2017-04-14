@@ -20,12 +20,13 @@ public class SQL_Donor {
 			Statement stmt5 = dmanager.getC().createStatement();
 			String donors = "CREATE TABLE Donors "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					   + " birth_date		DATE,"
+					   + " name             TEXT NOT NULL,"
+					   + " birthDate		DATE NOT NULL,"
 					   + " weight 			REAL ,"
 					   + " height 			REAL,"
 					   + " gender			TEXT,"
-					   + " dead_alive		TEXT,"
-					   + " blood_type		TEXT)";
+					   + " deadAlive		TEXT,"
+					   + " bloodType		TEXT)";
 			stmt5.executeUpdate(donors);
 			stmt5.close();
 			

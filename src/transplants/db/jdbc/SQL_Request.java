@@ -22,8 +22,8 @@ public class SQL_Request {
 			String requested_organs = "CREATE TABLE Requested_organs "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name				TEXT,"
-					   + " max_weight 		REAL ,"
-					   + " min_weight 		REAL,"
+					   + " maxWeight 		REAL ,"
+					   + " minWeight 		REAL,"
 					   + " patient_id		INTEGER,"
 					   + " FOREIGN KEY (patient_id) REFERENCES Patients(id))";
 			stmt7.executeUpdate(requested_organs);

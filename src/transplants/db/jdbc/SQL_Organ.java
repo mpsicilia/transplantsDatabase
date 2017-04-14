@@ -19,9 +19,9 @@ public class SQL_Organ {
 			Statement stmt6 = dmanager.getC().createStatement();
 			String organs = "CREATE TABLE Organs "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					   + " name				TEXT,"
+					   + " name				TEXT NOT NULL,"
 					   + " weight 			REAL ,"
-					   + " type_of_donation	TEXT,"
+					   + " typeOfDonation	TEXT,"
 					   + " requested_id		INTEGER,"
 					   + " donor_id			INTEGER, "
 					   + " FOREIGN KEY (requested_id) REFERENCES Requested_organs(id),"

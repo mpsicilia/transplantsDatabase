@@ -19,16 +19,16 @@ public class SQL_AnimalTissue {
 
 			Statement stmt8 = dmanager.getC().createStatement();
 			String animal_tissues = "CREATE TABLE Animal_tissues "
-					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					   + "(id               INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name				TEXT,"
-					   + " type_of_tissue	TEXT,"
+					   + " typeOfTissue	    TEXT,"
 					   + " pathology 		TEXT,"
 					   + " time				INTEGER)";
 			stmt8.executeUpdate(animal_tissues);
 			stmt8.close();
 			
 			Statement stmt9 = dmanager.getC().createStatement();
-			String requested_animals = "CREATE TABLE Requested_Animals "
+			String requested_animals = "CREATE TABLE RequestedOrgan_AnimalsTissues "
 					   + "(requested_id     INTEGER  REFERENCES Requested_organs(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " animal_id   		INTEGER  REFERENCES Animal_tissues(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " PRIMARY KEY (requested_id,animal_id))";
@@ -53,7 +53,7 @@ public class SQL_AnimalTissue {
 			stm1.close();
 			
 			Statement stm2 = dmanager.getC().createStatement();
-			String drop2 = "DROP TABLE Requested_Animals";
+			String drop2 = "DROP TABLE RequestedOrgan_AnimalsTissues";
 			stm2.executeUpdate(drop2);
 			stm2.close();
 		}catch (Exception e){

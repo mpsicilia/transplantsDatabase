@@ -15,7 +15,7 @@ public class SQL_Doctor {
 	
 	public SQL_Doctor(DBManager dbmanager){
 		this.dbManager= dbmanager;
-		dbmanager.connect();
+		dbManager.connect();
 	}
 	
 	public boolean insertDoctor(Doctor doctor){		
@@ -125,15 +125,14 @@ public class SQL_Doctor {
 					   + "(id       			INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name                 TEXT NOT NULL,"
 					   + " registrationNumber 	TEXT NOT NULL,"
-					   + " specialization 		TEXT,"
-					   + " hospital_id			INTEGER REFERENCES Hospitals(id))";
+					   + " specialization 		TEXT)";
 			stmt1.executeUpdate(doctors);
 			stmt1.close();
 			
 			Statement stmt2 = dbManager.getC().createStatement(); //table for n-n relationship between doctors and patients
 			String doctors_patients = "CREATE TABLE Doctors_patients "
 					   + "(doctor_id    INTEGER  REFERENCES Doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
-					   + " patient_id  				INTEGER  REFERENCES Patients(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					   + " patient_id  	INTEGER  REFERENCES Patients(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					   + " PRIMARY KEY (doctor_id,patient_id))";
 			stmt2.executeUpdate(doctors_patients);
 			stmt2.close();

@@ -18,7 +18,7 @@ public class SQL_Hospital {
 	public boolean insertHospital(Hospital hospital) {		
 		try {
 			Statement stmt = dmanager.getC().createStatement();
-			String sql = "INSERT INTO Hospitals (name, phone_number, address, city, postcode, country) VALUES ('"
+			String sql = "INSERT INTO Hospitals (name, phoneNumber, address, city, postcode, country) VALUES ('"
 					+ hospital.getName() + "', '" + hospital.getPhone_number() + "'," + " '" + hospital.getAddress()
 					+ "', '" + hospital.getCity() + "', '" + hospital.getPostcode() + "', '" + hospital.getCountry()
 					+ "');";
@@ -42,7 +42,7 @@ public class SQL_Hospital {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name1 = rs.getString("name");
-				String phone_number1 = rs.getString("phone_number");
+				String phone_number1 = rs.getString("phoneNumber");
 				String address1 = rs.getString("address");
 				String city1 = rs.getString("city");
 				String postcode1 = rs.getString("postcode");
@@ -110,7 +110,7 @@ public class SQL_Hospital {
 	
 	public boolean updateHospital (Hospital hosp){		
 		try {
-			String sql = "UPDATE Hospitals SET name=?, phone_number=?, address=?,"
+			String sql = "UPDATE Hospitals SET name=?, phoneNumber=?, address=?,"
 					+ "city =?, postcode=?, country=? WHERE id=?";
 			PreparedStatement prep = dmanager.getC().prepareStatement(sql);
 			prep.setString(1, hosp.getName());
@@ -158,7 +158,7 @@ public class SQL_Hospital {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name1 = rs.getString("name");
-				String phone_number1 = rs.getString("phone_number");
+				String phone_number1 = rs.getString("phoneNumber");
 				String address1 = rs.getString("address");
 				String city1 = rs.getString("city");
 				String postcode1 = rs.getString("postcode");
@@ -182,10 +182,10 @@ public class SQL_Hospital {
 			String hospitals = "CREATE TABLE Hospitals " 
 					+ "(id      		INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " name     		TEXT     NOT NULL, " 
-					+ " phone_number	TEXT,  "
+					+ " phoneNumber	    TEXT,              "
 					+ " address  		TEXT	 NOT NULL, " 
-					+ " city 			TEXT," 
-					+ " postcode		TEXT,"
+					+ " city 			TEXT,              " 
+					+ " postcode		TEXT,              "
 					+ " country			TEXT     NOT NULL)";
 			stmt1.executeUpdate(hospitals);
 			stmt1.close();
