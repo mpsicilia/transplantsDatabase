@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.omg.CORBA.Request;
@@ -242,8 +243,8 @@ public class DBManager implements DBManagerInterface{
 	}
 
 	@Override
-	public String DoctorHospital(String name) {
-		String hospital = "";
+	public List <Hospital> DoctorHospital(String name) {
+		List <Hospital> hospital = new ArrayList <Hospital>();
 		try{
 			hosp = new SQL_Hospital(this);
 			hospital = hosp.searchDoctorInHospital(name);

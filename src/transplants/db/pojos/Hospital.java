@@ -12,6 +12,7 @@ public class Hospital implements Serializable{
 	private String city;
 	private String postcode;
 	private String country;
+
 	
 	public Hospital (){
 		}
@@ -24,10 +25,12 @@ public class Hospital implements Serializable{
 		this.city = city;
 		this.postcode = postcode;
 		this.country = country;
+	}	
+	
+	public Hospital (String name){
+		this.name=name;
 	}
 	
-	
-
 	public Hospital(int id, String name, String phone_number, String address, String city, String postcode,
 			String country) {
 		this.id=id;

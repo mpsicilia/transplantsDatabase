@@ -137,7 +137,8 @@ public class UI_Hospitals {
 		
 	public void DoctorHospital (String docName){
 		try{
-			String docHosp = dbManager.DoctorHospital(docName);
+			List <Hospital> nameOfHospitals = dbManager.DoctorHospital(docName);
+			System.out.println("Doctor: "+ docName + " works in the following hospitals:\n "+ nameOfHospitals);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
