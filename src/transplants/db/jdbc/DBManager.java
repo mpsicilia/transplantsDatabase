@@ -240,4 +240,16 @@ public class DBManager implements DBManagerInterface{
 		
 		return false;
 	}
+
+	@Override
+	public String DoctorHospital(String name) {
+		String hospital = "";
+		try{
+			hosp = new SQL_Hospital(this);
+			hospital = hosp.searchDoctorInHospital(name);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return hospital;
+	}
 }

@@ -135,4 +135,11 @@ public class UI_Hospitals {
 		}
 	}
 		
+	public void DoctorHospital (String docName){
+		try{
+			String docHosp = dbManager.DoctorHospital(docName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 }

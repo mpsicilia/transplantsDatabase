@@ -162,8 +162,8 @@ public class UIGenericMenu {
                     			case 1:
                     				System.out.println("Introduce the number of the doctor: ");
                     				int numDoct = Integer.parseInt(console.readLine());
-                    				Doctor DoctUp = doct.get(numDoct-1);
-                    				uiDoctor.updateDoctor(DoctUp);
+                    				Doctor doctUp = doct.get(numDoct-1);
+                    				uiDoctor.updateDoctor(doctUp);
                     				break;
                     			case 2:
                     				System.out.println("Introduce the number of the doctor: ");
@@ -174,7 +174,8 @@ public class UIGenericMenu {
                     			case 3: 
                     				System.out.println("Introduce the number of the doctor: ");
                     				numDoct = Integer.parseInt(console.readLine());
-                    				Doctor DoctSearch = doct.get(numDoct-1);
+                    				Doctor doctSearch = doct.get(numDoct-1);
+                    				uiHospital.DoctorHospital(doctSearch.getNameOfDoctor());
                     				break;
                     				
                     		}
