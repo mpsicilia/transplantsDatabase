@@ -41,7 +41,8 @@ public class UI_Donor {
 			System.out.print("Dead or Alive: ");
 			String bloodType = console.readLine();
 			
-			Donor donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType);
+			Donor donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 
+			//en el constructor hay un localDate, no un DATE por eso el error
 			boolean ok=dbManager.insert(donor);
 			if (ok){
 				System.out.print("Donor has been introduced");

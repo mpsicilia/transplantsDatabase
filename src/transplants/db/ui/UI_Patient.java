@@ -22,6 +22,9 @@ public class UI_Patient {
 	
 	public void introduceNewPatient (){
 		try{
+			System.out.println("Name: ");
+			String name = console.readLine();
+			
 			System.out.println("Birth date [yyyy-mm-dd]: ");
 			String birth = console.readLine();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -50,7 +53,7 @@ public class UI_Patient {
 			System.out.println("Life expectancy: ");
 			int life = Integer.parseInt(console.readLine());
 			
-			Patient p = new Patient (birthDate, weight, height, gender, path, bt, life, addition);
+			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, life, addition);
 			boolean introduced = dbManager.insert(p);
 			if(introduced){
 				System.out.println("Patient has been introduced. ");
@@ -67,14 +70,100 @@ public class UI_Patient {
 	
 	public List<Patient> searchPatient(){
 		try{
-			System.out.println("Introduce the pathology of the patient: ");
-	 		String pathology = console.readLine();	 	
-			List<Patient> patients = dbManager.searchPat(pathology);
+			System.out.println("Introduce the name of the patient: ");
+	 		String name = console.readLine();	 	
+			List<Patient> patients = dbManager.searchPatient(name);
 	 		return patients;
 		}catch (IOException ex){
 			ex.printStackTrace();
 		}
 		return null; //se puede?
+	}
+	
+	public void updatePatient(Patient p){
+		boolean again = true;
+		try{
+			while(again){
+				System.out.println("1. Name: ");
+				System.out.println("2. Birth date. ");
+				System.out.println("3. Weight. ");
+				System.out.println("4. Height. ");
+				System.out.println("5. Gender. ");
+				System.out.println("6. Pathology. ");
+				System.out.println("7. Blood type. ");
+				System.out.println("8. Date of addition. ");
+				System.out.println("9. Life expectancy. ");
+				System.out.println("Choose the information that is goign to be updated [1-9]: ");
+				int op = Integer.parseInt(console.readLine());
+				switch (op){
+					case 1:
+						System.out.println("Introduce the new name: ");
+						p.setName(console.readLine());
+						break;
+					case 2:
+						System.out.println("Introduce the new birth date: ");
+						//date or local date?
+						break;
+					case 3:
+						System.out.println("Introduce the new weight: ");
+						p.setWeight(Float.parseFloat(console.readLine()));
+						break;
+					case 4:
+						System.out.println("Introduce the new height: ");
+						p.setHeight(Float.parseFloat(console.readLine()));
+						break;
+					case 5:
+						System.out.println("Introduce the new gender: ");
+						p.setGender(console.readLine());
+						break;
+					case 6:
+						System.out.println("Introduce the new pathology: ");
+						p.setPathology(console.readLine());
+						break;
+					case 7:
+						System.out.println("Introduce the new blood type: ");
+						p.setBloodType(console.readLine());
+						break;
+					case 8:
+						System.out.println("Introduce the new date of addition: ");
+						//same question of case 2
+						break;
+					case 9: 
+						System.out.println("Introduce the new life expectancy: ");
+						p.setLifeExpectancy(Integer.parseInt(console.readLine()));
+						break;
+				}
+				System.out.println("Do you want to update more information? [yes/no]");
+				if((console.readLine()).equals("no")){
+					again =  false;
+				}
+			}
+			boolean updated = dbManager.update(p);
+			if(updated){
+				System.out.println("Patient has been updated. \n"
+						+ p.toString());
+			}
+			else{
+				System.out.println("Patient has not been updated. ");
+			}
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void deletePatient (Patient pat){
+		try{
+			boolean deleted = dbManager.delete(pat);
+			if(deleted){
+				System.out.println("Patient has been deleted.");
+			}
+			else{
+				System.out.println("Patient has not been deleted. ");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }

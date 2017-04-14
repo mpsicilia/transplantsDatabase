@@ -151,7 +151,13 @@ public class DBManager implements DBManagerInterface{
 
 	@Override
 	public List<Patient> searchPatient(String name) {
-		// TODO Auto-generated method stub
+		try{
+			pat = new SQL_Patient(this);
+			List<Patient> patientList = pat.searchPatient(name);
+			return patientList;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -177,6 +183,10 @@ public class DBManager implements DBManagerInterface{
 				Doctor doctor=(Doctor)obj;			
 				return doct.updateDoctor(doctor);
 			}
+			if(Patient.class==obj.getClass()){
+				Patient patient=(Patient)obj;
+				return pat.updatePatient(patient);
+			}	
 			if (Donor.class==obj.getClass()){
 				Donor donor=(Donor)obj;
 				return don.updateDonor(donor);
@@ -194,6 +204,7 @@ public class DBManager implements DBManagerInterface{
 		try{
 			hosp = new SQL_Hospital (this);
 			doct = new SQL_Doctor (this);
+			pat = new SQL_Patient(this);
 			don  = new SQL_Donor(this);
 			
 			if (Hospital.class==obj.getClass()){
@@ -203,6 +214,10 @@ public class DBManager implements DBManagerInterface{
 			if (Doctor.class==obj.getClass()){
 				Doctor doctor=(Doctor)obj;			
 				return doct.deleteDoctor(doctor);
+			}
+			if(Patient.class==obj.getClass()){
+				Patient patient=(Patient)obj;
+				return pat.deletePatient(patient);
 			}
 			if (Donor.class==obj.getClass()){
 				Donor donor=(Donor)obj;

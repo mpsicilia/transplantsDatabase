@@ -11,6 +11,7 @@ import transplants.db.jdbc.DBManager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Patient;
 
 public class UIGenericMenu {
 
@@ -218,9 +219,41 @@ public class UIGenericMenu {
                     			case 3:
                     				break;
                     				
-                    		}
-                    		break;
+	                    		}
+	                    		break;
 	                    	case 4:
+	                    		List <Patient> pat= uiPatient.searchPatient();
+	                    		Iterator <Patient> it3 = pat.iterator();
+	                	 		int counterPat = 1;
+	                	 		while (it3.hasNext()){
+	                	 			Patient p = it3.next();
+	                	 			System.out.println(counterPat + ". " + p);
+	                	 			counterPat++;
+	                	 		}
+	                	 		System.out.print("RELATED WITH THE PATIENT THAT YOU JUST LOOKED FOR:");
+	                    		System.out.print("\n1. Update information.");
+	                    		System.out.print("\n2. Delete information.");
+	                    		System.out.print("\nChoose an option[1-2]:");
+	                    		String optP = console.readLine();
+	                    		int opPat = Integer.parseInt(optP);
+	                    		switch (opPat){
+                    			case 1:
+                    				System.out.println("Introduce the number of the patient: ");
+                    				int numPat = Integer.parseInt(console.readLine());
+                    				Patient patUp = pat.get(numPat-1);
+                    				uiPatient.updatePatient(patUp);
+                    				break;
+                    			case 2:
+                    				System.out.println("Introduce the number of the patient: ");
+                    				numPat = Integer.parseInt(console.readLine());
+                    				Patient patDel = pat.get(numPat-1);
+                    				uiPatient.deletePatient(patDel);
+                    				break;
+                    			case 3:
+                    				break;
+                    				
+	                    		}
+	                    		break;
 	                    	case 5:
 	                    }
 	        	 		

@@ -2,11 +2,15 @@ package transplants.db.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 
@@ -36,16 +40,79 @@ public class SQL_Patient {
 		return false;
 	}
 	
-	public List<Patient> searchPatient(String patho) {
-		
+	public List<Patient> searchPatient(String namePat) {
+		List<Patient> lookForPatient = new ArrayList<Patient>();
 		try {
-			
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Patients WHERE name LIKE '%" + namePat + "%'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String namePatient = rs.getString("name");
+				String birthString = rs.getString("birthDate");
+				DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate dob = LocalDate.parse(birthString, form);
+				Float weight = rs.getFloat("weight");
+				Float height = rs.getFloat("height");
+				String gen = rs.getString("gender");
+				String patho =  rs.getString("pathology");
+				String bt = rs.getString("bloodType");
+				String addString = rs.getString("birthDate");
+				DateTimeFormatter form2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate doa = LocalDate.parse(addString, form2);
+				Integer lifeExp = rs.getInt("lifeExpectancy");
+				
+				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, lifeExp,  doa);
+				lookForPatient.add(patientToShow);
+			}
+			rs.close();
+			stmt.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
+		return lookForPatient;
 	}
+	
+	public boolean updatePatient (Patient p){
+		try{
+			String sql = "UPDATE Patients SET name=?, birthDate=?, weight=?, height=?, gender=?, pathology=?,"
+					+ "bloodType=?, additionDate=?, lifeExpectancy=? WHERE id=?";
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setString(1, p.getName());
+			prep.setDate(2, p.getBirthDate());
+			prep.setFloat(3, p.getWeight());
+			prep.setFloat(4, p.getHeight());
+			prep.setString(5, p.getGender());
+			prep.setString(6, p.getPathology());
+			prep.setString(7, p.getBloodType());
+			prep.setDate(8, p.getAdditionDate());
+			prep.setInt(9, p.getLifeExpectancy());
+			prep.setInt(10, p.getId());
+			prep.executeUpdate();
+			prep.close();			
+		return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean deletePatient(Patient p){
+		try{
+			String sql = "DELETE FROM Patients WHERE id=?";
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			prep.executeUpdate();
+			prep.close();			
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	
 	public void createTable(){
 		try{			
