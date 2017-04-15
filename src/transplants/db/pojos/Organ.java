@@ -14,6 +14,14 @@ public class Organ implements Serializable{
 		
 	}
 	
+	public Organ(Integer id,String name, Float weight, String typeOfDonation) {
+		//super();
+		this.id=id;
+		this.name = name;
+		this.weight = weight;
+		this.typeOfDonation = typeOfDonation;
+	}
+	
 	public Organ(String name, Float weight, String typeOfDonation) {
 		//super();
 		this.name = name;
@@ -80,6 +88,11 @@ public class Organ implements Serializable{
 
 	public void setTypeOfDonation(String typeOfDonation) {
 		this.typeOfDonation = typeOfDonation;
+	}
+
+	@Override
+	public String toString() {
+		return "Organ [\nname=" + name + ", \nweight=" + weight + ", \ntypeOfDonation=" + typeOfDonation + "]";
 	}
 	
 	

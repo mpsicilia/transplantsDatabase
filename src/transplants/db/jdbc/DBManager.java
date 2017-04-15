@@ -69,6 +69,7 @@ public class DBManager implements DBManagerInterface{
 			doct = new SQL_Doctor (this);
 			pat = new SQL_Patient (this);
 			don = new SQL_Donor (this); 
+			org = new SQL_Organ (this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;			
@@ -87,6 +88,10 @@ public class DBManager implements DBManagerInterface{
 			if (Donor.class==obj.getClass()){
 				Donor donor=(Donor)obj;
 				return don.insertDonor(donor);
+			}
+			if (Organ.class==obj.getClass()){
+				Organ organ=(Organ)obj;
+				return org.insertOrgan(organ);
 			}
 		
 		}catch (Exception e) {
@@ -145,7 +150,13 @@ public class DBManager implements DBManagerInterface{
 
 	@Override
 	public List<Organ> searchOrgan(String name) {
-		// TODO Auto-generated method stub
+		try{
+			org = new SQL_Organ(this);
+			List<Organ> organList = org.searchOrgan(name);
+			return organList;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -174,6 +185,7 @@ public class DBManager implements DBManagerInterface{
 			doct = new SQL_Doctor (this);
 			pat = new SQL_Patient (this);
 			don =new SQL_Donor (this);
+			org= new SQL_Organ (this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -191,6 +203,10 @@ public class DBManager implements DBManagerInterface{
 				Donor donor=(Donor)obj;
 				return don.updateDonor(donor);
 			}
+			if (Organ.class==obj.getClass()){
+				Organ organ=(Organ)obj;
+				return org.updateOrgan(organ);
+			}
 			
 			
 		}catch(Exception ex){
@@ -206,6 +222,7 @@ public class DBManager implements DBManagerInterface{
 			doct = new SQL_Doctor (this);
 			pat = new SQL_Patient(this);
 			don  = new SQL_Donor(this);
+			org= new SQL_Organ (this);
 			
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -222,6 +239,10 @@ public class DBManager implements DBManagerInterface{
 			if (Donor.class==obj.getClass()){
 				Donor donor=(Donor)obj;
 				return don.deleteDonor(donor);
+			}
+			if (Organ.class==obj.getClass()){
+				Organ organ=(Organ)obj;
+				return org.deleteOrgan(organ);
 			}
 		}catch (Exception ex){
 			ex.printStackTrace();

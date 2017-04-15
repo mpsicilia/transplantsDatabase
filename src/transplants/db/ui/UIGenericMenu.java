@@ -28,6 +28,7 @@ public class UIGenericMenu {
 		UI_Doctor uiDoctor=new UI_Doctor();
 		UI_Donor uiDonor=new UI_Donor();
 		UI_Patient uiPatient=new UI_Patient();
+		UI_Organ uiOrgan= new UI_Organ();
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
 	        int option=0;
@@ -97,6 +98,8 @@ public class UIGenericMenu {
 		                    	break;
 		                    case 5:
 		                    case 6:
+		                    	uiOrgan.introduceNewOrgan();
+		                    	break;
 	                    }	                         	 		        			
 	        	 		
 	        	 	}
