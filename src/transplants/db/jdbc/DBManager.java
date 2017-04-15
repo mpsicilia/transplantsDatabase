@@ -296,6 +296,7 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
+	
 	//given a patient name is going to return the doctors that take care of him
 	public List<Doctor> patientDoctor (String pName){
 		List<Doctor> doctor = new ArrayList <Doctor>();
@@ -318,4 +319,5 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
+
 }

@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
@@ -23,8 +25,10 @@ public class UI_Donor {
 			System.out.print("Name: ");
 			String name = console.readLine();
 
-			System.out.print("Date of birth: [yyyy-mm-dd] ");///??? como leemos la fecha?Asi?
-			Date birthDate = Date.valueOf(console.readLine());
+			System.out.println("Date of birth: [yyyy-mm-dd]: ");
+			String birth = console.readLine();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate birthDate = LocalDate.parse(birth, formatter);
 			
 			System.out.print("Height: ");
 			Float height = Float.parseFloat(console.readLine());
@@ -38,11 +42,11 @@ public class UI_Donor {
 			System.out.print("Dead or Alive: ");
 			String deadAlive = console.readLine();
 			
-			System.out.print("Dead or Alive: ");
+			System.out.print("Blood Type: ");
 			String bloodType = console.readLine();
 			
 			Donor donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 
-			//en el constructor hay un localDate, no un DATE por eso el error
+			
 			boolean ok=dbManager.insert(donor);
 			if (ok){
 				System.out.print("Donor has been introduced");
@@ -70,14 +74,14 @@ public class UI_Donor {
 		boolean again = true;	
 		try{
 			while(again){
+				System.out.println("Choose the information that is going to be updated [1-7]: ");
 				System.out.println("1. Name");
 				System.out.println("2. Date of birth");
 				System.out.println("3. Height");
 				System.out.println("4. Weight");
 				System.out.println("5. Gender");
 				System.out.println("6. Dead or Alive");
-				System.out.println("7. Blood Type");
-				System.out.println("Choose the information that is going to be updated [1-7]: ");
+				System.out.println("7. Blood Type");				
 				int op = Integer.parseInt(console.readLine());
 				switch (op){
 					case 1:

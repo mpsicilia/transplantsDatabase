@@ -200,6 +200,7 @@ public class UIGenericMenu {
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See in what hospital he is and who is taking care of him.");
+	                    		System.out.print("\n3. See the organ that is donating");
 	                    		System.out.print("\nChoose an option[1-3]:");
 	                    		String optDonor = console.readLine();
 	                    		int opDonor = Integer.parseInt(optDonor);
@@ -218,6 +219,8 @@ public class UIGenericMenu {
                     				break;
                     			case 3:
                     				break;
+                    			case 4:
+                    				break;
                     				
 	                    		}
 	                    		break;
@@ -234,7 +237,7 @@ public class UIGenericMenu {
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See where the patient is hospitalised and the doctors that treat him. ");
-	                    		System.out.print("\n4 Check the characteristics of the requested organ. ");
+	                    		System.out.print("\n4. Check the characteristics of the requested organ. ");
 	                    		System.out.print("\nChoose an option[1-4]:");
 	                    		String optP = console.readLine();
 	                    		int opPat = Integer.parseInt(optP);
@@ -260,7 +263,8 @@ public class UIGenericMenu {
                     			case 4:
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat4 = Integer.parseInt(console.readLine());
-                    				//metodo al que le pasas un paciente y te muestra las caracteristicas del organo que necesita el paciente
+                    				//metodo al que le pasas un paciente y te muestra las caracteristicas del 
+                    				//organo que necesita el paciente
                     				break;
                     				
 	                    		}

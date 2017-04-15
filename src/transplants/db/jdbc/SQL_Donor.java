@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,15 +49,15 @@ public class SQL_Donor {
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
 				String nameDon = rs.getString("name");
-				Date birthDate = rs.getDate("birthDate");
+				String birthString = rs.getString("birthDate");
+				DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate dob = LocalDate.parse(birthString, form);
 				Float weight = rs.getFloat("weight");
 				Float height = rs.getFloat("height");
 				String gender = rs.getString("gender");
 				String deadAlive = rs.getString("deadAlive");
 				String bloodType= rs.getString("bloodType");
-				Donor donorToShow = new Donor(id, nameDon, birthDate, weight, height, gender, deadAlive, bloodType);
-				//como que supuestamente tiene que ser LocalDate... si lo consigues haz este tambn. mira codigo 
-				//de rodrigo
+				Donor donorToShow = new Donor(id, nameDon, dob, weight, height, gender, deadAlive, bloodType);
 				lookForDonor.add(donorToShow);
 			}
 			rs.close();
@@ -75,7 +76,7 @@ public class SQL_Donor {
 					+ "height =?, gender=?, deadAlive=?, bloodType=? WHERE id=?";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
 			prep.setString(1, donor.getName());
-			prep.setDate  (2, donor.getBirthDate());
+			prep.setDate (2, donor.getBirthDate());///falla
 			prep.setFloat(3, donor.getWeight());
 			prep.setFloat(4, donor.getHeight());
 			prep.setString(5, donor.getGender());
@@ -109,8 +110,19 @@ public class SQL_Donor {
 		
 		return false;
 	}
-
 	
+	/*SPECIFIC METHODS OF THE CLASS*/
+    //1. See in what hospital is the donor, and the doctors that are taking care of him
+	public String searchDonorInHospital (String donorName){
+		return "";
+	}
+	//2. See the organ that is going to donate
+	public String OrganDonating (String donorName){
+		return "";
+	}
+	
+	
+	/*METHODS RELATED WITH THE TABLES*/
 	public void createTable(){
 		try{
 			
@@ -136,8 +148,7 @@ public class SQL_Donor {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 	public void dropTable() {
 		try{
 			Statement stm = dbManager.getC().createStatement();
