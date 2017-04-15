@@ -12,6 +12,7 @@ import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
+import transplants.db.pojos.Requested_organ;
 
 public interface DBManagerInterface {
 	
@@ -29,7 +30,7 @@ public interface DBManagerInterface {
 	public List<Donor> searchDonor(String name); 
 	public List<Organ> searchOrgan(String name); 
 	public List<Patient> searchPatient(String name); 
-	public List<Request> searchRequest(String name); 
+	public List<Requested_organ> searchRequest(String name); 
 	
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);

@@ -17,6 +17,7 @@ import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
+import transplants.db.pojos.Requested_organ;
 
 public class DBManager implements DBManagerInterface{
 	private Connection c;
@@ -71,6 +72,7 @@ public class DBManager implements DBManagerInterface{
 			don = new SQL_Donor (this); 
 			org = new SQL_Organ (this);
 			animalT= new SQL_AnimalTissue(this);
+			req= new SQL_Request(this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;			
@@ -97,6 +99,10 @@ public class DBManager implements DBManagerInterface{
 			if (Animal_tissue.class==obj.getClass()){
 				Animal_tissue animalTi=(Animal_tissue)obj;
 				return animalT.insertAnimalTissue(animalTi);
+			}
+			if (Requested_organ.class==obj.getClass()){
+				Requested_organ reqOrgan=(Requested_organ)obj;
+				return req.insertRequest(reqOrgan);
 			}
 		
 		}catch (Exception e) {
@@ -185,8 +191,14 @@ public class DBManager implements DBManagerInterface{
 	}
 
 	@Override
-	public List<Request> searchRequest(String name) {
-		// TODO Auto-generated method stub
+	public List<Requested_organ> searchRequest(String name) {
+		try{
+			req = new SQL_Request(this);
+			List<Requested_organ> requestList = req.searchReqOrgan(name);
+			return requestList;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 	@Override
@@ -199,6 +211,7 @@ public class DBManager implements DBManagerInterface{
 			don =new SQL_Donor (this);
 			org= new SQL_Organ (this);
 			animalT= new SQL_AnimalTissue(this);
+			req= new SQL_Request (this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -224,6 +237,10 @@ public class DBManager implements DBManagerInterface{
 				Animal_tissue animalTi=(Animal_tissue)obj;
 				return animalT.updateAnimalTissue(animalTi);
 			}
+			if (Requested_organ.class==obj.getClass()){
+				Requested_organ reqOrgan=(Requested_organ)obj;
+				return req.updateReqOrgan(reqOrgan);
+			}
 			
 			
 		}catch(Exception ex){
@@ -241,6 +258,7 @@ public class DBManager implements DBManagerInterface{
 			don  = new SQL_Donor(this);
 			org= new SQL_Organ (this);
 			animalT=new SQL_AnimalTissue(this);
+			req= new SQL_Request(this);
 			
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -265,6 +283,10 @@ public class DBManager implements DBManagerInterface{
 			if (Animal_tissue.class==obj.getClass()){
 				Animal_tissue animalTi=(Animal_tissue)obj;
 				return animalT.deleteAnimalTissue(animalTi);
+			}
+			if (Requested_organ.class==obj.getClass()){
+				Requested_organ reqOrgan=(Requested_organ)obj;
+				return req.deleteReqOrgan(reqOrgan);
 			}
 		}catch (Exception ex){
 			ex.printStackTrace();

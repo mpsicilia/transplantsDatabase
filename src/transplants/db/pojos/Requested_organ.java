@@ -3,9 +3,8 @@ package transplants.db.pojos;
 import java.io.Serializable;
 
 public class Requested_organ implements Serializable {
-	
-	
-	private static final long serialVersionUID = -2088889973279102023L;
+
+	private static final long serialVersionUID = 4061202503200538758L;
 	private Integer id;
 	private String name;
 	private Float maxWeight;
@@ -18,6 +17,12 @@ public class Requested_organ implements Serializable {
 	public Requested_organ(Integer id, String name, Float maxWeight, Float minWeight) {
 		//super();
 		this.id = id;
+		this.name = name;
+		this.maxWeight = maxWeight;
+		this.minWeight = minWeight;
+	}
+	public Requested_organ(String name, Float maxWeight, Float minWeight) {
+		//super();
 		this.name = name;
 		this.maxWeight = maxWeight;
 		this.minWeight = minWeight;

@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
 
@@ -97,5 +98,20 @@ public class UI_Organ {
 			}catch (IOException ex){
 				ex.printStackTrace();
 			}
+	}
+	
+	public void deleteOrgan (Organ organ){
+		try{
+			boolean deleted = dbManager.delete(organ);
+			if(deleted){
+				System.out.println("Organ has been deleted.");
+			}
+			else{
+				System.out.println("Organ has NOT been deleted. ");
+			}
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+	
 	}
 }
