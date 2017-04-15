@@ -35,5 +35,7 @@ public interface DBManagerInterface {
 	public boolean delete (Object obj);
 	
 	public List <Hospital> DoctorHospital (String name);
+	public List<Doctor> patientDoctor (String pName);
+	public String patientHospital (String pName);
 	
 }

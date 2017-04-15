@@ -296,4 +296,26 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
+	//given a patient name is going to return the doctors that take care of him
+	public List<Doctor> patientDoctor (String pName){
+		List<Doctor> doctor = new ArrayList <Doctor>();
+		try{
+			doct = new SQL_Doctor(this);
+			doctor = doct.doctorsOfPatient(pName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return doctor;
+	}
+	//given a patient name is going to return the hospital in which the patient is admitted
+	public String patientHospital (String pName){
+		String hospital = "";
+		try{
+			hosp = new SQL_Hospital(this);
+			hospital = hosp.hospitalOfPatient(pName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return hospital;
+	}
 }

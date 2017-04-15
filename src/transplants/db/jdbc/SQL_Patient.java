@@ -87,7 +87,7 @@ public class SQL_Patient {
 			prep.setString(5, p.getGender());
 			prep.setString(6, p.getPathology());
 			prep.setString(7, p.getBloodType());
-			prep.setDate(8, p.getAdditionDate());
+			prep.setLocalDate(8, p.getAdditionDate());
 			prep.setInt(9, p.getLifeExpectancy());
 			prep.setInt(10, p.getId());
 			prep.executeUpdate();

@@ -117,6 +117,16 @@ public class SQL_Doctor {
 		return lookForDoctor;
 	}
 
+	public List<Doctor> doctorsOfPatient (String patName){
+		List<Doctor> patDoctors = new ArrayList<Doctor>();
+		try{
+			Statement stmt = dbManager.getC().createStatement();
+			//sql que seleccione doctores segun el nombre del paciente
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return patDoctors;
+	}
 	
 	public void createTable() {
 		try {

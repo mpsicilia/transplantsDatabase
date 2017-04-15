@@ -233,7 +233,9 @@ public class UIGenericMenu {
 	                	 		System.out.print("RELATED WITH THE PATIENT THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
-	                    		System.out.print("\nChoose an option[1-2]:");
+	                    		System.out.print("\n3. See where the patient is hospitalised and the doctors that treat him. ");
+	                    		System.out.print("\n4 Check the characteristics of the requested organ. ");
+	                    		System.out.print("\nChoose an option[1-4]:");
 	                    		String optP = console.readLine();
 	                    		int opPat = Integer.parseInt(optP);
 	                    		switch (opPat){
@@ -245,11 +247,20 @@ public class UIGenericMenu {
                     				break;
                     			case 2:
                     				System.out.println("Introduce the number of the patient: ");
-                    				numPat = Integer.parseInt(console.readLine());
-                    				Patient patDel = pat.get(numPat-1);
+                    				int numPat2 = Integer.parseInt(console.readLine());
+                    				Patient patDel = pat.get(numPat2-1);
                     				uiPatient.deletePatient(patDel);
                     				break;
                     			case 3:
+                    				System.out.println("Introduce the number of the patient: ");
+                    				int numPat3 = Integer.parseInt(console.readLine());
+                    				Patient patHD = pat.get(numPat3-1);
+                    				uiPatient.patientHospitalAndDoctor(patHD.getName());
+                    				break;
+                    			case 4:
+                    				System.out.println("Introduce the number of the patient: ");
+                    				int numPat4 = Integer.parseInt(console.readLine());
+                    				//metodo al que le pasas un paciente y te muestra las caracteristicas del organo que necesita el paciente
                     				break;
                     				
 	                    		}

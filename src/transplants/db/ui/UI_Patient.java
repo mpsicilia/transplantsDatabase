@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 
@@ -161,6 +162,17 @@ public class UI_Patient {
 			else{
 				System.out.println("Patient has not been deleted. ");
 			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void patientHospitalAndDoctor (String ptName){
+		try{
+			List<Doctor> patDoctors = dbManager.patientDoctor(ptName);
+			String hospName = dbManager.patientHospital(ptName);
+			System.out.println("Patient: " + ptName + ", is admitted in the hospital: " + hospName + 
+					". The doctors that take care of him are: \n" + patDoctors);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

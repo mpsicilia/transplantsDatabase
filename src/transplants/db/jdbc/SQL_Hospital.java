@@ -107,6 +107,17 @@ public class SQL_Hospital {
 		}
 		return searchSql;
 	}
+	//given a patient name is going to return the hospital in which the patient is
+	public String hospitalOfPatient (String pName){
+		String hosp = "";
+		try{
+			Statement stmt = dmanager.getC().createStatement();
+			//sql que seleccione el nombre del hospital por el nombre del paciente
+		}catch (Exception e){
+			e.printStackTrace();
+		} 
+		return hosp;
+	}
 	
 	public boolean updateHospital (Hospital hosp){		
 		try {
