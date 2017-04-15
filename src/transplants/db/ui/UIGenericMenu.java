@@ -29,6 +29,7 @@ public class UIGenericMenu {
 		UI_Donor uiDonor=new UI_Donor();
 		UI_Patient uiPatient=new UI_Patient();
 		UI_Organ uiOrgan= new UI_Organ();
+		UI_AnimalTissue uiAnimalT= new UI_AnimalTissue();
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
 	        int option=0;
@@ -99,6 +100,8 @@ public class UIGenericMenu {
 		                    case 5:
 		                    case 6:
 		                    	uiOrgan.introduceNewOrgan();
+		                    	uiAnimalT.introduceNewAnimalTissue();
+		                    	//make difference between if the organ comes from an animal or from a person
 		                    	break;
 	                    }	                         	 		        			
 	        	 		
@@ -273,6 +276,7 @@ public class UIGenericMenu {
 	                    		}
 	                    		break;
 	                    	case 5:
+	                    	//pensar como lo vamos a estructurar para poder ejecutarlo	
 	                    }
 	        	 		
 	        	 	}

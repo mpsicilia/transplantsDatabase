@@ -3,23 +3,30 @@ package transplants.db.pojos;
 import java.io.Serializable;
 
 public class Animal_tissue implements Serializable {
-	
-	private static final long serialVersionUID = 2350829857786761680L;
-	
-	private int id;
+
+	private static final long serialVersionUID = -7167881940806327162L;
+	private Integer id;
 	private String name;
 	private String typeOfTissue;
 	private String pathology;
-	private int timeItLasts;
+	private Integer timeItLasts;
 	
 	public Animal_tissue() {
 		super();
 	}
 	
 		
-	public Animal_tissue(int id, String name, String typeOfTissue, String pathology, int time) {
+	public Animal_tissue(Integer id, String name, String typeOfTissue, String pathology, int time) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.typeOfTissue = typeOfTissue;
+		this.pathology = pathology;
+		this.timeItLasts = time;
+	}
+	
+	public Animal_tissue(String name, String typeOfTissue, String pathology, int time) {
+		super();
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
 		this.pathology = pathology;
@@ -53,8 +60,8 @@ public class Animal_tissue implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Animal_tissue [id=" + id + ", name=" + name + ", type_of_tissue=" + typeOfTissue + ", pathology="
-				+ pathology + ", time=" + timeItLasts + "]";
+		return "Animal_tissue [\nname=" + name + ", \ntype_of_tissue=" + typeOfTissue + ", \npathology="
+				+ pathology + ", \ntime=" + timeItLasts + "]";
 	}
 
 

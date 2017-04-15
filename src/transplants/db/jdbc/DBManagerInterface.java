@@ -24,7 +24,7 @@ public interface DBManagerInterface {
 	public boolean insert(Object obj);
 	
 	public List<Hospital> searchHosp(String name); 
-	public List<Animal_tissue> searchAnimalT(String name); 
+	public List<Animal_tissue> searchAnimalTissue(String name); 
 	public List<Doctor> searchDoctor(String name); 
 	public List<Donor> searchDonor(String name); 
 	public List<Organ> searchOrgan(String name); 

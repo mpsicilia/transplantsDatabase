@@ -70,6 +70,7 @@ public class DBManager implements DBManagerInterface{
 			pat = new SQL_Patient (this);
 			don = new SQL_Donor (this); 
 			org = new SQL_Organ (this);
+			animalT= new SQL_AnimalTissue(this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;			
@@ -92,6 +93,10 @@ public class DBManager implements DBManagerInterface{
 			if (Organ.class==obj.getClass()){
 				Organ organ=(Organ)obj;
 				return org.insertOrgan(organ);
+			}
+			if (Animal_tissue.class==obj.getClass()){
+				Animal_tissue animalTi=(Animal_tissue)obj;
+				return animalT.insertAnimalTissue(animalTi);
 			}
 		
 		}catch (Exception e) {
@@ -128,8 +133,15 @@ public class DBManager implements DBManagerInterface{
 	}
 
 	@Override
-	public List<Animal_tissue> searchAnimalT(String name) {
-		// TODO Auto-generated method stub
+	public List<Animal_tissue> searchAnimalTissue(String name) {
+		try{
+			animalT = new SQL_AnimalTissue(this); //create connection
+			List<Animal_tissue> animalTList= animalT.searchAnimalTissue(name);
+			return animalTList;
+			}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -186,6 +198,7 @@ public class DBManager implements DBManagerInterface{
 			pat = new SQL_Patient (this);
 			don =new SQL_Donor (this);
 			org= new SQL_Organ (this);
+			animalT= new SQL_AnimalTissue(this);
 				
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -207,6 +220,10 @@ public class DBManager implements DBManagerInterface{
 				Organ organ=(Organ)obj;
 				return org.updateOrgan(organ);
 			}
+			if (Animal_tissue.class==obj.getClass()){
+				Animal_tissue animalTi=(Animal_tissue)obj;
+				return animalT.updateAnimalTissue(animalTi);
+			}
 			
 			
 		}catch(Exception ex){
@@ -223,6 +240,7 @@ public class DBManager implements DBManagerInterface{
 			pat = new SQL_Patient(this);
 			don  = new SQL_Donor(this);
 			org= new SQL_Organ (this);
+			animalT=new SQL_AnimalTissue(this);
 			
 			if (Hospital.class==obj.getClass()){
 				Hospital hospital=(Hospital)obj;
@@ -243,6 +261,10 @@ public class DBManager implements DBManagerInterface{
 			if (Organ.class==obj.getClass()){
 				Organ organ=(Organ)obj;
 				return org.deleteOrgan(organ);
+			}
+			if (Animal_tissue.class==obj.getClass()){
+				Animal_tissue animalTi=(Animal_tissue)obj;
+				return animalT.deleteAnimalTissue(animalTi);
 			}
 		}catch (Exception ex){
 			ex.printStackTrace();
