@@ -11,7 +11,9 @@ import transplants.db.jdbc.DBManager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
+import transplants.db.pojos.Requested_organ;
 
 public class UIGenericMenu {
 
@@ -30,6 +32,7 @@ public class UIGenericMenu {
 		UI_Patient uiPatient=new UI_Patient();
 		UI_Organ uiOrgan= new UI_Organ();
 		UI_AnimalTissue uiAnimalT= new UI_AnimalTissue();
+		UI_RequestedOrgan uiRequested = new UI_RequestedOrgan();
 		try{
 			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
 	        int option=0;
@@ -98,9 +101,17 @@ public class UIGenericMenu {
 		                    	uiPatient.introduceNewPatient();
 		                    	break;
 		                    case 5:
+		                    	uiRequested.introduceNewReqOrgan();
+		                    	break;
 		                    case 6:
-		                    	uiOrgan.introduceNewOrgan();
-		                    	uiAnimalT.introduceNewAnimalTissue();
+		                    	System.out.println("The organ that is going to be donated, comes from an animal or from a person? : [a/p]");
+		                    	String org = console.readLine();
+		                    	if(org.equalsIgnoreCase("a")){
+		                    		uiAnimalT.introduceNewAnimalTissue();
+		                    	}
+		                    	else{
+		                    		uiOrgan.introduceNewOrgan();
+		                    	}
 		                    	//make difference between if the organ comes from an animal or from a person
 		                    	break;
 	                    }	                         	 		        			
@@ -167,7 +178,8 @@ public class UIGenericMenu {
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See the hospital in which the doctor works.");
-	                    		System.out.print("\nChoose an option[1-3]:");
+	                    		System.out.print("\n4. Go back to the menu. ");
+	                    		System.out.print("\nChoose an option[1-4]:");
 	                    		String optDoctor = console.readLine();
 	                    		int opDoctor = Integer.parseInt(optDoctor);
 	                    		switch (opDoctor){
@@ -188,6 +200,9 @@ public class UIGenericMenu {
                     				numDoct = Integer.parseInt(console.readLine());
                     				Doctor doctSearch = doct.get(numDoct-1);
                     				uiHospital.DoctorHospital(doctSearch.getNameOfDoctor());
+                    				//we need to ask the user in which hospital is going to work each doctor
+                    				break;
+                    			case 4:
                     				break;
                     				
                     		}
@@ -206,8 +221,9 @@ public class UIGenericMenu {
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See in what hospital he is and who is taking care of him.");
-	                    		System.out.print("\n3. See the organ that is donating");
-	                    		System.out.print("\nChoose an option[1-3]:");
+	                    		System.out.print("\n4. See the organ that is donating");
+	                    		System.out.print("\n5. Go back to the menu. ");
+	                    		System.out.print("\nChoose an option[1-5]:");
 	                    		String optDonor = console.readLine();
 	                    		int opDonor = Integer.parseInt(optDonor);
 	                    		switch (opDonor){
@@ -227,6 +243,8 @@ public class UIGenericMenu {
                     				break;
                     			case 4:
                     				break;
+                    			case 5:
+                    				break;
                     				
 	                    		}
 	                    		break;
@@ -244,7 +262,8 @@ public class UIGenericMenu {
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See where the patient is hospitalised and the doctors that treat him. ");
 	                    		System.out.print("\n4. Check the characteristics of the requested organ. ");
-	                    		System.out.print("\nChoose an option[1-4]:");
+	                    		System.out.print("\n5. Go back to the menu. ");
+	                    		System.out.print("\nChoose an option[1-5]:");
 	                    		String optP = console.readLine();
 	                    		int opPat = Integer.parseInt(optP);
 	                    		switch (opPat){
@@ -272,11 +291,38 @@ public class UIGenericMenu {
                     				//metodo al que le pasas un paciente y te muestra las caracteristicas del 
                     				//organo que necesita el paciente
                     				break;
+                    			case 5:
+                    				break;
                     				
 	                    		}
 	                    		break;
-	                    	case 5:
-	                    	//pensar como lo vamos a estructurar para poder ejecutarlo	
+	                    	case 5:{//buscas un organo para el paciente (buscas organ), o buscas un paciente para un organo (request)
+	                    		System.out.println("\nIt's an organ that the patient needs? or that has been donated? : [need/donate]");
+	                    		String or = console.readLine();
+	                    		if(or.equalsIgnoreCase("need")){ //requested organ
+	                    			List <Requested_organ> reqOrgans = uiRequested.searchReqOrgan();
+	                    			Iterator <Requested_organ> it4 = reqOrgans.iterator();
+		                	 		int counterReq = 1;
+		                	 		while (it4.hasNext()){
+		                	 			Requested_organ r = it4.next();
+		                	 			System.out.println(counterReq + ". " + r);
+		                	 			counterReq++;
+		                	 		}
+		                	 		//extra methods
+	                    		}
+	                    		if(or.equalsIgnoreCase("donate")){
+	                    			List <Organ> orgs = uiOrgan.searchOrgan();
+	                    			Iterator <Organ> it5 = orgs.iterator();
+		                	 		int counterOrg = 1;
+		                	 		while (it5.hasNext()){
+		                	 			Organ o = it5.next();
+		                	 			System.out.println(counterOrg + ". " + o);
+		                	 			counterOrg++;
+		                	 		}
+		                	 		//extra methods
+	                    		}
+	                    	}
+	                    	break;
 	                    }
 	        	 		
 	        	 	}

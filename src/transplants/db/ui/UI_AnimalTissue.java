@@ -36,7 +36,7 @@ public class UI_AnimalTissue {
 			if (ok){
 				System.out.print("The animal tissue has been introduced");
 			}else{
-				System.out.print("The anima tissue has NOT been introduced");
+				System.out.print("The animal tissue has NOT been introduced");
 			}
 		}catch(IOException ex){
 			ex.printStackTrace();
