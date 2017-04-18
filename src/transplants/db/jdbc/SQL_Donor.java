@@ -50,8 +50,7 @@ public class SQL_Donor {
 				Integer id = rs.getInt("id");
 				String nameDon = rs.getString("name");
 				String birthString = rs.getString("birthDate");
-				DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate dob = LocalDate.parse(birthString, form);
+				Date dob = Date.valueOf(birthString);
 				Float weight = rs.getFloat("weight");
 				Float height = rs.getFloat("height");
 				String gender = rs.getString("gender");

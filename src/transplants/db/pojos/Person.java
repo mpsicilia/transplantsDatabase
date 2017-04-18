@@ -19,21 +19,21 @@ public class Person implements Serializable {
 	public Person (){
 	}
 	
-	public Person(String name, LocalDate birthDate, Float weight, Float height, String gender, String bloodType) {
+	public Person(String name, Date birthDate, Float weight, Float height, String gender, String bloodType) {
 		super();
 		this.name=name;
-		this.setLocalDateDob(birthDate);
+		this.birthDate = birthDate;
 		this.weight = weight;
 		this.height = height;
 		this.gender = gender;
 		this.bloodType = bloodType;
 	}
 	
-	public Person(Integer id, String name, LocalDate birthDate, Float weight, Float height, String gender, String bloodType) {
+	public Person(Integer id, String name, Date birthDate, Float weight, Float height, String gender, String bloodType) {
 		super();
 		this.id = id;
 		this.name=name;
-		this.setLocalDateDob(birthDate);
+		this.birthDate = birthDate;
 		this.weight = weight;
 		this.height = height;
 		this.gender = gender;
@@ -54,15 +54,6 @@ public class Person implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	// Additional method to use LocalDate objects
-	public void setLocalDateDob(LocalDate ldate) {
-		this.birthDate = Date.valueOf(ldate);
-	}
-
-	// Additional method to use LocalDate objects
-	public LocalDate getLocalDateDob() {
-		return this.birthDate.toLocalDate();
 	}
 
 	public Date getBirthDate() {

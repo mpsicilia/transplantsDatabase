@@ -28,8 +28,7 @@ public class UI_Patient {
 			
 			System.out.println("Birth date [yyyy-mm-dd]: ");
 			String birth = console.readLine();
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate birthDate = LocalDate.parse(birth, formatter);
+			Date birthDate = Date.valueOf(birth);
 			
 			System.out.println("Weight: ");
 			Float weight = Float.parseFloat(console.readLine());
@@ -48,8 +47,7 @@ public class UI_Patient {
 			
 			System.out.println("Date of addition: ");
 			String doa = console.readLine();
-			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate addition = LocalDate.parse(doa, format);
+			Date addition = Date.valueOf(doa);
 			
 			System.out.println("Life expectancy: ");
 			int life = Integer.parseInt(console.readLine());
@@ -103,7 +101,7 @@ public class UI_Patient {
 						break;
 					case 2:
 						System.out.println("Introduce the new birth date: ");
-						//date or local date?
+						p.setBirthDate(Date.valueOf(console.readLine()));
 						break;
 					case 3:
 						System.out.println("Introduce the new weight: ");
@@ -127,7 +125,7 @@ public class UI_Patient {
 						break;
 					case 8:
 						System.out.println("Introduce the new date of addition: ");
-						//same question of case 2
+						p.setAdditionDate(Date.valueOf(console.readLine()));
 						break;
 					case 9: 
 						System.out.println("Introduce the new life expectancy: ");

@@ -10,22 +10,22 @@ public class Patient extends Person{
 	//should this one implement Serializable? Should person? Or both?
 	private Integer lifeExpectancy;
 	private String pathology;
-	private LocalDate additionDate;
+	private Date additionDate;
 	
 	public Patient(){
 		
 	}
 	
-	public Patient(String name, LocalDate birthDate,Float weight, Float height, String gender, String pathology, String bloodType, 
-			Integer lifeExpectancy, LocalDate additionDate){
+	public Patient(String name, Date birthDate,Float weight, Float height, String gender, String pathology, String bloodType, 
+			Integer lifeExpectancy, Date additionDate){
 		super(name, birthDate,weight,height,gender, bloodType);
 		this.pathology = pathology;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
 	}
 	
-	public Patient(Integer id, String name, LocalDate birthDate,Float weight, Float height, String gender, String pathology, 
-			String bloodType, Integer lifeExpectancy, LocalDate additionDate){
+	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
+			String bloodType, Integer lifeExpectancy, Date additionDate){
 		super(id, name, birthDate,weight,height,gender, bloodType);
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
@@ -40,11 +40,11 @@ public class Patient extends Person{
 		this.lifeExpectancy = lifeExpectancy;
 	}
 
-	public LocalDate getAdditionDate() {
+	public Date getAdditionDate() {
 		return additionDate;
 	}
 
-	public void setAdditionDate(LocalDate additionDate) {
+	public void setAdditionDate(Date additionDate) {
 		this.additionDate = additionDate;
 	}
 	

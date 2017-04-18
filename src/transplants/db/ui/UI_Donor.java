@@ -27,8 +27,7 @@ public class UI_Donor {
 
 			System.out.println("Date of birth: [yyyy-mm-dd]: ");
 			String birth = console.readLine();
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate birthDate = LocalDate.parse(birth, formatter);
+			Date birthDate = Date.valueOf(birth);
 			
 			System.out.print("Height: ");
 			Float height = Float.parseFloat(console.readLine());

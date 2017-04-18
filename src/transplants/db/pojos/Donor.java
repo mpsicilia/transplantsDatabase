@@ -7,24 +7,22 @@ public class Donor extends Person{
 	
 	private static final long serialVersionUID = 6705263044123670258L;
 	private String deadOrAlive;
-    //same questions as Patient
+	
 	
 	public Donor() {
 	}
 	
-	public Donor (String name, LocalDate birthDate, Float weight, Float height, String gender, 
+	public Donor (String name, Date birthDate, Float weight, Float height, String gender, 
 			      String deadOrAlive, String bloodType){
 		super(name, birthDate, weight, height, gender, bloodType);
 		this.deadOrAlive=deadOrAlive;
-		super.setLocalDateDob(birthDate);
 		
 	}
 	
-	public Donor (Integer id, String name, LocalDate birthDate, Float weight, Float height, String gender, 
+	public Donor (Integer id, String name, Date birthDate, Float weight, Float height, String gender, 
 		      String deadOrAlive, String bloodType){
 		super(id, name, birthDate, weight, height, gender, bloodType);
 		this.deadOrAlive=deadOrAlive;
-		super.setLocalDateDob(birthDate);
     }
 
 	public String getDeadOrAlive() {
