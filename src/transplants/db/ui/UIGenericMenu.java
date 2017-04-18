@@ -134,13 +134,24 @@ public class UIGenericMenu {
 	                    		List<Hospital> hosps = uiHospital.searchHospital();
 	                    		Iterator <Hospital> it = hosps.iterator();
 	                	 		int counter = 1;
-	                	 		//-->to do/*¡¡¡¡HAY QUE PONER MENSAJE DE QUE SI NO ENCUENTRA EL DOCTOR SI LO DESEA AÑADIR O NO!!!!*/
+	               
 	                	 		while (it.hasNext()){
 	                	 			Hospital hospi = it.next();
 	                	 			System.out.println(counter + ". " + hospi);
 	                	 			counter++;
-	                	 		}	                	 		
-	                    		System.out.print("RELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
+	                	 		}	
+	                	 		if(counter ==1){
+	                	 			System.out.println("Hospital not found, would you like to introduce a new hospital?: [yes/no]");
+	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
+	                	 				uiHospital.introduceNewHospital();
+	                	 				break;
+	                	 			}
+	                	 			
+	                	 			
+                	 			
+	                	 		}
+	                	 		
+	                    		System.out.print("\nRELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete hospital.");
 	                    		System.out.print("\n3. Go back to the menu. ");
@@ -174,7 +185,14 @@ public class UIGenericMenu {
 	                	 			System.out.println(counterDoctor + ". " + doctor);
 	                	 			counterDoctor++;
 	                	 		}
-	                	 		System.out.print("RELATED WITH THE DOCTOR THAT YOU JUST LOOKED FOR:");
+	                	 		if(counterDoctor ==1){
+	                	 			System.out.println("Doctor not found, would you like to introduce a new Doctor?: [yes/no]");
+	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
+	                	 				uiDoctor.introduceNewDoctor();
+	                	 				break;
+	                	 			}
+	                	 			}
+	                	 		System.out.print("\nRELATED WITH THE DOCTOR THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See the hospital in which the doctor works.");
@@ -217,7 +235,14 @@ public class UIGenericMenu {
 	                	 			System.out.println(counterDonor + ". " + don);
 	                	 			counterDonor++;
 	                	 		}
-	                	 		System.out.print("RELATED WITH THE DONOR THAT YOU JUST LOOKED FOR:");
+	                	 		if(counterDonor ==1){
+	                	 			System.out.println("Donor not found, would you like to introduce a new Donor?: [yes/no]");
+	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
+	                	 				uiDonor.introduceNewDonor();
+	                	 				break;
+	                	 			}
+	                	 		}
+	                	 		System.out.print("\nRELATED WITH THE DONOR THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See in what hospital he is and who is taking care of him.");
@@ -257,7 +282,14 @@ public class UIGenericMenu {
 	                	 			System.out.println(counterPat + ". " + p);
 	                	 			counterPat++;
 	                	 		}
-	                	 		System.out.print("RELATED WITH THE PATIENT THAT YOU JUST LOOKED FOR:");
+	                	 		if(counterPat ==1){
+	                	 			System.out.println("Patient not found, would you like to introduce a new patient?: [yes/no]");
+	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
+	                	 				uiPatient.introduceNewPatient();
+	                	 				break;
+	                	 			}
+	                	 		}
+	                	 		System.out.print("\nRELATED WITH THE PATIENT THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See where the patient is hospitalised and the doctors that treat him. ");
@@ -297,7 +329,7 @@ public class UIGenericMenu {
 	                    		}
 	                    		break;
 	                    	case 5:{//buscas un organo para el paciente (buscas organ), o buscas un paciente para un organo (request)
-	                    		System.out.println("\nIt's an organ that the patient needs? or that has been donated? : [need/donate]");
+	                    		System.out.println("\nIt's an organ that the patient needs? or that has been donated? : [need/donated]");
 	                    		String or = console.readLine();
 	                    		if(or.equalsIgnoreCase("need")){ //requested organ
 	                    			List <Requested_organ> reqOrgans = uiRequested.searchReqOrgan();
@@ -331,17 +363,17 @@ public class UIGenericMenu {
 	        	 	//todas estas opciones. Seguro que lo vamos viendo a medida que lo vayamos haciendo
 	        	 	//pero he apuntado las ideas aqui para que no se nos olviden
 	        	 	case 3:
-	        	 		System.out.print("1. Search a hospital by the type of organ transplantation"
+	        	 		System.out.print("\n1. Search a hospital by the type of organ transplantation"
   	 				          			 + "that takes place in it.");
-	        	 		System.out.print("2. Hospital and doctor that is in charge of the patient.");
-	        	 		System.out.print("3. Hospital and doctor that is in charge of the donor.");
-	        	 		System.out.print("4. Hospital in which the organ that is going to"
+	        	 		System.out.print("\n2. Hospital and doctor that is in charge of the patient.");
+	        	 		System.out.print("\n3. Hospital and doctor that is in charge of the donor.");
+	        	 		System.out.print("\n4. Hospital in which the organ that is going to"
 	        	 				         + " be donated is located, and the owner of it.");
-	        	 		System.out.print("5. Patient that is reciving an organ.");
-	        	 		System.out.print("6. Compatibility test.");
-	        	 		System.out.print("7. See if there is a donor for the organ that you want.");
-	        	 		System.out.print("8. Number of organs of a specific organ that can be donated.");
-	        	 		System.out.print("9. Check the waiting list.");
+	        	 		System.out.print("\n5. Patient that is reciving an organ.");
+	        	 		System.out.print("\n6. Compatibility test.");
+	        	 		System.out.print("\n7. See if there is a donor for the organ that you want.");
+	        	 		System.out.print("\n8. Number of organs of a specific organ that can be donated.");
+	        	 		System.out.print("\n9. Check the waiting list.");
 	        	 		
 	        	 		break;
 	        	 	

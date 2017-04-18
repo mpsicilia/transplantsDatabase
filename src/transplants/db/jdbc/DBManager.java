@@ -65,42 +65,42 @@ public class DBManager implements DBManagerInterface{
 	public boolean insert(Object obj) {
 			
 		try{
-			//create connections
-			hosp = new SQL_Hospital(this); 
-			doct = new SQL_Doctor (this);
-			pat = new SQL_Patient (this);
-			don = new SQL_Donor (this); 
-			org = new SQL_Organ (this);
-			animalT= new SQL_AnimalTissue(this);
-			req= new SQL_Request(this);
 				
 			if (Hospital.class==obj.getClass()){
+				//create connection
+				hosp = new SQL_Hospital(this); 
 				Hospital hospital=(Hospital)obj;			
 				return hosp.insertHospital(hospital);
 			}
 			
 			if (Doctor.class==obj.getClass()){
+				doct = new SQL_Doctor (this);
 				Doctor doctor=(Doctor)obj;			
 				return doct.insertDoctor(doctor);
 			}
 			
 			if(Patient.class==obj.getClass()){
+				pat = new SQL_Patient (this);
 				Patient patient=(Patient)obj;
 				return pat.insertPatient(patient);
 			}			
 			if (Donor.class==obj.getClass()){
+				don = new SQL_Donor (this); 
 				Donor donor=(Donor)obj;
 				return don.insertDonor(donor);
 			}
 			if (Organ.class==obj.getClass()){
+				org = new SQL_Organ (this);
 				Organ organ=(Organ)obj;
 				return org.insertOrgan(organ);
 			}
 			if (Animal_tissue.class==obj.getClass()){
+				animalT= new SQL_AnimalTissue(this);
 				Animal_tissue animalTi=(Animal_tissue)obj;
 				return animalT.insertAnimalTissue(animalTi);
 			}
 			if (Requested_organ.class==obj.getClass()){
+				req= new SQL_Request(this);
 				Requested_organ reqOrgan=(Requested_organ)obj;
 				return req.insertRequest(reqOrgan);
 			}
@@ -203,41 +203,40 @@ public class DBManager implements DBManagerInterface{
 	}
 	@Override
 	public boolean update(Object obj) {
-		try{
-			//create connections
-			hosp = new SQL_Hospital(this); 
-			doct = new SQL_Doctor (this);
-			pat = new SQL_Patient (this);
-			don =new SQL_Donor (this);
-			org= new SQL_Organ (this);
-			animalT= new SQL_AnimalTissue(this);
-			req= new SQL_Request (this);
-				
+		try{							
 			if (Hospital.class==obj.getClass()){
+				//create connection
+				hosp = new SQL_Hospital(this);
 				Hospital hospital=(Hospital)obj;
 				return hosp.updateHospital(hospital);				
 			}
 			if (Doctor.class==obj.getClass()){
+				doct = new SQL_Doctor (this);
 				Doctor doctor=(Doctor)obj;			
 				return doct.updateDoctor(doctor);
 			}
 			if(Patient.class==obj.getClass()){
+				pat = new SQL_Patient (this);
 				Patient patient=(Patient)obj;
 				return pat.updatePatient(patient);
 			}	
 			if (Donor.class==obj.getClass()){
+				don =new SQL_Donor (this);
 				Donor donor=(Donor)obj;
 				return don.updateDonor(donor);
 			}
 			if (Organ.class==obj.getClass()){
+				org= new SQL_Organ (this);
 				Organ organ=(Organ)obj;
 				return org.updateOrgan(organ);
 			}
 			if (Animal_tissue.class==obj.getClass()){
+				animalT= new SQL_AnimalTissue(this);
 				Animal_tissue animalTi=(Animal_tissue)obj;
 				return animalT.updateAnimalTissue(animalTi);
 			}
 			if (Requested_organ.class==obj.getClass()){
+				req= new SQL_Request (this);
 				Requested_organ reqOrgan=(Requested_organ)obj;
 				return req.updateReqOrgan(reqOrgan);
 			}
@@ -251,40 +250,39 @@ public class DBManager implements DBManagerInterface{
 
 	@Override
 	public boolean delete(Object obj) {
-		try{
-			hosp = new SQL_Hospital (this);
-			doct = new SQL_Doctor (this);
-			pat = new SQL_Patient(this);
-			don  = new SQL_Donor(this);
-			org= new SQL_Organ (this);
-			animalT=new SQL_AnimalTissue(this);
-			req= new SQL_Request(this);
-			
+		try{			
 			if (Hospital.class==obj.getClass()){
+				hosp = new SQL_Hospital (this);
 				Hospital hospital=(Hospital)obj;
 				return hosp.deleteHospital(hospital);
 			}
 			if (Doctor.class==obj.getClass()){
+				doct = new SQL_Doctor (this);
 				Doctor doctor=(Doctor)obj;			
 				return doct.deleteDoctor(doctor);
 			}
 			if(Patient.class==obj.getClass()){
+				pat = new SQL_Patient(this);
 				Patient patient=(Patient)obj;
 				return pat.deletePatient(patient);
 			}
 			if (Donor.class==obj.getClass()){
+				don  = new SQL_Donor(this);
 				Donor donor=(Donor)obj;
 				return don.deleteDonor(donor);
 			}
 			if (Organ.class==obj.getClass()){
+				org= new SQL_Organ (this);
 				Organ organ=(Organ)obj;
 				return org.deleteOrgan(organ);
 			}
 			if (Animal_tissue.class==obj.getClass()){
+				animalT=new SQL_AnimalTissue(this);
 				Animal_tissue animalTi=(Animal_tissue)obj;
 				return animalT.deleteAnimalTissue(animalTi);
 			}
 			if (Requested_organ.class==obj.getClass()){
+				req= new SQL_Request(this);
 				Requested_organ reqOrgan=(Requested_organ)obj;
 				return req.deleteReqOrgan(reqOrgan);
 			}
