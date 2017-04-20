@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
@@ -51,9 +52,19 @@ public class UI_Patient {
 			
 			System.out.println("Life expectancy: ");
 			int life = Integer.parseInt(console.readLine());
-			
+
+			System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
+			List <Doctor> docs = dbManager.selectAllDoctors();
+			Iterator <Doctor> itD = docs.iterator();
+			while (itD.hasNext()){
+				Doctor d = itD.next();
+				System.out.println(d);
+			}
+			int idD = Integer.parseInt(console.readLine());
 			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, life, addition);
+			
 			boolean introduced = dbManager.insert(p);
+			boolean introFK = dbManager.insertPrimaryKeyDoctorPatient(p.getId(), idD);
 			if(introduced){
 				System.out.println("Patient has been introduced. ");
 			}
