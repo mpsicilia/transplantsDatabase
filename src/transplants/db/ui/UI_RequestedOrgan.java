@@ -31,8 +31,20 @@ public class UI_RequestedOrgan {
 			Requested_organ reqOrgan= new Requested_organ(name, maxWeight, minWeight); 
 			
 			boolean ok=dbManager.insert(reqOrgan);
+			//foreign keys, que pueden ser con el animal tissue (extra table) o organ donated (tabla de organ)
+			System.out.println("Choose if the requested organ is going to be supplied by an animal tissue or by a human organ. [animal/human]");
+			//TO DO --->>metodo que muestre todos los animaltissues y organs disponibles
+			//TO DO --->>cuando elija, ver si son compatibles
+			String elect = console.readLine();
+			boolean organOK = false;
+			if(elect.equalsIgnoreCase("human")){
+				organOK = dbManager.insertPrimaryKey(obj1, obj2);
+			}
+			if(elect.equalsIgnoreCase("animal")){
+				organOK = dbManager.insertPrimaryKey(obj1, obj2);
+			}
 			if (ok){
-				System.out.print(" The reuest Organ has been introduced");
+				System.out.print(" The request Organ has been introduced");
 			}else{
 				System.out.print("the request Organ has NOT been introduced");
 			}
