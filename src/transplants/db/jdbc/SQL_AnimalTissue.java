@@ -12,6 +12,7 @@ import java.util.List;
 
 import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Donor;
+import transplants.db.pojos.Requested_organ;
 
 public class SQL_AnimalTissue {
 
@@ -101,11 +102,11 @@ public class SQL_AnimalTissue {
 		return false;
 	}
 	
-	public boolean insertRequestedAnimal (int id_requested, int id_animal){
+	public boolean insertRequestedAnimal (Requested_organ reqOrg, Animal_tissue animalT){
 		try {
 			Statement st = dbManager.getC().createStatement();
 			String sql = "INSERT INTO RequestedOrgan_AnimalTissues (requested_id, animal_id) "
-					+ "VALUES ('" + id_requested + "' , '" + id_animal + "');" ;
+					+ "VALUES ('" + reqOrg.getId() + "' , '" + animalT.getId() + "');" ;
 			st.executeUpdate(sql);
 			st.close();
 			return true;

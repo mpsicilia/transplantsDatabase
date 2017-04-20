@@ -80,11 +80,10 @@ public class UIGenericMenu {
 	        	 		System.out.println("\nMENU: ");
 	    	        	System.out.println("1. Introduce a new hospital. ");
 	    	        	System.out.println("2. Introduce a new doctor. ");
-	    	        	System.out.println("3. Introduce a new donor.");
-	    	        	System.out.println("4. Introduce a new patient. ");
-	    	        	System.out.println("5. Introduce a new request for an organ. ");
-	    	        	System.out.println("6. Introduce a new organ in order to be donanted. ");
-	    	        	System.out.println("\nChoose an option[1-6]:");
+	    	        	System.out.println("3. Introduce a new donor."); //introducing also the organ that is donating
+	    	        	System.out.println("4. Introduce a new patient. "); //introducing also the requested organ
+	    	            System.out.println("5. Introduce a new animal tissue in order to be donated. ");
+	    	        	System.out.println("\nChoose an option[1-5]:");
 	                    String read1= console.readLine();
 	                    int option1= Integer.parseInt(read1); 
 	                    switch (option1){
@@ -96,23 +95,18 @@ public class UIGenericMenu {
 		                    	break;
 		                    case 3:
 		                    	uiDonor.introduceNewDonor();
+		                    	System.out.println("Introduce the organ that the donor donates. ");
+		                    	uiOrgan.introduceNewOrgan();
+		                    	//foreign keys
 		                    	break;
 		                    case 4:
 		                    	uiPatient.introduceNewPatient();
+		                    	System.out.println("Introduce the organ that the patient needs. ");
+		                    	uiRequested.introduceNewReqOrgan();
+		                    	//foreign keys
 		                    	break;
 		                    case 5:
-		                    	uiRequested.introduceNewReqOrgan();
-		                    	break;
-		                    case 6:
-		                    	System.out.println("The organ that is going to be donated, comes from an animal or from a person? : [a/p]");
-		                    	String org = console.readLine();
-		                    	if(org.equalsIgnoreCase("a")){
-		                    		uiAnimalT.introduceNewAnimalTissue();
-		                    	}
-		                    	else{
-		                    		uiOrgan.introduceNewOrgan();
-		                    	}
-		                    	//make difference between if the organ comes from an animal or from a person
+		                    	uiAnimalT.introduceNewAnimalTissue();
 		                    	break;
 	                    }	                         	 		        			
 	        	 		
