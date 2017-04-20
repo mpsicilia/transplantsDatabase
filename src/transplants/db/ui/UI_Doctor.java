@@ -3,10 +3,12 @@ package transplants.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.pojos.Doctor;
+import transplants.db.pojos.Hospital;
 
 
 public class UI_Doctor {
@@ -29,12 +31,19 @@ public class UI_Doctor {
 			
 			System.out.print("Introduce the id of the hospital in which the doctor works: ");
 			//first we show to the user all the hospitals
-			dbManager.selectAllHospitals();
+			List <Hospital> listHosp=dbManager.selectAllHospitals();
+			Iterator <Hospital> itH = listHosp.iterator();
+			while(itH.hasNext()){
+				Hospital hosp = itH.next();
+				System.out.print(hosp);
+			}
 			Integer idHospYouChoose = Integer.parseInt(console.readLine());
 			Doctor doct= new Doctor(name, regNumber, specializ);
 			
 			boolean ok=dbManager.insert(doct);
-			boolean ok2=dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, doct.getId());
+			int id = dbManager.getIdOfDoctor(doct);
+			
+			boolean ok2=dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, id);
 			
 			if (ok && ok2){
 				System.out.print("The doctor has been introduced correctly");

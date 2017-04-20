@@ -110,6 +110,9 @@ public class DBManager implements DBManagerInterface{
 		}
 		return false;
 	}
+	public Integer getIdOfDoctor (Doctor doctor){
+		return doct.getIdOfLastDoctor(doctor);
+	}
 	
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2){
 		return hosp.insertHospitalsDoctors(id1, id2);
@@ -215,6 +218,7 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	public List <Hospital> selectAllHospitals(){
+		hosp= new SQL_Hospital(this);
 		return hosp.selectAllHospitals();
 	}
 	

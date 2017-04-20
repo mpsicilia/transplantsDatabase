@@ -33,6 +33,29 @@ public class SQL_Doctor {
 		}
 		return false;	
 	}
+	public Integer getIdOfLastDoctor(Doctor doctor){
+		Doctor doctorToShow= new Doctor();
+		try {
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT name, registrationNumber, specialization FROM Doctors "
+					+ "WHERE name LIKE '%" + doctor.getNameOfDoctor() + "%'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String nameDoctor = rs.getString("name");
+				String regNumber = rs.getString("registrationNumber");
+				String specializ = rs.getString("specialization");
+				doctorToShow = new Doctor(id, nameDoctor, regNumber, specializ);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return doctorToShow.getId();
+	}
 	
 	public List<Doctor> searchDoctor(String nameDoct) {
 		List<Doctor> lookForDoctor = new ArrayList<Doctor>();
@@ -161,7 +184,7 @@ public class SQL_Doctor {
 		try {
 			Statement stmt= dbManager.getC().createStatement();
 			String sql = "INSERT INTO Doctors_patients (doctor_id, patient_id)"
-					+ " VALUES ('" + doct+ "', '" + pat + "')";
+					+ " VALUES (" + doct+ ", " + pat + ")";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			return true;

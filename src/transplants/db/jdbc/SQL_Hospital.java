@@ -73,23 +73,8 @@ public class SQL_Hospital {
 			ResultSet rs = stmt.executeQuery(searchSql);
 			
 			while (rs.next()) {
-				int id = rs.getInt("1");
 				nameHosp = rs.getString("2");
-				String phone_number1 = rs.getString("3");
-				String address1 = rs.getString("4");
-				String city1 = rs.getString("5");
-				String postcode1 = rs.getString("6");
-				String country1 = rs.getString("7");
 				
-				int idDoct = rs.getInt("1");
-				String nameDoctor = rs.getString("2");
-				String regNumb = rs.getString("3");
-				String specialization = rs.getString("4");
-				
-				int DoctId = rs.getInt("1");
-				int HospId = rs.getInt("2");
-				int Id = rs.getInt("3");
-
 			}
 			rs.close();
 			stmt.close();
@@ -206,7 +191,7 @@ public class SQL_Hospital {
 		try{
 			Statement st = dmanager.getC().createStatement();
 			String sql = "INSERT INTO HospitalsDoctors (doctor_id, hospital_id) "
-					+ "VALUES ('" + doctorId + "' , '" + hospitalId + "');";
+					+ "VALUES (" + doctorId + " , " + hospitalId + ");";
 			st.executeUpdate(sql);
 			st.close();
 			return true;
