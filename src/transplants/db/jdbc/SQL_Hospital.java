@@ -61,17 +61,25 @@ public class SQL_Hospital {
 	}
 	
 	//method that tell us given a specific doctor, in which hospital he works
-	public List<Hospital> searchDoctorInHospital (String doctorName){
+	public List<Hospital> searchHospitalOfDoctor (String doctorName){
 		List<Hospital> hospitalToPrint = new ArrayList<Hospital>();
 		try{
 			Statement stmt = dmanager.getC().createStatement();
-			String searchSql = "SELECT Hosp.name, Doct.name FROM Hospitals "
+			String searchSql = "SELECT * FROM Hospitals "
 					+ "AS Hosp JOIN HospitalsDoctors AS HospDocts ON Hosp.id=HospDocts.hospital_id "
 					+ "JOIN Doctors AS Doct ON Doct.id=HospDocts.doctor_id "
-					+ "WHERE Doct.name LIKE '" + doctorName + "'";
+					+ "WHERE Doct.name LIKE '%" + doctorName + "%'";
 			ResultSet rs = stmt.executeQuery(searchSql);
+			
 			while (rs.next()) {
-				String nameHosp = rs.getString("name");
+				int id = rs.getInt("1");
+				String nameHosp = rs.getString("2");
+				String phone_number1 = rs.getString("3");
+				String address1 = rs.getString("4");
+				String city1 = rs.getString("5");
+				String postcode1 = rs.getString("6");
+				String country1 = rs.getString("7");
+				
 				//String nameDoctor = rs.getString("name");
 				Hospital hospi= new Hospital(nameHosp);
 				hospitalToPrint.add(hospi);

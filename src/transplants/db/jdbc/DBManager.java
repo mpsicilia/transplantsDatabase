@@ -111,6 +111,39 @@ public class DBManager implements DBManagerInterface{
 		return false;
 	}
 
+	public boolean insertPrimaryKey(Object obj1, Object obj2){
+		try{
+			
+			if (Hospital.class==obj1.getClass() && Doctor.class==obj2.getClass()){
+				//create connection
+				hosp = new SQL_Hospital(this); 
+				doct = new SQL_Doctor (this);
+				Hospital hospital=(Hospital)obj1;	
+				Doctor doctor=(Doctor)obj2;	
+				return doct.insertHospitalsDoctors(hospital, doctor);
+			}
+			
+			if(Patient.class==obj1.getClass() && Doctor.class==obj2.getClass()){
+				pat = new SQL_Patient (this);
+				doct = new SQL_Doctor (this);
+				Patient patient=(Patient)obj1;
+				Doctor doctor=(Doctor)obj2;	
+				return doct.insertDoctorPatientTable(patient, doctor);
+			}
+			
+			if (Requested_organ.class==obj1.getClass() && Animal_tissue.class==obj2.getClass()){
+				req= new SQL_Request(this);
+				animalT= new SQL_AnimalTissue(this);
+				Requested_organ reqOrgan=(Requested_organ)obj1;
+				Animal_tissue animalTi=(Animal_tissue)obj2;
+				return animalT.insertRequestedAnimal(reqOrgan, animalTi);
+			}
+					
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	@Override
 	public List<Hospital> searchHosp(String name) {	
 		
@@ -200,6 +233,14 @@ public class DBManager implements DBManagerInterface{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public List <Hospital> selectAllHospitals(){
+		return hosp.selectAllHospitals();
+	}
+	
+	public List <Doctor> selectAllDoctors(){
+		return doct.selectAllDoctors();
 	}
 	@Override
 	public boolean update(Object obj) {
@@ -353,7 +394,7 @@ public class DBManager implements DBManagerInterface{
 		List <Hospital> hospital = new ArrayList <Hospital>();
 		try{
 			hosp = new SQL_Hospital(this);
-			hospital = hosp.searchDoctorInHospital(name);
+			hospital = hosp.searchHospitalOfDoctor(name);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
