@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 import java.sql.PreparedStatement;
 
+import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 
 public class SQL_Hospital {
@@ -61,8 +62,8 @@ public class SQL_Hospital {
 	}
 	
 	//method that tell us given a specific doctor, in which hospital he works
-	public List<Hospital> searchHospitalOfDoctor (String doctorName){
-		List<Hospital> hospitalToPrint = new ArrayList<Hospital>();
+	public String searchHospitalOfDoctor (String doctorName){
+		String nameHosp="";
 		try{
 			Statement stmt = dmanager.getC().createStatement();
 			String searchSql = "SELECT * FROM Hospitals "
@@ -73,24 +74,29 @@ public class SQL_Hospital {
 			
 			while (rs.next()) {
 				int id = rs.getInt("1");
-				String nameHosp = rs.getString("2");
+				nameHosp = rs.getString("2");
 				String phone_number1 = rs.getString("3");
 				String address1 = rs.getString("4");
 				String city1 = rs.getString("5");
 				String postcode1 = rs.getString("6");
 				String country1 = rs.getString("7");
 				
-				//String nameDoctor = rs.getString("name");
-				Hospital hospi= new Hospital(nameHosp);
-				hospitalToPrint.add(hospi);
+				int idDoct = rs.getInt("1");
+				String nameDoctor = rs.getString("2");
+				String regNumb = rs.getString("3");
+				String specialization = rs.getString("4");
+				
+				int DoctId = rs.getInt("1");
+				int HospId = rs.getInt("2");
+				int Id = rs.getInt("3");
+
 			}
 			rs.close();
 			stmt.close();
-			return hospitalToPrint;
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return hospitalToPrint;
+		return nameHosp;
 	}
 	
 	//method that tell us the hospital in which the transplant is taking place
@@ -195,11 +201,11 @@ public class SQL_Hospital {
 		return lookForHospital;
 	}
 	
-	public boolean insertHospitalsDoctors (int id_hospital, int id_doctor){
+	public boolean insertHospitalsDoctors (Integer hospitalId, Integer doctorId){
 		try{
 			Statement st = dmanager.getC().createStatement();
 			String sql = "INSERT INTO HospitalsDoctors (doctor_id, hospital_id) "
-					+ "VALUES ('" + id_doctor + "' , '" + id_hospital + "');";
+					+ "VALUES ('" + doctorId + "' , '" + hospitalId + "');";
 			st.executeUpdate(sql);
 			st.close();
 			return true;

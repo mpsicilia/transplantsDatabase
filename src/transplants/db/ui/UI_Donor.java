@@ -48,6 +48,7 @@ public class UI_Donor {
 			dbManager.selectAllHospitals();
 			Integer idHospYouChoose = Integer.parseInt(console.readLine());
 			
+			
 			System.out.print("Introduce the id of the doctor that takes care of the donor: ");
 			dbManager.selectAllDoctors();
 			Integer idDoctYouChoose = Integer.parseInt(console.readLine());

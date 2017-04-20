@@ -30,12 +30,13 @@ public class UI_Doctor {
 			System.out.print("Introduce the id of the hospital in which the doctor works: ");
 			//first we show to the user all the hospitals
 			dbManager.selectAllHospitals();
-			Integer idYouChoose = Integer.parseInt(console.readLine());
-			//how do I save it if it is n-n???????????????????
-			
+			Integer idHospYouChoose = Integer.parseInt(console.readLine());
 			Doctor doct= new Doctor(name, regNumber, specializ);
+			
 			boolean ok=dbManager.insert(doct);
-			if (ok){
+			boolean ok2=dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, doct.getId());
+			
+			if (ok && ok2){
 				System.out.print("The doctor has been introduced correctly");
 			}else{
 				System.out.print("The doctor has NOT been introduced");

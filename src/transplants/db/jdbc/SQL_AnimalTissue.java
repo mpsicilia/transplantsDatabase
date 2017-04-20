@@ -101,7 +101,7 @@ public class SQL_AnimalTissue {
 		return false;
 	}
 	
-	public boolean insertRequestedAnimal (int id_requested, int id_animal){
+	public boolean insertRequestedAnimal (Integer id_requested, Integer id_animal){
 		try {
 			Statement st = dbManager.getC().createStatement();
 			String sql = "INSERT INTO RequestedOrgan_AnimalTissues (requested_id, animal_id) "
