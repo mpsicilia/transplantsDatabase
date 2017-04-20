@@ -96,6 +96,7 @@ public class SQL_Hospital {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+		//
 		return nameHosp;
 	}
 	
