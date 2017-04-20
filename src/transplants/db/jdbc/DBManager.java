@@ -119,7 +119,7 @@ public class DBManager implements DBManagerInterface{
 		return doct.insertDoctorPatientTable(id1, id2);
 	}	
 	
-	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2){
+	public boolean insertPrimaryKeyRequestedAnimalPatient(Integer id1, Integer id2){
 		return animalT.insertRequestedAnimal(id1, id2);
 	}
 
@@ -369,8 +369,8 @@ public class DBManager implements DBManagerInterface{
 	}
 
 	@Override
-	public List <Hospital> DoctorHospital(String name) {
-		List <Hospital> hospital = new ArrayList <Hospital>();
+	public String DoctorHospital(String name) {
+		String hospital = "";
 		try{
 			hosp = new SQL_Hospital(this);
 			hospital = hosp.searchHospitalOfDoctor(name);

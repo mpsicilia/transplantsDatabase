@@ -101,16 +101,12 @@ public class SQL_AnimalTissue {
 		
 		return false;
 	}
-	
-<<<<<<< HEAD
+
 	public boolean insertRequestedAnimal (Integer id_requested, Integer id_animal){
-=======
-	public boolean insertRequestedAnimal (Requested_organ reqOrg, Animal_tissue animalT){
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		try {
 			Statement st = dbManager.getC().createStatement();
 			String sql = "INSERT INTO RequestedOrgan_AnimalTissues (requested_id, animal_id) "
-					+ "VALUES ('" + reqOrg.getId() + "' , '" + animalT.getId() + "');" ;
+					+ "VALUES ('" + id_requested+ "' , '" + id_animal + "');" ;
 			st.executeUpdate(sql);
 			st.close();
 			return true;

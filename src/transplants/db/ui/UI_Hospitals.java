@@ -137,8 +137,8 @@ public class UI_Hospitals {
 		
 	public void DoctorHospital (String docName){
 		try{
-			List <Hospital> nameOfHospitals = dbManager.DoctorHospital(docName);
-			System.out.println("Doctor: "+ docName + " works in the following hospitals:\n "+ nameOfHospitals);
+			String nameOfHospital = dbManager.DoctorHospital(docName);
+			System.out.println("The doctor: "+ docName + " works in the following hospital:\n "+ nameOfHospital);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
