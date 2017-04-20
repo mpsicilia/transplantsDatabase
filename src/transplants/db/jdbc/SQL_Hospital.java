@@ -186,6 +186,20 @@ public class SQL_Hospital {
 		}
 		return lookForHospital;
 	}
+	
+	public boolean insertHospitalsDoctors (int id_hospital, int id_doctor){
+		try{
+			Statement st = dmanager.getC().createStatement();
+			String sql = "INSERT INTO HospitalsDoctors (doctor_id, hospital_id) "
+					+ "VALUES ('" + id_doctor + "' , '" + id_hospital + "');";
+			st.executeUpdate(sql);
+			st.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	public void createTable() {
 		try {

@@ -120,4 +120,12 @@ public class UI_AnimalTissue {
 			ex.printStackTrace();
 		}
 	}
+	
+	public void insertRequestedAnimalFK (){
+		try{
+			System.out.println("");
+		}catch (IOException ex){
+			ex.printStackTrace();
+		}
+	}
 }

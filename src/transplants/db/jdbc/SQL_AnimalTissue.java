@@ -101,6 +101,20 @@ public class SQL_AnimalTissue {
 		return false;
 	}
 	
+	public boolean insertRequestedAnimal (int id_requested, int id_animal){
+		try {
+			Statement st = dbManager.getC().createStatement();
+			String sql = "INSERT INTO RequestedOrgan_AnimalTissues (requested_id, animal_id) "
+					+ "VALUES ('" + id_requested + "' , '" + id_animal + "');" ;
+			st.executeUpdate(sql);
+			st.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public void createTable(){
 		try{
 
