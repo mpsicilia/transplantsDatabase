@@ -122,7 +122,7 @@ public class DBManager implements DBManagerInterface{
 		return doct.insertDoctorPatientTable(id1, id2);
 	}	
 	
-	public boolean insertPrimaryKeyRequestedAnimalPatient(Integer id1, Integer id2){
+	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2){
 		return animalT.insertRequestedAnimal(id1, id2);
 	}
 

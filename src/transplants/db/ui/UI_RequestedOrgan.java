@@ -38,10 +38,10 @@ public class UI_RequestedOrgan {
 			String elect = console.readLine();
 			boolean organOK = false;
 			if(elect.equalsIgnoreCase("human")){
-				organOK = dbManager.insertPrimaryKey(obj1, obj2);
+				//metodo que introduzca pk en tablas no extras
 			}
 			if(elect.equalsIgnoreCase("animal")){
-				organOK = dbManager.insertPrimaryKey(obj1, obj2);
+				//organOK = dbManager.insertPrimaryKeyRequestedAnimal(reqOrgan.getId(), id_animal);
 			}
 			if (ok){
 				System.out.print(" The request Organ has been introduced");
