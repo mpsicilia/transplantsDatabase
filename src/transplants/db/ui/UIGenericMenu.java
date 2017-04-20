@@ -100,10 +100,10 @@ public class UIGenericMenu {
 		                    	//foreign keys
 		                    	break;
 		                    case 4:
-		                    	uiPatient.introduceNewPatient();
+		                    	Patient p = uiPatient.introduceNewPatient();
 		                    	System.out.println("Introduce the organ that the patient needs. ");
-		                    	uiRequested.introduceNewReqOrgan();
-		                    	//foreign keys
+		                    	uiRequested.introduceNewReqOrgan(p);
+		                    	//foreign keys in requested organ
 		                    	break;
 		                    case 5:
 		                    	uiAnimalT.introduceNewAnimalTissue();
@@ -332,9 +332,11 @@ public class UIGenericMenu {
 		                	 		while (it4.hasNext()){
 		                	 			Requested_organ r = it4.next();
 		                	 			System.out.println(counterReq + ". " + r);
+		                	 			//show the patient that request each organ
+		                	 			System.out.println("Requested by: " + uiRequested.patientOfRequested(r));
 		                	 			counterReq++;
 		                	 		}
-		                	 		//extra methods
+		                	 		
 	                    		}
 	                    		if(or.equalsIgnoreCase("donate")){
 	                    			List <Organ> orgs = uiOrgan.searchOrgan();

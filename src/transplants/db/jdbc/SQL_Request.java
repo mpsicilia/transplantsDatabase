@@ -37,6 +37,19 @@ public class SQL_Request {
 		return false;
 	}
 	
+	public boolean insertPatientFK (int idPat){
+		try{
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "INSERT INTO Requested_organs (patient_id) VALUES ('" + idPat + "');";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public List <Requested_organ> searchReqOrgan(String name){
 		List<Requested_organ> lookForReqOrgan = new ArrayList<Requested_organ>();
 		try {
@@ -96,6 +109,8 @@ public class SQL_Request {
 		
 		return false;
 	}
+	
+	
 	
 	public void createTable (){
 		try{

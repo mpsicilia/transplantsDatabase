@@ -112,6 +112,22 @@ public class SQL_Patient {
 		return false;
 	}
 	
+	public String patientRequested (int idReq){
+		String nameP = "";
+		try{
+			Statement st = dbManager.getC().createStatement();
+			String sql = "SELECT name FROM Patients AS Pat JOIN Requested_organs AS Req "
+					+ "ON Pat.id = Req.patient_id WHERE Req.id = " + idReq ;
+			ResultSet rs = st.executeQuery(sql);
+			nameP = rs.getString("name");
+			
+			rs.close();
+			st.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return nameP;
+	}
 	
 	public void createTable(){
 		try{			

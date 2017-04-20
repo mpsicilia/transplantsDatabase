@@ -7,6 +7,7 @@ import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.pojos.Organ;
+import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
 public class UI_RequestedOrgan {
@@ -17,20 +18,36 @@ public class UI_RequestedOrgan {
 		
 	}
 	
-	public void introduceNewReqOrgan(){
+	public void introduceNewReqOrgan(Patient p){
 		try{
-			System.out.print("Name: ");
-			String name = console.readLine();
+			boolean more = true;//one patient can request many organs so...
+			while (more){
+				System.out.print("Name: ");
+				String name = console.readLine();
+				
+				System.out.print("Maximum Weight: ");
+				Float maxWeight = Float.parseFloat(console.readLine());
+				
+				System.out.print("Minimun Weight: ");
+				Float minWeight = Float.parseFloat(console.readLine());
+				
+				Requested_organ reqOrgan= new Requested_organ(name, maxWeight, minWeight); 
+				
+				boolean ok=dbManager.insert(reqOrgan);
+				boolean okFK = dbManager.insertFKinRequestedOrgan(p.getId());
+				if (ok && okFK){
+					System.out.print("The request Organ has been introduced");
+				}else{
+					System.out.print("The request Organ has NOT been introduced");
+				}
+				System.out.println("Is the patient going to request another organ? [yes/no]");
+				String another = console.readLine();
+				if(another.equalsIgnoreCase("no")){
+					more = false;
+				}
 			
-			System.out.print("Maximum Weight: ");
-			Float maxWeight = Float.parseFloat(console.readLine());
-			
-			System.out.print("Minimun Weight: ");
-			Float minWeight = Float.parseFloat(console.readLine());
-			
-			Requested_organ reqOrgan= new Requested_organ(name, maxWeight, minWeight); 
-			
-			boolean ok=dbManager.insert(reqOrgan);
+			}
+			/*
 			//foreign keys, que pueden ser con el animal tissue (extra table) o organ donated (tabla de organ)
 			System.out.println("Choose if the requested organ is going to be supplied by an animal tissue or by a human organ. [animal/human]");
 			//TO DO --->>metodo que muestre todos los animaltissues y organs disponibles
@@ -42,12 +59,8 @@ public class UI_RequestedOrgan {
 			}
 			if(elect.equalsIgnoreCase("animal")){
 				//organOK = dbManager.insertPrimaryKeyRequestedAnimal(reqOrgan.getId(), id_animal);
-			}
-			if (ok){
-				System.out.print(" The request Organ has been introduced");
-			}else{
-				System.out.print("the request Organ has NOT been introduced");
-			}
+			}*/
+			
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
@@ -121,5 +134,14 @@ public class UI_RequestedOrgan {
 			ex.printStackTrace();
 		}
 	
+	}
+	public String patientOfRequested (Requested_organ reqOrg) {
+		String namePat = "";
+		try{
+			namePat = dbManager.patientReq(reqOrg);
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return namePat;
 	}
 }

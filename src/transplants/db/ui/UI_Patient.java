@@ -22,7 +22,7 @@ public class UI_Patient {
 	public UI_Patient(){		
 	}
 	
-	public void introduceNewPatient (){
+	public Patient introduceNewPatient (){
 		try{
 			System.out.println("Name: ");
 			String name = console.readLine();
@@ -71,11 +71,12 @@ public class UI_Patient {
 			else{
 				System.out.println("Patient has not been introduced. ");
 			}
-			
+			return p;
 			
 		}catch (IOException ex){
 			ex.printStackTrace();
 		}
+		return null;
 	}
 	
 	public List<Patient> searchPatient(){

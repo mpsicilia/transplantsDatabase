@@ -125,6 +125,10 @@ public class DBManager implements DBManagerInterface{
 	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2){
 		return animalT.insertRequestedAnimal(id1, id2);
 	}
+	
+	public boolean insertFKinRequestedOrgan (int patID){
+		return req.insertPatientFK(patID);
+	}
 
 	@Override
 	public List<Hospital> searchHosp(String name) {	
@@ -223,6 +227,7 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	public List <Doctor> selectAllDoctors(){
+		doct = new SQL_Doctor (this);
 		return doct.selectAllDoctors();
 	}
 	@Override
@@ -405,6 +410,17 @@ public class DBManager implements DBManagerInterface{
 			e.printStackTrace();
 		}
 		return hospital;
+	}
+	//given a requested organ is going to return the patient
+	public String patientReq (Requested_organ req){
+		String namePat = "";
+		try{
+			pat = new SQL_Patient(this);
+			namePat = pat.patientRequested(req.getId());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return namePat;
 	}
 
 }
