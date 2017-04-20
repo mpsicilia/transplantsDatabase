@@ -27,6 +27,12 @@ public class UI_Doctor {
 			System.out.print("Specialization: ");
 			String specializ = console.readLine();
 			
+			System.out.print("Introduce the id of the hospital in which the doctor works: ");
+			//first we show to the user all the hospitals
+			dbManager.selectAllHospitals();
+			Integer idYouChoose = Integer.parseInt(console.readLine());
+			//how do I save it if it is n-n???????????????????
+			
 			Doctor doct= new Doctor(name, regNumber, specializ);
 			boolean ok=dbManager.insert(doct);
 			if (ok){

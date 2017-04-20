@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import transplants.db.pojos.Doctor;
+import transplants.db.pojos.Patient;
 
 public class SQL_Doctor {
 	
@@ -155,6 +156,19 @@ public class SQL_Doctor {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public boolean insertDoctorPatientTable(Patient pat, Doctor doct){
+		try {
+			Statement stmt= dbManager.getC().createStatement();
+			String sql = "INSERT INTO Doctors_patients (doctor_id, patient_id)"
+					+ " VALUES ('" + doct.getId() + "', '" + pat.getId() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public void dropTable(){

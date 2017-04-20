@@ -44,6 +44,14 @@ public class UI_Donor {
 			System.out.print("Blood Type: ");
 			String bloodType = console.readLine();
 			
+			System.out.print("Introduce the id of the hospital in which the donor is located: ");
+			dbManager.selectAllHospitals();
+			Integer idHospYouChoose = Integer.parseInt(console.readLine());
+			
+			System.out.print("Introduce the id of the doctor that takes care of the donor: ");
+			dbManager.selectAllDoctors();
+			Integer idDoctYouChoose = Integer.parseInt(console.readLine());
+			
 			Donor donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 
 			
 			boolean ok=dbManager.insert(donor);
@@ -145,4 +153,5 @@ public class UI_Donor {
 			ex.printStackTrace();
 		}
 	}
+	
 }
