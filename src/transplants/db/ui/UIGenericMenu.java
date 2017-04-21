@@ -314,8 +314,10 @@ public class UIGenericMenu {
                     			case 4:
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat4 = Integer.parseInt(console.readLine());
-                    				//metodo al que le pasas un paciente y te muestra las caracteristicas del 
-                    				//organo que necesita el paciente
+                    				//metodo al que le pasas un paciente y te muestra las caracteristicas del organo que necesita el paciente
+                    				Patient patReq = pat.get(numPat4-1);
+                    				uiRequested.requestsOfPatient(patReq);
+                    				
                     				break;
                     			case 5:
                     				break;

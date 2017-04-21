@@ -3,6 +3,7 @@ package transplants.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
@@ -33,12 +34,15 @@ public class UI_RequestedOrgan {
 				
 				Requested_organ reqOrgan= new Requested_organ(name, maxWeight, minWeight); 
 				
+				//get the id of the patient
+				int idPatient = dbManager.idPatient(p);
+				
 				boolean ok=dbManager.insert(reqOrgan);
-				boolean okFK = dbManager.insertFKinRequestedOrgan(p.getId());
+				boolean okFK = dbManager.insertFKinRequestedOrgan(idPatient);
 				if (ok && okFK){
-					System.out.print("The request Organ has been introduced");
+					System.out.print("The request Organ has been introduced.\n");
 				}else{
-					System.out.print("The request Organ has NOT been introduced");
+					System.out.print("The request Organ has NOT been introduced. \n");
 				}
 				System.out.println("Is the patient going to request another organ? [yes/no]");
 				String another = console.readLine();
@@ -143,5 +147,22 @@ public class UI_RequestedOrgan {
 			ex.printStackTrace();
 		}
 		return namePat;
+	}
+	
+	public void requestsOfPatient (Patient patient){
+		try{
+			int idPat = patient.getId();
+			List<Requested_organ> requests = dbManager.requestedOfPatient(idPat);
+			System.out.println("Patient: " + patient.getName() + " needs the following organs: \n");
+			Iterator <Requested_organ> itReq = requests.iterator();
+			int countReq = 1;
+			while (itReq.hasNext()){
+				Requested_organ r = itReq.next();
+				System.out.println(countReq + ". " + r.getName());
+				countReq++;
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 }

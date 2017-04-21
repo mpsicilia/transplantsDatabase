@@ -422,5 +422,29 @@ public class DBManager implements DBManagerInterface{
 		}
 		return namePat;
 	}
+	
+	//given a patient is going to return its id
+	public int idPatient (Patient patient){
+		int id = 0;
+		try{
+			pat = new SQL_Patient(this);
+			id = pat.getPatientID(patient);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	//given a patient is going to return its requests
+	public List<Requested_organ> requestedOfPatient (int idPatient){
+		List<Requested_organ> reqsOfPat = new ArrayList<Requested_organ>();
+		try{
+			req = new SQL_Request(this);
+			reqsOfPat = req.requestedOfPatient(idPatient);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return reqsOfPat;
+	}
 
 }

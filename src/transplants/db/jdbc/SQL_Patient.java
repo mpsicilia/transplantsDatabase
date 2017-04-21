@@ -111,7 +111,7 @@ public class SQL_Patient {
 		}
 		return false;
 	}
-	
+	//given a requested organ returns the patient that needs it
 	public String patientRequested (int idReq){
 		String nameP = "";
 		try{
@@ -127,6 +127,25 @@ public class SQL_Patient {
 			e.printStackTrace();
 		}
 		return nameP;
+	}
+	
+	public int getPatientID (Patient p){
+		int idP = 0;
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql ="SELECT id FROM Patients WHERE (name LIKE '" + p.getName() + "') AND (weight = " + p.getWeight() + ")"
+					+ " AND (height = " + p.getHeight() + ") AND (gender LIKE '" + p.getGender() + "') AND "
+							+ "(pathology LIKE '" + p.getPathology() + "') AND (bloodType LIKE '" + p.getBloodType() + "')"
+									+ "AND (lifeExpectancy = " + p.getLifeExpectancy() + ")";
+			ResultSet rs = stm.executeQuery(sql);
+			idP = rs.getInt("id");
+			
+			rs.close();
+			stm.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return idP;
 	}
 	
 	public void createTable(){
