@@ -17,8 +17,8 @@ import transplants.db.pojos.Requested_organ;
 
 public class UIGenericMenu {
 
-	//private BufferedReader reader;
-	//private Integer option;
+	private BufferedReader console=new BufferedReader (new InputStreamReader (System.in));
+   	private Integer option=0;
 	
 	public static void main (String []args){		
 		UIGenericMenu genericMenu= new UIGenericMenu();
@@ -34,9 +34,7 @@ public class UIGenericMenu {
 		UI_AnimalTissue uiAnimalT= new UI_AnimalTissue();
 		UI_RequestedOrgan uiRequested = new UI_RequestedOrgan();
 		try{
-			BufferedReader console= new BufferedReader (new InputStreamReader (System.in));
-	        int option=0;
-	        
+				        
 	        /*System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 	        String drop = console.readLine();
 	        if(drop.equalsIgnoreCase("Y")){

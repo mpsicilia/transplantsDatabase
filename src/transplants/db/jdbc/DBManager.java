@@ -223,6 +223,7 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	public List <Doctor> selectAllDoctors(){
+		doct=new SQL_Doctor(this);
 		return doct.selectAllDoctors();
 	}
 	@Override
@@ -383,7 +384,7 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
-	
+	/*
 	//given a patient name is going to return the doctors that take care of him
 	public List<Doctor> patientDoctor (String pName){
 		List<Doctor> doctor = new ArrayList <Doctor>();
@@ -406,5 +407,17 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
+*/
 
+	@Override
+	public List<Doctor> patientDoctor(String pName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String patientHospital(String pName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
