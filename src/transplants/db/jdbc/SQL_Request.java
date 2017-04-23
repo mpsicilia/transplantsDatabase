@@ -37,6 +37,19 @@ public class SQL_Request {
 		return false;
 	}
 	
+	public boolean insertPatientFK (int idPat){
+		try{
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "INSERT INTO Requested_organs (patient_id) VALUES ('" + idPat + "');";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public List <Requested_organ> searchReqOrgan(String name){
 		List<Requested_organ> lookForReqOrgan = new ArrayList<Requested_organ>();
 		try {
@@ -95,6 +108,30 @@ public class SQL_Request {
 		}
 		
 		return false;
+	}
+	
+	public List<Requested_organ> requestedOfPatient (int idPat){
+		List <Requested_organ> reqs = new ArrayList<Requested_organ>();
+		try{
+			Statement st = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Requested_organs AS Req JOIN Patients AS Pat "
+					+ "ON  Req.patient_id = Pat.id WHERE Req.patient_id = " + idPat ;
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()){
+				Integer id = rs.getInt("id");
+				String nameReqOrgan = rs.getString("name");
+				Float maxWeight = rs.getFloat("maxWeight");
+				Float minWeight = rs.getFloat("minWeight");
+				Requested_organ reqOrgan = new Requested_organ(id, nameReqOrgan, maxWeight, minWeight);
+				reqs.add(reqOrgan);
+			}
+			
+			rs.close();
+			st.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return reqs;
 	}
 	
 	public void createTable (){

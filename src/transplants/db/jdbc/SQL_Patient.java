@@ -111,7 +111,42 @@ public class SQL_Patient {
 		}
 		return false;
 	}
+	//given a requested organ returns the patient that needs it
+	public String patientRequested (int idReq){
+		String nameP = "";
+		try{
+			Statement st = dbManager.getC().createStatement();
+			String sql = "SELECT name FROM Patients AS Pat JOIN Requested_organs AS Req "
+					+ "ON Pat.id = Req.patient_id WHERE Req.id = " + idReq ;
+			ResultSet rs = st.executeQuery(sql);
+			nameP = rs.getString("name");
+			
+			rs.close();
+			st.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return nameP;
+	}
 	
+	public int getPatientID (Patient p){
+		int idP = 0;
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql ="SELECT id FROM Patients WHERE (name LIKE '" + p.getName() + "') AND (weight = " + p.getWeight() + ")"
+					+ " AND (height = " + p.getHeight() + ") AND (gender LIKE '" + p.getGender() + "') AND "
+							+ "(pathology LIKE '" + p.getPathology() + "') AND (bloodType LIKE '" + p.getBloodType() + "')"
+									+ "AND (lifeExpectancy = " + p.getLifeExpectancy() + ")";
+			ResultSet rs = stm.executeQuery(sql);
+			idP = rs.getInt("id");
+			
+			rs.close();
+			stm.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return idP;
+	}
 	
 	public void createTable(){
 		try{			

@@ -125,6 +125,10 @@ public class DBManager implements DBManagerInterface{
 	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2){
 		return animalT.insertRequestedAnimal(id1, id2);
 	}
+	
+	public boolean insertFKinRequestedOrgan (int patID){
+		return req.insertPatientFK(patID);
+	}
 
 	@Override
 	public List<Hospital> searchHosp(String name) {	
@@ -223,7 +227,11 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	public List <Doctor> selectAllDoctors(){
+<<<<<<< HEAD
 		doct=new SQL_Doctor(this);
+=======
+		doct = new SQL_Doctor (this);
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		return doct.selectAllDoctors();
 	}
 	@Override
@@ -407,7 +415,45 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
+<<<<<<< HEAD
 */
+=======
+	//given a requested organ is going to return the patient
+	public String patientReq (Requested_organ req){
+		String namePat = "";
+		try{
+			pat = new SQL_Patient(this);
+			namePat = pat.patientRequested(req.getId());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return namePat;
+	}
+	
+	//given a patient is going to return its id
+	public int idPatient (Patient patient){
+		int id = 0;
+		try{
+			pat = new SQL_Patient(this);
+			id = pat.getPatientID(patient);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	//given a patient is going to return its requests
+	public List<Requested_organ> requestedOfPatient (int idPatient){
+		List<Requested_organ> reqsOfPat = new ArrayList<Requested_organ>();
+		try{
+			req = new SQL_Request(this);
+			reqsOfPat = req.requestedOfPatient(idPatient);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return reqsOfPat;
+	}
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 
 	@Override
 	public List<Doctor> patientDoctor(String pName) {
