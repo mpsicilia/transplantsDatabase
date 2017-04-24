@@ -227,7 +227,11 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	public List <Doctor> selectAllDoctors(){
+<<<<<<< HEAD
+		doct=new SQL_Doctor(this);
+=======
 		doct = new SQL_Doctor (this);
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		return doct.selectAllDoctors();
 	}
 	@Override
@@ -388,7 +392,7 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
-	
+	/*
 	//given a patient name is going to return the doctors that take care of him
 	public List<Doctor> patientDoctor (String pName){
 		List<Doctor> doctor = new ArrayList <Doctor>();
@@ -411,6 +415,9 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
+<<<<<<< HEAD
+*/
+=======
 	//given a requested organ is going to return the patient
 	public String patientReq (Requested_organ req){
 		String namePat = "";
@@ -457,5 +464,17 @@ public class DBManager implements DBManagerInterface{
 		}
 		return reqsOfPat;
 	}
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 
+	@Override
+	public List<Doctor> patientDoctor(String pName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String patientHospital(String pName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
