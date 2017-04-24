@@ -77,7 +77,7 @@ public class UIGenericMenu {
 	        	 	case 1: {
 	        	 		System.out.println("\nMENU: ");
 	    	        	System.out.println("1. Introduce a new hospital. ");
-	    	        	System.out.println("2. Introduce a new doctor. ");
+	    	        	System.out.println("2. Introduce a new doctor. ");//introduce the hospital where works
 	    	        	System.out.println("3. Introduce a new donor."); //introducing also the organ that is donating
 	    	        	System.out.println("4. Introduce a new patient. "); //introducing also the requested organ
 	    	            System.out.println("5. Introduce a new animal tissue in order to be donated. ");

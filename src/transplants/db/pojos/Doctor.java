@@ -82,8 +82,8 @@ public class Doctor implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Doctor [\nid: "  + id + ", \nname: " + nameOfDoctor + ", \nspecialization: " + specialization
-				+ ", \nregistrationNumber: " + registrationNumber + "]";
+		return "Doctor [id: "  + id + ", name: " + nameOfDoctor + ", specialization: " + specialization
+				+ ", registrationNumber: " + registrationNumber + "]";
 	}
 	
 	

@@ -1,15 +1,9 @@
 package transplants.db.jdbc;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.omg.CORBA.Request;
 
 import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Doctor;
@@ -227,11 +221,7 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	public List <Doctor> selectAllDoctors(){
-<<<<<<< HEAD
-		doct=new SQL_Doctor(this);
-=======
 		doct = new SQL_Doctor (this);
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		return doct.selectAllDoctors();
 	}
 	@Override
@@ -382,7 +372,7 @@ public class DBManager implements DBManagerInterface{
 	}
 
 	@Override
-	public String DoctorHospital(String name) {
+	public String hospitalOfDoctor(String name) {
 		String hospital = "";
 		try{
 			hosp = new SQL_Hospital(this);
@@ -415,9 +405,8 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
-<<<<<<< HEAD
 */
-=======
+	
 	//given a requested organ is going to return the patient
 	public String patientReq (Requested_organ req){
 		String namePat = "";
@@ -453,7 +442,7 @@ public class DBManager implements DBManagerInterface{
 		}
 		return reqsOfPat;
 	}
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
+
 
 	@Override
 	public List<Doctor> patientDoctor(String pName) {

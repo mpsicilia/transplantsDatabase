@@ -73,7 +73,7 @@ public class SQL_Hospital {
 			ResultSet rs = stmt.executeQuery(searchSql);
 			
 			while (rs.next()) {
-				nameHosp = rs.getString("2");
+				nameHosp = rs.getString(2);
 				
 			}
 			rs.close();
