@@ -131,6 +131,7 @@ public class SQL_Patient {
 	
 	public int getPatientID (Patient p){
 		int idP = 0;
+		Patient patient =  new Patient();
 		try{
 			Statement stm = dbManager.getC().createStatement();
 			String sql ="SELECT id FROM Patients WHERE (name LIKE '" + p.getName() + "') AND (weight = " + p.getWeight() + ")"
@@ -139,13 +140,14 @@ public class SQL_Patient {
 									+ "AND (lifeExpectancy = " + p.getLifeExpectancy() + ")";
 			ResultSet rs = stm.executeQuery(sql);
 			idP = rs.getInt("id");
+			patient = new Patient (idP, p.getName(), p.getBirthDate(), p.getWeight(), p.getHeight(), p.getGender(), p.getPathology(), p.getBloodType(), p.getLifeExpectancy(), p.getAdditionDate());
 			
 			rs.close();
 			stm.close();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return idP;
+		return patient.getId();
 	}
 	
 	public void createTable(){

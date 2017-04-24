@@ -120,8 +120,8 @@ public class DBManager implements DBManagerInterface{
 		return animalT.insertRequestedAnimal(id1, id2);
 	}
 	
-	public boolean insertFKinRequestedOrgan (int patID){
-		return req.insertPatientFK(patID);
+	public boolean insertFKinRequestedOrgan (int patID, int reqOrg){
+		return req.insertPatientFK(patID, reqOrg);
 	}
 
 	@Override
@@ -427,6 +427,17 @@ public class DBManager implements DBManagerInterface{
 			id = pat.getPatientID(patient);
 		}catch (Exception e){
 			e.printStackTrace();
+		}
+		return id;
+	}
+	//given a requested organ is goign to return its id
+	public int idRequestedOrgan (Requested_organ r){
+		int id=0;
+		try{
+			req = new SQL_Request (this);
+			id = req.getRequestedId(r);
+		}catch (Exception ex){
+			ex.printStackTrace();
 		}
 		return id;
 	}
