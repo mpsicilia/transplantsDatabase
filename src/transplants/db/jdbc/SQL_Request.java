@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import transplants.db.pojos.Organ;
+import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
 public class SQL_Request {
@@ -37,12 +38,13 @@ public class SQL_Request {
 		return false;
 	}
 	
-	public boolean insertPatientFK (int idPat){
+	public boolean insertPatientFK (int idPat, int idReq){
 		try{
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "INSERT INTO Requested_organs (patient_id) VALUES ('" + idPat + "');";
-			stmt.executeUpdate(sql);
-			stmt.close();
+			String sql = "UPDATE Requested_organs SET patient_id=? WHERE id=" + idReq;
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setInt(1, idPat);
+			prep.executeUpdate();
+			prep.close();
 			return true;
 		}catch (Exception e){
 			e.printStackTrace();
@@ -115,11 +117,11 @@ public class SQL_Request {
 		try{
 			Statement st = dbManager.getC().createStatement();
 			String sql = "SELECT * FROM Requested_organs AS Req JOIN Patients AS Pat "
-					+ "ON  Req.patient_id = Pat.id WHERE Req.patient_id = " + idPat ;
+					+ "ON  Req.patient_id = Pat.id WHERE Req.patient_id = " + idPat;
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()){
-				Integer id = rs.getInt("id");
-				String nameReqOrgan = rs.getString("name");
+				Integer id = rs.getInt(1);
+				String nameReqOrgan = rs.getString(2);
 				Float maxWeight = rs.getFloat("maxWeight");
 				Float minWeight = rs.getFloat("minWeight");
 				Requested_organ reqOrgan = new Requested_organ(id, nameReqOrgan, maxWeight, minWeight);
@@ -132,6 +134,25 @@ public class SQL_Request {
 			e.printStackTrace();
 		}
 		return reqs;
+	}
+	
+	public int getRequestedId(Requested_organ request){
+		int idR = 0;
+		Requested_organ ro = new Requested_organ();
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql ="SELECT id FROM Requested_organs WHERE (name LIKE '" + request.getName() + "') AND (maxWeight = " + request.getMaxWeight() + ")"
+					+ " AND (minWeight = " + request.getMinWeight() + ")";
+			ResultSet rs = stm.executeQuery(sql);
+			idR = rs.getInt("id");
+			ro = new Requested_organ (idR, request.getName(), request.getMaxWeight(), request.getMinWeight());
+			
+			rs.close();
+			stm.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return ro.getId();
 	}
 	
 	public void createTable (){

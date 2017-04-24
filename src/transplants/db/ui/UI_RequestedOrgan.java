@@ -33,12 +33,14 @@ public class UI_RequestedOrgan {
 				Float minWeight = Float.parseFloat(console.readLine());
 				
 				Requested_organ reqOrgan= new Requested_organ(name, maxWeight, minWeight); 
+				boolean ok=dbManager.insert(reqOrgan);
 				
 				//get the id of the patient
 				int idPatient = dbManager.idPatient(p);
+				//get the id of the  requested organ
+				int idRequested =  dbManager.idRequestedOrgan(reqOrgan);
 				
-				boolean ok=dbManager.insert(reqOrgan);
-				boolean okFK = dbManager.insertFKinRequestedOrgan(idPatient);
+				boolean okFK = dbManager.insertFKinRequestedOrgan(idPatient, idRequested);
 				if (ok && okFK){
 					System.out.print("The request Organ has been introduced.\n");
 				}else{
