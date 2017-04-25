@@ -20,7 +20,8 @@ public class UI_Donor {
 		
 	}
 	
-	public void introduceNewDonor(){
+	public Donor introduceNewDonor(){
+		Donor donor = new Donor();
 		try{
 			System.out.print("Name: ");
 			String name = console.readLine();
@@ -53,7 +54,7 @@ public class UI_Donor {
 			dbManager.selectAllDoctors();
 			Integer idDoctYouChoose = Integer.parseInt(console.readLine());
 			
-			Donor donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 
+			donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 
 			
 			boolean ok=dbManager.insert(donor);
 			if (ok){
@@ -64,6 +65,7 @@ public class UI_Donor {
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
+		return donor;
 	}
 	
 	public List<Donor> searchDonor(){

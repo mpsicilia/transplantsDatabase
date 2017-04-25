@@ -136,6 +136,10 @@ public class DBManager implements DBManagerInterface{
 	public boolean insertFKInPatient (Integer patID, Integer hospID){
 		return pat.insertHospitalFK(patID, hospID);
 	}
+	
+	public boolean donorFKinOrgan (Integer idD, Integer idO){
+		return org.insertDonorFK(idD, idO);
+	}
 	@Override
 	public List<Hospital> searchHosp(String name) {	
 		
@@ -452,6 +456,28 @@ doct = new SQL_Doctor (this);
 			id = req.getRequestedId(r);
 		}catch (Exception ex){
 			ex.printStackTrace();
+		}
+		return id;
+	}
+	
+	public int idOrgan (Organ o){
+		int id=0;
+		try{
+			org = new SQL_Organ(this);
+			id = org.getOrganId(o);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	public int idDonor (Donor d){
+		int id=0;
+		try{
+			don = new SQL_Donor(this);
+			id = don.getDonorID(d);
+		}catch (Exception e){
+			e.printStackTrace();
 		}
 		return id;
 	}

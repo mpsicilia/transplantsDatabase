@@ -21,7 +21,7 @@ public class UI_Organ {
 		
 	}
 	
-	public void introduceNewOrgan(){
+	public void introduceNewOrgan(Donor d){
 		try{
 			boolean more = true;//one patient can request many organs so...
 			while (more){
@@ -39,13 +39,12 @@ public class UI_Organ {
 				boolean ok=dbManager.insert(organ);
 				
 				//get the id of the donor
-				//int idDonor = dbManager.idDonor(d); //d is the donor that is passed to introduceNewOrgan
+				int idDonor = dbManager.idDonor(d); //d is the donor that is passed to introduceNewOrgan
 				//get the id of the organ
-				//int idOrgan = dbManager.idOrgan (organ);
+				int idOrgan = dbManager.idOrgan (organ);
 				
-				//boolean okFKDonor = dbManager.donorFKinOrgan (idDonor, idOrgan);
-				//if(ok && okFKDonor) {
-				if (ok){
+				boolean okFKDonor = dbManager.donorFKinOrgan (idDonor, idOrgan);
+				if(ok && okFKDonor) {
 					System.out.print("Organ has been introduced");
 				}else{
 					System.out.print("Organ has NOT been introduced");

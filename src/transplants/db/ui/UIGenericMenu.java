@@ -92,9 +92,9 @@ public class UIGenericMenu {
 		                    	uiDoctor.introduceNewDoctor();
 		                    	break;
 		                    case 3:
-		                    	uiDonor.introduceNewDonor();
+		                    	Donor d = uiDonor.introduceNewDonor();
 		                    	System.out.println("Introduce the organ that the donor donates. ");
-		                    	uiOrgan.introduceNewOrgan();
+		                    	uiOrgan.introduceNewOrgan(d);
 		                    	//foreign keys
 		                    	break;
 		                    case 4:
