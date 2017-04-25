@@ -37,15 +37,15 @@ public class SQL_Doctor {
 		Doctor doctorToShow= new Doctor();
 		try {
 			Statement stmt = dbManager.getC().createStatement();
-			String sql = "SELECT name, registrationNumber, specialization FROM Doctors "
-					+ "WHERE name LIKE '%" + doctor.getNameOfDoctor() + "%'";
+			String sql = "SELECT id FROM Doctors "
+					+ "WHERE name LIKE '%" + doctor.getNameOfDoctor() + "%' AND registrationNumber"
+							+ " LIKE '" + doctor.getRegistrationNumber()+ "' AND specialization "
+							+ "LIKE '" + doctor.getSpecialization()+ "'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
-				String nameDoctor = rs.getString("name");
-				String regNumber = rs.getString("registrationNumber");
-				String specializ = rs.getString("specialization");
-				doctorToShow = new Doctor(id, nameDoctor, regNumber, specializ);
+				doctorToShow = new Doctor(id, doctor.getNameOfDoctor(),
+						doctor.getRegistrationNumber(),doctor.getSpecialization());
 			}
 			rs.close();
 			stmt.close();
@@ -141,7 +141,7 @@ public class SQL_Doctor {
 		return lookForDoctor;
 	}
 
-	public List<Doctor> doctorsOfPatient (String patName){
+	public List<Doctor> doctorsAttendingPatient (String patName){
 		List<Doctor> patDoctors = new ArrayList<Doctor>();
 		try{
 			Statement stmt = dbManager.getC().createStatement();

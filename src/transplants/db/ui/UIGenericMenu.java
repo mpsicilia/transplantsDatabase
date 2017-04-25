@@ -77,7 +77,7 @@ public class UIGenericMenu {
 	        	 	case 1: {
 	        	 		System.out.println("\nMENU: ");
 	    	        	System.out.println("1. Introduce a new hospital. ");
-	    	        	System.out.println("2. Introduce a new doctor. ");
+	    	        	System.out.println("2. Introduce a new doctor. ");//introduce the hospital where works
 	    	        	System.out.println("3. Introduce a new donor."); //introducing also the organ that is donating
 	    	        	System.out.println("4. Introduce a new patient. "); //introducing also the requested organ
 	    	            System.out.println("5. Introduce a new animal tissue in order to be donated. ");
@@ -361,8 +361,6 @@ public class UIGenericMenu {
 	        	 	case 3:
 	        	 		System.out.print("\n1. Search a hospital by the type of organ transplantation"
   	 				          			 + "that takes place in it.");
-	        	 		System.out.print("\n2. Hospital and doctor that is in charge of the patient.");
-	        	 		System.out.print("\n3. Hospital and doctor that is in charge of the donor.");
 	        	 		System.out.print("\n4. Hospital in which the organ that is going to"
 	        	 				         + " be donated is located, and the owner of it.");
 	        	 		System.out.print("\n5. Patient that is reciving an organ.");
