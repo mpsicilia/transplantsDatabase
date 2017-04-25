@@ -113,6 +113,9 @@ public class DBManager implements DBManagerInterface{
 	public Integer getIdOfDoctor (Doctor doctor){
 		return doct.getIdOfLastDoctor(doctor);
 	}
+	public Integer getIdOfPatient(Patient patient){
+		return pat.getPatientID(patient);
+	}
 	
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2){
 		return hosp.insertHospitalsDoctors(id1, id2);
@@ -130,6 +133,9 @@ public class DBManager implements DBManagerInterface{
 		return req.insertPatientFK(patID, reqOrg);
 	}
 
+	public boolean insertFKInPatient (Integer patID, Integer hospID){
+		return pat.insertHospitalFK(patID, hospID);
+	}
 	@Override
 	public List<Hospital> searchHosp(String name) {	
 		
