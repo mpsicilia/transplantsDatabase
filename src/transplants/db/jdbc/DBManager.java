@@ -227,11 +227,9 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	public List <Doctor> selectAllDoctors(){
-<<<<<<< HEAD
 		doct=new SQL_Doctor(this);
-=======
-		doct = new SQL_Doctor (this);
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
+doct = new SQL_Doctor (this);
+
 		return doct.selectAllDoctors();
 	}
 	@Override
@@ -417,7 +415,6 @@ public class DBManager implements DBManagerInterface{
 	}
 <<<<<<< HEAD
 */
-=======
 	//given a requested organ is going to return the patient
 	public String patientReq (Requested_organ req){
 		String namePat = "";
@@ -464,7 +461,6 @@ public class DBManager implements DBManagerInterface{
 		}
 		return reqsOfPat;
 	}
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 
 	@Override
 	public List<Doctor> patientDoctor(String pName) {

@@ -137,7 +137,7 @@ public class UI_Hospitals {
 		
 	public void DoctorHospital (String docName){
 		try{
-			String nameOfHospital = dbManager.DoctorHospital(docName);
+			String nameOfHospital = dbManager.hospitalOfDoctor(docName);
 			System.out.println("The doctor: "+ docName + " works in the following hospital:\n "+ nameOfHospital);
 		}catch (Exception e){
 			e.printStackTrace();
