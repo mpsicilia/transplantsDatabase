@@ -60,12 +60,26 @@ public class UI_Patient {
 				Doctor d = itD.next();
 				System.out.println(d);
 			}
-			int idD = Integer.parseInt(console.readLine());
-			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, life, addition);
+			Integer idD = Integer.parseInt(console.readLine());			
 			
+			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
+			List <Hospital>hosps= dbManager.selectAllHospitals();
+			Iterator <Hospital> itH=hosps.iterator();
+			while (itH.hasNext()){
+				Hospital h=itH.next();
+				System.out.println(h);
+			}
+			Integer idHosp= Integer.parseInt(console.readLine());
+			
+			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, life, addition);
+			//here we introduce the patient
 			boolean introduced = dbManager.insert(p);
-			boolean introFK = dbManager.insertPrimaryKeyDoctorPatient(p.getId(), idD);
-			if(introduced){
+			//getting the FK
+			Integer introFKinPat=dbManager.getIdOfPatient(p);
+			boolean introduced2= dbManager.insertPrimaryKeyDoctorPatient(idD, introFKinPat);
+			boolean introduced3=dbManager.insertFKInPatient(introFKinPat,idHosp);
+			
+			if(introduced && introduced2 && introduced3){
 				System.out.println("Patient has been introduced. ");
 			}
 			else{

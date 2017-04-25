@@ -74,6 +74,8 @@ public class SQL_Patient {
 		return lookForPatient;
 	}
 	
+	
+	
 	public boolean updatePatient (Patient p){
 		try{
 			String sql = "UPDATE Patients SET name=?, birthDate=?, weight=?, height=?, gender=?, pathology=?,"
@@ -129,7 +131,7 @@ public class SQL_Patient {
 		return nameP;
 	}
 	
-	public int getPatientID (Patient p){
+	public Integer getPatientID (Patient p){
 		int idP = 0;
 		Patient patient =  new Patient();
 		try{

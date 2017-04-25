@@ -41,7 +41,7 @@ public class UI_Doctor {
 			Doctor doct= new Doctor(name, regNumber, specializ);
 			
 			boolean ok=dbManager.insert(doct);
-			int id = dbManager.getIdOfDoctor(doct);
+			Integer id = dbManager.getIdOfDoctor(doct);
 			
 			boolean ok2=dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, id);
 			
