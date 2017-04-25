@@ -13,6 +13,7 @@ import java.util.List;
 
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Patient;
 
 public class SQL_Donor {
 	
@@ -118,6 +119,29 @@ public class SQL_Donor {
 	//2. See the organ that is going to donate
 	public String OrganDonating (String donorName){
 		return "";
+	}
+	
+	public int getDonorID (Donor d){
+		Donor donor =  new Donor();
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql ="SELECT id FROM Donors "
+					+ "WHERE (name LIKE '" + d.getName() + "') "
+							+ "AND (weight = " + d.getWeight() + ")"
+							+ " AND (height = " + d.getHeight() + ") "
+							+ "AND (gender LIKE '" + d.getGender() + "')"
+							+ "AND (deadAlive LIKE '" + d.getDeadOrAlive() + "') "
+							+ "AND (bloodType LIKE '" + d.getBloodType() + "')";
+			ResultSet rs = stm.executeQuery(sql);
+			int idD = rs.getInt("id");
+			donor = new Donor (idD, d.getName(), d.getBirthDate(), d.getWeight(), d.getHeight(), d.getGender(), d.getDeadOrAlive(), d.getBloodType());
+			
+			rs.close();
+			stm.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return donor.getId();
 	}
 	
 	

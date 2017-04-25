@@ -23,22 +23,38 @@ public class UI_Organ {
 	
 	public void introduceNewOrgan(){
 		try{
-			System.out.print("Name: ");
-			String name = console.readLine();
-			
-			System.out.print("Weight: ");
-			Float weight = Float.parseFloat(console.readLine());
+			boolean more = true;//one patient can request many organs so...
+			while (more){
+				System.out.print("Name: ");
+				String name = console.readLine();
 				
-			System.out.print("Type of donation [total or partial]: ");
-			String typeOfDonation = console.readLine();
-			
-			Organ organ= new Organ(name, weight, typeOfDonation); 
-			
-			boolean ok=dbManager.insert(organ);
-			if (ok){
-				System.out.print("Organ has been introduced");
-			}else{
-				System.out.print("Organ has NOT been introduced");
+				System.out.print("Weight: ");
+				Float weight = Float.parseFloat(console.readLine());
+					
+				System.out.print("Type of donation [total or partial]: ");
+				String typeOfDonation = console.readLine();
+				
+				Organ organ= new Organ(name, weight, typeOfDonation); 
+				
+				boolean ok=dbManager.insert(organ);
+				
+				//get the id of the donor
+				//int idDonor = dbManager.idDonor(d); //d is the donor that is passed to introduceNewOrgan
+				//get the id of the organ
+				//int idOrgan = dbManager.idOrgan (organ);
+				
+				//boolean okFKDonor = dbManager.donorFKinOrgan (idDonor, idOrgan);
+				//if(ok && okFKDonor) {
+				if (ok){
+					System.out.print("Organ has been introduced");
+				}else{
+					System.out.print("Organ has NOT been introduced");
+				}
+				System.out.println("Is the donor going to donate another organ? [yes/no]");
+				String another = console.readLine();
+				if(another.equalsIgnoreCase("no")){
+					more = false;
+				}
 			}
 		}catch(IOException ex){
 			ex.printStackTrace();

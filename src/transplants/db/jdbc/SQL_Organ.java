@@ -12,6 +12,7 @@ import java.util.List;
 
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
+import transplants.db.pojos.Requested_organ;
 
 public class SQL_Organ {
 	
@@ -37,6 +38,7 @@ public class SQL_Organ {
 		}
 		return false;
 	}
+	
 	
 	
 	public List <Organ> searchOrgan(String name){
@@ -96,6 +98,39 @@ public class SQL_Organ {
 			e.printStackTrace();
 		}
 		
+		return false;
+	}
+	
+	public int getOrganId(Organ org){
+		int idO = 0;
+		Organ o = new Organ();
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql ="SELECT id FROM Organs WHERE (name LIKE '" + org.getName() + "') AND (weight = " + org.getWeight() + ""
+					+ ") AND (typeOfDonation = " + org.getTypeOfDonation() + ")";
+			ResultSet rs = stm.executeQuery(sql);
+			idO = rs.getInt("id");
+			o = new Organ (idO, org.getName(), org.getWeight(), org.getTypeOfDonation());
+			
+			rs.close();
+			stm.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return o.getId();
+	}
+	
+	public boolean insertDonorFK (int idDonor, int idOrg){
+		try{
+			String sql = "UPDATE Organs SET donor_id=? WHERE id=" + idOrg;
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setInt(1, idDonor);
+			prep.executeUpdate();
+			prep.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
