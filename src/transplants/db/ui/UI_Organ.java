@@ -135,7 +135,7 @@ public class UI_Organ {
 	public void organsOfDonor (Donor d){
 		try{
 			int idDon = d.getId();
-			List<Organ> organs= dbManager.organOfDonor(idDon);
+			List<Organ> organs= dbManager.organsOfDonor(idDon);
 			System.out.println("Donor: " + d.getName() + " donates the following organs: \n");
 			Iterator <Organ> itOrg = organs.iterator();
 			int countOrg = 1;

@@ -112,7 +112,7 @@ public class SQL_Request {
 		return false;
 	}
 	
-	public List<Requested_organ> requestedOfPatient (int idPat){
+	public List<Requested_organ> characteristicsOfRequests (int idPat){
 		List <Requested_organ> reqs = new ArrayList<Requested_organ>();
 		try{
 			Statement st = dbManager.getC().createStatement();
