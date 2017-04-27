@@ -76,7 +76,7 @@ public class SQL_Donor {
 					+ "height =?, gender=?, deadAlive=?, bloodType=? WHERE id=?";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
 			prep.setString(1, donor.getName());
-			prep.setDate (2, donor.getBirthDate());///falla
+			prep.setDate (2, donor.getBirthDate());
 			prep.setFloat(3, donor.getWeight());
 			prep.setFloat(4, donor.getHeight());
 			prep.setString(5, donor.getGender());
@@ -111,11 +111,6 @@ public class SQL_Donor {
 		return false;
 	}
 	
-	/*SPECIFIC METHODS OF THE CLASS*/
-    //1. See in what hospital is the donor, and the doctors that are taking care of him
-	public String searchDonorInHospital (String donorName){
-		return "";
-	}
 	//2. See the organ that is going to donate
 	public String OrganDonating (String donorName){
 		return "";

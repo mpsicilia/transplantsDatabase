@@ -45,16 +45,21 @@ public class UI_Donor {
 			System.out.print("Blood Type: ");
 			String bloodType = console.readLine();
 			
+			donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 
+			//there is no relationship between donor and doctor, nor donor and hospital
+			/*int idDonor = dbManager.getIdOfDonor (donor);
+			
 			System.out.print("Introduce the id of the hospital in which the donor is located: ");
 			dbManager.selectAllHospitals();
 			Integer idHospYouChoose = Integer.parseInt(console.readLine());
+			boolean okHosp = dbManager.insertFKHospInDonor (idHospYouChoose, idDonor);
 			
 			
 			System.out.print("Introduce the id of the doctor that takes care of the donor: ");
 			dbManager.selectAllDoctors();
-			Integer idDoctYouChoose = Integer.parseInt(console.readLine());
+			Integer idDoctYouChoose = Integer.parseInt(console.readLine());*/
 			
-			donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 
+			
 			
 			boolean ok=dbManager.insert(donor);
 			if (ok){
