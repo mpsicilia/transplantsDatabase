@@ -180,11 +180,11 @@ public class SQL_Doctor {
 			e.printStackTrace();
 		}
 	}
-	public boolean insertDoctorPatientTable(Integer pat, Integer doct){
+	public boolean insertDoctorPatientTable(Integer patId, Integer doctId){
 		try {
 			Statement stmt= dbManager.getC().createStatement();
 			String sql = "INSERT INTO Doctors_patients (doctor_id, patient_id)"
-					+ " VALUES (" + doct+ ", " + pat + ")";
+					+ " VALUES (" + doctId+ ", " + patId + ")";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			return true;

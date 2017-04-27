@@ -60,7 +60,7 @@ public class UI_Patient {
 				Doctor d = itD.next();
 				System.out.println(d);
 			}
-			Integer idD = Integer.parseInt(console.readLine());			
+			Integer doctId = Integer.parseInt(console.readLine());			
 			
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= dbManager.selectAllHospitals();
@@ -75,9 +75,9 @@ public class UI_Patient {
 			//here we introduce the patient
 			boolean introduced = dbManager.insert(p);
 			//getting the FK
-			Integer introFKinPat=dbManager.getIdOfPatient(p);
-			boolean introduced2= dbManager.insertPrimaryKeyDoctorPatient(idD, introFKinPat);
-			boolean introduced3=dbManager.insertFKInPatient(introFKinPat,idHosp);
+			Integer patId=dbManager.getIdOfPatient(p);
+			boolean introduced2= dbManager.insertPrimaryKeyDoctorPatient(patId, doctId);
+			boolean introduced3=dbManager.insertFKInPatient(patId,idHosp);
 			
 			if(introduced && introduced2 && introduced3){
 				System.out.println("Patient has been introduced. ");
