@@ -6,12 +6,14 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
+import transplants.db.pojos.Requested_organ;
 
 public class UI_Organ {
 	private DBManager dbManager=new DBManager();
@@ -128,5 +130,22 @@ public class UI_Organ {
 			ex.printStackTrace();
 		}
 	
+	}
+	
+	public void organsOfDonor (Donor d){
+		try{
+			int idDon = d.getId();
+			List<Organ> organs= dbManager.organOfDonor(idDon);
+			System.out.println("Donor: " + d.getName() + " donates the following organs: \n");
+			Iterator <Organ> itOrg = organs.iterator();
+			int countOrg = 1;
+			while (itOrg.hasNext()){
+				Organ o = itOrg.next();
+				System.out.println(countOrg + ". " + o.getName());
+				countOrg++;
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 }

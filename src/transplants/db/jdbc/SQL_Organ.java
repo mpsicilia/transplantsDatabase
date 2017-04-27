@@ -134,6 +134,30 @@ public class SQL_Organ {
 		return false;
 	}
 	
+	public List<Organ> organOfDonor (int idD){
+		List <Organ> orgs = new ArrayList<Organ>();
+		try{
+			Statement st = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Organs AS Org JOIN Donors AS Don "
+					+ "ON  Org.donor_id = Don.id WHERE Org.donor_id = " + idD;
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()){
+				Integer id = rs.getInt(1);
+				String nameOrgan = rs.getString(2);
+				Float weight = rs.getFloat("weight");
+				String typeDon = rs.getString("typeOfDonation");
+				Organ organ = new Organ(id, nameOrgan, weight, typeDon);
+				orgs.add(organ);
+			}
+			
+			rs.close();
+			st.close();
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return orgs;
+	}
+	
 	public void createTable(){
 		try{
 			

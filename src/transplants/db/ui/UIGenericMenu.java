@@ -237,16 +237,16 @@ public class UIGenericMenu {
 	                	 		System.out.print("\nRELATED WITH THE DONOR THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
-	                    		System.out.print("\n3. See in what hospital he is and who is taking care of him.");
-	                    		System.out.print("\n4. See the organ that is donating");
-	                    		System.out.print("\n5. Go back to the menu. ");
-	                    		System.out.print("\nChoose an option[1-5]:");
+	                    		System.out.print("\n3. See the organ that is donating");
+	                    		System.out.print("\n4. Go back to the menu. ");
+	                    		System.out.print("\nChoose an option[1-4]:");
 	                    		String optDonor = console.readLine();
 	                    		int opDonor = Integer.parseInt(optDonor);
+	                    		int numDon = 0;
 	                    		switch (opDonor){
                     			case 1:
                     				System.out.println("Introduce the number of the donor: ");
-                    				int numDon = Integer.parseInt(console.readLine());
+                    				numDon = Integer.parseInt(console.readLine());
                     				Donor donUp = donor.get(numDon-1);
                     				uiDonor.updateDonor(donUp);
                     				break;
@@ -257,10 +257,12 @@ public class UIGenericMenu {
                     				uiDonor.deleteDonor(donDel);
                     				break;
                     			case 3:
+                    				System.out.println("Introduce the number of the donor: ");
+                    				numDon = Integer.parseInt(console.readLine());
+                    				Donor donOrg = donor.get(numDon-1);
+                    				uiOrgan.organsOfDonor(donOrg);
                     				break;
                     			case 4:
-                    				break;
-                    			case 5:
                     				break;
                     				
 	                    		}
