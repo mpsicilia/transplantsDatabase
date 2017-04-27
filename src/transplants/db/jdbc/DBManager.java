@@ -121,8 +121,8 @@ public class DBManager implements DBManagerInterface{
 		return hosp.insertHospitalsDoctors(id1, id2);
 	}
 	
-	public boolean insertPrimaryKeyDoctorPatient(Integer id1, Integer id2){
-		return doct.insertDoctorPatientTable(id1, id2);
+	public boolean insertPrimaryKeyDoctorPatient(Integer patId, Integer doctId){
+		return doct.insertDoctorPatientTable(patId, doctId);
 	}	
 	
 	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2){
@@ -238,10 +238,9 @@ public class DBManager implements DBManagerInterface{
 	
 	public List <Doctor> selectAllDoctors(){
 		doct=new SQL_Doctor(this);
-doct = new SQL_Doctor (this);
-
-		return doct.selectAllDoctors();
+     	return doct.selectAllDoctors();
 	}
+	
 	@Override
 	public boolean update(Object obj) {
 		try{							

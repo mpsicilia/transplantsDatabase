@@ -130,6 +130,19 @@ public class SQL_Patient {
 		}
 		return nameP;
 	}
+	public boolean insertHospitalFK(Integer patID, Integer hospID){
+		try{
+			String sql = "UPDATE Patients SET hospital_id=? WHERE id=" + patID;
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setInt(1, hospID);
+			prep.executeUpdate();
+			prep.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 	public Integer getPatientID (Patient p){
 		int idP = 0;
