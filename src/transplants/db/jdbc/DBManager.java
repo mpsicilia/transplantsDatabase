@@ -388,42 +388,6 @@ public class DBManager implements DBManagerInterface{
 		return false;
 	}
 
-
-	public String DoctorHospital(String name) {
-		String hospital = "";
-		try{
-			hosp = new SQL_Hospital(this);
-			hospital = hosp.searchHospitalOfDoctor(name);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return hospital;
-	}
-	/*
-	//given a patient name is going to return the doctors that take care of him
-	public List<Doctor> patientDoctor (String pName){
-		List<Doctor> doctor = new ArrayList <Doctor>();
-		try{
-			doct = new SQL_Doctor(this);
-			doctor = doct.doctorsOfPatient(pName);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return doctor;
-	}
-	//given a patient name is going to return the hospital in which the patient is admitted
-	public String patientHospital (String pName){
-		String hospital = "";
-		try{
-			hosp = new SQL_Hospital(this);
-			hospital = hosp.hospitalOfPatient(pName);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return hospital;
-	}
-<<<<<<< HEAD
-*/
 	//given a requested organ is going to return the patient
 	public String patientReq (Requested_organ req){
 		String namePat = "";
@@ -494,20 +458,38 @@ public class DBManager implements DBManagerInterface{
 	}
 
 	@Override
-	public List<Doctor> patientDoctor(String pName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Doctor> doctorOfPatient(String pName) {
+		List<Doctor> doctor = new ArrayList <Doctor>();
+		try{
+			doct = new SQL_Doctor(this);
+			doctor = doct.doctorsAttendingPatient(pName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return doctor;
 	}
 
 	@Override
-	public String patientHospital(String pName) {
-		// TODO Auto-generated method stub
-		return null;
+	public String hospitalOfPatient (String pName) {
+		String hospital = "";
+		try{
+			hosp = new SQL_Hospital(this);
+			hospital = hosp.hospitalOfPatient(pName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return hospital;
 	}
 
 	@Override
 	public String hospitalOfDoctor(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		String hospital = "";
+		try{
+			hosp = new SQL_Hospital(this);
+			hospital = hosp.searchHospitalOfDoctor(name);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return hospital;
 	}
 }

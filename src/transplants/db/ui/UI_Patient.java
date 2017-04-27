@@ -193,9 +193,10 @@ public class UI_Patient {
 	
 	public void patientHospitalAndDoctor (String ptName){
 		try{
-			List<Doctor> patDoctors = dbManager.patientDoctor(ptName);
-			String hospName = dbManager.patientHospital(ptName);
-			System.out.println("Patient: " + ptName + ", is admitted in the hospital: " + hospName + 
+			String nameOfHosp= dbManager.hospitalOfPatient(ptName);
+			List<Doctor> patDoctors = dbManager.doctorOfPatient(ptName);
+			
+			System.out.println("Patient: " + ptName + ", is admitted in the hospital: " + nameOfHosp + 
 					". The doctors that take care of him are: \n" + patDoctors);
 		}catch (Exception e){
 			e.printStackTrace();

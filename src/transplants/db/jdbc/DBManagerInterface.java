@@ -43,7 +43,7 @@ public interface DBManagerInterface {
 	public boolean delete (Object obj);
 	
 	public String hospitalOfDoctor(String name);
-	public List<Doctor> patientDoctor (String pName);
-	public String patientHospital (String pName);
+	public String hospitalOfPatient(String pName);
+	public List<Doctor> doctorOfPatient(String pName);
 	
 }
