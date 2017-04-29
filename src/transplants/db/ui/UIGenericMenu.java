@@ -338,7 +338,7 @@ public class UIGenericMenu {
 		                	 		}
 		                	 		
 	                    		}
-	                    		if(or.equalsIgnoreCase("donate")){
+	                    		if(or.equalsIgnoreCase("donated")){
 	                    			List <Organ> orgs = uiOrgan.searchOrgan();
 	                    			Iterator <Organ> it5 = orgs.iterator();
 		                	 		int counterOrg = 1;
@@ -372,6 +372,7 @@ public class UIGenericMenu {
 	        	 		break;
 	        	 	
 	        	 	case 4:
+	        	 		System.out.println("The program has been closed.");
 	        	 		System.exit(0);
 	        	 	}
 	        	 		 		
