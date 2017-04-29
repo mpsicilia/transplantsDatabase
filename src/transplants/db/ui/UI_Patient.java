@@ -60,7 +60,12 @@ public class UI_Patient {
 				Doctor d = itD.next();
 				System.out.println(d);
 			}
-			Integer doctId = Integer.parseInt(console.readLine());			
+			Integer doctId = Integer.parseInt(console.readLine());	
+			System.out.println("Do you want to introduce another doctor?: [yes/no]");
+			String chooser = console.readLine();
+			if (chooser.equals("yes")){
+				
+			}
 			
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= dbManager.selectAllHospitals();

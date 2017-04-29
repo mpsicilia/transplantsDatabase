@@ -3,8 +3,6 @@ package transplants.db.jdbc;
 import java.sql.*;
 import java.util.*;
 import java.sql.PreparedStatement;
-
-import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 
 public class SQL_Hospital {
@@ -81,14 +79,10 @@ public class SQL_Hospital {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		//
 		return nameHosp;
 	}
 	
-	//method that tell us the hospital in which the transplant is taking place
-	//in order to know where is taking place, the user will introduce the name of the patient
-	//and the organ that that patient is going to receive.
-	//Shoud we put any other conditions??????????????????????????????????
+/*
 	public String searchHospitalByTransplantation (String patientName, String organReciving ){
 		String searchSql = "";
 		try{
@@ -106,13 +100,22 @@ public class SQL_Hospital {
 			e.printStackTrace();
 		}
 		return searchSql;
-	}
+	}*/
+	
 	//given a patient name is going to return the hospital in which the patient is
-	public String hospitalOfPatient (String pName){
+	public String hospitalOfPatient (String patName){
 		String hosp = "";
 		try{
 			Statement stmt = dmanager.getC().createStatement();
-			//sql que seleccione el nombre del hospital por el nombre del paciente
+			String searchSql = "SELECT * FROM Hospitals "
+					+ "AS Hosp JOIN Patients AS Pat ON Hosp.id=Pat.hospital_id "
+					+ "WHERE Pat.name LIKE '%" + patName + "%'";
+			ResultSet rs = stmt.executeQuery(searchSql);
+			
+			while (rs.next()) {
+				hosp = rs.getString(2);
+			}
+			
 		}catch (Exception e){
 			e.printStackTrace();
 		} 

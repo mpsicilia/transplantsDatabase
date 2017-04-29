@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import transplants.db.pojos.Doctor;
-import transplants.db.pojos.Patient;
 
 public class SQL_Doctor {
 	
@@ -141,11 +140,26 @@ public class SQL_Doctor {
 		return lookForDoctor;
 	}
 
-	public List<Doctor> doctorsAttendingPatient (String patName){
+	public List<Doctor> doctorsAttendingPatient (String patName){//n-n relation
 		List<Doctor> patDoctors = new ArrayList<Doctor>();
 		try{
 			Statement stmt = dbManager.getC().createStatement();
-			//sql que seleccione doctores segun el nombre del paciente
+			String searchSql = "SELECT * FROM Doctors "
+					+ "AS Doct JOIN Doctors_patients AS DoctPatients ON "
+					+ "Doct.id=DoctPatients.doctor_id JOIN Patients AS Pat ON "
+					+ "Pat.id=DoctPatients.patient_id WHERE Pat.name LIKE '%" + patName + "%'";
+			ResultSet rs = stmt.executeQuery(searchSql);
+			
+			while (rs.next()) {
+				Integer id=rs.getInt(1);
+				String name = rs.getString(2);
+				String regNumber= rs.getString(3);
+				String specializ=rs.getString(4);
+				Doctor doctor = new Doctor(id, name, regNumber,specializ);
+				patDoctors.add(doctor);	
+			}
+			rs.close();
+			stmt.close();
 		}catch (Exception e){
 			e.printStackTrace();
 		}

@@ -82,7 +82,7 @@ public class Doctor implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Doctor [id: "  + id + ", name: " + nameOfDoctor + ", specialization: " + specialization
+		return "[id: "  + id + ", name: " + nameOfDoctor + ", specialization: " + specialization
 				+ ", registrationNumber: " + registrationNumber + "]";
 	}
 	
