@@ -78,6 +78,13 @@ public class Requested_organ implements Serializable {
 	public void setMinWeight(Float minWeight) {
 		this.minWeight = minWeight;
 	}
+
+	@Override
+	public String toString() {
+		return "\nRequested_organ [id=" + id + ", name=" + name + ", maxWeight=" + maxWeight + ", minWeight=" + minWeight
+				+ "]";
+	}
+	
 	
 //need to see in what pojos we are going to put the toString
 }

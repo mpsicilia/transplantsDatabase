@@ -151,16 +151,16 @@ public class UI_RequestedOrgan {
 		return namePat;
 	}
 	
-	public void requestsOfPatient (Patient patient){
+	public void characteristicsOfRequestedOrgans (Patient patient){
 		try{
 			int idPat = patient.getId();
-			List<Requested_organ> requests = dbManager.requestedOfPatient(idPat);
+			List<Requested_organ> requests = dbManager.characteristicsOfRequestedOrgans(idPat);
 			System.out.println("Patient: " + patient.getName() + " needs the following organs: \n");
 			Iterator <Requested_organ> itReq = requests.iterator();
 			int countReq = 1;
 			while (itReq.hasNext()){
 				Requested_organ r = itReq.next();
-				System.out.println(countReq + ". " + r.getName());
+				System.out.println(countReq + ". " + r);
 				countReq++;
 			}
 		}catch (Exception e){

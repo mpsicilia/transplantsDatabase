@@ -107,7 +107,7 @@ public class SQL_Organ {
 		try{
 			Statement stm = dbManager.getC().createStatement();
 			String sql ="SELECT id FROM Organs WHERE (name LIKE '" + org.getName() + "') AND (weight = " + org.getWeight() + ""
-					+ ") AND (typeOfDonation = " + org.getTypeOfDonation() + ")";
+					+ ") AND (typeOfDonation = '" + org.getTypeOfDonation() + "')";
 			ResultSet rs = stm.executeQuery(sql);
 			idO = rs.getInt("id");
 			o = new Organ (idO, org.getName(), org.getWeight(), org.getTypeOfDonation());
@@ -144,7 +144,7 @@ public class SQL_Organ {
 			while (rs.next()){
 				Integer id = rs.getInt(1);
 				String nameOrgan = rs.getString(2);
-				Float weight = rs.getFloat("weight");
+				Float weight = rs.getFloat(3);
 				String typeDon = rs.getString("typeOfDonation");
 				Organ organ = new Organ(id, nameOrgan, weight, typeDon);
 				orgs.add(organ);

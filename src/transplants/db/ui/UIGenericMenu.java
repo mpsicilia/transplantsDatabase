@@ -139,8 +139,6 @@ public class UIGenericMenu {
 	                	 				break;
 	                	 			}
 	                	 			
-	                	 			
-                	 			
 	                	 		}
 	                	 		
 	                    		System.out.print("\nRELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
@@ -237,7 +235,7 @@ public class UIGenericMenu {
 	                	 		System.out.print("\nRELATED WITH THE DONOR THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
-	                    		System.out.print("\n3. See the organ that is donating");
+	                    		System.out.print("\n3. See the organs that is donating");
 	                    		System.out.print("\n4. Go back to the menu. ");
 	                    		System.out.print("\nChoose an option[1-4]:");
 	                    		String optDonor = console.readLine();
@@ -316,7 +314,7 @@ public class UIGenericMenu {
                     				int numPat4 = Integer.parseInt(console.readLine());
                     				//metodo al que le pasas un paciente y te muestra las caracteristicas del organo que necesita el paciente
                     				Patient patReq = pat.get(numPat4-1);
-                    				uiRequested.requestsOfPatient(patReq);
+                    				uiRequested.characteristicsOfRequestedOrgans(patReq);
                     				
                     				break;
                     			case 5:

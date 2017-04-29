@@ -446,17 +446,28 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	//given a patient is going to return its requests
-	public List<Requested_organ> requestedOfPatient (int idPatient){
+	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient){
 		List<Requested_organ> reqsOfPat = new ArrayList<Requested_organ>();
 		try{
 			req = new SQL_Request(this);
-			reqsOfPat = req.requestedOfPatient(idPatient);
+			reqsOfPat = req.characteristicsOfRequests(idPatient);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 		return reqsOfPat;
 	}
 
+	//given a donor is going to return its organs
+	public List<Organ> organsOfDonor (int idDonor){
+		List<Organ> orgsOfDonor = new ArrayList<Organ>();
+		try{
+			org = new SQL_Organ(this);
+			orgsOfDonor = org.organOfDonor(idDonor);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return  orgsOfDonor;
+	}
 	@Override
 	public List<Doctor> doctorOfPatient(String pName) {
 		List<Doctor> doctor = new ArrayList <Doctor>();
