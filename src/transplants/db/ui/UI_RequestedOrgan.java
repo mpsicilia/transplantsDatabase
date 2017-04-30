@@ -54,7 +54,8 @@ public class UI_RequestedOrgan {
 				}
 			
 			}
-			/*
+			/*quiero un corazon, me mira todos los organos de animales y todos los de organos
+			 * y me hace la fk con el que haya
 			//foreign keys, que pueden ser con el animal tissue (extra table) o organ donated (tabla de organ)
 			System.out.println("Choose if the requested organ is going to be supplied by an animal tissue or by a human organ. [animal/human]");
 			//TO DO --->>metodo que muestre todos los animaltissues y organs disponibles

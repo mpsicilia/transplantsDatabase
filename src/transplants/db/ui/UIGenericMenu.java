@@ -141,7 +141,7 @@ public class UIGenericMenu {
 	                	 			}
 	                	 			
 	                	 		}
-	                	 		
+	                	 		if (counter!=1){
 	                    		System.out.print("\nRELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete hospital.");
@@ -166,7 +166,7 @@ public class UIGenericMenu {
 	                    				break;
 	                    		}
 	                    		break;
-	                    		
+	                	 	   }
 	                    	case 2:
 	                    		List <Doctor> doct= uiDoctor.searchDoctor();
 	                    		Iterator <Doctor> it1 = doct.iterator();
@@ -182,7 +182,8 @@ public class UIGenericMenu {
 	                	 				uiDoctor.introduceNewDoctor();
 	                	 				break;
 	                	 			}
-	                	 			}
+	                	 		}
+	                	 		if (counterDoctor !=1){
 	                	 		System.out.print("\nRELATED WITH THE DOCTOR THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
@@ -215,8 +216,8 @@ public class UIGenericMenu {
                     				break;
                     				
                     		}
-                    		break;
-	                    			
+	                    		break;
+	                	 	}		
 	                    	case 3:
 	                    		List <Donor> donor= uiDonor.searchDonor();
 	                    		Iterator <Donor> it2 =donor.iterator();
@@ -233,6 +234,7 @@ public class UIGenericMenu {
 	                	 				break;
 	                	 			}
 	                	 		}
+	                	 		if (counterDonor!=1){
 	                	 		System.out.print("\nRELATED WITH THE DONOR THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
@@ -266,6 +268,7 @@ public class UIGenericMenu {
                     				
 	                    		}
 	                    		break;
+	                	 	}
 	                    	case 4:
 	                    		List <Patient> pat= uiPatient.searchPatient();
 	                    		Iterator <Patient> it3 = pat.iterator();
@@ -282,6 +285,7 @@ public class UIGenericMenu {
 	                	 				break;
 	                	 			}
 	                	 		}
+	                	 		if (counterPat!=1){
 	                	 		System.out.print("\nRELATED WITH THE PATIENT THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
@@ -331,8 +335,9 @@ public class UIGenericMenu {
                     				
 	                    		}
 	                    		break;
+	                	 	}
 	                    	case 5:{//buscas un organo para el paciente (buscas organ), o buscas un paciente para un organo (request)
-	                    		System.out.println("\nIt's an organ that the patient needs? or that has been donated? : [need/donated]");
+	                    		System.out.println("\nIs it an organ that the patient needs? or that has been donated? : [need/donated]");
 	                    		String or = console.readLine();
 	                    		if(or.equalsIgnoreCase("need")){ //requested organ
 	                    			List <Requested_organ> reqOrgans = uiRequested.searchReqOrgan();
@@ -344,8 +349,7 @@ public class UIGenericMenu {
 		                	 			//show the patient that request each organ
 		                	 			System.out.println("Requested by: " + uiRequested.patientOfRequested(r));
 		                	 			counterReq++;
-		                	 		}
-		                	 		
+		                	 		}		                	 		
 	                    		}
 	                    		if(or.equalsIgnoreCase("donated")){
 	                    			List <Organ> orgs = uiOrgan.searchOrgan();
@@ -364,9 +368,7 @@ public class UIGenericMenu {
 	        	 		
 	        	 	}
 	        	 	break;
-	        	 	//al igual podemos hacer solo dos opciones generales y a partir de ahi poner
-	        	 	//todas estas opciones. Seguro que lo vamos viendo a medida que lo vayamos haciendo
-	        	 	//pero he apuntado las ideas aqui para que no se nos olviden
+
 	        	 	case 3:
 	        	 		/*System.out.print("\n1. Search a hospital by the type of organ transplantation"
   	 				          			 + "that takes place in it.");

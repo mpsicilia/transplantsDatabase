@@ -62,13 +62,14 @@ public class UI_Patient {
 			while (itD.hasNext()){
 				Doctor d = itD.next();
 				System.out.println(d);
-			}
+			}			
 			Integer doctId = Integer.parseInt(console.readLine());	
-			System.out.println("Do you want to introduce another doctor?: [yes/no]");
+			//--->TO DOOO 
+			/*System.out.println("Do you want to introduce another doctor?: [yes/no]");
 			String chooser = console.readLine();
 			if (chooser.equals("yes")){
 				
-			}
+			}*/
 			
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= dbManager.selectAllHospitals();
@@ -110,7 +111,7 @@ public class UI_Patient {
 		}catch (IOException ex){
 			ex.printStackTrace();
 		}
-		return null; //se puede?
+		return null; 
 	}
 	
 	public void updatePatient(Patient p){
