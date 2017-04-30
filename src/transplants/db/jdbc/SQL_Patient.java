@@ -163,6 +163,38 @@ public class SQL_Patient {
 		return patient.getId();
 	}
 	
+	public List<Patient> selectAllPatients() {
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Patients";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String birthString = rs.getString("birthDate");
+				Date dob = Date.valueOf(birthString);
+				Float weight = rs.getFloat("weight");
+				Float height = rs.getFloat("height");
+				String gen = rs.getString("gender");
+				String patho =  rs.getString("pathology");
+				String bt = rs.getString("bloodType");
+				String addString = rs.getString("birthDate");
+				Date doa = Date.valueOf(addString);
+				Integer lifeExp = rs.getInt("lifeExpectancy");
+				Patient pat = new Patient (id, name, dob, weight, height, gen, patho, bt,lifeExp, doa);
+				patients.add(pat);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return patients;
+	}
+	
 	public void createTable(){
 		try{			
 			Statement stmt3 = dbManager.getC().createStatement();

@@ -134,6 +134,20 @@ public class SQL_Organ {
 		return false;
 	}
 	
+	public boolean insertRequestedFK (int idReq, int idOrg){
+		try{
+			String sql = "UPDATE Organs SET requested_id=? WHERE id=" + idOrg;
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setInt(1, idReq);
+			prep.executeUpdate();
+			prep.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public List<Organ> organOfDonor (int idD){
 		List <Organ> orgs = new ArrayList<Organ>();
 		try{

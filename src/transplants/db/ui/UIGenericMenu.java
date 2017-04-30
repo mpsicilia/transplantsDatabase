@@ -64,8 +64,9 @@ public class UIGenericMenu {
 	        	System.out.println("\nMENU: ");
 	        	System.out.println("1. Introduce new information to the database. ");
 	        	System.out.println("2. Search for specific information in the database. ");
-	        	System.out.println("3. Options that this database offers in order to make "
-	        						+ "transplantation prosses more efficient.");
+	        	/*System.out.println("3. Options that this database offers in order to make "
+	        						+ "transplantation prosses more efficient.");*/
+	        	System.out.println("3. Realize the compatibility test in order to look for an organ that matches the patient. ");
 	        	System.out.println("4. Exit from the database. ");
 	        		        	
 	        	 do{
@@ -312,9 +313,17 @@ public class UIGenericMenu {
                     			case 4:
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat4 = Integer.parseInt(console.readLine());
-                    				//metodo al que le pasas un paciente y te muestra las caracteristicas del organo que necesita el paciente
+                    				//metodo al que le pasas el id paciente y te muestra las caracteristicas del organo que necesita el paciente
                     				Patient patReq = pat.get(numPat4-1);
-                    				uiRequested.characteristicsOfRequestedOrgans(patReq);
+                    				List<Requested_organ> reqs = uiRequested.characteristicsOfRequestedOrgans(patReq.getId());
+                    				System.out.println("Patient: " + patReq.getName() + " needs the following organs: \n");
+                    				Iterator <Requested_organ> itReq = reqs.iterator();
+                    				int countReq = 1;
+                    				while (itReq.hasNext()){
+                    					Requested_organ r = itReq.next();
+                    					System.out.println(countReq + ". " + r);
+                    					countReq++;
+                    				}
                     				
                     				break;
                     			case 5:
@@ -359,7 +368,7 @@ public class UIGenericMenu {
 	        	 	//todas estas opciones. Seguro que lo vamos viendo a medida que lo vayamos haciendo
 	        	 	//pero he apuntado las ideas aqui para que no se nos olviden
 	        	 	case 3:
-	        	 		System.out.print("\n1. Search a hospital by the type of organ transplantation"
+	        	 		/*System.out.print("\n1. Search a hospital by the type of organ transplantation"
   	 				          			 + "that takes place in it.");
 	        	 		System.out.print("\n4. Hospital in which the organ that is going to"
 	        	 				         + " be donated is located, and the owner of it.");
@@ -367,7 +376,80 @@ public class UIGenericMenu {
 	        	 		System.out.print("\n6. Compatibility test.");
 	        	 		System.out.print("\n7. See if there is a donor for the organ that you want.");
 	        	 		System.out.print("\n8. Number of organs of a specific organ that can be donated.");
-	        	 		System.out.print("\n9. Check the waiting list.");
+	        	 		System.out.print("\n9. Check the waiting list.");*/
+	        	 		
+	        	 		//COMPATIBILITY TEST
+	        	 		try{	
+	        				System.out.println("\nList of Patients. "); //try to show the list ordered by addition date
+	        				List<Patient> patList = uiPatient.allPatients();
+	        				Iterator<Patient> itPat = patList.iterator();
+	        				int counterPat = 1;
+	        				while (itPat.hasNext()){
+	        					Patient p = itPat.next();				
+	        					System.out.println(counterPat + ". " + p);
+	        					counterPat++;
+	        				}
+	        		 		
+	        		 		System.out.println("Introduce the number of the patient for which the compatibility test is going to be made. ");
+	        		 		int patNum = Integer.parseInt(console.readLine());
+	        		 		Patient patForTest = patList.get(patNum-1);
+	        		 		//show the organs that the patient needs
+	        		 		List<Requested_organ> reqsList = uiRequested.characteristicsOfRequestedOrgans(patForTest.getId());
+	        		 		System.out.println("Patient: " + patForTest.getName() + " needs the following organ(s): ");
+	        				Iterator <Requested_organ> itReq = reqsList.iterator();
+	        				int countReq = 1;
+	        				while (itReq.hasNext()){
+	        					Requested_organ r = itReq.next();
+	        					System.out.println(countReq + ". " + r);
+	        					countReq++;
+	        				}
+	        				//get the name of the req organ, then select the organs that has the same name and get its donors
+	        				System.out.println("Choose the number of the organ for which the compatibility test is going to be made. ");
+	        				int reqNum = Integer.parseInt(console.readLine());
+	        				Requested_organ reqForTest = reqsList.get(reqNum-1);
+	        				//show the donated organs that have the same name, then show the ones that are compatible
+	        				List<Organ> orgsList = uiOrgan.organsThatMatchRequestByName(reqForTest.getName());
+	        				System.out.println("Possible organs and its donors: ");
+	        				Iterator<Organ> itOrg = orgsList.iterator();
+	        				int counterOrg = 1;
+	        				while (itOrg.hasNext()){
+	        					Organ o = itOrg.next();
+	        					System.out.println(counterOrg + ". " + o);
+	        					counterOrg++;
+	        				}
+	        				System.out.println("Choose the number of the donated organ for which the compatibility test is going to be made. ");
+	        				int dorgNum = Integer.parseInt(console.readLine());
+	        				Organ orgForTest = orgsList.get(dorgNum-1);
+	        				//get the donor of this organ
+	        				Donor donForTest = uiDonor.getDonorOfOrgan(orgForTest);
+	        				System.out.println(donForTest.getName());
+	        				//compatibility test between donor and patient: blood type, birthDate (rango de 5 años +-), weight
+	        				System.out.println("The compatibility test between patient and donor is going to be performed. ");
+	        				//BLOOD TYPE
+	        				if(patForTest.getBloodType().equalsIgnoreCase(donForTest.getBloodType())){
+	        					/*int patYear = patForTest.getBirthDate().getYear();
+	        					int donYear = donForTest.getBirthDate().getYear();
+	        					if(donYear == patYear || (donYear <= (patYear+5) && (patYear-5) <= donYear)){
+	        						
+	        					}
+	        					else {
+	        						System.out.println("Incompatibility due to the age.");
+	        					}*/
+	        					if(orgForTest.getWeight() <= reqForTest.getMaxWeight() && orgForTest.getWeight() >= reqForTest.getMinWeight()){
+	        						System.out.println("The organ is compatible with the requested organ. ");
+	        						//now we proceed to introduce the id of the requested organ in the table Organs
+	        						if(uiOrgan.insertRequestedFKinOrgan(reqForTest.getId(), orgForTest.getId())){
+	        							System.out.println("Compatibility test finished. ");
+	        						}
+	        					}
+	        				}	        				
+	        				else{
+	        					System.out.println("Compatibility problems. ");
+	        				}
+	        		 		
+	        			}catch (Exception e){
+	        				e.printStackTrace();
+	        			}
 	        	 		
 	        	 		break;
 	        	 	

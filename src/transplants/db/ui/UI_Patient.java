@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -207,5 +210,14 @@ public class UI_Patient {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public List<Patient> allPatients (){
+		List<Patient> patList = new ArrayList<Patient>();
+		try{
+			patList = dbManager.selectAllPatients();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return patList;
+	}
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import transplants.db.jdbc.DBManager;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Organ;
 
 public class UI_Donor {
 	private DBManager dbManager=new DBManager();
@@ -160,6 +161,16 @@ public class UI_Donor {
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
+	}
+	
+	public Donor getDonorOfOrgan (Organ org){
+		Donor don = new Donor();
+		try{
+			don = dbManager.getDonorOfOrg(org.getName());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return don;
 	}
 	
 }

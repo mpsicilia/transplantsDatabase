@@ -3,6 +3,7 @@ package transplants.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -151,20 +152,13 @@ public class UI_RequestedOrgan {
 		return namePat;
 	}
 	
-	public void characteristicsOfRequestedOrgans (Patient patient){
+	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPat){
+		List<Requested_organ> requests = new ArrayList<Requested_organ>();
 		try{
-			int idPat = patient.getId();
-			List<Requested_organ> requests = dbManager.characteristicsOfRequestedOrgans(idPat);
-			System.out.println("Patient: " + patient.getName() + " needs the following organs: \n");
-			Iterator <Requested_organ> itReq = requests.iterator();
-			int countReq = 1;
-			while (itReq.hasNext()){
-				Requested_organ r = itReq.next();
-				System.out.println(countReq + ". " + r);
-				countReq++;
-			}
+			requests = dbManager.characteristicsOfRequestedOrgans(idPat);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+		return requests;
 	}
 }

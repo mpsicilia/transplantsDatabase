@@ -23,7 +23,7 @@ public interface DBManagerInterface {
 	public boolean dropTables();
 	
 	public boolean insert(Object obj);
-	public Integer getIdOfDoctor(Doctor doct);
+	
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyDoctorPatient(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2);
@@ -38,10 +38,12 @@ public interface DBManagerInterface {
 	
 	public List <Hospital> selectAllHospitals();	
 	public List <Doctor> selectAllDoctors();
+	public List<Patient> selectAllPatients();
 	
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);
 	
+	public Integer getIdOfDoctor(Doctor doct);
 	public String hospitalOfDoctor(String name);
 	public String hospitalOfPatient(String pName);
 	public List<Doctor> doctorOfPatient(String pName);

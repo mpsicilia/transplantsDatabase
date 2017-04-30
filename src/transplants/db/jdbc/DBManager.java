@@ -60,7 +60,64 @@ public class DBManager implements DBManagerInterface{
 		
 	}
 	
+	@Override
+	public boolean createTables() {
+		try{
+			
+			hosp = new SQL_Hospital(this);
+			doct = new SQL_Doctor(this);
+			pat = new SQL_Patient(this);
+			animalT = new SQL_AnimalTissue(this);
+			org = new SQL_Organ(this);
+			don = new SQL_Donor(this);
+			req = new SQL_Request(this);
+			
+			hosp.createTable();
+			doct.createTable();
+			pat.createTable();
+			animalT.createTable();
+			org.createTable();
+			don.createTable();
+			req.createTable();
+					
+			return true;
+			
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean dropTables(){
+		try{
+			
+			hosp = new SQL_Hospital(this);
+			doct = new SQL_Doctor(this);
+			pat = new SQL_Patient(this);
+			animalT = new SQL_AnimalTissue(this);
+			org = new SQL_Organ(this);
+			don = new SQL_Donor(this);
+			req = new SQL_Request(this);
+			
+			hosp.dropTable();
+			doct.dropTable();
+			pat.dropTable();
+			animalT.dropTable();
+			org.dropTable();
+			don.dropTable();
+			req.dropTable();
+					
+			return true;
+			
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 
+	//insertions
 	@Override
 	public boolean insert(Object obj) {
 			
@@ -110,13 +167,8 @@ public class DBManager implements DBManagerInterface{
 		}
 		return false;
 	}
-	public Integer getIdOfDoctor (Doctor doctor){
-		return doct.getIdOfLastDoctor(doctor);
-	}
-	public Integer getIdOfPatient(Patient patient){
-		return pat.getPatientID(patient);
-	}
 	
+	//PKs
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2){
 		return hosp.insertHospitalsDoctors(id1, id2);
 	}
@@ -129,6 +181,7 @@ public class DBManager implements DBManagerInterface{
 		return animalT.insertRequestedAnimal(id1, id2);
 	}
 	
+	//FKs
 	public boolean insertFKinRequestedOrgan (int patID, int reqOrg){
 		return req.insertPatientFK(patID, reqOrg);
 	}
@@ -140,6 +193,12 @@ public class DBManager implements DBManagerInterface{
 	public boolean donorFKinOrgan (Integer idD, Integer idO){
 		return org.insertDonorFK(idD, idO);
 	}
+	
+	public boolean requestedFKinOrgan (int idR, int idO){
+		return org.insertRequestedFK (idR, idO);
+	}
+	
+	//searches
 	@Override
 	public List<Hospital> searchHosp(String name) {	
 		
@@ -179,8 +238,6 @@ public class DBManager implements DBManagerInterface{
 		}
 		return null;
 	}
-
-
 
 	@Override
 	public List<Donor> searchDonor(String name) {
@@ -231,6 +288,8 @@ public class DBManager implements DBManagerInterface{
 		return null;
 	}
 	
+	
+	//selects
 	public List <Hospital> selectAllHospitals(){
 		hosp= new SQL_Hospital(this);
 		return hosp.selectAllHospitals();
@@ -240,6 +299,12 @@ public class DBManager implements DBManagerInterface{
 		doct=new SQL_Doctor(this);
      	return doct.selectAllDoctors();
 	}
+	
+	public List<Patient> selectAllPatients(){
+		pat=new SQL_Patient(this);
+		return pat.selectAllPatients();
+	}
+	
 	
 	@Override
 	public boolean update(Object obj) {
@@ -332,61 +397,60 @@ public class DBManager implements DBManagerInterface{
 		return false;
 	}
 
-	@Override
-	public boolean createTables() {
-		try{
-			
-			hosp = new SQL_Hospital(this);
-			doct = new SQL_Doctor(this);
-			pat = new SQL_Patient(this);
-			animalT = new SQL_AnimalTissue(this);
-			org = new SQL_Organ(this);
-			don = new SQL_Donor(this);
-			req = new SQL_Request(this);
-			
-			hosp.createTable();
-			doct.createTable();
-			pat.createTable();
-			animalT.createTable();
-			org.createTable();
-			don.createTable();
-			req.createTable();
-					
-			return true;
-			
-		}catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return false;
-	}
-	
-	public boolean dropTables(){
-		try{
-			
-			hosp = new SQL_Hospital(this);
-			doct = new SQL_Doctor(this);
-			pat = new SQL_Patient(this);
-			animalT = new SQL_AnimalTissue(this);
-			org = new SQL_Organ(this);
-			don = new SQL_Donor(this);
-			req = new SQL_Request(this);
-			
-			hosp.dropTable();
-			doct.dropTable();
-			pat.dropTable();
-			animalT.dropTable();
-			org.dropTable();
-			don.dropTable();
-			req.dropTable();
-					
-			return true;
-			
-		}catch (Exception ex){
-			ex.printStackTrace();
+
+	//ID getters
+		public int idPatient (Patient patient){
+			int id = 0;
+			try{
+				pat = new SQL_Patient(this);
+				id = pat.getPatientID(patient);
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			return id;
 		}
 		
-		return false;
-	}
+		public int idRequestedOrgan (Requested_organ r){
+			int id=0;
+			try{
+				req = new SQL_Request (this);
+				id = req.getRequestedId(r);
+			}catch (Exception ex){
+				ex.printStackTrace();
+			}
+			return id;
+		}
+		
+		public int idOrgan (Organ o){
+			int id=0;
+			try{
+				org = new SQL_Organ(this);
+				id = org.getOrganId(o);
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			return id;
+		}
+		
+		public int idDonor (Donor d){
+			int id=0;
+			try{
+				don = new SQL_Donor(this);
+				id = don.getDonorID(d);
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			return id;
+		}
+		
+		public Integer getIdOfDoctor (Doctor doctor){
+			return doct.getIdOfLastDoctor(doctor);
+		}
+		//this method already exists!!!!!!! TE DIJE QUE YA ESTABA HECHO
+		public Integer getIdOfPatient(Patient patient){
+			return pat.getPatientID(patient);
+		}
+		
 
 	//given a requested organ is going to return the patient
 	public String patientReq (Requested_organ req){
@@ -400,51 +464,7 @@ public class DBManager implements DBManagerInterface{
 		return namePat;
 	}
 	
-	//given a patient is going to return its id
-	public int idPatient (Patient patient){
-		int id = 0;
-		try{
-			pat = new SQL_Patient(this);
-			id = pat.getPatientID(patient);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return id;
-	}
-	//given a requested organ is goign to return its id
-	public int idRequestedOrgan (Requested_organ r){
-		int id=0;
-		try{
-			req = new SQL_Request (this);
-			id = req.getRequestedId(r);
-		}catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return id;
-	}
-	
-	public int idOrgan (Organ o){
-		int id=0;
-		try{
-			org = new SQL_Organ(this);
-			id = org.getOrganId(o);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return id;
-	}
-	
-	public int idDonor (Donor d){
-		int id=0;
-		try{
-			don = new SQL_Donor(this);
-			id = don.getDonorID(d);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return id;
-	}
-	
+		
 	//given a patient is going to return its requests
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient){
 		List<Requested_organ> reqsOfPat = new ArrayList<Requested_organ>();
@@ -468,6 +488,7 @@ public class DBManager implements DBManagerInterface{
 		}
 		return  orgsOfDonor;
 	}
+	
 	@Override
 	public List<Doctor> doctorOfPatient(String pName) {
 		List<Doctor> doctor = new ArrayList <Doctor>();
@@ -503,4 +524,17 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
+	
+	public Donor getDonorOfOrg (String nameO){
+		Donor d = new Donor();
+		try{
+			don = new SQL_Donor(this);
+			d = don.getDonorOfOrgan(nameO);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return d;
+	}
+	
+	
 }

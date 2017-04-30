@@ -139,6 +139,33 @@ public class SQL_Donor {
 		return donor.getId();
 	}
 	
+	public Donor getDonorOfOrgan (String nameOrg){
+		Donor donor = new Donor();
+		try{
+			Statement stmt  = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Donors AS Don JOIN Organs AS Org ON Don.id = Org.donor_id "
+					+ " WHERE Org.name LIKE '" + nameOrg + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			Integer id = rs.getInt(1);
+			String nameDon = rs.getString(2);
+			String birthString = rs.getString("birthDate");
+			Date dob = Date.valueOf(birthString);
+			Float weight = rs.getFloat(4);
+			Float height = rs.getFloat("height");
+			String gender = rs.getString("gender");
+			String deadAlive = rs.getString("deadAlive");
+			String bloodType= rs.getString("bloodType");
+			donor = new Donor(id, nameDon, dob, weight, height, gender, deadAlive, bloodType);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return donor;
+	}
+	
+	public Donor compatibleDonor (Patient p, Donor d){
+		Donor compDonor = new Donor();
+		return compDonor;
+	}
 	
 	/*METHODS RELATED WITH THE TABLES*/
 	public void createTable(){

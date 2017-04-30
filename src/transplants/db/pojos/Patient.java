@@ -62,6 +62,10 @@ public class Patient extends Person{
 				", height=" + height + ", gender=" + gender + "lifeExpectancy=" + lifeExpectancy + 
 				", additionDate=" + additionDate + ", bloodType=" + bloodType + "]";
 	}
+
+	public int compareTo(Patient p) {
+		return additionDate.compareTo(p.getAdditionDate());
+	}
 	
 	
 	

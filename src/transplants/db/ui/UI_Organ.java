@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -147,5 +148,24 @@ public class UI_Organ {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Organ> organsThatMatchRequestByName (String reqName){
+		List<Organ> matchByNameOrgs = new ArrayList<Organ>();
+		try{
+			matchByNameOrgs = dbManager.searchOrgan(reqName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return matchByNameOrgs;
+	}
+	
+	public boolean insertRequestedFKinOrgan (int idReq, int idOrg){
+		try{
+			return dbManager.requestedFKinOrgan(idReq, idOrg);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

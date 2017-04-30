@@ -81,8 +81,8 @@ public class Requested_organ implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\nRequested_organ [id=" + id + ", name=" + name + ", maxWeight=" + maxWeight + ", minWeight=" + minWeight
-				+ "]";
+		return "Requested_organ [id=" + id + ", name=" + name + ", maxWeight=" + maxWeight + ", minWeight=" + minWeight
+				+ "]\n";
 	}
 	
 	
