@@ -35,7 +35,7 @@ public class UI_Doctor {
 			Iterator <Hospital> itH = listHosp.iterator();
 			while(itH.hasNext()){
 				Hospital hosp = itH.next();
-				System.out.print(hosp);
+				System.out.println(hosp);
 			}
 			Integer idHospYouChoose = Integer.parseInt(console.readLine());
 			Doctor doct= new Doctor(name, regNumber, specializ);

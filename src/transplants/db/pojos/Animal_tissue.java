@@ -75,7 +75,7 @@ public class Animal_tissue implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Animal_tissue [name=" + name + ", type_of_tissue=" + typeOfTissue + ", pathology="
+		return "Animal_tissue [id = " + id + ", name=" + name + ", type_of_tissue=" + typeOfTissue + ", pathology="
 				+ pathology + ", time=" + timeItLasts + "]";
 	}
 

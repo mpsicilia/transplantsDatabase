@@ -190,7 +190,7 @@ public class Hospital implements Serializable{
 	@Override
 	public String toString() {
 	
-		return "Hospital: name=" + name + ", phone_number=" + phone_number + ", address=" + address + ", \ncity=" + city
+		return "Hospital:id =" + id + ", name=" + name + ", phone_number=" + phone_number + ", address=" + address + ", city=" + city
 				+ ", postcode=" + postcode + ", country=" + country + "]";
 	}
 	
