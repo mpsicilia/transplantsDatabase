@@ -2,14 +2,29 @@ package transplants.db.pojos;
 
 import java.io.Serializable;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Organs")
+
 public class Organ implements Serializable{
 
 	private static final long serialVersionUID = -5113823135998745845L;
+	@Id
+	@GeneratedValue(generator="Organs")
+	@TableGenerator(name="Organs", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Organs")
 	private Integer id;
 	private String name;
 	private Float weight;
 	private String typeOfDonation;
+	@ManyToOne
+	@JoinColumn(name = "requested_organ_id") // FK
+	private Requested_organ requested_organ;
 	
+	@ManyToOne
+	@JoinColumn(name= "donor_id")//FK
+	private Donor donor;
 	public Organ (){
 		
 	}
@@ -92,10 +107,11 @@ public class Organ implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Organ [name=" + name + ", weight=" + weight + ", typeOfDonation=" + typeOfDonation + "]\n";
+		return "Organ [name=" + name + ", weight=" + weight + ", typeOfDonation=" + typeOfDonation + "]";
 	}
 	
 	
 
 	
 }
+

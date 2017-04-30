@@ -3,10 +3,19 @@ package transplants.db.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import javax.persistence.*;
 
-public class Person implements Serializable {
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+
+
+public abstract class Person {
 	
 	private static final long serialVersionUID = 6256446381306555938L;
+	//aun asi deberia indicar que id es una PK?-->porque luego heredan patient and donor
+	//Cuando comprobemos que las que no son de inheritance funcionan, tenemos que comprobar si inheritance 
+	//funciona definiendo el id en person (la padre), doctor y patient, y si no, borramos id de person y lo ponemos en las hijas
+	@Id
 	protected Integer id;
 	protected String name;
 	protected Date birthDate;
@@ -22,7 +31,7 @@ public class Person implements Serializable {
 	public Person(String name, Date birthDate, Float weight, Float height, String gender, String bloodType) {
 		super();
 		this.name=name;
-		this.birthDate = birthDate;
+		this.birthDate=birthDate;
 		this.weight = weight;
 		this.height = height;
 		this.gender = gender;
@@ -33,7 +42,7 @@ public class Person implements Serializable {
 		super();
 		this.id = id;
 		this.name=name;
-		this.birthDate = birthDate;
+		this.birthDate=birthDate;
 		this.weight = weight;
 		this.height = height;
 		this.gender = gender;

@@ -2,14 +2,29 @@ package transplants.db.pojos;
 
 import java.io.Serializable;
 
+import java.util.List;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Animal_tissue")
+
 public class Animal_tissue implements Serializable {
 
 	private static final long serialVersionUID = -7167881940806327162L;
+	@Id 
+	@GeneratedValue(generator="Animal_tissue")
+	@TableGenerator(name="Animal_tissue", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Animal_tissue")
 	private Integer id;
 	private String name;
 	private String typeOfTissue;
 	private String pathology;
 	private Integer timeItLasts;
+	
+	@ManyToMany(mappedBy = "Requested_organs/animals") //name of the table with both FK
+	private List<Requested_organ> requested_organs;
+	
 	
 	public Animal_tissue() {
 		super();
@@ -60,8 +75,8 @@ public class Animal_tissue implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Animal_tissue [\nname=" + name + ", \ntype_of_tissue=" + typeOfTissue + ", \npathology="
-				+ pathology + ", \ntime=" + timeItLasts + "]";
+		return "Animal_tissue [name=" + name + ", type_of_tissue=" + typeOfTissue + ", pathology="
+				+ pathology + ", time=" + timeItLasts + "]";
 	}
 
 
@@ -95,5 +110,26 @@ public class Animal_tissue implements Serializable {
 	public void setTimeItLasts(int timeItLasts) {
 		this.timeItLasts = timeItLasts;
 	}
+	public List<Requested_organ> getRequested_organs(){
+		return requested_organs;
+	}
 	
+	public void setRequested_organs(List<Requested_organ> requested_organs){
+		this.requested_organs=requested_organs;
+	}
+
+	
+	public void addRequestedOrgan(Requested_organ requested_organ) {
+		if (!requested_organs.contains(requested_organ)) {
+			this.requested_organs.add(requested_organ);
+		}
+	}
+
+	// Additional method to remove from a list
+	public void removeRequestedOrgan(Requested_organ requested_organ) {
+		if (requested_organs.contains(requested_organ)) {
+			this.requested_organs.remove(requested_organ);
+		}
+	}
 }
+

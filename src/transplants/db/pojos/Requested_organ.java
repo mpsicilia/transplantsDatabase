@@ -1,14 +1,39 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.*;
+
+
+
+@Entity
+@Table (name= "Requested_organs")
 
 public class Requested_organ implements Serializable {
 
 	private static final long serialVersionUID = 4061202503200538758L;
+	
+	@Id
+	@GeneratedValue(generator="Requested_organs")
+	@TableGenerator(name="Requested_organs", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Requested_organs")
 	private Integer id;
 	private String name;
 	private Float maxWeight;
 	private Float minWeight;
+	//DIDNT PUT FETCHTYPE
+	@ManyToOne
+	@JoinColumn(name = "patient_id") // the FK
+	private Patient patient;
+	@ManyToMany
+	//the attribute above joins both tables creating requested_organs/animals
+	@JoinTable(name="Requested_organs/animals",
+		joinColumns={@JoinColumn(name="requested_organ_id", referencedColumnName="id")},
+	    inverseJoinColumns={@JoinColumn(name="animal_id", referencedColumnName="id")})
+
+	//req organ has a list of animals
+	//animal has a list of reqs
+	private List<Animal_tissue> animalTissues;
 	
 	public Requested_organ(){
 		
@@ -78,13 +103,33 @@ public class Requested_organ implements Serializable {
 	public void setMinWeight(Float minWeight) {
 		this.minWeight = minWeight;
 	}
-
-	@Override
-	public String toString() {
-		return "Requested_organ [id=" + id + ", name=" + name + ", maxWeight=" + maxWeight + ", minWeight=" + minWeight
-				+ "]\n";
+	
+	public List<Animal_tissue> getAnimalTissues(){
+		return animalTissues;
 	}
 	
-	
-//need to see in what pojos we are going to put the toString
+	public void setAnimalTissues(List<Animal_tissue> animalTissues){
+		this.animalTissues=animalTissues;
+	}
+
+	// Additional method to add to a list
+		public void addAnimalTissue(Animal_tissue animalTissue) {
+			if (!animalTissues.contains(animalTissue)) {
+				this.animalTissues.add(animalTissue);
+			}
+		}
+
+		// Additional method to remove from a list
+		public void removeAnimalTissue(Animal_tissue animalTissue) {
+			if (animalTissues.contains(animalTissue)) {
+				this.animalTissues.remove(animalTissue);
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "Requested_organ [id=" + id + ", name=" + name + ", maxWeight=" + maxWeight + ", minWeight="
+					+ minWeight + ", patient=" + patient + ", animalTissues=" + animalTissues + "]";
+		}
+
 }

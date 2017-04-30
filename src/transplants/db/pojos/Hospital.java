@@ -1,10 +1,21 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "hospitals")
+
 
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = -2900229453507535621L;
+	@Id
+	@GeneratedValue(generator="hospitals")
+	@TableGenerator(name="hospitals", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="hospitals")
 	private Integer id;
 	private String name;
 	private String phone_number;
@@ -12,8 +23,13 @@ public class Hospital implements Serializable{
 	private String city;
 	private String postcode;
 	private String country;
-
+	//estas dos lineas de abajo no se si habria que ponerlas porque antes no habia lista de doctores
+	@OneToMany(mappedBy="hospital")
+	private List<Doctor> doctors;
+	@OneToMany(mappedBy="hospital")
+	private List<Patient> patients;
 	
+	//TTTTTTTTTT
 	public Hospital (){
 		}
 	
@@ -122,12 +138,60 @@ public class Hospital implements Serializable{
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+	
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+	
+	public List<Patient> getPatients(){
+		return patients;
+	}
+	
+	public void setPatients(List<Patient> patients){
+		this.patients=patients;
+	}
 
+	// Additional method to add to a list
+		public boolean addDoctor(Doctor doctor) {
+			if (!doctors.contains(doctor)) {
+				 return this.doctors.add(doctor);
+			}
+			else return false;
+		}
+
+		// Additional method to remove from a list
+		public boolean removeDoctor(Doctor doctor) {
+			if (doctors.contains(doctor)) {
+				return this.doctors.remove(doctor);
+			}
+			else return false;
+		}
+		
+		
+		// Additional method to add to a list
+		public boolean addPatient(Patient patient) {
+			if (!patients.contains(patient)) {
+				return this.patients.add(patient);
+			}
+			else return false;
+		}
+
+		// Additional method to remove from a list
+		public boolean removePatient(Patient patient) {
+			if (patients.contains(patient)) {
+				return this.patients.remove(patient);
+			}
+			else return false;
+		}
 	@Override
 	public String toString() {
 	
-		return "Hospital: id="+ id + ", name=" + name + ", phone_number=" + phone_number + ", address=" + address + ", city=" + city
-				+ ", postcode=" + postcode + ", country=" + country + "]\n";
+		return "Hospital: name=" + name + ", phone_number=" + phone_number + ", address=" + address + ", \ncity=" + city
+				+ ", postcode=" + postcode + ", country=" + country + "]";
 	}
 	
 	

@@ -1,13 +1,25 @@
 package transplants.db.pojos;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
-public class Donor extends Person{
-	
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Donors")
+public class Donor extends Person implements Serializable{
+	@Id
+	@GeneratedValue(generator="Donors")
+	@TableGenerator(name="Donors", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Donors")
+	private Integer id;
 	private static final long serialVersionUID = 6705263044123670258L;
 	private String deadOrAlive;
-	
+    //same questions as Patient
+	@OneToMany(mappedBy="donor") 
+	private List<Organ> organs;
 	
 	public Donor() {
 	}
@@ -16,6 +28,7 @@ public class Donor extends Person{
 			      String deadOrAlive, String bloodType){
 		super(name, birthDate, weight, height, gender, bloodType);
 		this.deadOrAlive=deadOrAlive;
+		super.birthDate=birthDate;
 		
 	}
 	
@@ -23,6 +36,7 @@ public class Donor extends Person{
 		      String deadOrAlive, String bloodType){
 		super(id, name, birthDate, weight, height, gender, bloodType);
 		this.deadOrAlive=deadOrAlive;
+		super.birthDate=birthDate;
     }
 
 	public String getDeadOrAlive() {
@@ -31,6 +45,28 @@ public class Donor extends Person{
 
 	public void setDeadOrAlive(String deadOrAlive) {
 		this.deadOrAlive = deadOrAlive;
+	}
+
+	public List<Organ> getOrgans(){
+		return organs;
+	}
+	
+	public void setOrgans(List<Organ> organs){
+		this.organs=organs;
+	}
+	public boolean addOrgan(Organ organ) {
+		if (!organs.contains(organ)) {
+			 return this.organs.add(organ);
+		}
+		else return false;
+	}
+
+	// Additional method to remove from a list
+	public boolean removeOrgan(Organ organ) {
+		if (organs.contains(organ)) {
+			return this.organs.remove(organ);
+		}
+		else return false;
 	}
 
 	@Override
@@ -43,3 +79,4 @@ public class Donor extends Person{
 	
 	
 }
+
