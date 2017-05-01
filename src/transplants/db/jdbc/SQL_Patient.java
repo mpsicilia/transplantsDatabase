@@ -4,13 +4,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import transplants.db.pojos.Doctor;
-import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 
 public class SQL_Patient {

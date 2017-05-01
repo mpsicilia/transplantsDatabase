@@ -1,18 +1,14 @@
 package transplants.db.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
-import transplants.db.pojos.Requested_organ;
+
 
 public class SQL_Organ {
 	

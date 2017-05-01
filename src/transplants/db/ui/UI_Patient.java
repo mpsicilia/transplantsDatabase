@@ -55,21 +55,12 @@ public class UI_Patient {
 			
 			System.out.println("Life expectancy: ");
 			int life = Integer.parseInt(console.readLine());
-
-			System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
-			List <Doctor> docs = dbManager.selectAllDoctors();
-			Iterator <Doctor> itD = docs.iterator();
-			while (itD.hasNext()){
-				Doctor d = itD.next();
-				System.out.println(d);
-			}			
-			Integer doctId = Integer.parseInt(console.readLine());	
-			//--->TO DOOO 
-			/*System.out.println("Do you want to introduce another doctor?: [yes/no]");
-			String chooser = console.readLine();
-			if (chooser.equals("yes")){
-				
-			}*/
+			
+			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, life, addition);
+			//here we introduce the patient
+			boolean introduced = dbManager.insert(p);
+			//getting the FK
+			Integer patId=dbManager.getIdOfPatient(p);
 			
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= dbManager.selectAllHospitals();
@@ -78,15 +69,28 @@ public class UI_Patient {
 				Hospital h=itH.next();
 				System.out.println(h);
 			}
-			Integer idHosp= Integer.parseInt(console.readLine());
+			Integer idHosp= Integer.parseInt(console.readLine());			
+			//here we are introducing the FK hospital_id in table patients
+			boolean introduced2=dbManager.insertFKInPatient(patId,idHosp);
 			
-			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, life, addition);
-			//here we introduce the patient
-			boolean introduced = dbManager.insert(p);
-			//getting the FK
-			Integer patId=dbManager.getIdOfPatient(p);
-			boolean introduced2= dbManager.insertPrimaryKeyDoctorPatient(patId, doctId);
-			boolean introduced3=dbManager.insertFKInPatient(patId,idHosp);
+			
+			System.out.println("How many doctors are attending the patient?");
+			Integer Xtimes= Integer.parseInt(console.readLine());
+			Integer counter=1;
+			Integer doctId=0;
+			boolean introduced3=false;
+			do {
+				System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
+				List <Doctor> docs = dbManager.selectAllDoctors();
+				Iterator <Doctor> itD = docs.iterator();
+				while (itD.hasNext()){
+					Doctor d = itD.next();
+					System.out.println(d);
+				}		
+				doctId = Integer.parseInt(console.readLine());
+				introduced3= dbManager.insertPrimaryKeyDoctorPatient(patId, doctId);
+				counter++;
+			}while(counter<=Xtimes);
 			
 			if(introduced && introduced2 && introduced3){
 				System.out.println("Patient has been introduced. ");

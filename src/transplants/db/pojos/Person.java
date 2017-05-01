@@ -121,7 +121,5 @@ public abstract class Person {
 		return true;
 	}
 	
-	//Should we put a method of compatibility test??
-	
 	
 }

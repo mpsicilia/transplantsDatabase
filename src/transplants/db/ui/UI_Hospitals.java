@@ -66,7 +66,7 @@ public class UI_Hospitals {
 		}catch (IOException ex){
 			ex.printStackTrace();
 		}
-		return null; //se puede?
+		return null; 
 	}
 	
 	

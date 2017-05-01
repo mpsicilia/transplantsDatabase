@@ -1,11 +1,7 @@
 package transplants.db.jdbc;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -177,8 +173,8 @@ public class DBManager implements DBManagerInterface{
 		return doct.insertDoctorPatientTable(patId, doctId);
 	}	
 	
-	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2){
-		return animalT.insertRequestedAnimal(id1, id2);
+	public boolean insertPrimaryKeyRequestedAnimal(Integer idRequest, Integer idAnimal){//falta llamarlo desde el main
+		return animalT.insertRequestedAnimal(idRequest, idAnimal);
 	}
 	
 	//FKs

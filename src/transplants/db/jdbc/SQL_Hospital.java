@@ -82,26 +82,6 @@ public class SQL_Hospital {
 		return nameHosp;
 	}
 	
-/*
-	public String searchHospitalByTransplantation (String patientName, String organReciving ){
-		String searchSql = "";
-		try{
-			Statement stmt = dmanager.getC().createStatement();
-			searchSql = "SELECT Hosp.name, Pat.name, Org.name FROM Hospitals "
-					+ "AS Hosp JOIN Patients AS Pat ON Hosp.id=Pat.hospital_id "
-					+ "JOIN Requested_organs AS Req ON Pat.id=Req.patient_id "
-					+ "JOIN Organs AS Org ON Req.id=Org.requested_id "
-					+ "WHERE Pat.name LIKE '" + patientName + "' AND Org.name "
-				    + "LIKE '"+ organReciving+ "'";
-			stmt.executeUpdate(searchSql);
-			stmt.close();
-			return searchSql;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return searchSql;
-	}*/
-	
 	//given a patient name is going to return the hospital in which the patient is
 	public String hospitalOfPatient (String patName){
 		String hosp = "";

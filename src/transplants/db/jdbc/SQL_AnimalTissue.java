@@ -1,18 +1,12 @@
 package transplants.db.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import transplants.db.pojos.Animal_tissue;
-import transplants.db.pojos.Donor;
-import transplants.db.pojos.Requested_organ;
 
 public class SQL_AnimalTissue {
 
@@ -106,7 +100,7 @@ public class SQL_AnimalTissue {
 		try {
 			Statement st = dbManager.getC().createStatement();
 			String sql = "INSERT INTO RequestedOrgan_AnimalTissues (requested_id, animal_id) "
-					+ "VALUES ('" + id_requested+ "' , '" + id_animal + "');" ;
+					+ "VALUES (" + id_requested+ ", " + id_animal + ");" ;
 			st.executeUpdate(sql);
 			st.close();
 			return true;

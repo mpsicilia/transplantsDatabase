@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.pojos.Donor;
-import transplants.db.pojos.Hospital;
+
 import transplants.db.pojos.Organ;
 
 public class UI_Donor {

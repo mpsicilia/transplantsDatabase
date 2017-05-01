@@ -1,7 +1,5 @@
 package transplants.db.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.List;
 
 import org.omg.CORBA.Request;
@@ -26,7 +24,7 @@ public interface DBManagerInterface {
 	
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyDoctorPatient(Integer id1, Integer id2);	
-	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2);
+	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2);//falta hacerla
 	
 	public List<Hospital> searchHosp(String name); 
 	public List<Animal_tissue> searchAnimalTissue(String name); 

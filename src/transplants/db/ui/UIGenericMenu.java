@@ -61,16 +61,13 @@ public class UIGenericMenu {
 	        	System.out.println("Tables should be already created");
 	        }
 	        while(true){
-	        	System.out.println("\nMENU: ");
+	        	System.out.println("\nBASIC MENU: ");
 	        	System.out.println("1. Introduce new information to the database. ");
 	        	System.out.println("2. Search for specific information in the database. ");
-	        	/*System.out.println("3. Options that this database offers in order to make "
-	        						+ "transplantation prosses more efficient.");*/
-	        	System.out.println("3. Realize the compatibility test in order to look for an organ that matches the patient. ");
-	        	System.out.println("4. Exit from the database. ");
+	            System.out.println("3. Exit from the database. ");
 	        		        	
 	        	 do{
-	                    System.out.println("\nChoose an option[1-4]:");
+	                    System.out.println("\nChoose an option[1-3]:");
 	                    String read= console.readLine();
 	                    option= Integer.parseInt(read);            
 	                }while (option<0|| option>4);
@@ -331,142 +328,24 @@ public class UIGenericMenu {
                     				
                     				break;
                     			case 5:
-                    				break;
-                    				
+                    				break;                    				
 	                    		}
 	                    		break;
 	                	 	}
-	                    	case 5:{//buscas un organo para el paciente (buscas organ), o buscas un paciente para un organo (request)
-	                    		System.out.println("\nIs it an organ that the patient needs? or that has been donated? : [need/donated]");
-	                    		String or = console.readLine();
-	                    		if(or.equalsIgnoreCase("need")){ //requested organ
-	                    			List <Requested_organ> reqOrgans = uiRequested.searchReqOrgan();
-	                    			Iterator <Requested_organ> it4 = reqOrgans.iterator();
-		                	 		int counterReq = 1;
-		                	 		while (it4.hasNext()){
-		                	 			Requested_organ r = it4.next();
-		                	 			System.out.println(counterReq + ". " + r);
-		                	 			//show the patient that request each organ
-		                	 			System.out.println("Requested by: " + uiRequested.patientOfRequested(r));
-		                	 			counterReq++;
-		                	 		}		                	 		
-	                    		}
-	                    		if(or.equalsIgnoreCase("donated")){
-	                    			List <Organ> orgs = uiOrgan.searchOrgan();
-	                    			Iterator <Organ> it5 = orgs.iterator();
-		                	 		int counterOrg = 1;
-		                	 		while (it5.hasNext()){
-		                	 			Organ o = it5.next();
-		                	 			System.out.println(counterOrg + ". " + o);
-		                	 			counterOrg++;
-		                	 		}
-		                	 		//extra methods
-	                    		}
-	                    	}
 	                    	break;
-	                    }
-	        	 		
+	                    }	        	 		
 	        	 	}
 	        	 	break;
-
+	        	         	 	
 	        	 	case 3:
-	        	 		/*System.out.print("\n1. Search a hospital by the type of organ transplantation"
-  	 				          			 + "that takes place in it.");
-	        	 		System.out.print("\n4. Hospital in which the organ that is going to"
-	        	 				         + " be donated is located, and the owner of it.");
-	        	 		System.out.print("\n5. Patient that is reciving an organ.");
-	        	 		System.out.print("\n6. Compatibility test.");
-	        	 		System.out.print("\n7. See if there is a donor for the organ that you want.");
-	        	 		System.out.print("\n8. Number of organs of a specific organ that can be donated.");
-	        	 		System.out.print("\n9. Check the waiting list.");*/
-	        	 		
-	        	 		//COMPATIBILITY TEST
-	        	 		try{	
-	        				System.out.println("\nList of Patients. "); //try to show the list ordered by addition date
-	        				List<Patient> patList = uiPatient.allPatients();
-	        				Iterator<Patient> itPat = patList.iterator();
-	        				int counterPat = 1;
-	        				while (itPat.hasNext()){
-	        					Patient p = itPat.next();				
-	        					System.out.println(counterPat + ". " + p);
-	        					counterPat++;
-	        				}
-	        		 		
-	        		 		System.out.println("Introduce the number of the patient for which the compatibility test is going to be made. ");
-	        		 		int patNum = Integer.parseInt(console.readLine());
-	        		 		Patient patForTest = patList.get(patNum-1);
-	        		 		//show the organs that the patient needs
-	        		 		List<Requested_organ> reqsList = uiRequested.characteristicsOfRequestedOrgans(patForTest.getId());
-	        		 		System.out.println("Patient: " + patForTest.getName() + " needs the following organ(s): ");
-	        				Iterator <Requested_organ> itReq = reqsList.iterator();
-	        				int countReq = 1;
-	        				while (itReq.hasNext()){
-	        					Requested_organ r = itReq.next();
-	        					System.out.println(countReq + ". " + r);
-	        					countReq++;
-	        				}
-	        				//get the name of the req organ, then select the organs that has the same name and get its donors
-	        				System.out.println("Choose the number of the organ for which the compatibility test is going to be made. ");
-	        				int reqNum = Integer.parseInt(console.readLine());
-	        				Requested_organ reqForTest = reqsList.get(reqNum-1);
-	        				//show the donated organs that have the same name, then show the ones that are compatible
-	        				List<Organ> orgsList = uiOrgan.organsThatMatchRequestByName(reqForTest.getName());
-	        				System.out.println("Possible organs and its donors: ");
-	        				Iterator<Organ> itOrg = orgsList.iterator();
-	        				int counterOrg = 1;
-	        				while (itOrg.hasNext()){
-	        					Organ o = itOrg.next();
-	        					System.out.println(counterOrg + ". " + o);
-	        					counterOrg++;
-	        				}
-	        				System.out.println("Choose the number of the donated organ for which the compatibility test is going to be made. ");
-	        				int dorgNum = Integer.parseInt(console.readLine());
-	        				Organ orgForTest = orgsList.get(dorgNum-1);
-	        				//get the donor of this organ
-	        				Donor donForTest = uiDonor.getDonorOfOrgan(orgForTest);
-	        				System.out.println(donForTest.getName());
-	        				//compatibility test between donor and patient: blood type, birthDate (rango de 5 años +-), weight
-	        				System.out.println("The compatibility test between patient and donor is going to be performed. ");
-	        				//BLOOD TYPE
-	        				if(patForTest.getBloodType().equalsIgnoreCase(donForTest.getBloodType())){
-	        					/*int patYear = patForTest.getBirthDate().getYear();
-	        					int donYear = donForTest.getBirthDate().getYear();
-	        					if(donYear == patYear || (donYear <= (patYear+5) && (patYear-5) <= donYear)){
-	        						
-	        					}
-	        					else {
-	        						System.out.println("Incompatibility due to the age.");
-	        					}*/
-	        					if(orgForTest.getWeight() <= reqForTest.getMaxWeight() && orgForTest.getWeight() >= reqForTest.getMinWeight()){
-	        						System.out.println("The organ is compatible with the requested organ. ");
-	        						//now we proceed to introduce the id of the requested organ in the table Organs
-	        						if(uiOrgan.insertRequestedFKinOrgan(reqForTest.getId(), orgForTest.getId())){
-	        							System.out.println("Compatibility test finished. ");
-	        						}
-	        					}
-	        				}	        				
-	        				else{
-	        					System.out.println("Compatibility problems. ");
-	        				}
-	        		 		
-	        			}catch (Exception e){
-	        				e.printStackTrace();
-	        			}
-	        	 		
-	        	 		break;
-	        	 	
-	        	 	case 4:
 	        	 		System.out.println("The program has been closed.");
-	        	 		System.exit(0);
-	        	 	}
-	        	 		 		
+	        	 		System.exit(0);        	 		 		
 	        	 }
 	        
-			
+	        }
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
-	
-}
 
 }
+	}

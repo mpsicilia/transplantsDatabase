@@ -3,18 +3,15 @@ package transplants.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
-import transplants.db.pojos.Doctor;
+
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
-import transplants.db.pojos.Requested_organ;
+
 
 public class UI_Organ {
 	private DBManager dbManager=new DBManager();
