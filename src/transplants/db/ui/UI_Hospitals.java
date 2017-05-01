@@ -4,12 +4,15 @@ import java.io.*;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.jpa.JPACreate;
 import transplants.db.pojos.Hospital;
 
 public class UI_Hospitals {
 	
 	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
+	//atributo añadido
+	private JPACreate jpacreate=new JPACreate();
 	
 	public UI_Hospitals(){		
 	}
@@ -38,8 +41,13 @@ public class UI_Hospitals {
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
 			boolean ok=dbManager.insert(hosp);
+			//linea de abajo añadida para añadir con JPA
+			jpacreate.create(hosp);
+			
 			if (ok){
 				System.out.print("Hospital has been introduced");
+				
+				
 			}else{
 				System.out.print("Hospital has NOT been introduced");
 			}

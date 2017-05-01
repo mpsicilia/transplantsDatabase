@@ -1,4 +1,5 @@
 package transplants.db.jpa;
+import transplants.db.pojos.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,30 +8,31 @@ import java.io.InputStreamReader;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import transJPA.db.pojos.Hospital;
-import transJPA.db.ui.Uihospital;
+
 
 
 public class JPACreate implements JPAinterface{
 private JPAhospital hosp;
+private JPAdoctor doct;
 	
 	@Override
-	public void create(Object obj) {
+	public boolean create(Object obj) {
 		try{
 			
 			
 			if (Hospital.class==obj.getClass()){
 				//create connection
-				hosp = new JPAhospital(); 
+				hosp = new JPAhospital(); //JPA HOSPITAL NECESITA CONSTRUCTOR AL QUE SE LE PASE UN ENTITY MANAGER?
 				Hospital hospital=(Hospital)obj;			
 				return hosp.create(hospital);
 			}
-			/*
+			
+			
 			if (Doctor.class==obj.getClass()){
-				doct = new SQL_Doctor (this);
+				doct = new JPAdoctor ();
 				Doctor doctor=(Doctor)obj;			
-				return doct.insertDoctor(doctor);
-			}
+				return doct.create(doctor);
+			}/*
 			
 			if(Patient.class==obj.getClass()){
 				pat = new SQL_Patient (this);
@@ -93,5 +95,5 @@ private JPAhospital hosp;
 		
 		// Close the entity manager
 		em.close();}*/
-	}
+	//}
 

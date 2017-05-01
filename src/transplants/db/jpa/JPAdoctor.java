@@ -1,32 +1,21 @@
 package transplants.db.jpa;
 
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Doctor;
 
-public class JPAhospital {
-	public boolean create(Hospital hospital) {
+
+public class JPAdoctor {
+	public boolean create(Doctor doctor) {
 		// Get the entity manager
 		try {
-			//CAMBIAR COMPANY PROVIDER
 			EntityManager em = Persistence.createEntityManagerFactory("company-provider").createEntityManager();
 			em.getTransaction().begin();
 			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 			em.getTransaction().commit();
-			//SE SUPONE QUE AQUI EL USUARIO AÑADIRIA INFORMACION DEL HOSPITAL.
-			//NO SE SI SIRVE HACERLO ASI.
-			em.getTransaction().begin();
-			// Store the object
-			em.persist(hospital);
-			// End transaction
-			em.getTransaction().commit();
-			
-			// Close the entity manager
-			em.close();
-		
+			return true;
+			//falta codigo
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
