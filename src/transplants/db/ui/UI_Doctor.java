@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 
@@ -14,6 +15,8 @@ import transplants.db.pojos.Hospital;
 public class UI_Doctor {
 	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
+	//atributo añadido
+	private JPAmanager jpamanager=new JPAmanager();
 	
 	public UI_Doctor(){
 	}
@@ -41,6 +44,7 @@ public class UI_Doctor {
 			Doctor doct= new Doctor(name, regNumber, specializ);
 			
 			boolean ok=dbManager.insert(doct);
+			
 			Integer id = dbManager.getIdOfDoctor(doct);
 			
 			boolean ok2=dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, id);
@@ -50,6 +54,8 @@ public class UI_Doctor {
 			}else{
 				System.out.print("The doctor has NOT been introduced");
 			}
+			//añado doctor con JPA
+			jpamanager.insert(doct);
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}

@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Donor;
 
 import transplants.db.pojos.Organ;
@@ -15,6 +16,8 @@ import transplants.db.pojos.Organ;
 public class UI_Donor {
 	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
+	//atributo añadido
+		private JPAmanager jpamanager=new JPAmanager();
 	
 	public UI_Donor(){
 		
@@ -67,6 +70,8 @@ public class UI_Donor {
 			}else{
 				System.out.print("Donor has NOT been introduced");
 			}
+			//linea de abajo añadida para añadir con JPA
+			jpamanager.insert(donor);
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}

@@ -14,12 +14,13 @@ import transplants.db.pojos.Requested_organ;
 
 public interface DBManagerInterface {
 	
+	//estos 4 de abajo son solo del dbmanager de jdbc
 	public void connect();
 	public void disconnect();
 	
 	public boolean createTables();
 	public boolean dropTables();
-	
+	//insert para jpa y para jdbc
 	public boolean insert(Object obj);
 	
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2);	

@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
@@ -21,7 +22,8 @@ public class UI_Patient {
 	
 	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
-	
+	//atributo añadido
+		private JPAmanager jpamanager=new JPAmanager();
 	public UI_Patient(){		
 	}
 	
@@ -98,6 +100,8 @@ public class UI_Patient {
 			else{
 				System.out.println("Patient has not been introduced. ");
 			}
+			//linea de abajo añadida para añadir con JPA
+			jpamanager.insert(p);
 			return p;
 			
 		}catch (IOException ex){

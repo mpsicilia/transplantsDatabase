@@ -5,41 +5,47 @@ package transplants.db.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import transplants.db.pojos.Hospital;
 
-public class JPAhospital {
+import transplants.db.pojos.Patient;
+
+public class JPApatient {
 	private EntityManager em;
-	
 
-		public JPAhospital(JPAmanager jpamanager){
+		public JPApatient(JPAmanager jpamanager){
 			em=jpamanager.getEManager();
 			
 		}
-
-	public boolean insert(Hospital hospital) {
+	public boolean insert(Patient patient) {
 		
+
 		try {
-			//si quitas el import de EM te da este error, osea que algo mal tenemos en persistence.xml
-			//pero si pones el import te dice que nunca se usa, que coño?
+			// COMPANY PROVIDER cambiado!!!!
 			//EntityManager em = Persistence.createEntityManagerFactory("transplants-provider").createEntityManager();
 			em.getTransaction().begin();
 			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 			em.getTransaction().commit();
-			//EN JPADEMO EL USUARIO AÑADE INFORMACION AQUI.
-			//EN NUESTRO CASO, LA INFORMACION SE HA AÑADIDO EN UIHOSPITAL
-			
+
 			em.getTransaction().begin();
 			// Store the object
-			em.persist(hospital);
-			
+			em.persist(patient);
+
 			em.getTransaction().commit();
-			
-			
+
 			em.close();
-		
+	        //List<Doctor> doctors=patient.getDoctors();
+	        //LA RELACION N-N DOCTOR PACIENTE LA DB LA HACE SOLA?
+			//NO SE SI HABRIA QUE INSERTAR EL PACIENTE EN LA LISTA DE PACIENTES QUE TENGAN SUS DOCTORES
+			//POR EJEMPLO: maria tiene dos doctores: pedro y juan. habria que añadir a la lista de pacientes de pedro y juan, maria?
+			
+	       
+			
+			
+			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
+
 }

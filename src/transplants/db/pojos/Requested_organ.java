@@ -25,7 +25,7 @@ public class Requested_organ implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "patient_id") // the FK
 	private Patient patient;
-	@ManyToMany
+	@ManyToMany(mappedBy = "Requested_organs/animals")
 	//the attribute above joins both tables creating requested_organs/animals
 	@JoinTable(name="Requested_organs/animals",
 		joinColumns={@JoinColumn(name="requested_organ_id", referencedColumnName="id")},
@@ -33,6 +33,8 @@ public class Requested_organ implements Serializable {
 
 	//req organ has a list of animals
 	//animal has a list of reqs
+
+	
 	private List<Animal_tissue> animalTissues;
 	
 	public Requested_organ(){
