@@ -1,4 +1,4 @@
-package transplants.db.jdbc;
+package transplants.db.dbInterface;
 
 import java.util.List;
 
