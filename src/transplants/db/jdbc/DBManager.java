@@ -84,7 +84,7 @@ public class DBManager implements DBManagerInterface{
 		}
 		return false;
 	}
-	
+	@Override
 	public boolean dropTables(){
 		try{
 			
@@ -166,31 +166,33 @@ public class DBManager implements DBManagerInterface{
 	}
 	
 	//PKs
+	@Override
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2){
 		return hosp.insertHospitalsDoctors(id1, id2);
 	}
-	
+	@Override
 	public boolean insertPrimaryKeyDoctorPatient(Integer patId, Integer doctId){
 		return doct.insertDoctorPatientTable(patId, doctId);
 	}	
-	
+	@Override
 	public boolean insertPrimaryKeyRequestedAnimal(Integer idRequest, Integer idAnimal){//falta llamarlo desde el main
 		return animalT.insertRequestedAnimal(idRequest, idAnimal);
 	}
 	
 	//FKs
+	@Override
 	public boolean insertFKinRequestedOrgan (int patID, int reqOrg){
 		return req.insertPatientFK(patID, reqOrg);
 	}
-
+	@Override
 	public boolean insertFKInPatient (Integer patID, Integer hospID){
 		return pat.insertHospitalFK(patID, hospID);
 	}
-	
+	@Override
 	public boolean donorFKinOrgan (Integer idD, Integer idO){
 		return org.insertDonorFK(idD, idO);
 	}
-	
+	@Override
 	public boolean requestedFKinOrgan (int idR, int idO){
 		return org.insertRequestedFK (idR, idO);
 	}
@@ -287,16 +289,17 @@ public class DBManager implements DBManagerInterface{
 	
 	
 	//selects
+	@Override
 	public List <Hospital> selectAllHospitals(){
 		hosp= new SQL_Hospital(this);
 		return hosp.selectAllHospitals();
 	}
-	
+	@Override
 	public List <Doctor> selectAllDoctors(){
 		doct=new SQL_Doctor(this);
      	return doct.selectAllDoctors();
 	}
-	
+	@Override
 	public List<Patient> selectAllPatients(){
 		pat=new SQL_Patient(this);
 		return pat.selectAllPatients();
@@ -396,8 +399,9 @@ public class DBManager implements DBManagerInterface{
 
 
 	//ID getters
-		public int idPatient (Patient patient){
-			int id = 0;
+	@Override
+		public Integer idPatient (Patient patient){
+			Integer id = 0;
 			try{
 				pat = new SQL_Patient(this);
 				id = pat.getPatientID(patient);
@@ -406,9 +410,9 @@ public class DBManager implements DBManagerInterface{
 			}
 			return id;
 		}
-		
-		public int idRequestedOrgan (Requested_organ r){
-			int id=0;
+		@Override
+		public Integer idRequestedOrgan (Requested_organ r){
+			Integer id=0;
 			try{
 				req = new SQL_Request (this);
 				id = req.getRequestedId(r);
@@ -417,9 +421,9 @@ public class DBManager implements DBManagerInterface{
 			}
 			return id;
 		}
-		
-		public int idOrgan (Organ o){
-			int id=0;
+		@Override
+		public Integer idOrgan (Organ o){
+			Integer id=0;
 			try{
 				org = new SQL_Organ(this);
 				id = org.getOrganId(o);
@@ -428,9 +432,9 @@ public class DBManager implements DBManagerInterface{
 			}
 			return id;
 		}
-		
-		public int idDonor (Donor d){
-			int id=0;
+		@Override
+		public Integer idDonor (Donor d){
+			Integer id=0;
 			try{
 				don = new SQL_Donor(this);
 				id = don.getDonorID(d);
@@ -440,15 +444,12 @@ public class DBManager implements DBManagerInterface{
 			return id;
 		}
 		
-		public Integer getIdOfDoctor (Doctor doctor){
-			return doct.getIdOfLastDoctor(doctor);
-		}
-		//this method already exists!!!!!!! TE DIJE QUE YA ESTABA HECHO
-		public Integer getIdOfPatient(Patient patient){
-			return pat.getPatientID(patient);
-		}
+	@Override
+	public Integer getIdOfDoctor (Doctor doctor){
+		return doct.getIdOfLastDoctor(doctor);
+	}
 		
-
+	@Override
 	//given a requested organ is going to return the patient
 	public String patientReq (Requested_organ req){
 		String namePat = "";
@@ -461,7 +462,7 @@ public class DBManager implements DBManagerInterface{
 		return namePat;
 	}
 	
-		
+	@Override
 	//given a patient is going to return its requests
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient){
 		List<Requested_organ> reqsOfPat = new ArrayList<Requested_organ>();
@@ -473,7 +474,7 @@ public class DBManager implements DBManagerInterface{
 		}
 		return reqsOfPat;
 	}
-
+	@Override
 	//given a donor is going to return its organs
 	public List<Organ> organsOfDonor (int idDonor){
 		List<Organ> orgsOfDonor = new ArrayList<Organ>();
@@ -521,7 +522,7 @@ public class DBManager implements DBManagerInterface{
 		}
 		return hospital;
 	}
-	
+	@Override
 	public Donor getDonorOfOrg (String nameO){
 		Donor d = new Donor();
 		try{

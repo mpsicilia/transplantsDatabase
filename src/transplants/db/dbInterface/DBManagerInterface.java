@@ -26,6 +26,11 @@ public interface DBManagerInterface {
 	public boolean insertPrimaryKeyDoctorPatient(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2);//falta hacerla
 	
+	public boolean insertFKinRequestedOrgan (int patID, int reqOrg);
+	public boolean insertFKInPatient (Integer patID, Integer hospID);
+	public boolean donorFKinOrgan (Integer idD, Integer idO);
+	public boolean requestedFKinOrgan (int idR, int idO);
+	
 	public List<Hospital> searchHosp(String name); 
 	public List<Animal_tissue> searchAnimalTissue(String name); 
 	public List<Doctor> searchDoctor(String name); 
@@ -41,9 +46,18 @@ public interface DBManagerInterface {
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);
 	
+	public Integer idPatient (Patient patient);
+	public Integer idRequestedOrgan (Requested_organ r);
+	public Integer idOrgan (Organ o);
+	public Integer idDonor (Donor d);
+	
 	public Integer getIdOfDoctor(Doctor doct);
+	public String patientReq (Requested_organ req);
+	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient);
+	public List<Organ> organsOfDonor (int idDonor);
 	public String hospitalOfDoctor(String name);
 	public String hospitalOfPatient(String pName);
 	public List<Doctor> doctorOfPatient(String pName);
+	public Donor getDonorOfOrg (String nameO);
 	
 }

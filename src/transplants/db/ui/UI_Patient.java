@@ -60,7 +60,7 @@ public class UI_Patient {
 			//here we introduce the patient
 			boolean introduced = dbManager.insert(p);
 			//getting the FK
-			Integer patId=dbManager.getIdOfPatient(p);
+			Integer patId=dbManager.idPatient(p);
 			
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= dbManager.selectAllHospitals();
