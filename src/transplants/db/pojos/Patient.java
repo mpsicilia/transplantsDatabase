@@ -1,5 +1,6 @@
 package transplants.db.pojos;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,23 +24,25 @@ public class Patient extends Person implements Serializable {
 	private Date additionDate;
 	@ManyToMany
 	//the attribute above joins both tables creating doctors/patients
-	@JoinTable(name="doctors/patients",
+	@JoinTable(name="doctors_patients",
 		joinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")},
-	    inverseJoinColumns={@JoinColumn(name="doctor_ID", referencedColumnName="id")})
+	    inverseJoinColumns={@JoinColumn(name="doctor_id", referencedColumnName="id")})
 	//joincolumn makes reference to the class Patient.
 	//inversejoincolumns makes reference to the opposite class-->doctor
 	//Patient has a list of doctors
 	//Doctor has a list of patients
 	private List<Doctor> doctors;
+	
 	@ManyToOne(fetch = FetchType.LAZY)//only get the hospital when u ask for it (with gethospital)
 	@JoinColumn(name = "hospital_id") // the FK
 	private Hospital hospital;
-	//el donor tambien tiene un hospital?o solo el paciente?
-	@ManyToOne
-	@JoinColumn(name = "Requested_organ_id")
-	private Requested_organ requested_organ;
+	//el donor tambien tiene un hospital?o solo el paciente?solo paciente
+	
+	@OneToMany(mappedBy="patient")
+	private List<Requested_organ> requested_organ;
 	public Patient(){
-		
+		doctors= new ArrayList<Doctor>();
+		requested_organ=new ArrayList<Requested_organ>();
 	}
 	
 
@@ -83,10 +86,10 @@ public class Patient extends Person implements Serializable {
 		this.pathology = pathology;
 	}
 	
-	public Requested_organ getRequested_organ(){
+	public List<Requested_organ> getRequested_organ(){
 		return requested_organ;
 	}
-	public void setRequested_organ (Requested_organ requested_organ){
+	public void setRequested_organ (List<Requested_organ> requested_organ){
 		this.requested_organ= requested_organ;
 	}
 	public List<Doctor> getDoctors() {

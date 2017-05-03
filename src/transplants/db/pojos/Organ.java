@@ -18,8 +18,9 @@ public class Organ implements Serializable{
 	private String name;
 	private Float weight;
 	private String typeOfDonation;
-	@ManyToOne
-	@JoinColumn(name = "requested_organ_id") // FK
+	
+	@OneToOne
+	@JoinColumn(name = "requested_id") // FK
 	private Requested_organ requested_organ;
 	
 	@ManyToOne

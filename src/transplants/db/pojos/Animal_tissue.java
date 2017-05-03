@@ -1,7 +1,7 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -22,12 +22,13 @@ public class Animal_tissue implements Serializable {
 	private String pathology;
 	private Integer timeItLasts;
 	
-	@ManyToMany(mappedBy = "Requested_organs/animals") //name of the table with both FK
+	@ManyToMany(mappedBy = "animalTissues") //bc it is mapped by the list of the other class. ver apuntes
 	private List<Requested_organ> requested_organs;
 	
 	
 	public Animal_tissue() {
 		super();
+		requested_organs=new ArrayList<Requested_organ>();
 	}
 	
 		

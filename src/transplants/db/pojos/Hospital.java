@@ -1,6 +1,7 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -23,14 +24,22 @@ public class Hospital implements Serializable{
 	private String city;
 	private String postcode;
 	private String country;
-	//estas dos lineas de abajo no se si habria que ponerlas porque antes no habia lista de doctores
-	@OneToMany(mappedBy="hospital")
+	//Hospital is related with doctor and patient
+	//with doctors is an n-n because one doctor can work at many hospitals and 1 hospital can have many doctors
+	@ManyToMany
+	@JoinTable(name="hospitalsdoctors",//name of the n-n table
+	joinColumns={@JoinColumn(name="hospital_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="doctor_id", referencedColumnName="id")})
 	private List<Doctor> doctors;
+	//in the case of patients we have one to many because 1 hospital can host many patients
 	@OneToMany(mappedBy="hospital")
 	private List<Patient> patients;
 	
-	//TTTTTTTTTT
+	
 	public Hospital (){
+		super();
+		doctors= new ArrayList<Doctor>();
+		patients= new ArrayList<Patient>();
 		}
 	
 	public Hospital(String name, String phone_number, String address, String city, String postcode,

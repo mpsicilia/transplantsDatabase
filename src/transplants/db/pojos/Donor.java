@@ -3,6 +3,7 @@ package transplants.db.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -17,11 +18,12 @@ public class Donor extends Person implements Serializable{
 	private Integer id;
 	private static final long serialVersionUID = 6705263044123670258L;
 	private String deadOrAlive;
-    //same questions as Patient
+   
 	@OneToMany(mappedBy="donor") 
 	private List<Organ> organs;
 	
 	public Donor() {
+		organs=new ArrayList<Organ>();
 	}
 	
 	public Donor (String name, Date birthDate, Float weight, Float height, String gender, 

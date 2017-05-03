@@ -15,26 +15,34 @@ import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
 public class JPAmanager implements DBManagerInterface {
-	EntityManager em;
-	private JPAhospital hosp;
-	private JPAdoctor doct;
-	private JPApatient pat;
-	private JPAdonor don;
 	
+	private EntityManager em;
+	private JPAhospital hosp;
+	/*private JPAdoctor doct;
+	private JPApatient pat;
+	private JPAdonor don;	*/
 	
 
-	
 	public JPAmanager(){
+		super();
+	}
+	
+	public EntityManager getEManager(){
+		return em;
+	}
+	
+	@Override
+	public void connect() {
 		try{
-	em = Persistence.createEntityManagerFactory("transplants-provider").createEntityManager();
+			em = Persistence.createEntityManagerFactory("transplants-provider").createEntityManager();
+			em.getTransaction().begin();
+			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
+			em.getTransaction().commit();
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
 		}
-	}
-	//NUEVO METODO. CREO QUE EL EM se crea una unica vez, en los JPA individuales
-	public EntityManager getEManager(){
-		return em;
+		
 	}
 
 	@Override
@@ -44,13 +52,12 @@ public class JPAmanager implements DBManagerInterface {
 
 			if (Hospital.class == obj.getClass()) {
 				// create connection
-				hosp = new JPAhospital(this); 
-				
+				hosp = new JPAhospital(this); 				
 				Hospital hospital = (Hospital) obj;
 				return hosp.insert(hospital);
 			}
 
-			if (Doctor.class == obj.getClass()) {
+			/*if (Doctor.class == obj.getClass()) {
 				doct = new JPAdoctor(this);
 				Doctor doctor = (Doctor) obj;
 				return doct.insert(doctor);
@@ -64,7 +71,7 @@ public class JPAmanager implements DBManagerInterface {
 				don=new JPAdonor(this);
 				Donor donor=(Donor) obj;
 				return don.insert(donor);
-			}
+			}*/
 				 
 
 		} catch (Exception e) {
@@ -72,11 +79,7 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return false;
 	}
-	@Override
-	public void connect() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public void disconnect() {
 		// TODO Auto-generated method stub

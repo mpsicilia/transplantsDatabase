@@ -34,8 +34,8 @@ public class JPAdoctor {
 			// Close the entity manager
 			em.close();
 			//CUANDO INSERTO EL DOCTOR??
-			Hospital hosp=doctor.getHospital();
-			hosp.addDoctor(doctor);
+			//Hospital hosp=doctor.getHospital();
+			//hosp.addDoctor(doctor);
 			
 			return true;
 		

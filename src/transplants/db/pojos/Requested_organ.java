@@ -1,6 +1,7 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -25,20 +26,22 @@ public class Requested_organ implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "patient_id") // the FK
 	private Patient patient;
+	
+	@OneToOne(mappedBy="requested_organ")
+	private Organ organ;
+	
 	@ManyToMany
 	//the attribute above joins both tables creating requested_organs/animals
-	@JoinTable(name="Requested_organs/animals",
-		joinColumns={@JoinColumn(name="requested_organ_id", referencedColumnName="id")},
+	@JoinTable(name="Requestedorgan_animaltissues",
+		joinColumns={@JoinColumn(name="requested_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="animal_id", referencedColumnName="id")})
 
 	//req organ has a list of animals
 	//animal has a list of reqs
-
-	
 	private List<Animal_tissue> animalTissues;
 	
 	public Requested_organ(){
-		
+		animalTissues=new ArrayList<Animal_tissue>();
 	}
 	
 	public Requested_organ(Integer id, String name, Float maxWeight, Float minWeight) {

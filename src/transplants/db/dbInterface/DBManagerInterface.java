@@ -23,10 +23,10 @@ public interface DBManagerInterface {
 	//insert para jpa y para jdbc
 	public boolean insert(Object obj);
 	
+	//I think that all these inserts are not supposed to be in the interface
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyDoctorPatient(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2);//falta hacerla
-	
 	public boolean insertFKinRequestedOrgan (int patID, int reqOrg);
 	public boolean insertFKInPatient (Integer patID, Integer hospID);
 	public boolean donorFKinOrgan (Integer idD, Integer idO);
@@ -47,6 +47,7 @@ public interface DBManagerInterface {
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);
 	
+	//I think all these methods the same
 	public Integer idPatient (Patient patient);
 	public Integer idRequestedOrgan (Requested_organ r);
 	public Integer idOrgan (Organ o);

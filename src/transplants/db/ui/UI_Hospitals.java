@@ -42,7 +42,7 @@ public class UI_Hospitals {
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
 			boolean ok=dbManager.insert(hosp);
 			//linea de abajo añadida para añadir con JPA
-			jpamanager.insert(hosp);
+			//boolean ok= jpamanager.insert(hosp);
 			
 			if (ok){
 				System.out.print("Hospital has been introduced");

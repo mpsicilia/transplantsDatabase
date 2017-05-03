@@ -1,36 +1,36 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Doctors")
+@Table(name = "doctors")
 
 public class Doctor implements Serializable{
 
 	private static final long serialVersionUID = -1701687912909197672L;
 	@Id
-	@GeneratedValue(generator="Doctors")
-	@TableGenerator(name="Doctors", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Doctors")
+	@GeneratedValue(generator="doctors")
+	@TableGenerator(name="doctors", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="doctors")
 	private Integer id;
 	private String registrationNumber;
 	private String specialization;
 	private String nameOfDoctor;
 	//no estaba antes el atributo de Hospital ni lista de pacientes
-	@ManyToOne(fetch = FetchType.LAZY) //only get the hospital when u ask for it
-	@JoinColumn(name = "hospital_id") //the one that is going to be the FK in doctors´table
-	private Hospital hospital;
-	@ManyToMany(mappedBy = "doctors/patients") //name of the table with both FK
+	@ManyToMany(mappedBy= "doctors") 	
+	private List<Hospital> hospital;
+	@ManyToMany(mappedBy = "doctors")
 	private List<Patient> patients;
 	
-	
-
 
 	//our default constructor
 	public Doctor (){
+		hospital= new ArrayList<Hospital>();
+		patients =new ArrayList<Patient>();
 	}
 	
 	public Doctor(String nameOfDoctor,String registrationNumber, String specialization){
@@ -106,11 +106,11 @@ public class Doctor implements Serializable{
 	public void setPatients(List<Patient> patients){
 		this.patients=patients;
 	}
-	public Hospital getHospital() {
+	public List<Hospital> getHospital() {
 		return hospital;
 	}
 
-	public void setHospital(Hospital hospital) {
+	public void setHospital(List<Hospital> hospital) {
 		this.hospital = hospital;
 	}
 	
