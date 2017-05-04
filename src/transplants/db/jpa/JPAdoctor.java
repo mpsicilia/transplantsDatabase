@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import sample.db.pojos.Employee;
+
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 
@@ -17,7 +17,7 @@ public class JPAdoctor {
 	private JPAmanager jpaManager;
 	
 
-//HAGO ESTE CONSTRUCTOR en todos los JPA individuales PORQUE ES LA MANERA QUE HE ENCONTRADO DE TRABAJAR CON EL MISMO EM.
+
 	public JPAdoctor(JPAmanager jpamanager){
 		this.jpaManager=jpamanager;
 		jpaManager.connect();
@@ -32,38 +32,50 @@ public class JPAdoctor {
 			jpaManager.getEManager().getTransaction().commit();		
 			jpaManager.getEManager().close();
 			
-			Query q1=jpaManager.getEManager().createNativeQuery("SELECT * FROM doctors",Doctor.class);
+			
+			//habria que guardar en esta lista (que devuelve gethospital) en uidoctor, los hospitales en los que trabaja
+			// el doctor.
+			//una vez teniendo esos hospitales ya podria hacer dos bucles while.
+			
+			
 			Query q2=jpaManager.getEManager().createNativeQuery("SELECT * FROM hospitals",Hospital.class);
 			
-			List<Doctor> doctors =(List<Doctor>) q1.getResultList();
-    		Iterator <Doctor> it = doctors.iterator();
-    		while(it.hasNext()){
+			/*getHospital() me tiene que devolver la lista de hospitales donde trabaja el doctor. esta lista se debe inicializar
+			en uidoctor cuando arreglemos lo de poder introducir varios hospitales al doctor.
+			 * allhospitals devuelve todos los hospitales de la db (query q2 arriba de este comentario)
+			 * lo que hace el primer bucle while es ir pasando los hospitales que haya en la db y cogiendo el id.
+			 * el bucle de dentro lo que hace es pasar los hospitales en los que trabaje el doctor. cuando el id de uno de los hospitales
+			 * coincida con el id de un hospital en el que trabaja el señor, va a añadir el doctor a la lista de doctores de su hospital
+			 * y va a añadir el hospital a la lista de hospitales del doctor.
+			 * y asi recorriendo toodos los hospitales de la db
+			*/
+			
+			List<Hospital> hospitalofdoctor =doctor.getHospital();
+			List<Hospital> allhospitals=(List<Hospital>) q2.getResultList();
+    		
+			Iterator <Hospital> it1 = hospitalofdoctor.iterator();
+    		Iterator <Hospital> it2 = allhospitals.iterator();
+    		
+    		while(it1.hasNext()){
+    			Hospital allhosp=it1.next();
+    			int id1=allhosp.getId();
+    			while(it2.hasNext()){
+    				Hospital hospdoctor=it2.next();
+    				int id2=hospdoctor.getId();
+    				if(id1==id2){
+    					allhosp.addDoctor(doctor);
+    					doctor.addHospital(hospdoctor);
+    					//esta ultima line creo que no haria falta porque la lista de hospitales del doctor ya estaria 
+    					//inicializada en Uidoctor como he dicho arriba.
+    					
+    				}
+    			}
+    		}
     			
     				
-    	 			Doctor doct = it.next();
-    	 	        doct.addHospital(hospi);
-    	 			
-    	 		
-    		}
+    
     		
-    		/*// Get 4 employees from the database
-		Query q3 = em.createNativeQuery("SELECT * FROM employees", Employee.class);
-		List<Employee> employeeList2 = (List<Employee>) q3.getResultList();
-		Employee emp1 = employeeList2.get(0);
-		Employee emp2 = employeeList2.get(1);
-		Employee emp3 = employeeList2.get(2);
-		Employee emp4 = employeeList2.get(3);
-		// Set authors
-		rep1.addAuthor(emp1);
-		rep1.addAuthor(emp2);
-		rep2.addAuthor(emp3);
-		rep2.addAuthor(emp4);
-		emp1.addReport(rep1);
-		emp2.addReport(rep2);
-		emp3.addReport(rep1);
-		emp4.addReport(rep2);
-    	*/
-    		
+    	
 			
 	 	
 			
