@@ -34,13 +34,25 @@ public class Donor extends Person implements Serializable{
 		
 	}
 	
-	public Donor (Integer id, String name, Date birthDate, Float weight, Float height, String gender, 
+	public Donor (Integer id, String name, Date birthDate, Float weight, Float height, St
+			ring gender, 
 		      String deadOrAlive, String bloodType){
 		super(name, birthDate, weight, height, gender, bloodType);
+<<<<<<< HEAD
 		this.id=id;
+=======
+	this.id=id;
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		this.deadOrAlive=deadOrAlive;
 		super.birthDate=birthDate;
     }
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getDeadOrAlive() {
 		return deadOrAlive;
