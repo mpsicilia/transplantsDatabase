@@ -42,6 +42,8 @@ public class JPAdoctor {
 			
 			/*getHospital() me tiene que devolver la lista de hospitales donde trabaja el doctor. esta lista se debe inicializar
 			en uidoctor cuando arreglemos lo de poder introducir varios hospitales al doctor.
+			 * o si no se puede conectar ui con pojo, pues poner esos hospitales en una lista y pasarsela al insert y copiar esa lista en la lista propia 
+			 * del pojo de doctor
 			 * allhospitals devuelve todos los hospitales de la db (query q2 arriba de este comentario)
 			 * lo que hace el primer bucle while es ir pasando los hospitales que haya en la db y cogiendo el id.
 			 * el bucle de dentro lo que hace es pasar los hospitales en los que trabaje el doctor. cuando el id de uno de los hospitales
