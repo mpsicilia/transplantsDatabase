@@ -46,7 +46,7 @@ public class JPAdoctor {
 			 * lo que hace el primer bucle while es ir pasando los hospitales que haya en la db y cogiendo el id.
 			 * el bucle de dentro lo que hace es pasar los hospitales en los que trabaje el doctor. cuando el id de uno de los hospitales
 			 * coincida con el id de un hospital en el que trabaja el señor, va a añadir el doctor a la lista de doctores de su hospital
-			 * y va a añadir el hospital a la lista de hospitales del doctor.
+			
 			 * y asi recorriendo toodos los hospitales de la db
 			*/
 			
