@@ -7,18 +7,17 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "hospitals")
-
-
+@Table(name = "Hospitals")
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = -2900229453507535621L;
 	@Id
-	@GeneratedValue(generator="hospitals")
-	@TableGenerator(name="hospitals", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="hospitals")
+	@GeneratedValue(generator="Hospitals")
+	@TableGenerator(name="Hospitals", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Hospitals")
 	private Integer id;
 	private String name;
+	@Column(name="phoneNumber")
 	private String phone_number;
 	private String address;
 	private String city;
