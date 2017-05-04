@@ -1,6 +1,6 @@
 package transplants.db.jpa;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+
+
 
 import transplants.db.pojos.Hospital;
 
