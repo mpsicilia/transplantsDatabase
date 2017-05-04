@@ -134,6 +134,12 @@ public class Doctor implements Serializable{
 		return "Doctor [id=" + id + ", nameOfDoctor=" + nameOfDoctor + ", registrationNumber=" + registrationNumber + ", "
 				+ "specialization=" + specialization + "]";
 	}
+	public boolean addHospital(Hospital hospi) {
+		if (!hospital.contains(hospi)) {
+			return this.hospital.add(hospi);
+		}
+		else return false;
+	}
 	
 	
 	
