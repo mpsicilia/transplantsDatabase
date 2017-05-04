@@ -1,16 +1,14 @@
 package transplants.db.jpa;
-
-
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import transplants.db.pojos.Hospital;
 
 public class JPAhospital {
 	private JPAmanager jpaManager;
 
 		public JPAhospital(JPAmanager jpamanager){
-			this.jpaManager=jpamanager;
-			jpaManager.connect();
-			
+			this.jpaManager=jpamanager;			
 		}
 
 	public boolean insert(Hospital hospital) {
@@ -19,7 +17,6 @@ public class JPAhospital {
 			jpaManager.getEManager().getTransaction().begin();
 			// Store the object
 			jpaManager.getEManager().persist(hospital);			
-<<<<<<< HEAD
 			jpaManager.getEManager().getTransaction().commit();		
 			
 			return true;
@@ -30,12 +27,12 @@ public class JPAhospital {
 		return false;
 	}
 	
-	public boolean updateHospital (Hospital hospital){
-		///should I pass the hospital or each methods
+	public boolean updateHospital (Hospital hospital, Hospital newHosp){
 		jpaManager.getEManager().getTransaction().begin();
 		hospital.setAddress(hospital.getAddress());
 		return false;
 	}
+	
 	public List<Hospital> shearchHospital (String name){
 		List<Hospital> hospitalList = new ArrayList<Hospital>();
 		try{
@@ -55,8 +52,6 @@ public class JPAhospital {
 			jpaManager.getEManager().getTransaction().begin();
 			// Store the object
 			jpaManager.getEManager().remove(hosp);			
-=======
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 			jpaManager.getEManager().getTransaction().commit();		
 			
 			return true;
