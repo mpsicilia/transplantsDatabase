@@ -15,10 +15,7 @@ public abstract class Person {
 	//aun asi deberia indicar que id es una PK?-->porque luego heredan patient and donor
 	//Cuando comprobemos que las que no son de inheritance funcionan, tenemos que comprobar si inheritance 
 	//funciona definiendo el id en person (la padre), doctor y patient, y si no, borramos id de person y lo ponemos en las hijas
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
+
 	protected String name;
 	protected Date birthDate;
 	protected Float weight;
@@ -40,10 +37,7 @@ public abstract class Person {
 		this.gender = gender;
 		this.bloodType = bloodType;
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
+
 	
 	public String getName() {
 		return name;
@@ -83,11 +77,6 @@ public abstract class Person {
 	public void setBloodType(String bloodType) {
 		this.bloodType = bloodType;
 	}
-<<<<<<< HEAD
 
-
-	
-=======
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 	
 }
