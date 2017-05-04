@@ -7,15 +7,15 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Animal_tissue")
+@Table(name = "Animal_tissues")
 
 public class Animal_tissue implements Serializable {
 
 	private static final long serialVersionUID = -7167881940806327162L;
 	@Id 
-	@GeneratedValue(generator="Animal_tissue")
-	@TableGenerator(name="Animal_tissue", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Animal_tissue")
+	@GeneratedValue(generator="Animal_tissues")
+	@TableGenerator(name="Animal_tissues", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Animal_tissues")
 	private Integer id;
 	private String name;
 	private String typeOfTissue;

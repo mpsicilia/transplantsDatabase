@@ -21,6 +21,7 @@ public class JPAhospital {
 			jpaManager.getEManager().persist(hospital);			
 			jpaManager.getEManager().getTransaction().commit();		
 			jpaManager.getEManager().close();
+			return true;
 		
 		} catch (Exception e) {
 			e.printStackTrace();
