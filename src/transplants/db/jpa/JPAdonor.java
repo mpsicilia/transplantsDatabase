@@ -6,39 +6,37 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import transplants.db.pojos.Donor;
+import transplants.db.pojos.Organ;
 
 public class JPAdonor {
-	private JPAmanager jpaManager;
+	private EntityManager em;
 
 	public JPAdonor(JPAmanager jpamanager){
-		this.jpaManager=jpamanager;
-		jpaManager.connect();
+		em=jpamanager.getEManager();
 		
 	}
-public boolean insert(Donor donor) {
-		
-		try {			
-			jpaManager.getEManager().getTransaction().begin();
-			// Store the object
-			jpaManager.getEManager().persist(donor);			
-			jpaManager.getEManager().getTransaction().commit();		
-			return true;
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-public boolean delete(Donor donor) {
+public boolean insert(Donor donor){
 	
-	try {			
-		jpaManager.getEManager().getTransaction().begin();
+	try {
+	
+		//EntityManager em = Persistence.createEntityManagerFactory("transplants-provider").createEntityManager();
+		em.getTransaction().begin();
+		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
+		em.getTransaction().commit();
+	
+		em.getTransaction().begin();
 		// Store the object
-		jpaManager.getEManager().remove(donor);			
-		jpaManager.getEManager().getTransaction().commit();		
-		return true;
+		em.persist(donor);
 		
+		em.getTransaction().commit();
+		
+		
+		em.close();
+		List<Organ> organs=donor.getOrgans();
+	
+		
+		
+	
 	} catch (Exception e) {
 		e.printStackTrace();
 	}

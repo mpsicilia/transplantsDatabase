@@ -20,7 +20,7 @@ public class Animal_tissue implements Serializable {
 	private String name;
 	private String typeOfTissue;
 	private String pathology;
-	private Integer time;
+	private Integer timeItLasts;
 	
 	@ManyToMany(mappedBy = "animalTissues") //bc it is mapped by the list of the other class. ver apuntes
 	private List<Requested_organ> requested_organs;
@@ -38,7 +38,7 @@ public class Animal_tissue implements Serializable {
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
 		this.pathology = pathology;
-		this.time= time;
+		this.timeItLasts = time;
 	}
 	
 	public Animal_tissue(String name, String typeOfTissue, String pathology, int time) {
@@ -46,7 +46,7 @@ public class Animal_tissue implements Serializable {
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
 		this.pathology = pathology;
-		this.time = time;
+		this.timeItLasts = time;
 	}
 
 
@@ -77,7 +77,7 @@ public class Animal_tissue implements Serializable {
 	@Override
 	public String toString() {
 		return "Animal_tissue [id = " + id + ", name=" + name + ", type_of_tissue=" + typeOfTissue + ", pathology="
-				+ pathology + ", time=" + time + "]";
+				+ pathology + ", time=" + timeItLasts + "]";
 	}
 
 
@@ -106,10 +106,10 @@ public class Animal_tissue implements Serializable {
 		this.pathology = pathology;
 	}
 	public int getTimeItLasts() {
-		return time;
+		return timeItLasts;
 	}
 	public void setTimeItLasts(int timeItLasts) {
-		this.time= timeItLasts;
+		this.timeItLasts = timeItLasts;
 	}
 	public List<Requested_organ> getRequested_organs(){
 		return requested_organs;

@@ -7,20 +7,19 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Doctors")
+@Table(name = "doctors")
 
 public class Doctor implements Serializable{
 
 	private static final long serialVersionUID = -1701687912909197672L;
 	@Id
-	@GeneratedValue(generator="Doctors")
-	@TableGenerator(name="Doctors", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Doctors")
+	@GeneratedValue(generator="doctors")
+	@TableGenerator(name="doctors", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="doctors")
 	private Integer id;
-	private String name;
 	private String registrationNumber;
 	private String specialization;
-	
+	private String nameOfDoctor;
 	//no estaba antes el atributo de Hospital ni lista de pacientes
 	@ManyToMany(mappedBy= "doctors") 	
 	private List<Hospital> hospital;
@@ -35,14 +34,14 @@ public class Doctor implements Serializable{
 	}
 	
 	public Doctor(String nameOfDoctor,String registrationNumber, String specialization){
-		this.name=nameOfDoctor;
+		this.nameOfDoctor=nameOfDoctor;
 		this.registrationNumber=registrationNumber;
 		this.specialization=specialization;		
 	}
 	
 	public Doctor(Integer id, String nameOfDoctor,String registrationNumber, String specialization){
 		this.id=id;
-		this.name=nameOfDoctor;
+		this.nameOfDoctor=nameOfDoctor;
 		this.registrationNumber=registrationNumber;
 		this.specialization=specialization;
 		
@@ -94,10 +93,10 @@ public class Doctor implements Serializable{
 		this.specialization = specialization;
 	}
 	public String getNameOfDoctor() {
-		return name;
+		return nameOfDoctor;
 	}
 	public void setNameOfDoctor(String nameOfDoctor) {
-		this.name = nameOfDoctor;
+		this.nameOfDoctor = nameOfDoctor;
 	}
 
 	public List<Patient> getPatients(){
@@ -132,8 +131,8 @@ public class Doctor implements Serializable{
 			}
 	@Override
 	public String toString() {
-		return "Doctor [id=" + id + ", nameOfDoctor=" + name + ", registrationNumber=" + registrationNumber + ", "
-				+ "specialization=" + specialization + "]\n";
+		return "Doctor [id=" + id + ", nameOfDoctor=" + nameOfDoctor + ", registrationNumber=" + registrationNumber + ", "
+				+ "specialization=" + specialization + "]";
 	}
 	
 	

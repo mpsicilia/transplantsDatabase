@@ -36,8 +36,7 @@ public class Donor extends Person implements Serializable{
 	
 	public Donor (Integer id, String name, Date birthDate, Float weight, Float height, String gender, 
 		      String deadOrAlive, String bloodType){
-		super(name, birthDate, weight, height, gender, bloodType);
-		this.id=id;
+		super(id, name, birthDate, weight, height, gender, bloodType);
 		this.deadOrAlive=deadOrAlive;
 		super.birthDate=birthDate;
     }
@@ -48,14 +47,6 @@ public class Donor extends Person implements Serializable{
 
 	public void setDeadOrAlive(String deadOrAlive) {
 		this.deadOrAlive = deadOrAlive;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public List<Organ> getOrgans(){

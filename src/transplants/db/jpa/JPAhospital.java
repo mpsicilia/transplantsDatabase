@@ -1,8 +1,7 @@
 package transplants.db.jpa;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Query;
+
+
 import transplants.db.pojos.Hospital;
 
 public class JPAhospital {
@@ -20,6 +19,7 @@ public class JPAhospital {
 			jpaManager.getEManager().getTransaction().begin();
 			// Store the object
 			jpaManager.getEManager().persist(hospital);			
+<<<<<<< HEAD
 			jpaManager.getEManager().getTransaction().commit();		
 			
 			return true;
@@ -55,6 +55,8 @@ public class JPAhospital {
 			jpaManager.getEManager().getTransaction().begin();
 			// Store the object
 			jpaManager.getEManager().remove(hosp);			
+=======
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 			jpaManager.getEManager().getTransaction().commit();		
 			
 			return true;
