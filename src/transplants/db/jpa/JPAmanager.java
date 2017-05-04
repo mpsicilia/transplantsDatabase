@@ -34,7 +34,7 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public void connect() {
 		try{
-			em = Persistence.createEntityManagerFactory("transplants-provider").createEntityManager();
+			em = Persistence.createEntityManagerFactory("transplant-provider").createEntityManager();
 			em.getTransaction().begin();
 			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 			em.getTransaction().commit();
