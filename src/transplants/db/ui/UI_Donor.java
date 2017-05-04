@@ -14,7 +14,7 @@ import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
 
 public class UI_Donor {
-	private DBManager dbManager=new DBManager();
+
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	//atributo añadido
 		private JPAmanager jpamanager=new JPAmanager();
@@ -23,7 +23,7 @@ public class UI_Donor {
 		
 	}
 	
-	public Donor introduceNewDonor(){
+	public Donor introduceNewDonor(DBManager dbManager){
 		Donor donor = new Donor();
 		try{
 			System.out.print("Name: ");
@@ -78,7 +78,7 @@ public class UI_Donor {
 		return donor;
 	}
 	
-	public List<Donor> searchDonor(){
+	public List<Donor> searchDonor(DBManager dbManager){
 		try{
 			System.out.println("Introduce the name of the donor: ");
 	 		String name = console.readLine();	 	
@@ -90,7 +90,7 @@ public class UI_Donor {
 		return null; 
 	}
 	
-	public void updateDonor(Donor donor){
+	public void updateDonor(Donor donor, DBManager dbManager){
 		boolean again = true;	
 		try{
 			while(again){
@@ -153,7 +153,7 @@ public class UI_Donor {
 			}
 	}
 	
-	public void deleteDonor (Donor donor){
+	public void deleteDonor (Donor donor, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(donor);
 			if(deleted){
@@ -167,7 +167,7 @@ public class UI_Donor {
 		}
 	}
 	
-	public Donor getDonorOfOrgan (Organ org){
+	public Donor getDonorOfOrgan (Organ org, DBManager dbManager){
 		Donor don = new Donor();
 		try{
 			don = dbManager.getDonorOfOrg(org.getName());

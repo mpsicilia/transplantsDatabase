@@ -14,14 +14,13 @@ import transplants.db.pojos.Organ;
 
 
 public class UI_Organ {
-	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	
 	public UI_Organ(){
 		
 	}
 	
-	public void introduceNewOrgan(Donor d){
+	public void introduceNewOrgan(Donor d, DBManager dbManager){
 		try{
 			boolean more = true;//one patient can request many organs so...
 			while (more){
@@ -60,7 +59,7 @@ public class UI_Organ {
 		}
 	}
 	
-	public List<Organ> searchOrgan(){
+	public List<Organ> searchOrgan(DBManager dbManager){
 		try{
 			System.out.println("Introduce the name of the organ: ");
 	 		String name = console.readLine();	 	
@@ -72,7 +71,7 @@ public class UI_Organ {
 		return null; 
 	}
 	
-	public void updateOrgan(Organ organ){
+	public void updateOrgan(Organ organ, DBManager dbManager){
 		boolean again = true;	
 		try{
 			while(again){
@@ -115,7 +114,7 @@ public class UI_Organ {
 			}
 	}
 	
-	public void deleteOrgan (Organ organ){
+	public void deleteOrgan (Organ organ, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(organ);
 			if(deleted){
@@ -130,7 +129,7 @@ public class UI_Organ {
 	
 	}
 	
-	public void organsOfDonor (Donor d){
+	public void organsOfDonor (Donor d, DBManager dbManager){
 		try{
 			int idDon = d.getId();
 			List<Organ> organs= dbManager.organsOfDonor(idDon);
@@ -147,7 +146,7 @@ public class UI_Organ {
 		}
 	}
 	
-	public List<Organ> organsThatMatchRequestByName (String reqName){
+	public List<Organ> organsThatMatchRequestByName (String reqName, DBManager dbManager){
 		List<Organ> matchByNameOrgs = new ArrayList<Organ>();
 		try{
 			matchByNameOrgs = dbManager.searchOrgan(reqName);
@@ -157,7 +156,7 @@ public class UI_Organ {
 		return matchByNameOrgs;
 	}
 	
-	public boolean insertRequestedFKinOrgan (int idReq, int idOrg){
+	public boolean insertRequestedFKinOrgan (int idReq, int idOrg, DBManager dbManager){
 		try{
 			return dbManager.requestedFKinOrgan(idReq, idOrg);
 		}catch (Exception e){

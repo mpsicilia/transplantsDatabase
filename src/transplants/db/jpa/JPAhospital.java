@@ -21,7 +21,7 @@ public class JPAhospital {
 			// Store the object
 			jpaManager.getEManager().persist(hospital);			
 			jpaManager.getEManager().getTransaction().commit();		
-			//jpaManager.getEManager().close();
+			
 			return true;
 		
 		} catch (Exception e) {
@@ -31,7 +31,7 @@ public class JPAhospital {
 	}
 	
 	public boolean updateHospital (Hospital hospital){
-		///should I pass the hospital or each methots
+		///should I pass the hospital or each methods
 		jpaManager.getEManager().getTransaction().begin();
 		hospital.setAddress(hospital.getAddress());
 		return false;
@@ -44,7 +44,6 @@ public class JPAhospital {
 					+ " name LIKE '%" + name + "%'", JPAhospital.class);
 			hospitalList = (List<Hospital>) q1.getResultList();
 			jpaManager.getEManager().getTransaction().commit();		
-			jpaManager.getEManager().close();
 			
 		}catch (Exception ex){
 			ex.printStackTrace();
@@ -57,7 +56,7 @@ public class JPAhospital {
 			// Store the object
 			jpaManager.getEManager().remove(hosp);			
 			jpaManager.getEManager().getTransaction().commit();		
-			jpaManager.getEManager().close();
+			
 			return true;
 		
 		} catch (Exception e) {

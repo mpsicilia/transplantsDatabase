@@ -25,7 +25,7 @@ public class UIGenericMenu {
 	}	
 	
 	public UIGenericMenu(){
-		DBManager dmanager = new DBManager();
+		DBManager dbManager = new DBManager();
 		UI_Hospitals uiHospital=new UI_Hospitals();
 		UI_Doctor uiDoctor=new UI_Doctor();
 		UI_Donor uiDonor=new UI_Donor();
@@ -50,7 +50,7 @@ public class UIGenericMenu {
 	        System.out.println("Do you want to create the tables?: [yes/no]");
 	        String decider= console.readLine();
 	        if (decider.equals("yes")){
-	        	boolean created = dmanager.createTables();
+	        	boolean created = dbManager.createTables();
 		        	if(created){
 		        		System.out.println("Tables have been created. ");
 		        	}
@@ -84,25 +84,25 @@ public class UIGenericMenu {
 	                    int option1= Integer.parseInt(read1); 
 	                    switch (option1){
 		                    case 1:
-		                    	uiHospital.introduceNewHospital();
+		                    	uiHospital.introduceNewHospital(dbManager);
 		                    	break;
 		                    case 2:
-		                    	uiDoctor.introduceNewDoctor();
+		                    	uiDoctor.introduceNewDoctor(dbManager);
 		                    	break;
 		                    case 3:
-		                    	Donor d = uiDonor.introduceNewDonor();
+		                    	Donor d = uiDonor.introduceNewDonor(dbManager);
 		                    	System.out.println("Introduce the organ that the donor donates. ");
-		                    	uiOrgan.introduceNewOrgan(d);
+		                    	uiOrgan.introduceNewOrgan(d, dbManager);
 		                    	//foreign keys
 		                    	break;
 		                    case 4:
-		                    	Patient p = uiPatient.introduceNewPatient();
+		                    	Patient p = uiPatient.introduceNewPatient(dbManager);
 		                    	System.out.println("Introduce the organ that the patient needs. ");
-		                    	uiRequested.introduceNewReqOrgan(p);
+		                    	uiRequested.introduceNewReqOrgan(p,dbManager);
 		                    	//foreign keys in requested organ
 		                    	break;
 		                    case 5:
-		                    	uiAnimalT.introduceNewAnimalTissue();
+		                    	uiAnimalT.introduceNewAnimalTissue(dbManager);
 		                    	break;
 	                    }	                         	 		        			
 	        	 		
@@ -121,7 +121,7 @@ public class UIGenericMenu {
 	                    int option2= Integer.parseInt(read2); 
 	                    switch(option2){
 	                    	case 1:
-	                    		List<Hospital> hosps = uiHospital.searchHospital();
+	                    		List<Hospital> hosps = uiHospital.searchHospital(dbManager);
 	                    		Iterator <Hospital> it = hosps.iterator();
 	                	 		int counter = 1;
 	               
@@ -133,7 +133,7 @@ public class UIGenericMenu {
 	                	 		if(counter ==1){
 	                	 			System.out.println("Hospital not found, would you like to introduce a new hospital?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiHospital.introduceNewHospital();
+	                	 				uiHospital.introduceNewHospital(dbManager);
 	                	 				break;
 	                	 			}
 	                	 			
@@ -151,13 +151,13 @@ public class UIGenericMenu {
 	                    				System.out.println("Introduce the number of the hospital: ");
 	                    				int numHosp = Integer.parseInt(console.readLine());
 	                    				Hospital hospUp = hosps.get(numHosp-1);
-	                    				uiHospital.updateHospital(hospUp);
+	                    				uiHospital.updateHospital(hospUp, dbManager);
 	                    				break;
 	                    			case 2:
 	                    				System.out.println("Introduce the number of the hospital: ");
 	                    				int num = Integer.parseInt(console.readLine());
 	                    				Hospital hospDel = hosps.get(num-1);
-	                    				uiHospital.deleteHospital(hospDel);
+	                    				uiHospital.deleteHospital(hospDel, dbManager);
 	                    				break;
 	                    			case 3:
 	                    				break;
@@ -165,7 +165,7 @@ public class UIGenericMenu {
 	                    		break;
 	                	 	   }
 	                    	case 2:
-	                    		List <Doctor> doct= uiDoctor.searchDoctor();
+	                    		List <Doctor> doct= uiDoctor.searchDoctor(dbManager);
 	                    		Iterator <Doctor> it1 = doct.iterator();
 	                	 		int counterDoctor = 1;
 	                	 		while (it1.hasNext()){
@@ -176,7 +176,7 @@ public class UIGenericMenu {
 	                	 		if(counterDoctor ==1){
 	                	 			System.out.println("Doctor not found, would you like to introduce a new Doctor?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiDoctor.introduceNewDoctor();
+	                	 				uiDoctor.introduceNewDoctor(dbManager);
 	                	 				break;
 	                	 			}
 	                	 		}
@@ -194,19 +194,19 @@ public class UIGenericMenu {
                     				System.out.println("Introduce the number of the doctor: ");
                     				int numDoct = Integer.parseInt(console.readLine());
                     				Doctor doctUp = doct.get(numDoct-1);
-                    				uiDoctor.updateDoctor(doctUp);
+                    				uiDoctor.updateDoctor(doctUp, dbManager);
                     				break;
                     			case 2:
                     				System.out.println("Introduce the number of the doctor: ");
                     				numDoct = Integer.parseInt(console.readLine());
                     				Doctor doctDel = doct.get(numDoct-1);
-                    				uiDoctor.deleteDoctor(doctDel);
+                    				uiDoctor.deleteDoctor(doctDel, dbManager);
                     				break;
                     			case 3: 
                     				System.out.println("Introduce the number of the doctor: ");
                     				numDoct = Integer.parseInt(console.readLine());
                     				Doctor doctSearch = doct.get(numDoct-1);
-                    				uiHospital.DoctorHospital(doctSearch.getNameOfDoctor());
+                    				uiHospital.DoctorHospital(doctSearch.getNameOfDoctor(), dbManager);
                     				//we need to ask the user in which hospital is going to work each doctor
                     				break;
                     			case 4:
@@ -216,7 +216,7 @@ public class UIGenericMenu {
 	                    		break;
 	                	 	}		
 	                    	case 3:
-	                    		List <Donor> donor= uiDonor.searchDonor();
+	                    		List <Donor> donor= uiDonor.searchDonor(dbManager);
 	                    		Iterator <Donor> it2 =donor.iterator();
 	                	 		int counterDonor = 1;
 	                	 		while (it2.hasNext()){
@@ -227,7 +227,7 @@ public class UIGenericMenu {
 	                	 		if(counterDonor ==1){
 	                	 			System.out.println("Donor not found, would you like to introduce a new Donor?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiDonor.introduceNewDonor();
+	                	 				uiDonor.introduceNewDonor(dbManager);
 	                	 				break;
 	                	 			}
 	                	 		}
@@ -246,19 +246,19 @@ public class UIGenericMenu {
                     				System.out.println("Introduce the number of the donor: ");
                     				numDon = Integer.parseInt(console.readLine());
                     				Donor donUp = donor.get(numDon-1);
-                    				uiDonor.updateDonor(donUp);
+                    				uiDonor.updateDonor(donUp, dbManager);
                     				break;
                     			case 2:
                     				System.out.println("Introduce the number of the donor: ");
                     				numDon = Integer.parseInt(console.readLine());
                     				Donor donDel = donor.get(numDon-1);
-                    				uiDonor.deleteDonor(donDel);
+                    				uiDonor.deleteDonor(donDel, dbManager);
                     				break;
                     			case 3:
                     				System.out.println("Introduce the number of the donor: ");
                     				numDon = Integer.parseInt(console.readLine());
                     				Donor donOrg = donor.get(numDon-1);
-                    				uiOrgan.organsOfDonor(donOrg);
+                    				uiOrgan.organsOfDonor(donOrg, dbManager);
                     				break;
                     			case 4:
                     				break;
@@ -267,7 +267,7 @@ public class UIGenericMenu {
 	                    		break;
 	                	 	}
 	                    	case 4:
-	                    		List <Patient> pat= uiPatient.searchPatient();
+	                    		List <Patient> pat= uiPatient.searchPatient(dbManager);
 	                    		Iterator <Patient> it3 = pat.iterator();
 	                	 		int counterPat = 1;
 	                	 		while (it3.hasNext()){
@@ -278,7 +278,7 @@ public class UIGenericMenu {
 	                	 		if(counterPat ==1){
 	                	 			System.out.println("Patient not found, would you like to introduce a new patient?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiPatient.introduceNewPatient();
+	                	 				uiPatient.introduceNewPatient(dbManager);
 	                	 				break;
 	                	 			}
 	                	 		}
@@ -297,26 +297,26 @@ public class UIGenericMenu {
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat = Integer.parseInt(console.readLine());
                     				Patient patUp = pat.get(numPat-1);
-                    				uiPatient.updatePatient(patUp);
+                    				uiPatient.updatePatient(patUp,dbManager);
                     				break;
                     			case 2:
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat2 = Integer.parseInt(console.readLine());
                     				Patient patDel = pat.get(numPat2-1);
-                    				uiPatient.deletePatient(patDel);
+                    				uiPatient.deletePatient(patDel, dbManager);
                     				break;
                     			case 3:
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat3 = Integer.parseInt(console.readLine());
                     				Patient patHD = pat.get(numPat3-1);
-                    				uiPatient.patientHospitalAndDoctor(patHD.getName());
+                    				uiPatient.patientHospitalAndDoctor(patHD.getName(),dbManager);
                     				break;
                     			case 4:
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat4 = Integer.parseInt(console.readLine());
                     				//metodo al que le pasas el id paciente y te muestra las caracteristicas del organo que necesita el paciente
                     				Patient patReq = pat.get(numPat4-1);
-                    				List<Requested_organ> reqs = uiRequested.characteristicsOfRequestedOrgans(patReq.getId());
+                    				List<Requested_organ> reqs = uiRequested.characteristicsOfRequestedOrgans(patReq.getId(), dbManager);
                     				System.out.println("Patient: " + patReq.getName() + " needs the following organs: \n");
                     				Iterator <Requested_organ> itReq = reqs.iterator();
                     				int countReq = 1;

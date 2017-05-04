@@ -11,7 +11,6 @@ public class SQL_Hospital {
 
 	public SQL_Hospital(DBManager dbmanager) {
 		this.dmanager = dbmanager;
-		dmanager.connect();
 	}
 
 	public boolean insertHospital(Hospital hospital) {		

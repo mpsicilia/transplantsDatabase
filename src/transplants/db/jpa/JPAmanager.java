@@ -29,7 +29,7 @@ public class JPAmanager implements DBManagerInterface {
 	
 	public EntityManager getEManager(){
 		return em;
-	}//mmm
+	}
 	
 	@Override
 	public void connect() {
@@ -82,7 +82,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public void disconnect() {
-		// TODO Auto-generated method stub
+		em.close();
 		
 	}
 	@Override

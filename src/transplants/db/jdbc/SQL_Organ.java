@@ -16,7 +16,6 @@ public class SQL_Organ {
 
 	public SQL_Organ(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-		dbManager.connect();
 	}
 	
 	public boolean insertOrgan(Organ organ){

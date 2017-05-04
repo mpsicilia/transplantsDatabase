@@ -13,7 +13,7 @@ import transplants.db.pojos.Hospital;
 
 
 public class UI_Doctor {
-	private DBManager dbManager=new DBManager();
+
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	//atributo añadido
 	private JPAmanager jpamanager=new JPAmanager();
@@ -21,7 +21,7 @@ public class UI_Doctor {
 	public UI_Doctor(){
 	}
 	
-	public void introduceNewDoctor(){
+	public void introduceNewDoctor(DBManager dbManager){
 		try{
 			System.out.print("Name of the doctor: ");
 			String name = console.readLine();
@@ -61,7 +61,7 @@ public class UI_Doctor {
 		}
 	}
 	
-	public List<Doctor> searchDoctor(){
+	public List<Doctor> searchDoctor(DBManager dbManager){
 		try{
 			System.out.println("Introduce the name of the doctor: ");
 	 		String name = console.readLine();	 	
@@ -73,7 +73,7 @@ public class UI_Doctor {
 		return null; 
 	}
 	
-	public void updateDoctor(Doctor doct){
+	public void updateDoctor(Doctor doct, DBManager dbManager){
 		boolean again = true;	
 		try{
 			while(again){
@@ -116,7 +116,7 @@ public class UI_Doctor {
 			}
 	}
 	
-	public void deleteDoctor (Doctor doc){
+	public void deleteDoctor (Doctor doc, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(doc);
 			if(deleted){

@@ -19,7 +19,6 @@ public class SQL_Donor {
 
 	public SQL_Donor(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-		dbManager.connect();
 	}
 	
 	public boolean insertDonor (Donor donor){

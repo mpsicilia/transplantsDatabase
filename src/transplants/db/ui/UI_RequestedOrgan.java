@@ -13,14 +13,13 @@ import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
 public class UI_RequestedOrgan {
-	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	
 	public UI_RequestedOrgan(){
 		
 	}
 	
-	public void introduceNewReqOrgan(Patient p){
+	public void introduceNewReqOrgan(Patient p, DBManager dbManager){
 		try{
 			boolean more = true;//one patient can request many organs so...
 			while (more){
@@ -74,7 +73,7 @@ public class UI_RequestedOrgan {
 		}
 	}
 	
-	public List<Requested_organ> searchReqOrgan(){
+	public List<Requested_organ> searchReqOrgan(DBManager dbManager){
 		try{
 			System.out.println("Introduce the name of the requested organ: ");
 	 		String name = console.readLine();	 	
@@ -86,7 +85,7 @@ public class UI_RequestedOrgan {
 		return null; 
 	}
 	
-	public void updateReqOrgan(Requested_organ reqOrgan){
+	public void updateReqOrgan(Requested_organ reqOrgan, DBManager dbManager){
 		boolean again = true;	
 		try{
 			while(again){
@@ -129,7 +128,7 @@ public class UI_RequestedOrgan {
 			}
 	}
 	
-	public void deleteRequestOrgan (Requested_organ reqOrgan){
+	public void deleteRequestOrgan (Requested_organ reqOrgan, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(reqOrgan);
 			if(deleted){
@@ -143,7 +142,7 @@ public class UI_RequestedOrgan {
 		}
 	
 	}
-	public String patientOfRequested (Requested_organ reqOrg) {
+	public String patientOfRequested (Requested_organ reqOrg, DBManager dbManager) {
 		String namePat = "";
 		try{
 			namePat = dbManager.patientReq(reqOrg);
@@ -153,7 +152,7 @@ public class UI_RequestedOrgan {
 		return namePat;
 	}
 	
-	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPat){
+	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPat, DBManager dbManager){
 		List<Requested_organ> requests = new ArrayList<Requested_organ>();
 		try{
 			requests = dbManager.characteristicsOfRequestedOrgans(idPat);
