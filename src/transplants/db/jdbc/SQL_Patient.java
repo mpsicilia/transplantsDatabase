@@ -14,7 +14,6 @@ public class SQL_Patient {
 
 	public SQL_Patient(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-		dbManager.connect();
 	}
 	
 	public boolean insertPatient (Patient p){

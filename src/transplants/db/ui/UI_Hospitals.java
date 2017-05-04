@@ -9,7 +9,6 @@ import transplants.db.pojos.Hospital;
 
 public class UI_Hospitals {
 	
-	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	//atributo añadido
 	private JPAmanager jpamanager=new JPAmanager();
@@ -18,7 +17,7 @@ public class UI_Hospitals {
 	}
 	
 	
-	public void introduceNewHospital(){
+	public void introduceNewHospital(DBManager dbManager){
 		try{
 			System.out.print("Name: ");
 			String name = console.readLine();
@@ -40,9 +39,10 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
-			//boolean ok=dbManager.insert(hosp);
+			
+			boolean ok=dbManager.insert(hosp);
 			//linea de abajo añadida para añadir con JPA
-			boolean ok= jpamanager.insert(hosp);
+			//boolean ok= jpamanager.insert(hosp);
 			
 			if (ok){
 				System.out.print("Hospital has been introduced");
@@ -57,7 +57,7 @@ public class UI_Hospitals {
 	}
 	
 		
-	public List<Hospital> searchHospital(){
+	public List<Hospital> searchHospital(DBManager dbManager){
 		try{
 			System.out.println("Introduce the name of the hospital: ");
 	 		String name = console.readLine();	 	
@@ -70,7 +70,7 @@ public class UI_Hospitals {
 	}
 	
 	
-	public void updateHospital(Hospital hosp){
+	public void updateHospital(Hospital hosp, DBManager dbManager){
 		boolean again = true;	
 		try{
 			while(again){
@@ -129,7 +129,7 @@ public class UI_Hospitals {
 	}
 	
 	
-	public void deleteHospital (Hospital hosp){
+	public void deleteHospital (Hospital hosp, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(hosp);
 			if(deleted){
@@ -143,7 +143,7 @@ public class UI_Hospitals {
 		}
 	}
 		
-	public void DoctorHospital (String docName){
+	public void DoctorHospital (String docName, DBManager dbManager){
 		try{
 			String nameOfHospital = dbManager.hospitalOfDoctor(docName);
 			System.out.println("The doctor: "+ docName + " works in the following hospital:\n "+ nameOfHospital);

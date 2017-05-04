@@ -15,7 +15,6 @@ public class SQL_Doctor {
 	
 	public SQL_Doctor(DBManager dbmanager){
 		this.dbManager= dbmanager;
-		dbManager.connect();
 	}
 	
 	public boolean insertDoctor(Doctor doctor){		

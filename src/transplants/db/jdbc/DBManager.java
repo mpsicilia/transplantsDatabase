@@ -29,6 +29,7 @@ public class DBManager implements DBManagerInterface{
 	
 	public DBManager() {
 		super();
+		connect();
 	}
 
 	public Connection getC() {

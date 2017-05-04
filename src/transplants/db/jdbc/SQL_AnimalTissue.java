@@ -14,7 +14,6 @@ public class SQL_AnimalTissue {
 	
 	public SQL_AnimalTissue(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-		dbManager.connect();
 	}
 	
 	public boolean insertAnimalTissue (Animal_tissue animalT){

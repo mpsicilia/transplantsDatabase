@@ -7,19 +7,17 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "hospitals")
-
-
+@Table(name = "Hospitals")
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = -2900229453507535621L;
 	@Id
-	@GeneratedValue(generator="hospitals")
-	@TableGenerator(name="hospitals", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="hospitals")
+	@GeneratedValue(generator="Hospitals")
+	@TableGenerator(name="Hospitals", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Hospitals")
 	private Integer id;
 	private String name;
-	private String phone_number;
+	private String phoneNumber;
 	private String address;
 	private String city;
 	private String postcode;
@@ -27,7 +25,7 @@ public class Hospital implements Serializable{
 	//Hospital is related with doctor and patient
 	//with doctors is an n-n because one doctor can work at many hospitals and 1 hospital can have many doctors
 	@ManyToMany
-	@JoinTable(name="hospitalsdoctors",//name of the n-n table
+	@JoinTable(name="HospitalsDoctors",//name of the n-n table
 	joinColumns={@JoinColumn(name="hospital_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="doctor_id", referencedColumnName="id")})
 	private List<Doctor> doctors;
@@ -45,7 +43,7 @@ public class Hospital implements Serializable{
 	public Hospital(String name, String phone_number, String address, String city, String postcode,
 			String country) {
 		this.name = name;
-		this.phone_number = phone_number;
+		this.phoneNumber = phone_number;
 		this.address = address;
 		this.city = city;
 		this.postcode = postcode;
@@ -60,7 +58,7 @@ public class Hospital implements Serializable{
 			String country) {
 		this.id=id;
 		this.name = name;
-		this.phone_number = phone_number;
+		this.phoneNumber = phone_number;
 		this.address = address;
 		this.city = city;
 		this.postcode = postcode;
@@ -109,11 +107,11 @@ public class Hospital implements Serializable{
 	}
 
 	public String getPhone_number() {
-		return phone_number;
+		return phoneNumber;
 	}
 
 	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+		this.phoneNumber = phone_number;
 	}
 
 	public String getAddress() {
@@ -199,7 +197,7 @@ public class Hospital implements Serializable{
 	@Override
 	public String toString() {
 	
-		return "Hospital:id =" + id + ", name=" + name + ", phone_number=" + phone_number + ", address=" + address + ", city=" + city
+		return "Hospital:id =" + id + ", name=" + name + ", phone_number=" + phoneNumber + ", address=" + address + ", city=" + city
 				+ ", postcode=" + postcode + ", country=" + country + "]";
 	}
 	

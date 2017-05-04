@@ -20,14 +20,13 @@ import transplants.db.pojos.Patient;
 
 public class UI_Patient {
 	
-	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	//atributo añadido
 		private JPAmanager jpamanager=new JPAmanager();
 	public UI_Patient(){		
 	}
 	
-	public Patient introduceNewPatient (){
+	public Patient introduceNewPatient (DBManager dbManager){
 		try{
 			System.out.println("Name: ");
 			String name = console.readLine();
@@ -110,7 +109,7 @@ public class UI_Patient {
 		return null;
 	}
 	
-	public List<Patient> searchPatient(){
+	public List<Patient> searchPatient(DBManager dbManager){
 		try{
 			System.out.println("Introduce the name of the patient: ");
 	 		String name = console.readLine();	 	
@@ -122,7 +121,7 @@ public class UI_Patient {
 		return null; 
 	}
 	
-	public void updatePatient(Patient p){
+	public void updatePatient(Patient p, DBManager dbManager){
 		boolean again = true;
 		try{
 			while(again){
@@ -194,7 +193,7 @@ public class UI_Patient {
 		
 	}
 	
-	public void deletePatient (Patient pat){
+	public void deletePatient (Patient pat, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(pat);
 			if(deleted){
@@ -208,7 +207,7 @@ public class UI_Patient {
 		}
 	}
 	
-	public void patientHospitalAndDoctor (String ptName){
+	public void patientHospitalAndDoctor (String ptName, DBManager dbManager){
 		try{
 			String nameOfHosp= dbManager.hospitalOfPatient(ptName);
 			List<Doctor> patDoctors = dbManager.doctorOfPatient(ptName);
@@ -220,7 +219,7 @@ public class UI_Patient {
 		}
 	}
 	
-	public List<Patient> allPatients (){
+	public List<Patient> allPatients (DBManager dbManager){
 		List<Patient> patList = new ArrayList<Patient>();
 		try{
 			patList = dbManager.selectAllPatients();

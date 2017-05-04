@@ -16,7 +16,6 @@ public class SQL_Request {
 
 	public SQL_Request(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-		dbManager.connect();
 	}
 	
 	public boolean insertRequest(Requested_organ organ){

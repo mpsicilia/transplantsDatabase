@@ -10,14 +10,13 @@ import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Hospital;
 
 public class UI_AnimalTissue {
-	private DBManager dbManager=new DBManager();
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	
 	public UI_AnimalTissue(){		
 	}
 	
 	
-	public void introduceNewAnimalTissue(){
+	public void introduceNewAnimalTissue(DBManager dbManager){
 		try{
 			System.out.print("Name of the animal tissue: ");
 			String name = console.readLine();
@@ -44,7 +43,7 @@ public class UI_AnimalTissue {
 	}
 	
 		
-	public List<Animal_tissue> searchAnimalTissue(){
+	public List<Animal_tissue> searchAnimalTissue(DBManager dbManager){
 		try{
 			System.out.println("Introduce the name of the animal Tissue: ");
 	 		String name = console.readLine();	 	
@@ -57,7 +56,7 @@ public class UI_AnimalTissue {
 	}
 	
 	
-	public void updateAnimalTissue(Animal_tissue animalT){
+	public void updateAnimalTissue(Animal_tissue animalT, DBManager dbManager){
 		boolean again = true;	
 		try{
 			while(again){
@@ -107,7 +106,7 @@ public class UI_AnimalTissue {
 	}
 	
 	
-	public void deleteAnimalTissue (Animal_tissue animalT){
+	public void deleteAnimalTissue (Animal_tissue animalT, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(animalT);
 			if(deleted){
