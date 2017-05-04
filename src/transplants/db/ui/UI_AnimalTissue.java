@@ -13,8 +13,7 @@ public class UI_AnimalTissue {
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	
 	public UI_AnimalTissue(){		
-	}
-	
+	}	
 	
 	public void introduceNewAnimalTissue(DBManager dbManager){
 		try{

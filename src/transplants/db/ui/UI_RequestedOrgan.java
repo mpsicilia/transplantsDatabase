@@ -53,24 +53,28 @@ public class UI_RequestedOrgan {
 				}
 			
 			}
-			/*quiero un corazon, me mira todos los organos de animales y todos los de organos
-			 * y me hace la fk con el que haya
-			//foreign keys, que pueden ser con el animal tissue (extra table) o organ donated (tabla de organ)
-			System.out.println("Choose if the requested organ is going to be supplied by an animal tissue or by a human organ. [animal/human]");
-			//TO DO --->>metodo que muestre todos los animaltissues y organs disponibles
-			//TO DO --->>cuando elija, ver si son compatibles
-			String elect = console.readLine();
-			boolean organOK = false;
-			if(elect.equalsIgnoreCase("human")){
-				//metodo que introduzca pk en tablas no extras
-			}
-			if(elect.equalsIgnoreCase("animal")){
-				//organOK = dbManager.insertPrimaryKeyRequestedAnimal(reqOrgan.getId(), id_animal);
-			}*/
 			
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
+	}
+	public boolean OrganComingFromDonor(Requested_organ req){
+		//mirariamos si nuestro request esta entre los organos que se van a donar. 
+		//de serlo relacionariamos con la FK el request y el organo!!!!
+		    // devolveriamos true y le mostrariamos al usuario que su organo es humano
+		//despues de ello le preguntariamos sobre el compatibility test que si lo queeria hacer.
+		    //en caso de ser compatibles guay, se podria llevar a cabo la operacion
+			//en  caso de no serlo, llamar al metodo que busque otro organo que sea compatible
+                  //si no hubiese organo hacer una lista de espera, ordenada por el addition date
+		return false;
+		
+	}
+	public boolean OrganComingFromAnimal(Requested_organ req){
+		//mirariamos si nuestro request esta entre los tejidos de animales. 
+		//de serlo relacionariamos con la FK tabla entre animal y request!!!!!!!
+		    // devolveriamos true y le mostrariamos al usuario que su organo es de animal
+		//...mismo proceso que arriba
+		return false;
 	}
 	
 	public List<Requested_organ> searchReqOrgan(DBManager dbManager){
