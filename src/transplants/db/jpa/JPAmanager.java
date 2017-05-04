@@ -29,7 +29,7 @@ public class JPAmanager implements DBManagerInterface {
 	
 	public EntityManager getEManager(){
 		return em;
-	}
+	}//mmm
 	
 	@Override
 	public void connect() {
