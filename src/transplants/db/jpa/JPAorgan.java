@@ -14,7 +14,6 @@ public class JPAorgan {
 	
 	public JPAorgan(JPAmanager jpamanager){
 		this.jpaManager=jpamanager;
-		jpaManager.connect();
 		
 	}
 

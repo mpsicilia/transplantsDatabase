@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 
 import java.util.List;
-
-import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Donor;
 
@@ -23,7 +21,7 @@ public class UI_Donor {
 		
 	}
 	
-	public Donor introduceNewDonor(DBManager dbManager){
+	public Donor introduceNewDonor(JPAmanager jpaManager){
 		Donor donor = new Donor();
 		try{
 			System.out.print("Name: ");
@@ -64,7 +62,7 @@ public class UI_Donor {
 			
 			
 			
-			boolean ok=dbManager.insert(donor);
+			boolean ok=jpaManager.insert(donor);
 			if (ok){
 				System.out.print("Donor has been introduced");
 			}else{
@@ -78,11 +76,11 @@ public class UI_Donor {
 		return donor;
 	}
 	
-	public List<Donor> searchDonor(DBManager dbManager){
+	public List<Donor> searchDonor(JPAmanager jpaManager){
 		try{
 			System.out.println("Introduce the name of the donor: ");
 	 		String name = console.readLine();	 	
-			List<Donor> donor = dbManager.searchDonor(name);
+			List<Donor> donor = jpaManager.searchDonor(name);
 	 		return donor;
 		}catch (IOException ex){
 			ex.printStackTrace();
@@ -90,7 +88,7 @@ public class UI_Donor {
 		return null; 
 	}
 	
-	public void updateDonor(Donor donor, DBManager dbManager){
+	public void updateDonor(Donor donor, JPAmanager jpaManager){
 		boolean again = true;	
 		try{
 			while(again){
@@ -139,7 +137,7 @@ public class UI_Donor {
 				}
 			}
 			
-			boolean updated = dbManager.update(donor);
+			boolean updated = jpaManager.update(donor);
 			if(updated){
 				System.out.println("Donor has been updated. \n"
 						+ donor.toString());
@@ -153,9 +151,9 @@ public class UI_Donor {
 			}
 	}
 	
-	public void deleteDonor (Donor donor, DBManager dbManager){
+	public void deleteDonor (Donor donor, JPAmanager jpaManager){
 		try{
-			boolean deleted = dbManager.delete(donor);
+			boolean deleted = jpaManager.delete(donor);
 			if(deleted){
 				System.out.println("Donor has been deleted.");
 			}
@@ -167,10 +165,10 @@ public class UI_Donor {
 		}
 	}
 	
-	public Donor getDonorOfOrgan (Organ org, DBManager dbManager){
+	public Donor getDonorOfOrgan (Organ org, JPAmanager jpaManager){
 		Donor don = new Donor();
 		try{
-			don = dbManager.getDonorOfOrg(org.getName());
+			don = jpaManager.getDonorOfOrg(org.getName());
 		}catch (Exception e){
 			e.printStackTrace();
 		}

@@ -15,7 +15,6 @@ private JPAmanager jpaManager;
 	
 	public JPArequest(JPAmanager jpamanager){
 		this.jpaManager=jpamanager;
-		jpaManager.connect();
 		
 	}
 

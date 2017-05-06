@@ -8,6 +8,7 @@ import java.util.List;
 
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
@@ -26,6 +27,7 @@ public class UIGenericMenu {
 	
 	public UIGenericMenu(){
 		DBManager dbManager = new DBManager();
+		JPAmanager jpaManager= new JPAmanager();
 		UI_Hospitals uiHospital=new UI_Hospitals();
 		UI_Doctor uiDoctor=new UI_Doctor();
 		UI_Donor uiDonor=new UI_Donor();
@@ -85,19 +87,25 @@ public class UIGenericMenu {
 	                    switch (option1){
 		                    case 1:
 		                    	uiHospital.introduceNewHospital(dbManager);
+		                    	//En caso de que queramos hacerlas con JPA; además habría que añadir en UIPojo el método
+		                    	//al que le pasas JPAmanager en vez de DBmanager
+		                    	//uiHospital.introduceNewHospital(jpaManager);
 		                    	break;
 		                    case 2:
 		                    	uiDoctor.introduceNewDoctor(dbManager);
+		                    	//uiDoctor.introduceNewDoctor(jpaManager);
 		                    	break;
 		                    case 3:
-		                    	Donor d = uiDonor.introduceNewDonor(dbManager);
+		                    	Donor d = uiDonor.introduceNewDonor(jpaManager);
 		                    	System.out.println("Introduce the organ that the donor donates. ");
+		                    	//Donor in JPA but organ in jdbc
 		                    	uiOrgan.introduceNewOrgan(d, dbManager);
 		                    	//foreign keys
 		                    	break;
 		                    case 4:
-		                    	Patient p = uiPatient.introduceNewPatient(dbManager);
+		                    	Patient p = uiPatient.introduceNewPatient(jpaManager);
 		                    	System.out.println("Introduce the organ that the patient needs. ");
+		                    	//patient in JPA but requested organ in jdbc
 		                    	uiRequested.introduceNewReqOrgan(p,dbManager);
 		                    	//foreign keys in requested organ
 		                    	break;
@@ -216,7 +224,7 @@ public class UIGenericMenu {
 	                    		break;
 	                	 	}		
 	                    	case 3:
-	                    		List <Donor> donor= uiDonor.searchDonor(dbManager);
+	                    		List <Donor> donor= uiDonor.searchDonor(jpaManager);
 	                    		Iterator <Donor> it2 =donor.iterator();
 	                	 		int counterDonor = 1;
 	                	 		while (it2.hasNext()){
@@ -227,7 +235,7 @@ public class UIGenericMenu {
 	                	 		if(counterDonor ==1){
 	                	 			System.out.println("Donor not found, would you like to introduce a new Donor?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiDonor.introduceNewDonor(dbManager);
+	                	 				uiDonor.introduceNewDonor(jpaManager);
 	                	 				break;
 	                	 			}
 	                	 		}
@@ -246,13 +254,13 @@ public class UIGenericMenu {
                     				System.out.println("Introduce the number of the donor: ");
                     				numDon = Integer.parseInt(console.readLine());
                     				Donor donUp = donor.get(numDon-1);
-                    				uiDonor.updateDonor(donUp, dbManager);
+                    				uiDonor.updateDonor(donUp, jpaManager);
                     				break;
                     			case 2:
                     				System.out.println("Introduce the number of the donor: ");
                     				numDon = Integer.parseInt(console.readLine());
                     				Donor donDel = donor.get(numDon-1);
-                    				uiDonor.deleteDonor(donDel, dbManager);
+                    				uiDonor.deleteDonor(donDel, jpaManager);
                     				break;
                     			case 3:
                     				System.out.println("Introduce the number of the donor: ");
@@ -267,7 +275,7 @@ public class UIGenericMenu {
 	                    		break;
 	                	 	}
 	                    	case 4:
-	                    		List <Patient> pat= uiPatient.searchPatient(dbManager);
+	                    		List <Patient> pat= uiPatient.searchPatient(jpaManager);
 	                    		Iterator <Patient> it3 = pat.iterator();
 	                	 		int counterPat = 1;
 	                	 		while (it3.hasNext()){
@@ -278,7 +286,7 @@ public class UIGenericMenu {
 	                	 		if(counterPat ==1){
 	                	 			System.out.println("Patient not found, would you like to introduce a new patient?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiPatient.introduceNewPatient(dbManager);
+	                	 				uiPatient.introduceNewPatient(jpaManager);
 	                	 				break;
 	                	 			}
 	                	 		}
@@ -297,19 +305,19 @@ public class UIGenericMenu {
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat = Integer.parseInt(console.readLine());
                     				Patient patUp = pat.get(numPat-1);
-                    				uiPatient.updatePatient(patUp,dbManager);
+                    				uiPatient.updatePatient(patUp,jpaManager);
                     				break;
                     			case 2:
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat2 = Integer.parseInt(console.readLine());
                     				Patient patDel = pat.get(numPat2-1);
-                    				uiPatient.deletePatient(patDel, dbManager);
+                    				uiPatient.deletePatient(patDel, jpaManager);
                     				break;
                     			case 3:
                     				System.out.println("Introduce the number of the patient: ");
                     				int numPat3 = Integer.parseInt(console.readLine());
                     				Patient patHD = pat.get(numPat3-1);
-                    				uiPatient.patientHospitalAndDoctor(patHD.getName(),dbManager);
+                    				uiPatient.patientHospitalAndDoctor(patHD.getName(),jpaManager);
                     				break;
                     			case 4:
                     				System.out.println("Introduce the number of the patient: ");

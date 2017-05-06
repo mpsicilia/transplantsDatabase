@@ -25,6 +25,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	public JPAmanager(){
 		super();
+		connect();
 	}
 	
 	public EntityManager getEManager(){

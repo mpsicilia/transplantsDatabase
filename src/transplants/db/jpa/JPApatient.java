@@ -12,7 +12,6 @@ public class JPApatient {
 
 	public JPApatient(JPAmanager jpamanager){
 		this.jpaManager=jpamanager;
-		jpaManager.connect();
 		
 	}
 public boolean insert(Patient patient) {

@@ -20,7 +20,6 @@ public class JPAdoctor {
 
 	public JPAdoctor(JPAmanager jpamanager){
 		this.jpaManager=jpamanager;
-		jpaManager.connect();
 		
 	}
 	public boolean insert(Doctor doctor) {
