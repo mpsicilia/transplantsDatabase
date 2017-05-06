@@ -18,10 +18,11 @@ public class JPAmanager implements DBManagerInterface {
 	
 	private EntityManager em;
 	private JPAhospital hosp;
-	/*private JPAdoctor doct;
+	// Rodrigo: Comments removed so it works
+	private JPAdoctor doct;
 	private JPApatient pat;
-	private JPAdonor don;	*/
-	
+	private JPAdonor don;
+
 
 	public JPAmanager(){
 		super();
@@ -57,8 +58,8 @@ public class JPAmanager implements DBManagerInterface {
 				Hospital hospital = (Hospital) obj;
 				return hosp.insert(hospital);
 			}
-
-			/*if (Doctor.class == obj.getClass()) {
+			// Rodrigo: Comments removed so it works
+			if (Doctor.class == obj.getClass()) {
 				doct = new JPAdoctor(this);
 				Doctor doctor = (Doctor) obj;
 				return doct.insert(doctor);
@@ -72,7 +73,7 @@ public class JPAmanager implements DBManagerInterface {
 				don=new JPAdonor(this);
 				Donor donor=(Donor) obj;
 				return don.insert(donor);
-			}*/
+			}
 				 
 
 		} catch (Exception e) {
