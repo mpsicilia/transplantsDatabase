@@ -253,4 +253,10 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
+	@Override
+	public String searchHospital(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

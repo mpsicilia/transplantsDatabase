@@ -48,6 +48,7 @@ public class DBManager implements DBManagerInterface{
 		
 	}
 
+
 	@Override
 	public void disconnect() {
 		try {
@@ -212,6 +213,18 @@ public class DBManager implements DBManagerInterface{
 		}
 		return null;
 }
+	//new method to use in UIDOCTOR
+	public String searchHospital(Integer id){
+		try{
+			hosp = new SQL_Hospital(this); //create connection
+			String namehosp= hosp.Hospitalofdoctor(id);
+			return namehosp;
+			}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 		
 	@Override
 	public List<Doctor> searchDoctor(String name) {

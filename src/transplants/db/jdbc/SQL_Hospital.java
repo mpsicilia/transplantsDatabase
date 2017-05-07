@@ -58,6 +58,26 @@ public class SQL_Hospital {
 		}
 		return lookForHospital;
 	}
+	//new method that searches for a hospital with an id-->to use in UIDOCTOR
+	//NOSE SI ESTA BIEN EL SQL escrito
+	public String Hospitalofdoctor (Integer idhosp){
+		String hosp = "";
+		try{
+			Statement stmt = dmanager.getC().createStatement();
+			String searchSql = "SELECT * FROM Hospitals "
+					+ "WHERE id = "+ idhosp; 
+			ResultSet rs = stmt.executeQuery(searchSql);
+			
+			while (rs.next()) {
+				hosp = rs.getString(2);
+			}
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		} 
+		return hosp;
+	}
+	
 	
 	//method that tell us given a specific doctor, in which hospital he works
 	public List<Hospital> searchHospitalsOfDoctor (String doctorName){

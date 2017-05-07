@@ -33,6 +33,7 @@ public interface DBManagerInterface {
 	public boolean requestedFKinOrgan (int idR, int idO);
 	
 	public List<Hospital> searchHosp(String name); 
+	public String searchHospital(Integer id);
 	public List<Animal_tissue> searchAnimalTissue(String name); 
 	public List<Doctor> searchDoctor(String name); 
 	public List<Donor> searchDonor(String name); 

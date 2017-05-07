@@ -20,6 +20,7 @@ public class JPAdoctor {
 
 	public JPAdoctor(JPAmanager jpamanager){
 		this.jpaManager=jpamanager;
+		jpaManager.connect();
 		
 	}
 	public boolean insert(Doctor doctor) {
@@ -65,13 +66,20 @@ public class JPAdoctor {
     				int id2=hospdoctor.getId();
     				if(id1==id2){
     					allhosp.addDoctor(doctor);
-    					doctor.addHospital(hospdoctor);
-    					//esta ultima line creo que no haria falta porque la lista de hospitales del doctor ya estaria 
+    					//doctor.addHospital(hospdoctor);
+    					//esta ultima linea creo que no haria falta porque la lista de hospitales del doctor ya estaria 
     					//inicializada en Uidoctor como he dicho arriba.
     					
     				}
     			}
     		}
+    			
+    				
+    
+    		
+    	
+			
+	 	
 			
 			return true;
 		

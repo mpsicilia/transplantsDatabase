@@ -41,6 +41,7 @@ public class UI_Doctor {
 			int times = Integer.parseInt(console.readLine());
 			int count = 0;
 			boolean ok2 = false;
+			List <Hospital> listHospital=doct.getHospital();
 			do{//first we show to the user all the hospitals
 				List <Hospital> listHosp=dbManager.selectAllHospitals();
 				Iterator <Hospital> itH = listHosp.iterator();
@@ -51,17 +52,27 @@ public class UI_Doctor {
 				System.out.print("Introduce the id of the hospital in which the doctor works: ");
 				Integer idHospYouChoose = Integer.parseInt(console.readLine());
 				ok2=dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, id);
+				
+				
 				count ++;
+				//ME DA PROBLEMAS PORQUE BUSCO CUANDO AUN NO SE HA UPDATE LA DB (busca un hospital que aun no esta guardado)
+				//new line
+				//TENIENDO EL ID DEL HOSPITAL, BUSCO SU NOMBRE Y UNA VEZ LO TENGO BUSCO HOSPITAL CON ESE NOMBRE Y LO GUARDO EN LA LISTA
+				//DE HOSPITALES DEL DOCTOR.
+				String namehospital=dbManager.searchHospital(idHospYouChoose);
+				listHospital=dbManager.searchHosp(namehospital);
+				doct.setHospital(listHospital);//AQUI ES DONDE SE ACTUALIZA LA LISTA DE HOSPITALES DEL DOCTOR.
+				
 			}while (count<times);					
 						
-			
+			jpamanager.insert(doct);
 			if (ok && ok2){
 				System.out.print("The doctor has been introduced correctly");
 			}else{
 				System.out.print("The doctor has NOT been introduced");
 			}
 			//añado doctor con JPA
-			jpamanager.insert(doct);
+			
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
