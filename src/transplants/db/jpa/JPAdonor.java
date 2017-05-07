@@ -9,38 +9,30 @@ import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
 
 public class JPAdonor {
-	private EntityManager em;
+	private JPAmanager jpaManager;
 
 	public JPAdonor(JPAmanager jpamanager){
-		em=jpamanager.getEManager();
+		this.jpaManager=jpamanager;
 		
 	}
-public boolean insert(Donor donor){
 	
-	try {
-	
-		//EntityManager em = Persistence.createEntityManagerFactory("transplants-provider").createEntityManager();
-		em.getTransaction().begin();
-		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
-		em.getTransaction().commit();
-	
-		em.getTransaction().begin();
-		// Store the object
-		em.persist(donor);
+	public boolean insert(Donor donor){
 		
-		em.getTransaction().commit();
+		try {			
+			jpaManager.getEManager().getTransaction().begin();
+			// Store the object
+			jpaManager.getEManager().persist(donor);			
+			jpaManager.getEManager().getTransaction().commit();		
+			List<Organ> organs=donor.getOrgans();
+			return true;
 		
-		
-		em.close();
-		List<Organ> organs=donor.getOrgans();
-	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+			
 		
 		
-	
-	} catch (Exception e) {
-		e.printStackTrace();
 	}
-	return false;
-}
 }
 
