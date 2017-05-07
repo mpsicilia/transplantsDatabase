@@ -17,6 +17,8 @@ public class Donor extends Person implements Serializable{
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Donors")
 	private Integer id;
 	private static final long serialVersionUID = 6705263044123670258L;
+	// Rodrigo: Corrected error in column name
+	@Column(name="deadAlive")
 	private String deadOrAlive;
    
 	@OneToMany(mappedBy="donor") 
@@ -36,7 +38,10 @@ public class Donor extends Person implements Serializable{
 	
 	public Donor (Integer id, String name, Date birthDate, Float weight, Float height, String gender, 
 		      String deadOrAlive, String bloodType){
-		super(id, name, birthDate, weight, height, gender, bloodType);
+		// Rodrigo: Changed call to superclass' constructor
+		super(name, birthDate, weight, height, gender, bloodType);
+		// Rodrigo: Added id initialization
+		this.id = id;
 		this.deadOrAlive=deadOrAlive;
 		super.birthDate=birthDate;
     }
@@ -77,8 +82,15 @@ public class Donor extends Person implements Serializable{
 				+ ", weight=" + weight + ", height=" + height + ", gender=" + gender + ","
 				+ " bloodType=" + bloodType + ", deadOrAlive=" + deadOrAlive + "]";
 	}
-	
-	
+
+	// Rodrigo: Added getId and setId
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 }
 
