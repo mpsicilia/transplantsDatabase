@@ -513,15 +513,15 @@ public class DBManager implements DBManagerInterface{
 	}
 
 	@Override
-	public String hospitalOfDoctor(String name) {
-		String hospital = "";
+	public List<Hospital> hospitalsOfDoctor(String name) {
+		List<Hospital> hospitals = new ArrayList<Hospital>();
 		try{
 			hosp = new SQL_Hospital(this);
-			hospital = hosp.searchHospitalOfDoctor(name);
+			hospitals = hosp.searchHospitalsOfDoctor(name);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return hospital;
+		return hospitals;
 	}
 	@Override
 	public Donor getDonorOfOrg (String nameO){

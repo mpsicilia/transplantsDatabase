@@ -57,7 +57,7 @@ public interface DBManagerInterface {
 	public String patientReq (Requested_organ req);
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient);
 	public List<Organ> organsOfDonor (int idDonor);
-	public String hospitalOfDoctor(String name);
+	public List<Hospital> hospitalsOfDoctor(String name);
 	public String hospitalOfPatient(String pName);
 	public List<Doctor> doctorOfPatient(String pName);
 	public Donor getDonorOfOrg (String nameO);

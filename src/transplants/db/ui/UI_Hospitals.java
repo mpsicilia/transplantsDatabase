@@ -1,6 +1,7 @@
 package transplants.db.ui;
 
 import java.io.*;
+import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
@@ -145,8 +146,14 @@ public class UI_Hospitals {
 		
 	public void DoctorHospital (String docName, DBManager dbManager){
 		try{
-			String nameOfHospital = dbManager.hospitalOfDoctor(docName);
-			System.out.println("The doctor: "+ docName + " works in the following hospital:\n "+ nameOfHospital);
+			List<Hospital> hospitals = dbManager.hospitalsOfDoctor(docName);
+			System.out.println("The doctor: "+ docName + " works in the following hospitals:\n ");
+			Iterator <Hospital> it = hospitals.iterator();
+			int count = 1;
+			while (it.hasNext()){
+				System.out.println(count + ". " + it.next().getName());
+				count++;
+			}
 		}catch (Exception e){
 			e.printStackTrace();
 		}

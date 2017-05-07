@@ -233,7 +233,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 	@Override
-	public String hospitalOfDoctor(String name) {
+	public List<Hospital> hospitalsOfDoctor(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

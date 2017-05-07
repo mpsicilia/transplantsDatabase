@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 import java.sql.PreparedStatement;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Organ;
 
 public class SQL_Hospital {
 
@@ -59,8 +60,8 @@ public class SQL_Hospital {
 	}
 	
 	//method that tell us given a specific doctor, in which hospital he works
-	public String searchHospitalOfDoctor (String doctorName){
-		String nameHosp="";
+	public List<Hospital> searchHospitalsOfDoctor (String doctorName){
+		List<Hospital> hosps = new ArrayList<Hospital>();
 		try{
 			Statement stmt = dmanager.getC().createStatement();
 			String searchSql = "SELECT * FROM Hospitals "
@@ -68,17 +69,24 @@ public class SQL_Hospital {
 					+ "JOIN Doctors AS Doct ON Doct.id=HospDocts.doctor_id "
 					+ "WHERE Doct.name LIKE '%" + doctorName + "%'";
 			ResultSet rs = stmt.executeQuery(searchSql);
-			
-			while (rs.next()) {
-				nameHosp = rs.getString(2);
-				
+			while (rs.next()){
+				Integer id = rs.getInt(1);
+				String nameHosp = rs.getString(2);
+				String phone = rs.getString("phoneNumber");
+				String address = rs.getString("address");
+				String city = rs.getString("city");
+				String pc = rs.getString("postcode");
+				String country =  rs.getString("country");
+				Hospital h = new Hospital(id, nameHosp, phone, address, city, pc, country);
+				hosps.add(h);
 			}
+			
 			rs.close();
 			stmt.close();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return nameHosp;
+		return hosps;
 	}
 	
 	//given a patient name is going to return the hospital in which the patient is

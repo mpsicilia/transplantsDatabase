@@ -32,22 +32,28 @@ public class UI_Doctor {
 			System.out.print("Specialization: ");
 			String specializ = console.readLine();
 			
-			System.out.print("Introduce the id of the hospital in which the doctor works: ");
-			//first we show to the user all the hospitals
-			List <Hospital> listHosp=dbManager.selectAllHospitals();
-			Iterator <Hospital> itH = listHosp.iterator();
-			while(itH.hasNext()){
-				Hospital hosp = itH.next();
-				System.out.println(hosp);
-			}
-			Integer idHospYouChoose = Integer.parseInt(console.readLine());
 			Doctor doct= new Doctor(name, regNumber, specializ);
-			
 			boolean ok=dbManager.insert(doct);
 			
+			//get the id of the doctor, to use it when introducing FK
 			Integer id = dbManager.getIdOfDoctor(doct);
-			
-			boolean ok2=dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, id);
+			System.out.println("In how many hospitals is going to work the doctor?");
+			int times = Integer.parseInt(console.readLine());
+			int count = 0;
+			boolean ok2 = false;
+			do{//first we show to the user all the hospitals
+				List <Hospital> listHosp=dbManager.selectAllHospitals();
+				Iterator <Hospital> itH = listHosp.iterator();
+				while(itH.hasNext()){
+					Hospital hosp = itH.next();
+					System.out.println(hosp);
+				}
+				System.out.print("Introduce the id of the hospital in which the doctor works: ");
+				Integer idHospYouChoose = Integer.parseInt(console.readLine());
+				ok2=dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, id);
+				count ++;
+			}while (count<times);					
+						
 			
 			if (ok && ok2){
 				System.out.print("The doctor has been introduced correctly");

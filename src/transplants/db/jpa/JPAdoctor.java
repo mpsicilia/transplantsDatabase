@@ -72,13 +72,6 @@ public class JPAdoctor {
     				}
     			}
     		}
-    			
-    				
-    
-    		
-    	
-			
-	 	
 			
 			return true;
 		

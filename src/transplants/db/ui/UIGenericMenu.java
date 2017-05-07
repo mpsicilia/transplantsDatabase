@@ -215,7 +215,6 @@ public class UIGenericMenu {
                     				numDoct = Integer.parseInt(console.readLine());
                     				Doctor doctSearch = doct.get(numDoct-1);
                     				uiHospital.DoctorHospital(doctSearch.getNameOfDoctor(), dbManager);
-                    				//we need to ask the user in which hospital is going to work each doctor
                     				break;
                     			case 4:
                     				break;
