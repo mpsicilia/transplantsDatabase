@@ -150,10 +150,11 @@ public class UI_Hospitals {
 			System.out.println("The doctor: "+ docName + " works in the following hospitals:\n ");
 			Iterator <Hospital> it = hospitals.iterator();
 			int count = 1;
-			while (it.hasNext()){
-				System.out.println(count + ". " + it.next().getName());
-				count++;
+				while (it.hasNext()){
+			 	    System.out.println(count + ". " + it.next().getName());
+			 		count++;
 			}
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}

@@ -70,15 +70,15 @@ public class SQL_Hospital {
 					+ "WHERE Doct.name LIKE '%" + doctorName + "%'";
 			ResultSet rs = stmt.executeQuery(searchSql);
 			while (rs.next()){
-				Integer id = rs.getInt(1);
-				String nameHosp = rs.getString(2);
-				String phone = rs.getString("phoneNumber");
-				String address = rs.getString("address");
-				String city = rs.getString("city");
-				String pc = rs.getString("postcode");
-				String country =  rs.getString("country");
-				Hospital h = new Hospital(id, nameHosp, phone, address, city, pc, country);
-				hosps.add(h);
+				 Integer id = rs.getInt(1);
+				 String nameHosp = rs.getString(2);
+				 String phone = rs.getString(3);
+				 String address = rs.getString(4);
+				 String city = rs.getString(5);
+				 String pc = rs.getString(6);
+				 String country =  rs.getString(6);
+				 Hospital h = new Hospital(id, nameHosp, phone, address, city, pc, country);
+				 hosps.add(h);
 			}
 			
 			rs.close();
