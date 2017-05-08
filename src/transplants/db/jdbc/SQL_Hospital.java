@@ -64,18 +64,18 @@ public class SQL_Hospital {
 		String hosp = "";
 		try{
 			Statement stmt = dmanager.getC().createStatement();
-			String searchSql = "SELECT * FROM Hospitals "
+			String searchSql = "SELECT name FROM Hospitals "
 					+ "WHERE id = "+ idhosp; 
 			ResultSet rs = stmt.executeQuery(searchSql);
 			
 			while (rs.next()) {
-				hosp = rs.getString(2);
+				hosp = rs.getString("name");
 			}
 			
 		}catch (Exception e){
 			e.printStackTrace();
 		} 
-		return hosp;
+		return hosp; //devuelve el nombre del hospital
 	}
 	
 	

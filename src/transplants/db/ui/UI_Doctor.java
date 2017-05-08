@@ -15,7 +15,7 @@ import transplants.db.pojos.Hospital;
 public class UI_Doctor {
 
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
-	//atributo añadido
+	
 	private JPAmanager jpamanager=new JPAmanager();
 	
 	public UI_Doctor(){
@@ -55,23 +55,24 @@ public class UI_Doctor {
 				
 				
 				count ++;
-				//ME DA PROBLEMAS PORQUE BUSCO CUANDO AUN NO SE HA UPDATE LA DB (busca un hospital que aun no esta guardado)
-				//new line
+				
 				//TENIENDO EL ID DEL HOSPITAL, BUSCO SU NOMBRE Y UNA VEZ LO TENGO BUSCO HOSPITAL CON ESE NOMBRE Y LO GUARDO EN LA LISTA
 				//DE HOSPITALES DEL DOCTOR.
 				String namehospital=dbManager.searchHospital(idHospYouChoose);
 				listHospital=dbManager.searchHosp(namehospital);
-				doct.setHospital(listHospital);//AQUI ES DONDE SE ACTUALIZA LA LISTA DE HOSPITALES DEL DOCTOR.
+				doct.setHospital(listHospital);
 				
-			}while (count<times);					
+			}
+			while (count<times);					
 						
 			jpamanager.insert(doct);
+			
 			if (ok && ok2){
 				System.out.print("The doctor has been introduced correctly");
 			}else{
 				System.out.print("The doctor has NOT been introduced");
 			}
-			//añado doctor con JPA
+			
 			
 		}catch(IOException ex){
 			ex.printStackTrace();
