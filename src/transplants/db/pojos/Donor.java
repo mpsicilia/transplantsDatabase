@@ -17,9 +17,7 @@ public class Donor extends Person implements Serializable{
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Donors")
 	private Integer id;
 	private static final long serialVersionUID = 6705263044123670258L;
-	// Rodrigo: Corrected error in column name
-	@Column(name="deadAlive")
-	private String deadOrAlive;
+	private String deadAlive;
    
 	@OneToMany(mappedBy="donor") 
 	private List<Organ> organs;
@@ -31,27 +29,27 @@ public class Donor extends Person implements Serializable{
 	public Donor (String name, Date birthDate, Float weight, Float height, String gender, 
 			      String deadOrAlive, String bloodType){
 		super(name, birthDate, weight, height, gender, bloodType);
-		this.deadOrAlive=deadOrAlive;
+		this.deadAlive=deadOrAlive;
 		super.birthDate=birthDate;
 		
 	}
 	
 	public Donor (Integer id, String name, Date birthDate, Float weight, Float height, String gender, 
 		      String deadOrAlive, String bloodType){
-		// Rodrigo: Changed call to superclass' constructor
+		
 		super(name, birthDate, weight, height, gender, bloodType);
-		// Rodrigo: Added id initialization
+		
 		this.id = id;
-		this.deadOrAlive=deadOrAlive;
+		this.deadAlive=deadOrAlive;
 		super.birthDate=birthDate;
     }
 
 	public String getDeadOrAlive() {
-		return deadOrAlive;
+		return deadAlive;
 	}
 
 	public void setDeadOrAlive(String deadOrAlive) {
-		this.deadOrAlive = deadOrAlive;
+		this.deadAlive = deadOrAlive;
 	}
 
 	public List<Organ> getOrgans(){
@@ -80,10 +78,9 @@ public class Donor extends Person implements Serializable{
 	public String toString() {
 		return "Donor [id=" + id + ", name=" + name + ", birthDate=" + birthDate
 				+ ", weight=" + weight + ", height=" + height + ", gender=" + gender + ","
-				+ " bloodType=" + bloodType + ", deadOrAlive=" + deadOrAlive + "]";
+				+ " bloodType=" + bloodType + ", deadOrAlive=" + deadAlive + "]";
 	}
 
-	// Rodrigo: Added getId and setId
 	public Integer getId() {
 		return id;
 	}
