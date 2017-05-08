@@ -34,7 +34,7 @@ public class JPAdoctor {
 			
 			
 			
-			Query q2=jpaManager.getEManager().createNativeQuery("SELECT * FROM hospitals",Hospital.class);
+		
 			
 			
 			
@@ -47,6 +47,7 @@ public class JPAdoctor {
     	
     		while(it1.hasNext()){
     			Hospital hosp=it1.next();
+    			doctor.addHospital(hosp);
     			hosp.addDoctor(doctor);
     		}
     			
