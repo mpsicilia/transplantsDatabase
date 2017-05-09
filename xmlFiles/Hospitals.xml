@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Hospital name="pta. hierro" phoneNumber="345" address="street" postcode="345">
+    <Country>spain</Country>
+    <City>madrid</City>
+</Hospital>
