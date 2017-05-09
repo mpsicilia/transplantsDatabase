@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
-
+import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
 
@@ -163,5 +163,14 @@ public class UI_Organ {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	public Donor getDonorOfOrgan (Organ org, JPAmanager jpaManager){
+		Donor don = new Donor();
+		try{
+			don = jpaManager.getDonorOfOrg(org.getName());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return don;
 	}
 }

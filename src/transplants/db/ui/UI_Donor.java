@@ -165,14 +165,6 @@ public class UI_Donor {
 		}
 	}
 	
-	public Donor getDonorOfOrgan (Organ org, JPAmanager jpaManager){
-		Donor don = new Donor();
-		try{
-			don = jpaManager.getDonorOfOrg(org.getName());
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return don;
-	}
+
 	
 }
