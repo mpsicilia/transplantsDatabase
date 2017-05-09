@@ -87,7 +87,7 @@ public class UIGenericMenu {
 	                    switch (option1){
 		                    case 1:
 		                    	uiHospital.introduceNewHospital(dbManager);
-		                    	//En caso de que queramos hacerlas con JPA; además habría que añadir en UIPojo el método
+		                    	//En caso de que queramos hacerlas con JPA; ademï¿½s habrï¿½a que aï¿½adir en UIPojo el mï¿½todo
 		                    	//al que le pasas JPAmanager en vez de DBmanager
 		                    	//uiHospital.introduceNewHospital(jpaManager);
 		                    	break;
@@ -99,7 +99,7 @@ public class UIGenericMenu {
 		                    	Donor d = uiDonor.introduceNewDonor(jpaManager);
 		                    	System.out.println("Introduce the organ that the donor donates. ");
 		                    	//Donor in JPA but organ in jdbc
-		                    	uiOrgan.introduceNewOrgan(d, dbManager, jpaManager);
+		                    	uiOrgan.introduceNewOrgan(d, dbManager);
 		                    	//foreign keys
 		                    	break;
 		                    case 4:

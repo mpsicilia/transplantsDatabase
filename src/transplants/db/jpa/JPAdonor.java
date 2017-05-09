@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 import transplants.db.pojos.Donor;
+import transplants.db.pojos.Patient;
 
 public class JPAdonor {
 	private JPAmanager jpaManager;
@@ -64,6 +65,7 @@ public class JPAdonor {
 		}
 		return donorList;
 	}
+
 	
 	public boolean updateDonor (Donor oldDonor, Donor newDonor){
 		try{

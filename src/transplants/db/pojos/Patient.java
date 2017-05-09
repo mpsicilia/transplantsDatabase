@@ -12,8 +12,7 @@ import java.time.LocalDate;
 public class Patient extends Person implements Serializable {
 
 	private static final long serialVersionUID = 5283904286714952072L;
-	//should this one implement Serializable? Should person? Or both?
-	//EL ID ESTA EN LA CLASE PERSONA
+
 	@Id
 	@GeneratedValue(generator="Patients")
 	@TableGenerator(name="Patients", table="sqlite_sequence",
@@ -36,7 +35,7 @@ public class Patient extends Person implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)//only get the hospital when u ask for it (with gethospital)
 	@JoinColumn(name = "hospital_id") // the FK
 	private Hospital hospital;
-	//el donor tambien tiene un hospital?o solo el paciente?solo paciente
+	
 	
 	@OneToMany(mappedBy="patient")
 	private List<Requested_organ> requested_organ;

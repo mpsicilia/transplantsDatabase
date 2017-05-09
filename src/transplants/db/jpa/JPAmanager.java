@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+
 
 import transplants.db.dbInterface.DBManagerInterface;
 import transplants.db.jdbc.SQL_Donor;
@@ -166,9 +168,17 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public List<Patient> searchPatient(String name) {
-		// TODO Auto-generated method stub
+		try{
+			pat = new JPApatient(this); 
+			List<Patient> patients= pat.searchPatient(name);
+			return patients;
+			}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
+	
 	@Override
 	public List<Requested_organ> searchRequest(String name) {
 		// TODO Auto-generated method stub
@@ -186,14 +196,18 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public List<Patient> selectAllPatients() {
-		// TODO Auto-generated method stub
-		return null;
+		this.getEManager().getTransaction().begin();
+		Query q1 = em.createNativeQuery("SELECT * FROM Patients ", Patient.class);
+		List<Patient> allpatients = (List<Patient>) q1.getResultList();
+		return allpatients;
 	}
+	
 	@Override
 	public boolean update(Object obj) {
 		// TODO Auto-generated method stub
-		return false;
+    return false;
 	}
+	
 	@Override
 	public boolean delete(Object obj) {
 		if (Donor.class==obj.getClass()){
@@ -201,11 +215,24 @@ public class JPAmanager implements DBManagerInterface {
 			Donor donor=(Donor) obj;
 			return don.removeDonor(donor);
 		}
+		if(Patient.class==obj.getClass()){
+			pat=new JPApatient(this);
+			Patient patient=(Patient)obj;
+			return pat.removePatient(patient);
+		}
 		return false;
 	}
 	@Override
 	public Integer idPatient(Patient patient) {
-		// TODO Auto-generated method stub
+		/*Integer id=0;
+		try {
+			pat = new JPApatient(this);
+			id = pat.getIdOfPatient(patient);
+			return id;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;*/
 		return null;
 	}
 	@Override

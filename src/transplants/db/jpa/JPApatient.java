@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
@@ -24,7 +25,6 @@ public class JPApatient {
 
 		try {
 			jpaManager.getEManager().getTransaction().begin();
-			// Store the object
 			jpaManager.getEManager().persist(patient);
 			jpaManager.getEManager().getTransaction().commit();
 
@@ -35,12 +35,33 @@ public class JPApatient {
 		}
 		return false;
 	}
+	/*public Integer getIdOfPatient(Patient pat){
+		Patient patient=new Patient();
+		try{
+			jpaManager.getEManager().getTransaction().begin();
+			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT id FROM Patients "
+					+ "WHERE (name LIKE '" + pat.getName() + "') "
+					+ "AND (weight = " + pat.getWeight() + ")"
+					+ "AND (height = " + pat.getHeight() + ") "
+					+ "AND (gender LIKE '" + pat.getGender() + "')"
+					+ "AND (pathology LIKE '" + pat.getPathology() + "') "
+					+"AND ( lifeExpectancy  LIKE'" +pat.getLifeExpectancy() + "')"
+				    +"AND ( additionDate  LIKE'" +pat.getAdditionDate() + "')"
+				    +"AND ( birthDate  LIKE'" +pat.getAdditionDate() + "')"
+					+ "AND (bloodType LIKE '" + pat.getBloodType() + "')", Patient.class);
+			patient = (Patient) q1.getSingleResult();
+			jpaManager.getEManager().getTransaction().commit();		
+			
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return patient.getId();
+	}*/
 
-	public boolean delete(Patient patient) {
+	public boolean removePatient(Patient patient) {
 
 		try {
 			jpaManager.getEManager().getTransaction().begin();
-			// Store the object
 			jpaManager.getEManager().remove(patient);
 			jpaManager.getEManager().getTransaction().commit();
 			return true;
@@ -64,7 +85,7 @@ public class JPApatient {
 			patient.setBloodType(newpatient.getBloodType());
 
 			patient.setDoctors(newpatient.getDoctors());
-			 //n-n relationship newpatient.getDoctors()
+			 
 			patient.setGender(newpatient.getGender());
 
 			patient.setHeight(newpatient.getHeight());
@@ -92,13 +113,18 @@ public class JPApatient {
 		List<Patient> patients = new ArrayList<Patient>();
 		try{
 			jpaManager.getEManager().getTransaction().begin();
-			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Patients WHERE name LIKE '%" + name + "%'", JPApatient.class);
+			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Patients WHERE "
+					+ "name LIKE '%" + name + "%'", Patient.class);
 			patients = (List<Patient>) q.getResultList();
 			jpaManager.getEManager().getTransaction().commit();
+			
+					
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 		return patients;
 	}
+
+	
 
 }
