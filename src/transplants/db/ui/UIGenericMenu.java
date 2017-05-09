@@ -353,6 +353,10 @@ public class UIGenericMenu {
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
+	
 
 }
+	//public void CompatibilityTest (Requested_Organ reqOrg, UI_Organ uiOrgan){
+	//	String patient= uiRequested.patientOfRequested(reqOrg, dbManager)
+	//}
 	}
