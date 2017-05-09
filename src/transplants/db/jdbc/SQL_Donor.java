@@ -108,10 +108,7 @@ public class SQL_Donor {
 		return false;
 	}
 	
-	//2. See the organ that is going to donate
-	public String OrganDonating (String donorName){
-		return "";
-	}
+
 	
 	public int getDonorID (Donor d){
 		Donor donor =  new Donor();

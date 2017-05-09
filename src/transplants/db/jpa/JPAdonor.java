@@ -35,7 +35,7 @@ public class JPAdonor {
 		try{
 			jpaManager.getEManager().getTransaction().begin();
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Donors WHERE "
-					+ " name LIKE '%" + name + "%'", JPAdonor.class);
+					+ " name LIKE '%" + name + "%'", Donor.class);
 			donorList = (List<Donor>) q1.getResultList();
 			jpaManager.getEManager().getTransaction().commit();		
 			
@@ -45,8 +45,21 @@ public class JPAdonor {
 		return donorList;
 	}
 	
-	public boolean updateDonor (Donor donor){
-		//falta hacerlo
+	public boolean updateDonor (Donor oldDonor, Donor newDonor){
+		try{
+			jpaManager.getEManager().getTransaction().begin();
+			oldDonor.setName(newDonor.getName());
+			oldDonor.setBirthDate(newDonor.getBirthDate());	
+			oldDonor.setWeight(newDonor.getWeight());
+			oldDonor.setHeight(newDonor.getHeight());
+			oldDonor.setGender(newDonor.getGender());
+			oldDonor.setDeadOrAlive(newDonor.getDeadOrAlive());
+			oldDonor.setBloodType(newDonor.getBloodType());
+			jpaManager.getEManager().getTransaction().commit();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
