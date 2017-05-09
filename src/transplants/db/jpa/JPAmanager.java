@@ -124,9 +124,9 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public boolean donorFKinOrgan(Integer idD, Integer idO) {
-		// TODO Auto-generated method stub
-		return false;
+		return don.insertDonorFK(idD, idO);
 	}
+
 	@Override
 	public boolean requestedFKinOrgan(int idR, int idO) {
 		// TODO Auto-generated method stub
