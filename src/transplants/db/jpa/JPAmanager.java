@@ -196,7 +196,11 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public boolean delete(Object obj) {
-		// TODO Auto-generated method stub
+		if (Donor.class==obj.getClass()){
+			don=new JPAdonor(this);
+			Donor donor=(Donor) obj;
+			return don.removeDonor(donor);
+		}
 		return false;
 	}
 	@Override
@@ -216,8 +220,14 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public Integer idDonor(Donor d) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer id = 0;
+		try {
+			don = new JPAdonor(this);
+			id = don.getIdOfDonor(d);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 	@Override
 	public Integer getIdOfDoctor(Doctor doct) {
