@@ -20,7 +20,7 @@ public class UI_Organ {
 		
 	}
 	
-	public void introduceNewOrgan(Donor d, DBManager dbManager){
+	public void introduceNewOrgan(Donor donor, DBManager dbManager, JPAmanager jpaManager){
 		try{
 			boolean more = true;//one patient can request many organs so...
 			while (more){
@@ -34,16 +34,22 @@ public class UI_Organ {
 				String typeOfDonation = console.readLine();
 				
 				Organ organ= new Organ(name, weight, typeOfDonation); 
-				
 				boolean ok=dbManager.insert(organ);
 				
-				//get the id of the donor
-				int idDonor = dbManager.idDonor(d); //d is the donor that is passed to introduceNewOrgan
+				/*FIRST APPROACH*/				
+				//get the id of the donor but form jpa, instead of from jdbc
+				//int idDonor = jpaManager.idDonor(donor); 
 				//get the id of the organ
-				int idOrgan = dbManager.idOrgan (organ);
+				//int idOrgan = dbManager.idOrgan (organ);
+				//overwriting with the foring keys using jpa
+				//found a prob: how to do it if in the query i cannot put update
+				//boolean okFKDonor = jpaManager.donorFKinOrgan (idDonor, idOrgan);
 				
-				boolean okFKDonor = dbManager.donorFKinOrgan (idDonor, idOrgan);
-				if(ok && okFKDonor) {
+				/*SECOND APPROACH*/
+				//call a new method 
+				//boolean okAssigment= jpaManager.assigmentDonorOrgan(donor,organ);
+				
+				if(ok /*&& okAssigment*/) {
 					System.out.print("Organ has been introduced");
 				}else{
 					System.out.print("Organ has NOT been introduced");

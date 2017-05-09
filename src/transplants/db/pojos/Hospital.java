@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.*;
 @Table(name = "Hospitals")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement (name = "Hospital")
-@XmlType(propOrder = {"name", "phonenumber", "address", "postcode", "country","city", "doctors", "patients"}) //idk if its the proper order :S
+@XmlType(propOrder = {"name", "phoneNumber", "address", "postcode", "country","city", "doctors", "patients"}) //idk if its the proper order :S
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = -2900229453507535621L;
@@ -30,12 +30,15 @@ public class Hospital implements Serializable{
 	@XmlAttribute
 	private String address;
 	@XmlElement (name = "City")
-	@XmlElementWrapper (name="Cities")
+	//@XmlElementWrapper (name="Cities") 
+	//lo dejo comentado igual que wrapper de country para no volver a cometer el fallo
+	//no van a ser wrappers xq no envuelven nada, cada hosp tiene una ciudad y un country
+	//wrapper son doctors y patients pq cada hosp tiene varios
 	private String city;
 	@XmlAttribute
 	private String postcode;
 	@XmlElement(name = "Country")
-	@XmlElementWrapper (name="Countries")
+	//@XmlElementWrapper (name="Countries")
 	private String country;
 	//Hospital is related with doctor and patient
 	//with doctors is an n-n because one doctor can work at many hospitals and 1 hospital can have many doctors

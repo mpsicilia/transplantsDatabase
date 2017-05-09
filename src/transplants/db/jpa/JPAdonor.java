@@ -51,6 +51,10 @@ public class JPAdonor {
 		return donor.getId();
 	}
 	
+	public boolean insertDonorFK (int idDonor, int idOrg){
+		return false;
+	}
+	
 	public List <Donor> searchDonor (String name){
 		List<Donor> donorList = new ArrayList<Donor>();
 		try{
