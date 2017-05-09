@@ -100,12 +100,9 @@ public class UIGenericMenu {
 		                    	Donor d = uiDonor.introduceNewDonor(jpaManager);
 		                    	System.out.println("Introduce the organ that the donor donates. ");
 		                    	//Donor in JPA but organ in jdbc
-<<<<<<< HEAD
+
 		                    	uiOrgan.introduceNewOrgan(d, dbManager,jpaManager); 
-=======
-		                    	//uiOrgan.introduceNewOrgan(d, dbManager, jpaManager);
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
-		                    	//foreign keys
+
 		                    	break;
 		                    case 4:
 		                    	Patient p = uiPatient.introduceNewPatient(jpaManager);
