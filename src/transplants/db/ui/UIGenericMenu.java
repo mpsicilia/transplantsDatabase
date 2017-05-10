@@ -101,7 +101,7 @@ public class UIGenericMenu {
 		                    	System.out.println("Introduce the organ that the donor donates. ");
 		                    	//Donor in JPA but organ in jdbc
 
-		                    	uiOrgan.introduceNewOrgan(d, dbManager);
+		                    	uiOrgan.introduceNewOrgan(d, dbManager, jpaManager);
 		                    			                    	
 		                    	//foreign keys
 
