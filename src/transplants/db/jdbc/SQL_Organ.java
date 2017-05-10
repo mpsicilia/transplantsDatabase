@@ -1,6 +1,7 @@
 package transplants.db.jdbc;
 
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -8,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import transplants.db.pojos.Organ;
+import transplants.db.pojos.Patient;
 
 
 public class SQL_Organ {
@@ -167,6 +169,43 @@ public class SQL_Organ {
 		return orgs;
 	}
 	
+	public List<Patient> CompatibilityTest(Organ organ){
+		List<Patient> compatiblePatients= new ArrayList<Patient>();
+		try{
+			Statement stmt= dbManager.getC().createStatement();//Tendría que ser un right join no?
+			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
+			//Could COLLATE NOCASE be used also for bloodtype... ?
+			String sql = "SELECT * FROM Patients JOIN Requested_Organs ON Patients.id = Requested_Organs.patient_id"
+					+ "JOIN Organs ON RequestedOrgans.id = Organs.requested_id JOIN Donors ON Organs.donor_id = Donors.id "
+					+ "WHERE Requested_Organs.name LIKE '%" + organ.getName() + "%' COLLATE NOCASE AND Patients.bloodType = Donors.bloodType "
+					+ "ORDER BY Patients.additionDate";
+			ResultSet rs= stmt.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String namePatient = rs.getString(2);
+				String birthString = rs.getString(3);
+				Date dob = Date.valueOf(birthString);
+				Float weight = rs.getFloat(4);
+				Float height = rs.getFloat(5);
+				String gen = rs.getString(6);
+				String patho =  rs.getString(7);
+				String bt = rs.getString(8);
+				String addString = rs.getString(9);				
+				Date doa = Date.valueOf(addString);
+				Integer lifeExp = rs.getInt(10);
+				
+				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, lifeExp,  doa);
+				compatiblePatients.add(patientToShow);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return compatiblePatients;	
+		}
 	public void createTable(){
 		try{
 			

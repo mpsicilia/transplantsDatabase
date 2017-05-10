@@ -319,7 +319,12 @@ public class DBManager implements DBManagerInterface{
 		return pat.selectAllPatients();
 	}
 	
-	
+	@Override
+	public List<Patient> dbCompatibilityTest(Organ organ) {
+		org=new SQL_Organ(this);
+		return org.CompatibilityTest(organ);
+	}
+
 	@Override
 	public boolean update(Object obj) {
 		try{							

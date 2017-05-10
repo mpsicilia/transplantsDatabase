@@ -11,164 +11,183 @@ import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Organ;
-
+import transplants.db.pojos.Patient;
 
 public class UI_Organ {
-	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
-	
-	public UI_Organ(){
-		
+	BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+
+	public UI_Organ() {
+
 	}
-	
-	public void introduceNewOrgan(Donor d, DBManager dbManager){
-		try{
-			boolean more = true;//one patient can request many organs so...
-			while (more){
+
+	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
+		List<Patient> compatiblePatients = new ArrayList<Patient>();
+
+		try {
+			compatiblePatients = dbManager.dbCompatibilityTest(organ);
+			Iterator<Patient> it = compatiblePatients.iterator();
+			int counterPat = 1;
+			while (it.hasNext()) {
+				Patient p = it.next();
+				System.out.println(counterPat + ". " + p);
+				counterPat++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void introduceNewOrgan(Donor d, DBManager dbManager) {
+		try {
+			boolean more = true;// one patient can request many organs so...
+			while (more) {
 				System.out.print("Name: ");
 				String name = console.readLine();
-				
+
 				System.out.print("Weight: ");
 				Float weight = Float.parseFloat(console.readLine());
-					
+
 				System.out.print("Type of donation [total or partial]: ");
 				String typeOfDonation = console.readLine();
-				
-				Organ organ= new Organ(name, weight, typeOfDonation); 
-				
-				boolean ok=dbManager.insert(organ);
-				
-				//get the id of the donor
-				int idDonor = dbManager.idDonor(d); //d is the donor that is passed to introduceNewOrgan
-				//get the id of the organ
-				int idOrgan = dbManager.idOrgan (organ);
-				
-				boolean okFKDonor = dbManager.donorFKinOrgan (idDonor, idOrgan);
-				if(ok && okFKDonor) {
+
+				Organ organ = new Organ(name, weight, typeOfDonation);
+
+				boolean ok = dbManager.insert(organ);
+
+				// get the id of the donor
+				int idDonor = dbManager.idDonor(d); // d is the donor that is
+													// passed to
+													// introduceNewOrgan
+				// get the id of the organ
+				int idOrgan = dbManager.idOrgan(organ);
+
+				boolean okFKDonor = dbManager.donorFKinOrgan(idDonor, idOrgan);
+				if (ok && okFKDonor) {
 					System.out.print("Organ has been introduced");
-				}else{
+					uiCompatibilityTest(organ, dbManager);
+				} else {
 					System.out.print("Organ has NOT been introduced");
 				}
 				System.out.println("Is the donor going to donate another organ? [yes/no]");
 				String another = console.readLine();
-				if(another.equalsIgnoreCase("no")){
+				if (another.equalsIgnoreCase("no")) {
 					more = false;
 				}
 			}
-		}catch(IOException ex){
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
-	
-	public List<Organ> searchOrgan(DBManager dbManager){
-		try{
+
+	public List<Organ> searchOrgan(DBManager dbManager) {
+		try {
 			System.out.println("Introduce the name of the organ: ");
-	 		String name = console.readLine();	 	
+			String name = console.readLine();
 			List<Organ> organ = dbManager.searchOrgan(name);
-	 		return organ;
-		}catch (IOException ex){
+			return organ;
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		return null; 
+		return null;
 	}
-	
-	public void updateOrgan(Organ organ, DBManager dbManager){
-		boolean again = true;	
-		try{
-			while(again){
+
+	public void updateOrgan(Organ organ, DBManager dbManager) {
+		boolean again = true;
+		try {
+			while (again) {
 				System.out.println("Choose the information that is going to be updated [1-7]: ");
 				System.out.println("1. Name");
 				System.out.println("2. Weight");
-				System.out.println("3. Type of donation");				
+				System.out.println("3. Type of donation");
 				int op = Integer.parseInt(console.readLine());
-				switch (op){
-					case 1:
-						System.out.println("Introduce the new name: ");
-						organ.setName(console.readLine());
-						break;
-					case 2:
-						System.out.println("Introduce the new weight: ");
-						organ.setWeight(Float.parseFloat(console.readLine()));
-						break;
-					case 3:
-						System.out.println("Introduce the new type of donation: ");
-						organ.setTypeOfDonation(console.readLine());
-						break;
+				switch (op) {
+				case 1:
+					System.out.println("Introduce the new name: ");
+					organ.setName(console.readLine());
+					break;
+				case 2:
+					System.out.println("Introduce the new weight: ");
+					organ.setWeight(Float.parseFloat(console.readLine()));
+					break;
+				case 3:
+					System.out.println("Introduce the new type of donation: ");
+					organ.setTypeOfDonation(console.readLine());
+					break;
 				}
 				System.out.println("Do you want to update more information? [yes/no]");
-				if((console.readLine()).equals("no")){
-					again =  false;
+				if ((console.readLine()).equals("no")) {
+					again = false;
 				}
 			}
-			
+
 			boolean updated = dbManager.update(organ);
-			if(updated){
-				System.out.println("Organ has been updated. \n"
-						+ organ.toString());
-			}
-			else{
+			if (updated) {
+				System.out.println("Organ has been updated. \n" + organ.toString());
+			} else {
 				System.out.println("Organ has NOT been updated. ");
 			}
-			
-			}catch (IOException ex){
-				ex.printStackTrace();
-			}
-	}
-	
-	public void deleteOrgan (Organ organ, DBManager dbManager){
-		try{
-			boolean deleted = dbManager.delete(organ);
-			if(deleted){
-				System.out.println("Organ has been deleted.");
-			}
-			else{
-				System.out.println("Organ has NOT been deleted. ");
-			}
-		}catch (Exception ex){
+
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	
 	}
-	
-	public void organsOfDonor (Donor d, DBManager dbManager){
-		try{
+
+	public void deleteOrgan(Organ organ, DBManager dbManager) {
+		try {
+			boolean deleted = dbManager.delete(organ);
+			if (deleted) {
+				System.out.println("Organ has been deleted.");
+			} else {
+				System.out.println("Organ has NOT been deleted. ");
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	public void organsOfDonor(Donor d, DBManager dbManager) {
+		try {
 			int idDon = d.getId();
-			List<Organ> organs= dbManager.organsOfDonor(idDon);
+			List<Organ> organs = dbManager.organsOfDonor(idDon);
 			System.out.println("Donor: " + d.getName() + " donates the following organs: \n");
-			Iterator <Organ> itOrg = organs.iterator();
+			Iterator<Organ> itOrg = organs.iterator();
 			int countOrg = 1;
-			while (itOrg.hasNext()){
+			while (itOrg.hasNext()) {
 				Organ o = itOrg.next();
 				System.out.println(countOrg + ". " + o.getName());
 				countOrg++;
 			}
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public List<Organ> organsThatMatchRequestByName (String reqName, DBManager dbManager){
+
+	public List<Organ> organsThatMatchRequestByName(String reqName, DBManager dbManager) {
 		List<Organ> matchByNameOrgs = new ArrayList<Organ>();
-		try{
+		try {
 			matchByNameOrgs = dbManager.searchOrgan(reqName);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return matchByNameOrgs;
 	}
-	
-	public boolean insertRequestedFKinOrgan (int idReq, int idOrg, DBManager dbManager){
-		try{
+
+	public boolean insertRequestedFKinOrgan(int idReq, int idOrg, DBManager dbManager) {
+		try {
 			return dbManager.requestedFKinOrgan(idReq, idOrg);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
-	public Donor getDonorOfOrgan (Organ org, JPAmanager jpaManager){
+
+	public Donor getDonorOfOrgan(Organ org, JPAmanager jpaManager) {
 		Donor don = new Donor();
-		try{
+		try {
 			don = jpaManager.getDonorOfOrg(org.getName());
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return don;

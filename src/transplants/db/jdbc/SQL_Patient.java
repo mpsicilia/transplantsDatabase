@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 
 public class SQL_Patient {
@@ -32,6 +34,11 @@ public class SQL_Patient {
 		}
 		return false;
 	}
+	
+	//public List<Patient> .. seleccionar los pacientes con el nombre del organo y el bloodtype del organo
+	
+	
+	
 	
 	public List<Patient> searchPatient(String namePat) {
 		List<Patient> lookForPatient = new ArrayList<Patient>();

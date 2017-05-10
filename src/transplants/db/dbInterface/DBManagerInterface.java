@@ -23,6 +23,9 @@ public interface DBManagerInterface {
 	//insert para jpa y para jdbc
 	public boolean insert(Object obj);
 	
+
+	public List<Patient> dbCompatibilityTest(Organ organ);
+	
 	//I think that all these inserts are not supposed to be in the interface
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyDoctorPatient(Integer id1, Integer id2);	
