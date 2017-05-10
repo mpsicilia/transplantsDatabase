@@ -209,7 +209,7 @@ public class SQL_Patient {
 					   + " pathology 		TEXT,"
 					   + " bloodType		TEXT,"
 					   + " additionDate 	DATE,"
-					   + " lifeExpectancy 	INTEGER,"
+					   + " lifeExpectancy 	DATE,"
 					   + " hospital_id		INTEGER REFERENCES Hospitals (id))";
 			stmt3.executeUpdate(patients);
 			stmt3.close();

@@ -66,8 +66,6 @@ public class UI_Doctor {
 
 			} while (count < times);
 				
-			// jpamanager.insert(doct);// este metodo tendria que ser una vez introducido el doctor
-
 			if (ok && ok2) {
 				System.out.print("The doctor has been introduced correctly");
 			} else {

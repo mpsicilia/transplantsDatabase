@@ -68,7 +68,7 @@ public class UI_Patient {
 				System.out.println("the patient has NOT  been introduced");
 			}
 			
-			/*System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
+			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= jpaManager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
 			while (itH.hasNext()){
@@ -103,7 +103,7 @@ public class UI_Patient {
 			}
 			else{
 				System.out.println("Patient has not been introduced. ");
-			}*/
+			}
 			
 			
 			return p;

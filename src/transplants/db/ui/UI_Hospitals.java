@@ -15,8 +15,6 @@ import transplants.db.pojos.Hospital;
 public class UI_Hospitals {
 	
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
-	//atributo añadido
-	private JPAmanager jpamanager=new JPAmanager();
 	
 	public UI_Hospitals(){		
 	}
@@ -46,8 +44,6 @@ public class UI_Hospitals {
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
 			
 			boolean ok=dbManager.insert(hosp);
-			//linea de abajo añadida para añadir con JPA
-			//boolean ok= jpamanager.insert(hosp);
 			
 			if (ok){
 				System.out.print("Hospital has been introduced");
@@ -163,7 +159,7 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
 	public void javaToXmlHospital (DBManager dbManager){
 		try{
 			//JAXBContext is like the entity manager for xml, I pass the class thats going to be the root element
@@ -196,5 +192,5 @@ public class UI_Hospitals {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

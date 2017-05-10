@@ -37,10 +37,10 @@ public class UIGenericMenu {
 		UI_RequestedOrgan uiRequested = new UI_RequestedOrgan();
 		try{
 				        
-	        /*System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
+	        System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 	        String drop = console.readLine();
 	        if(drop.equalsIgnoreCase("Y")){
-	        	boolean dropped = dmanager.dropTables();
+	        	boolean dropped = dbManager.dropTables();
 	        	if(dropped){
 	        		System.out.println("Tables have been dropped. ");
 	        	}
@@ -48,7 +48,7 @@ public class UIGenericMenu {
 	        		System.out.println("Tables have not been dropped. ");
 	        	}
 	        }
-	        */
+	        
 	        System.out.println("Do you want to create the tables?: [yes/no]");
 	        String decider= console.readLine();
 	        if (decider.equals("yes")){
@@ -354,7 +354,7 @@ public class UIGenericMenu {
 	        	         	
 	        	 	case 3:
 	        	 		//In rodrigos, the xml thing is done with jpa, im going to try to do it with jdbc
-	        	 		uiHospital.javaToXmlHospital(dbManager);
+	        	 		//uiHospital.javaToXmlHospital(dbManager);
 	        	 		break;
 	        	 	
 	        	 	case 4:
