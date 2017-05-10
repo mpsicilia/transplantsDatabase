@@ -317,15 +317,14 @@ public class DBManager implements DBManagerInterface {
 		pat = new SQL_Patient(this);
 		return pat.selectAllPatients();
 	}
-<<<<<<< HEAD
+
 	
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
 		org=new SQL_Organ(this);
 		return org.CompatibilityTest(organ);
 	}
-=======
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
+
 
 	@Override
 	public boolean update(Object obj) {
