@@ -215,6 +215,7 @@ public class SQL_Organ {
 					   + " name				TEXT NOT NULL,"
 					   + " weight 			REAL ,"
 					   + " typeOfDonation	TEXT,"
+					   + " lifeOfOrgan      DATE,"
 					   + " requested_id		INTEGER,"
 					   + " donor_id			INTEGER, "
 					   + " FOREIGN KEY (requested_id) REFERENCES Requested_organs(id),"

@@ -118,7 +118,7 @@ public class SQL_AnimalTissue {
 					   + " name				TEXT,"
 					   + " typeOfTissue	    TEXT,"
 					   + " pathology 		TEXT,"
-					   + " time				INTEGER)";
+					   + " lifeExpTissue    DATE)";
 			stmt8.executeUpdate(animal_tissues);
 			stmt8.close();
 			
