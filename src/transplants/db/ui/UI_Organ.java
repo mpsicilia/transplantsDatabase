@@ -38,11 +38,11 @@ public class UI_Organ {
 	}
 
 	public void introduceNewOrgan(Donor d, DBManager dbManager) {
-		try {
-			boolean more = true;// one patient can request many organs so...
-			while (more) {
-
 	
+			boolean more = true;// one patient can request many organs so...
+		  // while (more)
+
+	}
 	public void introduceNewOrgan(Donor donor, DBManager dbManager, JPAmanager jpaManager){
 		try{
 			boolean more = true;//one patient can request many organs so...
@@ -63,9 +63,10 @@ public class UI_Organ {
 				boolean ok = dbManager.insert(organ);
 
 				// get the id of the donor
-				int idDonor = dbManager.idDonor(d); // d is the donor that is
+				int idDonor = dbManager.idDonor(donor); // d is the donor that is
 													// passed to
 													// introduceNewOrgan
+				//ENTONCES SERA DONOR NO?NO EXISTE D
 				// get the id of the organ
 				int idOrgan = dbManager.idOrgan(organ);
 
@@ -73,8 +74,8 @@ public class UI_Organ {
 				if (ok && okFKDonor) {
 
 				
-				Organ organ= new Organ(name, weight, typeOfDonation); 
-				boolean ok=dbManager.insert(organ);
+				/*Organ organ= new Organ(name, weight, typeOfDonation); 
+				boolean okey=dbManager.insert(organ);/*
 				
 				/*FIRST APPROACH*/				
 				//get the id of the donor but form jpa, instead of from jdbc
@@ -102,7 +103,7 @@ public class UI_Organ {
 					more = false;
 				}
 			}
-		} catch (IOException ex) {
+			}}catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}

@@ -21,7 +21,7 @@ import transplants.db.pojos.Patient;
 public class UI_Patient {
 	
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
-	private JPAmanager jpamanager=new JPAmanager();
+	
 	public UI_Patient(){		
 	}
 	
@@ -56,12 +56,12 @@ public class UI_Patient {
 			System.out.println("Life expectancy: ");
 			int life = Integer.parseInt(console.readLine());
 			
-			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, life, addition);
+			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
 			
-			boolean ok=jpaManager.insert(p);
+			boolean introduced=jpaManager.insert(p);
 			//getting the FK
-			//Integer patId=jpaManager.idPatient(p);
-			if(ok){
+			Integer patId=jpaManager.idPatient(p); 
+			if(introduced &&(patId!=3000)){
 				System.out.println("the patient has been introduced ");
 			}
 			else{
@@ -103,8 +103,8 @@ public class UI_Patient {
 			}
 			else{
 				System.out.println("Patient has not been introduced. ");
-			}
-			*/
+			}*/
+			
 			
 			return p;
 			

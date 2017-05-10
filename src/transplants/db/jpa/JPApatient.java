@@ -1,16 +1,18 @@
 package transplants.db.jpa;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+
 import javax.persistence.Query;
 
-import transplants.db.pojos.Donor;
+
+import transplants.db.pojos.Doctor;
+
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
-import transplants.db.pojos.Requested_organ;
+
 
 public class JPApatient {
 
@@ -35,28 +37,32 @@ public class JPApatient {
 		}
 		return false;
 	}
-	/*public Integer getIdOfPatient(Patient pat){
-		Patient patient=new Patient();
+	
+	public Integer getIdOfPatient(Patient pat){
+		Integer id=3000; //por darle un valor
 		try{
 			jpaManager.getEManager().getTransaction().begin();
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT id FROM Patients "
 					+ "WHERE (name LIKE '" + pat.getName() + "') "
-					+ "AND (weight = " + pat.getWeight() + ")"
+				    +"AND ( birthDate  LIKE '" +pat.getBirthDate() + "')"
+				    + "AND (weight = " + pat.getWeight() + ")"
 					+ "AND (height = " + pat.getHeight() + ") "
 					+ "AND (gender LIKE '" + pat.getGender() + "')"
 					+ "AND (pathology LIKE '" + pat.getPathology() + "') "
-					+"AND ( lifeExpectancy  LIKE'" +pat.getLifeExpectancy() + "')"
-				    +"AND ( additionDate  LIKE'" +pat.getAdditionDate() + "')"
-				    +"AND ( birthDate  LIKE'" +pat.getAdditionDate() + "')"
-					+ "AND (bloodType LIKE '" + pat.getBloodType() + "')", Patient.class);
-			patient = (Patient) q1.getSingleResult();
-			jpaManager.getEManager().getTransaction().commit();		
+					+ "AND (bloodType LIKE '" + pat.getBloodType() + "')"
+					+"AND (additionDate  LIKE '" +pat.getAdditionDate() + "')"
+				    +"AND (lifeExpectancy  LIKE '" +pat.getLifeExpectancy() + "')",Patient.class);
+				
+					
+			id = (Integer) q1.getSingleResult();
+			jpaManager.getEManager().getTransaction().commit();	
+			return id;
 			
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
-		return patient.getId();
-	}*/
+		return id;
+	}
 
 	public boolean removePatient(Patient patient) {
 
@@ -73,7 +79,10 @@ public class JPApatient {
 	}
 
 	public boolean updatePatient(Patient patient, Patient newpatient) {
+		List<Doctor> listofdoctors=newpatient.getDoctors();
+		Hospital hosp=newpatient.getHospital();
 		try {
+			
 			jpaManager.getEManager().getTransaction().begin();
 
 			patient.setName(newpatient.getName());
@@ -84,7 +93,16 @@ public class JPApatient {
 
 			patient.setBloodType(newpatient.getBloodType());
 
-			patient.setDoctors(newpatient.getDoctors());
+			patient.setDoctors(listofdoctors);
+			Iterator<Doctor> it = listofdoctors.iterator();
+            //N-N relationship
+			while (it.hasNext()) {
+				Doctor doct = it.next();
+				patient.addDoctor(doct);
+				doct.addPatient(patient);
+				
+			}
+			
 			 
 			patient.setGender(newpatient.getGender());
 
@@ -94,8 +112,9 @@ public class JPApatient {
 
 			patient.setLifeExpectancy(newpatient.getLifeExpectancy());
 
-			patient.setHospital(newpatient.getHospital());
-			newpatient.getHospital().addPatient(newpatient);
+			patient.setHospital(hosp);
+			//1-N relationship
+			hosp.addPatient(newpatient);
 
 			patient.setPathology(newpatient.getPathology());
 

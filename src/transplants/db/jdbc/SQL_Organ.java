@@ -172,7 +172,7 @@ public class SQL_Organ {
 	public List<Patient> CompatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
-			Statement stmt= dbManager.getC().createStatement();//Tendría que ser un right join no?
+			Statement stmt= dbManager.getC().createStatement();//Tendrï¿½a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
 			String sql = "SELECT * FROM Patients JOIN Requested_Organs ON Patients.id = Requested_Organs.patient_id"
@@ -194,7 +194,7 @@ public class SQL_Organ {
 				Date doa = Date.valueOf(addString);
 				Integer lifeExp = rs.getInt(10);
 				
-				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, lifeExp,  doa);
+				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt,  doa, lifeExp);
 				compatiblePatients.add(patientToShow);
 			}
 			rs.close();

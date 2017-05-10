@@ -224,7 +224,7 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public Integer idPatient(Patient patient) {
-		/*Integer id=0;
+		Integer id=3000; //por ejemplo
 		try {
 			pat = new JPApatient(this);
 			id = pat.getIdOfPatient(patient);
@@ -232,8 +232,8 @@ public class JPAmanager implements DBManagerInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;*/
-		return null;
+		return id;
+	
 	}
 	@Override
 	public Integer idRequestedOrgan(Requested_organ r) {
@@ -299,6 +299,12 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public String searchHospital(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Patient> dbCompatibilityTest(Organ organ) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -46,7 +46,7 @@ public class Patient extends Person implements Serializable {
 	
 
 	public Patient(String name, Date birthDate,Float weight, Float height, String gender, String pathology, String bloodType, 
-			Integer lifeExpectancy, Date additionDate){
+			 Date additionDate,Integer lifeExpectancy){
 		super(name, birthDate,weight,height,gender, bloodType);
 		this.pathology = pathology;
 		this.lifeExpectancy=lifeExpectancy;
@@ -54,7 +54,7 @@ public class Patient extends Person implements Serializable {
 	}
 	
 	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
-			String bloodType, Integer lifeExpectancy, Date additionDate){
+			String bloodType, Date additionDate, Integer lifeExpectancy){
 		super(name, birthDate,weight,height,gender, bloodType);
 		this.id= id;
 		this.lifeExpectancy=lifeExpectancy;

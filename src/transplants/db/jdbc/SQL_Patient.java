@@ -60,7 +60,7 @@ public class SQL_Patient {
 				Date doa = Date.valueOf(addString);
 				Integer lifeExp = rs.getInt("lifeExpectancy");
 				
-				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, lifeExp,  doa);
+				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, doa, lifeExp);
 				lookForPatient.add(patientToShow);
 			}
 			rs.close();
@@ -154,7 +154,7 @@ public class SQL_Patient {
 									+ "AND (lifeExpectancy = " + p.getLifeExpectancy() + ")";
 			ResultSet rs = stm.executeQuery(sql);
 			idP = rs.getInt("id");
-			patient = new Patient (idP, p.getName(), p.getBirthDate(), p.getWeight(), p.getHeight(), p.getGender(), p.getPathology(), p.getBloodType(), p.getLifeExpectancy(), p.getAdditionDate());
+			patient = new Patient (idP, p.getName(), p.getBirthDate(), p.getWeight(), p.getHeight(), p.getGender(), p.getPathology(), p.getBloodType(), p.getAdditionDate(), p.getLifeExpectancy());
 			
 			rs.close();
 			stm.close();
@@ -183,7 +183,7 @@ public class SQL_Patient {
 				String addString = rs.getString("birthDate");
 				Date doa = Date.valueOf(addString);
 				Integer lifeExp = rs.getInt("lifeExpectancy");
-				Patient pat = new Patient (id, name, dob, weight, height, gen, patho, bt,lifeExp, doa);
+				Patient pat = new Patient (id, name, dob, weight, height, gen, patho, bt, doa,lifeExp);
 				patients.add(pat);
 			}
 			rs.close();
