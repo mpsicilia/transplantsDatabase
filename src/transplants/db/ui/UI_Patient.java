@@ -14,14 +14,14 @@ import java.util.List;
 
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Doctor;
+import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 
 public class UI_Patient {
 	
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
-	//atributo añadido
-		private JPAmanager jpamanager=new JPAmanager();
+	private JPAmanager jpamanager=new JPAmanager();
 	public UI_Patient(){		
 	}
 	
@@ -57,12 +57,18 @@ public class UI_Patient {
 			int life = Integer.parseInt(console.readLine());
 			
 			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, life, addition);
-			//here we introduce the patient
-			boolean introduced = jpaManager.insert(p);
-			//getting the FK
-			Integer patId=jpaManager.idPatient(p);
 			
-			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
+			boolean ok=jpaManager.insert(p);
+			//getting the FK
+			//Integer patId=jpaManager.idPatient(p);
+			if(ok){
+				System.out.println("the patient has been introduced ");
+			}
+			else{
+				System.out.println("the patient has NOT  been introduced");
+			}
+			
+			/*System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= jpaManager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
 			while (itH.hasNext()){
@@ -98,8 +104,8 @@ public class UI_Patient {
 			else{
 				System.out.println("Patient has not been introduced. ");
 			}
-			//linea de abajo añadida para añadir con JPA
-			jpamanager.insert(p);
+			*/
+			
 			return p;
 			
 		}catch (IOException ex){
@@ -112,13 +118,14 @@ public class UI_Patient {
 		try{
 			System.out.println("Introduce the name of the patient: ");
 	 		String name = console.readLine();	 	
-			List<Patient> patients = jpaManager.searchPatient(name);
-	 		return patients;
+			List<Patient> patient = jpaManager.searchPatient(name);
+	 		return patient;
 		}catch (IOException ex){
 			ex.printStackTrace();
 		}
 		return null; 
 	}
+
 	
 	public void updatePatient(Patient p, JPAmanager jpaManager){
 		boolean again = true;
@@ -133,7 +140,7 @@ public class UI_Patient {
 				System.out.println("7. Blood type. ");
 				System.out.println("8. Date of addition. ");
 				System.out.println("9. Life expectancy. ");
-				System.out.println("Choose the information that is goign to be updated [1-9]: ");
+				System.out.println("Choose the information that is going to be updated [1-9]: ");
 				int op = Integer.parseInt(console.readLine());
 				switch (op){
 					case 1:

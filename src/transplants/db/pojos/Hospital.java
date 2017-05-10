@@ -5,9 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
+
 
 @Entity
 @Table(name = "Hospitals")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement (name = "Hospital")
+@XmlType(propOrder = {"name", "phoneNumber", "address", "postcode", "country","city", "doctors", "patients"}) //idk if its the proper order :S
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = -2900229453507535621L;
@@ -15,12 +21,24 @@ public class Hospital implements Serializable{
 	@GeneratedValue(generator="Hospitals")
 	@TableGenerator(name="Hospitals", table="sqlite_sequence",
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Hospitals")
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private String phoneNumber;
+	@XmlAttribute
 	private String address;
+	@XmlElement (name = "City")
+	//@XmlElementWrapper (name="Cities") 
+	//lo dejo comentado igual que wrapper de country para no volver a cometer el fallo
+	//no van a ser wrappers xq no envuelven nada, cada hosp tiene una ciudad y un country
+	//wrapper son doctors y patients pq cada hosp tiene varios
 	private String city;
+	@XmlAttribute
 	private String postcode;
+	@XmlElement(name = "Country")
+	//@XmlElementWrapper (name="Countries")
 	private String country;
 	//Hospital is related with doctor and patient
 	//with doctors is an n-n because one doctor can work at many hospitals and 1 hospital can have many doctors
@@ -28,9 +46,13 @@ public class Hospital implements Serializable{
 	@JoinTable(name="HospitalsDoctors",//name of the n-n table
 	joinColumns={@JoinColumn(name="hospital_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="doctor_id", referencedColumnName="id")})
+	@XmlElement (name = "Doctor")
+	@XmlElementWrapper(name = "Doctors")
 	private List<Doctor> doctors;
 	//in the case of patients we have one to many because 1 hospital can host many patients
 	@OneToMany(mappedBy="hospital")
+	@XmlElement (name = "Patient")
+	@XmlElementWrapper (name = "Patients")
 	private List<Patient> patients;
 	
 	

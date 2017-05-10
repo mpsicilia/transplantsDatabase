@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.Query;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Hospital;
@@ -155,6 +159,40 @@ public class UI_Hospitals {
 			 		count++;
 			}
 
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void javaToXmlHospital (DBManager dbManager){
+		try{
+			//JAXBContext is like the entity manager for xml, I pass the class thats going to be the root element
+			JAXBContext jaxbContext = JAXBContext.newInstance(Hospital.class);
+			// Get the marshaller, create mashaller object
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			
+			// Pretty formatting
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+			
+			//Show the user all the hospitals, so he can choose what hospital is going to turn into XML
+			List<Hospital> hosps = dbManager.selectAllHospitals();
+			Iterator<Hospital> itH = hosps.iterator();
+			int counter = 1;
+			while (itH.hasNext()){
+				Hospital h = itH.next();
+				System.out.println(counter + ". " + h.getName());
+				counter++;
+			}
+			System.out.print("Introduce the number of the hospital that is going to turn into an XML file:");
+			int hospNumb = Integer.parseInt(console.readLine());
+			//get the hospital from the list
+			Hospital hospToXml = hosps.get(hospNumb-1);
+			
+			// Marshal the hospital to a file
+			File file = new File("./xmlFiles/Hospitals.xml");
+			marshaller.marshal(hospToXml, file); //store the hospital in that file
+			//print
+			marshaller.marshal(hospToXml, System.out);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

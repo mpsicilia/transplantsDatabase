@@ -66,13 +66,14 @@ public class UIGenericMenu {
 	        	System.out.println("\nBASIC MENU: ");
 	        	System.out.println("1. Introduce new information to the database. ");
 	        	System.out.println("2. Search for specific information in the database. ");
-	            System.out.println("3. Exit from the database. ");
+	        	System.out.println("3. Save the database information in an XML file. ");
+	            System.out.println("4. Exit from the database. ");
 	        		        	
 	        	 do{
-	                    System.out.println("\nChoose an option[1-3]:");
+	                    System.out.println("\nChoose an option[1-4]:");
 	                    String read= console.readLine();
 	                    option= Integer.parseInt(read);            
-	                }while (option<0|| option>4);
+	                }while (option<1|| option>4);
 	        	 switch (option){
 	        	 	case 1: {
 	        	 		System.out.println("\nMENU: ");
@@ -87,7 +88,7 @@ public class UIGenericMenu {
 	                    switch (option1){
 		                    case 1:
 		                    	uiHospital.introduceNewHospital(dbManager);
-		                    	//En caso de que queramos hacerlas con JPA; además habría que añadir en UIPojo el método
+		                    	//En caso de que queramos hacerlas con JPA; ademï¿½s habrï¿½a que aï¿½adir en UIPojo el mï¿½todo
 		                    	//al que le pasas JPAmanager en vez de DBmanager
 		                    	//uiHospital.introduceNewHospital(jpaManager);
 		                    	break;
@@ -99,9 +100,15 @@ public class UIGenericMenu {
 		                    	Donor d = uiDonor.introduceNewDonor(jpaManager);
 		                    	System.out.println("Introduce the organ that the donor donates. ");
 		                    	//Donor in JPA but organ in jdbc
+<<<<<<< HEAD
 		                    	uiOrgan.introduceNewOrgan(d, dbManager);
 		                    			                    	
 		                    	//foreign keys
+=======
+
+		                    	uiOrgan.introduceNewOrgan(d, dbManager,jpaManager); 
+
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
 		                    	break;
 		                    case 4:
 		                    	Patient p = uiPatient.introduceNewPatient(jpaManager);
@@ -344,8 +351,13 @@ public class UIGenericMenu {
 	                    }	        	 		
 	        	 	}
 	        	 	break;
-	        	         	 	
+	        	         	
 	        	 	case 3:
+	        	 		//In rodrigos, the xml thing is done with jpa, im going to try to do it with jdbc
+	        	 		uiHospital.javaToXmlHospital(dbManager);
+	        	 		break;
+	        	 	
+	        	 	case 4:
 	        	 		System.out.println("The program has been closed.");
 	        	 		System.exit(0);        	 		 		
 	        	 }

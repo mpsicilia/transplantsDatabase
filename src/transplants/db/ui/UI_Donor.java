@@ -14,8 +14,6 @@ import transplants.db.pojos.Organ;
 public class UI_Donor {
 
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
-	//atributo añadido
-		private JPAmanager jpamanager=new JPAmanager();
 	
 	public UI_Donor(){
 		
@@ -46,30 +44,16 @@ public class UI_Donor {
 			System.out.print("Blood Type: ");
 			String bloodType = console.readLine();
 			
-			donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 
-			//there is no relationship between donor and doctor, nor donor and hospital
-			/*int idDonor = dbManager.getIdOfDonor (donor);
-			
-			System.out.print("Introduce the id of the hospital in which the donor is located: ");
-			dbManager.selectAllHospitals();
-			Integer idHospYouChoose = Integer.parseInt(console.readLine());
-			boolean okHosp = dbManager.insertFKHospInDonor (idHospYouChoose, idDonor);
-			
-			
-			System.out.print("Introduce the id of the doctor that takes care of the donor: ");
-			dbManager.selectAllDoctors();
-			Integer idDoctYouChoose = Integer.parseInt(console.readLine());*/
-			
-			
+			donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 	
 			
 			boolean ok=jpaManager.insert(donor);
 			if (ok){
-				System.out.print("Donor has been introduced");
+				System.out.println("Donor has been introduced");
 			}else{
-				System.out.print("Donor has NOT been introduced");
+				System.out.println("Donor has NOT been introduced");
 			}
-			//linea de abajo añadida para añadir con JPA
-			jpamanager.insert(donor);
+		
+			
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}

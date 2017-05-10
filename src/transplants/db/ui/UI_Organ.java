@@ -19,6 +19,7 @@ public class UI_Organ {
 	public UI_Organ() {
 
 	}
+<<<<<<< HEAD
 
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
@@ -42,6 +43,13 @@ public class UI_Organ {
 		try {
 			boolean more = true;// one patient can request many organs so...
 			while (more) {
+=======
+	
+	public void introduceNewOrgan(Donor donor, DBManager dbManager, JPAmanager jpaManager){
+		try{
+			boolean more = true;//one patient can request many organs so...
+			while (more){
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
 				System.out.print("Name: ");
 				String name = console.readLine();
 
@@ -50,6 +58,7 @@ public class UI_Organ {
 
 				System.out.print("Type of donation [total or partial]: ");
 				String typeOfDonation = console.readLine();
+<<<<<<< HEAD
 
 				Organ organ = new Organ(name, weight, typeOfDonation);
 
@@ -64,6 +73,26 @@ public class UI_Organ {
 
 				boolean okFKDonor = dbManager.donorFKinOrgan(idDonor, idOrgan);
 				if (ok && okFKDonor) {
+=======
+				
+				Organ organ= new Organ(name, weight, typeOfDonation); 
+				boolean ok=dbManager.insert(organ);
+				
+				/*FIRST APPROACH*/				
+				//get the id of the donor but form jpa, instead of from jdbc
+				//int idDonor = jpaManager.idDonor(donor); 
+				//get the id of the organ
+				//int idOrgan = dbManager.idOrgan (organ);
+				//overwriting with the foring keys using jpa
+				//found a prob: how to do it if in the query i cannot put update
+				//boolean okFKDonor = jpaManager.donorFKinOrgan (idDonor, idOrgan);
+				
+				/*SECOND APPROACH*/
+				//call a new method 
+				//boolean okAssigment= jpaManager.assigmentDonorOrgan(donor,organ);
+				
+				if(ok /*&& okAssigment*/) {
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
 					System.out.print("Organ has been introduced");
 					uiCompatibilityTest(organ, dbManager);
 				} else {
