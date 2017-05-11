@@ -48,8 +48,10 @@ public class SQL_Organ {
 				Integer id = rs.getInt("id");
 				String nameOrgan = rs.getString("name");
 				Float weight = rs.getFloat("weight");
+				String lifeOfOrg= rs.getString("lifeOfOrgan");
+				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);
 				String typeOfDonation= rs.getString("typeOfDonation");
-				Organ organToShow = new Organ(id, nameOrgan, weight, typeOfDonation);
+				Organ organToShow = new Organ(id, nameOrgan, weight, lifeOfOrgan, typeOfDonation);
 				lookForOrgan.add(organToShow);
 			}
 			rs.close();
@@ -107,7 +109,7 @@ public class SQL_Organ {
 					+ ") AND (typeOfDonation = '" + org.getTypeOfDonation() + "')";
 			ResultSet rs = stm.executeQuery(sql);
 			idO = rs.getInt("id");
-			o = new Organ (idO, org.getName(), org.getWeight(), org.getTypeOfDonation());
+			o = new Organ (idO, org.getName(), org.getWeight(), org.getLifeOfOrgan(), org.getTypeOfDonation());
 			
 			rs.close();
 			stm.close();
@@ -156,8 +158,10 @@ public class SQL_Organ {
 				Integer id = rs.getInt(1);
 				String nameOrgan = rs.getString(2);
 				Float weight = rs.getFloat(3);
+				String lifeOfOrg= rs.getString(4);
+				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);
 				String typeDon = rs.getString("typeOfDonation");
-				Organ organ = new Organ(id, nameOrgan, weight, typeDon);
+				Organ organ = new Organ(id, nameOrgan, weight, lifeOfOrgan,  typeDon);
 				orgs.add(organ);
 			}
 			
@@ -192,9 +196,10 @@ public class SQL_Organ {
 				String bt = rs.getString(8);
 				String addString = rs.getString(9);				
 				Date doa = Date.valueOf(addString);
-				Integer lifeExp = rs.getInt(10);
+				String lifeExp = rs.getString(10);
+				Date lifeExpectancy= Date.valueOf(lifeExp);
 				
-				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt,  doa, lifeExp);
+				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt,  doa, lifeExpectancy);
 				compatiblePatients.add(patientToShow);
 			}
 			rs.close();

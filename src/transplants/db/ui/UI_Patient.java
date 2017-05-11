@@ -54,7 +54,7 @@ public class UI_Patient {
 			Date addition = Date.valueOf(doa);
 			
 			System.out.println("Life expectancy: ");
-			int life = Integer.parseInt(console.readLine());
+			Date life = Date.valueOf(console.readLine());
 			
 			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
 			
@@ -177,7 +177,7 @@ public class UI_Patient {
 						break;
 					case 9: 
 						System.out.println("Introduce the new life expectancy: ");
-						p.setLifeExpectancy(Integer.parseInt(console.readLine()));
+						p.setLifeExpectancy(Date.valueOf(console.readLine()));
 						break;
 				}
 				System.out.println("Do you want to update more information? [yes/no]");

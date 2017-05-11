@@ -56,11 +56,12 @@ public class SQL_Patient {
 				String gen = rs.getString("gender");
 				String patho =  rs.getString("pathology");
 				String bt = rs.getString("bloodType");
-				String addString = rs.getString("birthDate");
+				String addString = rs.getString("additionDate");
 				Date doa = Date.valueOf(addString);
-				Integer lifeExp = rs.getInt("lifeExpectancy");
+				String lifeExp= rs.getString("lifeExpectancy");
+				Date lifeExpectancy = Date.valueOf(lifeExp);
 				
-				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, doa, lifeExp);
+				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, doa, lifeExpectancy);
 				lookForPatient.add(patientToShow);
 			}
 			rs.close();
@@ -88,7 +89,7 @@ public class SQL_Patient {
 			prep.setString(6, p.getPathology());
 			prep.setString(7, p.getBloodType());
 			prep.setDate(8, p.getAdditionDate());
-			prep.setInt(9, p.getLifeExpectancy());
+			prep.setDate(9, p.getLifeExpectancy());
 			prep.setInt(10, p.getId());
 			prep.executeUpdate();
 			prep.close();			
@@ -182,8 +183,9 @@ public class SQL_Patient {
 				String bt = rs.getString("bloodType");
 				String addString = rs.getString("birthDate");
 				Date doa = Date.valueOf(addString);
-				Integer lifeExp = rs.getInt("lifeExpectancy");
-				Patient pat = new Patient (id, name, dob, weight, height, gen, patho, bt, doa,lifeExp);
+				String lifeExp= rs.getString("lifeExpectancy");
+				Date lifeExpectancy= Date.valueOf(lifeExp);
+				Patient pat = new Patient (id, name, dob, weight, height, gen, patho, bt, doa,lifeExpectancy);
 				patients.add(pat);
 			}
 			rs.close();

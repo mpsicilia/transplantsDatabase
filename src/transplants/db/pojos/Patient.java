@@ -18,7 +18,7 @@ public class Patient extends Person implements Serializable {
 	@TableGenerator(name="Patients", table="sqlite_sequence",
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Patients")
 	private Integer id;
-	private Integer lifeExpectancy;
+	private Date lifeExpectancy;
 	private String pathology;
 	private Date additionDate;
 	@ManyToMany
@@ -46,7 +46,7 @@ public class Patient extends Person implements Serializable {
 	
 
 	public Patient(String name, Date birthDate,Float weight, Float height, String gender, String pathology, String bloodType, 
-			 Date additionDate,Integer lifeExpectancy){
+			 Date additionDate,Date lifeExpectancy){
 		super(name, birthDate,weight,height,gender, bloodType);
 		this.pathology = pathology;
 		this.lifeExpectancy=lifeExpectancy;
@@ -54,7 +54,7 @@ public class Patient extends Person implements Serializable {
 	}
 	
 	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
-			String bloodType, Date additionDate, Integer lifeExpectancy){
+			String bloodType, Date additionDate, Date lifeExpectancy){
 		super(name, birthDate,weight,height,gender, bloodType);
 		this.id= id;
 		this.lifeExpectancy=lifeExpectancy;
@@ -62,11 +62,11 @@ public class Patient extends Person implements Serializable {
 	}
 	
 	//what about the parent class?? Do we create them in the parent class??
-	public Integer getLifeExpectancy() {
+	public Date getLifeExpectancy() {
 		return lifeExpectancy;
 	}
 
-	public void setLifeExpectancy(Integer lifeExpectancy) {
+	public void setLifeExpectancy(Date lifeExpectancy) {
 		this.lifeExpectancy = lifeExpectancy;
 	}
 

@@ -1,6 +1,7 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.*;
 
@@ -17,8 +18,8 @@ public class Organ implements Serializable{
 	private Integer id;
 	private String name;
 	private Float weight;
-	private String typeOfDonation;
-	
+	private Date lifeOfOrgan;
+	private String typeOfDonation;	
 	@OneToOne
 	@JoinColumn(name = "requested_id") // FK
 	private Requested_organ requested_organ;
@@ -30,18 +31,20 @@ public class Organ implements Serializable{
 		
 	}
 	
-	public Organ(Integer id,String name, Float weight, String typeOfDonation) {
+	public Organ(Integer id,String name, Float weight, Date lifeOfOrgan, String typeOfDonation) {
 		//super();
 		this.id=id;
 		this.name = name;
 		this.weight = weight;
+		this.lifeOfOrgan= lifeOfOrgan;
 		this.typeOfDonation = typeOfDonation;
 	}
 	
-	public Organ(String name, Float weight, String typeOfDonation) {
+	public Organ(String name, Float weight, Date lifeOfOrgan, String typeOfDonation) {
 		//super();
 		this.name = name;
 		this.weight = weight;
+		this.lifeOfOrgan= lifeOfOrgan;
 		this.typeOfDonation = typeOfDonation;
 	}
 	//equals and hashcode
@@ -105,11 +108,38 @@ public class Organ implements Serializable{
 	public void setTypeOfDonation(String typeOfDonation) {
 		this.typeOfDonation = typeOfDonation;
 	}
+	public Date getLifeOfOrgan() {
+		return lifeOfOrgan;
+	}
+
+	public void setLifeOfOrgan(Date lifeOfOrgan) {
+		this.lifeOfOrgan = lifeOfOrgan;
+	}
+
+	public Requested_organ getRequested_organ() {
+		return requested_organ;
+	}
+
+	public void setRequested_organ(Requested_organ requested_organ) {
+		this.requested_organ = requested_organ;
+	}
+
+	public Donor getDonor() {
+		return donor;
+	}
+
+	public void setDonor(Donor donor) {
+		this.donor = donor;
+	}
 
 	@Override
 	public String toString() {
-		return "Organ [id = "+ id + ", name=" + name + ", weight=" + weight + ", typeOfDonation=" + typeOfDonation + "]";
+		return "Organ [id=" + id + ", name=" + name + ", weight=" + weight + ", lifeOfOrgan=" + lifeOfOrgan
+				+ ", typeOfDonation=" + typeOfDonation + ", requested_organ=" + requested_organ + ", donor=" + donor
+				+ "]";
 	}
+
+	
 	
 	
 
