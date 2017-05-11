@@ -58,8 +58,8 @@ public class Hospital implements Serializable{
 	
 	public Hospital (){
 		super();
-		doctors= new ArrayList<Doctor>();
-		patients= new ArrayList<Patient>();
+		this.doctors= new ArrayList<Doctor>();
+		this.patients= new ArrayList<Patient>();
 		}
 	
 	public Hospital(String name, String phone_number, String address, String city, String postcode,
