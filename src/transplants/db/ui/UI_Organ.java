@@ -32,14 +32,16 @@ public class UI_Organ {
 				System.out.print("Weight: ");
 				Float weight = Float.parseFloat(console.readLine());
 				
+				System.out.print("Type of donation [total or partial]: ");
+				String typeOfDonation = console.readLine();
+				
 				System.out.print("Life of organ: ");
 				String lifeOfOrg= console.readLine();
 				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);						
 
-				System.out.print("Type of donation [total or partial]: ");
-				String typeOfDonation = console.readLine();
+				
 
-				Organ organ = new Organ(name, weight, lifeOfOrgan, typeOfDonation);
+				Organ organ = new Organ(name, weight, typeOfDonation, lifeOfOrgan);
 				boolean ok = dbManager.insert(organ);
 				// get the id of the donor
 				int idDonor = dbManager.idDonor(donor);
@@ -48,7 +50,7 @@ public class UI_Organ {
 				boolean okFKDonor = dbManager.donorFKinOrgan(idDonor, idOrgan);
 
 				/*
-				 * Organ organ= new Organ(name, weight, lifeOfOrgan, typeOfDonation); boolean
+				 * Organ organ= new Organ(name, weight, typeOfDonation,  lifeOfOrgan); boolean
 				 * okey=dbManager.insert(organ);/*
 				 * 
 				 * /*FIRST APPROACH
@@ -121,9 +123,9 @@ public class UI_Organ {
 			while (again) {
 				System.out.println("Choose the information that is going to be updated [1-7]: ");
 				System.out.println("1. Name");
-				System.out.println("2. Weight");
-				System.out.println("3. Life of organ");
-				System.out.println("4. Type of donation");
+				System.out.println("2. Weight");				
+				System.out.println("3. Type of donation");
+				System.out.println("4. Life of organ");
 				int op = Integer.parseInt(console.readLine());
 				switch (op) {
 				case 1:
@@ -133,14 +135,14 @@ public class UI_Organ {
 				case 2:
 					System.out.println("Introduce the new weight: ");
 					organ.setWeight(Float.parseFloat(console.readLine()));
-					break;
+					break;				
 				case 3:
-					System.out.println("Introduce the new life of organ");
-					organ.setLifeOfOrgan(Date.valueOf(console.readLine()));
-					break;
-				case 4:
 					System.out.println("Introduce the new type of donation: ");
 					organ.setTypeOfDonation(console.readLine());
+					break;
+				case 4:
+					System.out.println("Introduce the new life of organ");
+					organ.setLifeOfOrgan(Date.valueOf(console.readLine()));
 					break;
 				}
 				System.out.println("Do you want to update more information? [yes/no]");

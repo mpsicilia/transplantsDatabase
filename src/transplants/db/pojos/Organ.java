@@ -17,9 +17,9 @@ public class Organ implements Serializable{
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Organs")
 	private Integer id;
 	private String name;
-	private Float weight;
-	private Date lifeOfOrgan;
+	private Float weight;	
 	private String typeOfDonation;	
+	private Date lifeOfOrgan;
 	@OneToOne
 	@JoinColumn(name = "requested_id") // FK
 	private Requested_organ requested_organ;
@@ -31,7 +31,7 @@ public class Organ implements Serializable{
 		
 	}
 	
-	public Organ(Integer id,String name, Float weight, Date lifeOfOrgan, String typeOfDonation) {
+	public Organ(Integer id,String name, Float weight, String typeOfDonation, Date lifeOfOrgan) {
 		//super();
 		this.id=id;
 		this.name = name;
@@ -40,7 +40,7 @@ public class Organ implements Serializable{
 		this.typeOfDonation = typeOfDonation;
 	}
 	
-	public Organ(String name, Float weight, Date lifeOfOrgan, String typeOfDonation) {
+	public Organ(String name, Float weight, String typeOfDonation,Date lifeOfOrgan) {
 		//super();
 		this.name = name;
 		this.weight = weight;
@@ -134,12 +134,9 @@ public class Organ implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Organ [id=" + id + ", name=" + name + ", weight=" + weight + ", lifeOfOrgan=" + lifeOfOrgan
-				+ ", typeOfDonation=" + typeOfDonation + ", requested_organ=" + requested_organ + ", donor=" + donor
-				+ "]";
+		return "Organ [id=" + id + ", name=" + name + ", weight=" + weight + ", typeOfDonation=" + typeOfDonation
+				+ ", lifeOfOrgan=" + lifeOfOrgan + ", requested_organ=" + requested_organ + ", donor=" + donor + "]";
 	}
-
-	
 	
 	
 

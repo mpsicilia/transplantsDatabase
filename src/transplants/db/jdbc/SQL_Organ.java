@@ -23,9 +23,9 @@ public class SQL_Organ {
 	public boolean insertOrgan(Organ organ){
 		try{
 			Statement stmt = dbManager.getC().createStatement();
-			String sql = "INSERT INTO Organs (name, weight, typeOfDonation) "
+			String sql = "INSERT INTO Organs (name, weight, typeOfDonation, lifeOfOrgan) "
 					+ "VALUES ('"+ organ.getName() + "','" + organ.getWeight() + "' , '" 
-					+ organ.getTypeOfDonation() + "');";
+					+ organ.getTypeOfDonation() + "','" +organ.getLifeOfOrgan()+"');";
 			stmt.executeUpdate(sql);			
 			stmt.close();
 			return true;
@@ -48,10 +48,11 @@ public class SQL_Organ {
 				Integer id = rs.getInt("id");
 				String nameOrgan = rs.getString("name");
 				Float weight = rs.getFloat("weight");
+				String typeOfDonation= rs.getString("typeOfDonation");
 				String lifeOfOrg= rs.getString("lifeOfOrgan");
 				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);
-				String typeOfDonation= rs.getString("typeOfDonation");
-				Organ organToShow = new Organ(id, nameOrgan, weight, lifeOfOrgan, typeOfDonation);
+				
+				Organ organToShow = new Organ(id, nameOrgan, weight, typeOfDonation, lifeOfOrgan );
 				lookForOrgan.add(organToShow);
 			}
 			rs.close();
@@ -66,11 +67,12 @@ public class SQL_Organ {
 	
 	public boolean updateOrgan (Organ organ){
 		try {
-			String sql = "UPDATE Organs SET name=?, weight=?, typeOfDonation =? WHERE id=?";
+			String sql = "UPDATE Organs SET name=?, weight=?, typeOfDonation =?, lifeOfOrgan=? WHERE id=?";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
 			prep.setString(1, organ.getName());
 			prep.setFloat(2, organ.getWeight());
 			prep.setString(3, organ.getTypeOfDonation());
+			prep.setDate(4, organ.getLifeOfOrgan());
 			prep.setInt(4, organ.getId());
 			prep.executeUpdate();
 			prep.close();			
@@ -106,10 +108,10 @@ public class SQL_Organ {
 		try{
 			Statement stm = dbManager.getC().createStatement();
 			String sql ="SELECT id FROM Organs WHERE (name LIKE '" + org.getName() + "') AND (weight = " + org.getWeight() + ""
-					+ ") AND (typeOfDonation = '" + org.getTypeOfDonation() + "')";
+					+ ") AND (typeOfDonation = '" + org.getTypeOfDonation() + "') AND (lifeOfOrgan = "+org.getLifeOfOrgan()+")";
 			ResultSet rs = stm.executeQuery(sql);
 			idO = rs.getInt("id");
-			o = new Organ (idO, org.getName(), org.getWeight(), org.getLifeOfOrgan(), org.getTypeOfDonation());
+			o = new Organ (idO, org.getName(), org.getWeight(), org.getTypeOfDonation(),  org.getLifeOfOrgan());
 			
 			rs.close();
 			stm.close();
@@ -161,7 +163,7 @@ public class SQL_Organ {
 				String lifeOfOrg= rs.getString(4);
 				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);
 				String typeDon = rs.getString("typeOfDonation");
-				Organ organ = new Organ(id, nameOrgan, weight, lifeOfOrgan,  typeDon);
+				Organ organ = new Organ(id, nameOrgan, weight, typeDon, lifeOfOrgan);
 				orgs.add(organ);
 			}
 			
