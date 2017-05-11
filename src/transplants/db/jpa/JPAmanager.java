@@ -18,7 +18,6 @@ import transplants.db.pojos.Requested_organ;
 public class JPAmanager implements DBManagerInterface {
 
 	private EntityManager em;
-	private JPAdoctor doct;
 	private JPApatient pat;
 	private JPAdonor don;
 	private JPAorgan org;
@@ -48,11 +47,6 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public boolean insert(Object obj) {
 		try {
-			if (Doctor.class == obj.getClass()) {
-				doct = new JPAdoctor(this);
-				Doctor doctor = (Doctor) obj;
-				return doct.insert(doctor);
-			}
 			if (Patient.class == obj.getClass()) {
 				pat = new JPApatient(this);
 				Patient patient = (Patient) obj;

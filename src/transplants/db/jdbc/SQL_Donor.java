@@ -3,11 +3,8 @@ package transplants.db.jdbc;
 
 import java.sql.Date;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import transplants.db.pojos.Donor;
 
@@ -20,95 +17,6 @@ public class SQL_Donor {
 	public SQL_Donor(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-	
-	public boolean insertDonor (Donor donor){
-		try{
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "INSERT INTO Donors (name, birthDate, weight, height, gender, deadAlive, bloodType) "
-					+ "VALUES ('"+ donor.getName() + "','" + donor.getBirthDate() + "' , '" + donor.getWeight() +
-					"' , '" + donor.getHeight() + "' , '" + donor.getGender() + "' , '" + donor.getDeadOrAlive()+ "' , '" +
-					donor.getBloodType() + "');";
-			stmt.executeUpdate(sql);			
-			stmt.close();
-			return true;
-					
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	public List <Donor> searchDonor(String name){
-		List<Donor> lookForDonor = new ArrayList<Donor>();
-		try {
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Donors WHERE name LIKE '%" + name + "%'";
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				String nameDon = rs.getString("name");
-				String birthString = rs.getString("birthDate");
-				Date dob = Date.valueOf(birthString);
-				Float weight = rs.getFloat("weight");
-				Float height = rs.getFloat("height");
-				String gender = rs.getString("gender");
-				String deadAlive = rs.getString("deadAlive");
-				String bloodType= rs.getString("bloodType");
-				Donor donorToShow = new Donor(id, nameDon, dob, weight, height, gender, deadAlive, bloodType);
-				lookForDonor.add(donorToShow);
-			}
-			rs.close();
-			stmt.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return lookForDonor;
-	}
-	
-	public boolean updateDonor (Donor donor){
-		try {
-			String sql = "UPDATE Donors SET name=?, birhDate=?, weight=?,"
-					+ "height =?, gender=?, deadAlive=?, bloodType=? WHERE id=?";
-			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
-			prep.setString(1, donor.getName());
-			prep.setDate (2, donor.getBirthDate());
-			prep.setFloat(3, donor.getWeight());
-			prep.setFloat(4, donor.getHeight());
-			prep.setString(5, donor.getGender());
-			prep.setString(6, donor.getDeadOrAlive());
-			prep.setString(7, donor.getBloodType());
-			prep.setInt(8, donor.getId());
-			prep.executeUpdate();
-			prep.close();			
-		return true;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return false;
-	}
-	
-	public boolean deleteDonor(Donor donor){
-		try{
-			String sql = "DELETE FROM Donors WHERE id=?";
-			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
-			prep.setInt(1, donor.getId());
-			prep.executeUpdate();
-			prep.close();
-			
-			return true;
-			
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
-	
-
 	
 	public int getDonorID (Donor d){
 		Donor donor =  new Donor();

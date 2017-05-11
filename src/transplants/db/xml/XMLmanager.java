@@ -4,7 +4,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import transplants.db.jpa.JPAhospital;
 import transplants.db.pojos.Hospital;
 
 public class XMLmanager {
