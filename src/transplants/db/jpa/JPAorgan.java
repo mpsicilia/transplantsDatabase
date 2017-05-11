@@ -45,7 +45,7 @@ public class JPAorgan {
 		return organs;
 	}
 	
-	public boolean updateOrgan (Organ orgOld, Organ orgNew){
+	/*public boolean updateOrgan (Organ orgOld, Organ orgNew){
 		try{
 			jpaManager.getEManager().getTransaction().begin();
 			orgOld.setName(orgNew.getName());
@@ -60,7 +60,7 @@ public class JPAorgan {
 			e.printStackTrace();
 		}
 		return false;
-	}
+	}*/
 	
 	public boolean delete(Organ organ){
 		try{

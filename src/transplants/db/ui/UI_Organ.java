@@ -37,9 +37,7 @@ public class UI_Organ {
 				
 				System.out.print("Life of organ: ");
 				String lifeOfOrg= console.readLine();
-				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);						
-
-				
+				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);	
 
 				Organ organ = new Organ(name, weight, typeOfDonation, lifeOfOrgan);
 				boolean ok = dbManager.insert(organ);
@@ -47,8 +45,12 @@ public class UI_Organ {
 				int idDonor = dbManager.idDonor(donor);
 				// get the id of the organ
 				int idOrgan = dbManager.idOrgan(organ);
+				//boolean upDated=jpaManager.organOfDonor(idDonor);
 				boolean okFKDonor = dbManager.donorFKinOrgan(idDonor, idOrgan);
-
+				//cojo el id del hosp y me creo metodo donde pasandole el id del hops me devuleve el hosp
+				//con un update el pacient con hop y con set y add
+				
+				
 				/*
 				 * Organ organ= new Organ(name, weight, typeOfDonation,  lifeOfOrgan); boolean
 				 * okey=dbManager.insert(organ);/*
@@ -72,7 +74,7 @@ public class UI_Organ {
 
 				if (ok && okFKDonor) {
 					System.out.print("Organ has been introduced");
-					uiCompatibilityTest(organ, dbManager);
+					//uiCompatibilityTest(organ, dbManager);
 				} else {
 					System.out.print("Organ has NOT been introduced");
 				}
@@ -131,6 +133,7 @@ public class UI_Organ {
 				case 1:
 					System.out.println("Introduce the new name: ");
 					organ.setName(console.readLine());
+					
 					break;
 				case 2:
 					System.out.println("Introduce the new weight: ");

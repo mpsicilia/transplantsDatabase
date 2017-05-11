@@ -204,12 +204,9 @@ public class JPAmanager implements DBManagerInterface {
 	
 	@Override
 	public boolean update(Object obj) {
-		if(Patient.class==obj.getClass()){ 
-			pat = new JPApatient(this); 
-			Patient patient=(Patient) obj; 
-			return pat.insert(patient);
-			} 
-     return false;
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+     return true;
 	}
 	
 	@Override

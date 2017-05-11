@@ -18,7 +18,7 @@ public class UI_Donor {
 	public UI_Donor(){
 		
 	}
-	
+
 	public Donor introduceNewDonor(JPAmanager jpaManager){
 		Donor donor = new Donor();
 		try{
