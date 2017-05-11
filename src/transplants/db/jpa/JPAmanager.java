@@ -223,7 +223,11 @@ public class JPAmanager implements DBManagerInterface {
 	
 	@Override
 	public boolean update(Object obj) {
-		em.flush();
+
+       em.flush();
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+
      return true;
 	}
 	

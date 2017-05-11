@@ -5,10 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "doctors")
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"nameOfDoctor", "specialization", "registrationNumber",})
 public class Doctor implements Serializable{
 
 	private static final long serialVersionUID = -1701687912909197672L;
@@ -16,9 +23,13 @@ public class Doctor implements Serializable{
 	@GeneratedValue(generator="doctors")
 	@TableGenerator(name="doctors", table="sqlite_sequence",
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="doctors")
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String registrationNumber;
+	@XmlAttribute
 	private String specialization;
+	@XmlAttribute
 	private String nameOfDoctor;
 	//no estaba antes el atributo de Hospital ni lista de pacientes
 	@ManyToMany(mappedBy= "doctors") 	
@@ -73,7 +84,7 @@ public class Doctor implements Serializable{
 		return true;
 	}
 
-	//getters and setters of all its atributes
+	//getters and setters of all its attributes
 	public Integer getId() {
 		return id;
 	}

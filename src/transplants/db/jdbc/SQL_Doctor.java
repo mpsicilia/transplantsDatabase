@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import transplants.db.pojos.Doctor;
+import transplants.db.pojos.Hospital;
 
 public class SQL_Doctor {
 	
@@ -165,6 +166,8 @@ public class SQL_Doctor {
 		return patDoctors;
 	}
 	
+	
+	
 	public void createTable() {
 		try {
 			Statement stmt1 = dbManager.getC().createStatement();
@@ -206,6 +209,7 @@ public class SQL_Doctor {
 		}
 		return false;
 	}
+
 	
 	public void dropTable(){
 		try{

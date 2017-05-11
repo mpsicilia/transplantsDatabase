@@ -330,7 +330,6 @@ public class DBManager implements DBManagerInterface {
 	public boolean update(Object obj) {
 		try {
 			if (Hospital.class == obj.getClass()) {
-				// create connection
 				hosp = new SQL_Hospital(this);
 				Hospital hospital = (Hospital) obj;
 				return hosp.updateHospital(hospital);

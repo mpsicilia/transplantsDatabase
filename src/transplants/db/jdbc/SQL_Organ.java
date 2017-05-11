@@ -107,8 +107,10 @@ public class SQL_Organ {
 		Organ o = new Organ();
 		try{
 			Statement stm = dbManager.getC().createStatement();
-			String sql ="SELECT id FROM Organs WHERE (name LIKE '" + org.getName() + "') AND (weight = " + org.getWeight() + ""
-					+ ") AND (typeOfDonation = '" + org.getTypeOfDonation() + "') AND (lifeOfOrgan = "+org.getLifeOfOrgan()+")";
+			String sql ="SELECT id FROM Organs WHERE name LIKE '" + org.getName() 
+						+ "' AND weight LIKE '" + org.getWeight() 
+						+ "' AND typeOfDonation LIKE '" + org.getTypeOfDonation() 
+						+ "' AND lifeOfOrgan LIKE '" + org.getLifeOfOrgan() + "'";
 			ResultSet rs = stm.executeQuery(sql);
 			idO = rs.getInt("id");
 			o = new Organ (idO, org.getName(), org.getWeight(), org.getTypeOfDonation(),  org.getLifeOfOrgan());
