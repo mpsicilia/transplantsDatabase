@@ -102,11 +102,7 @@ public class UIGenericMenu {
 		                    	//Donor in JPA but organ in jdbc
 
 		                    	uiOrgan.introduceNewOrgan(d, dbManager, jpaManager);
-		                    			                    	
-		                    	//foreign keys
 		                    	
-
-
 		                    	break;
 		                    case 4:
 		                    	Patient p = uiPatient.introduceNewPatient(jpaManager);

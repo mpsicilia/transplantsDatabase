@@ -29,13 +29,13 @@ public class UI_Organ {
 				System.out.print("Name: ");
 				String name = console.readLine();
 
-				System.out.print("Weight: ");
+				System.out.print("Weight(kg): ");
 				Float weight = Float.parseFloat(console.readLine());
 				
 				System.out.print("Type of donation [total or partial]: ");
 				String typeOfDonation = console.readLine();
 				
-				System.out.print("Life of organ: ");
+				System.out.print("Life of organ [yyyy-mm-dd]: ");
 				String lifeOfOrg= console.readLine();
 				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);	
 
@@ -43,40 +43,19 @@ public class UI_Organ {
 				boolean ok = dbManager.insert(organ);
 				// get the id of the donor
 				int idDonor = dbManager.idDonor(donor);
+				organ= jpaManager.organOfADonor(idDonor);
+				boolean okFKDonor= donor.addOrgan(organ);
+				
 				// get the id of the organ
-				int idOrgan = dbManager.idOrgan(organ);
+				//int idOrgan = dbManager.idOrgan(organ);
 				//boolean upDated=jpaManager.organOfDonor(idDonor);
-				boolean okFKDonor = dbManager.donorFKinOrgan(idDonor, idOrgan);
-				//cojo el id del hosp y me creo metodo donde pasandole el id del hops me devuleve el hosp
-				//con un update el pacient con hop y con set y add
-				
-				
-				/*
-				 * Organ organ= new Organ(name, weight, typeOfDonation,  lifeOfOrgan); boolean
-				 * okey=dbManager.insert(organ);/*
-				 * 
-				 * /*FIRST APPROACH
-				 */
-				// get the id of the donor but form jpa, instead of from jdbc
-				// int idDonor = jpaManager.idDonor(donor);
-				// get the id of the organ
-				// int idOrgan = dbManager.idOrgan (organ);
-				// overwriting with the foring keys using jpa
-				// found a prob: how to do it if in the query i cannot put
-				// update
-				// boolean okFKDonor = jpaManager.donorFKinOrgan (idDonor,
-				// idOrgan);
-
-				/* SECOND APPROACH */
-				// call a new method
-				// boolean okAssigment=
-				// jpaManager.assigmentDonorOrgan(donor,organ);
+				//boolean okFKDonor = dbManager.donorFKinOrgan(idDonor, idOrgan);
 
 				if (ok && okFKDonor) {
-					System.out.print("Organ has been introduced");
+					System.out.println("Organ has been introduced");
 					//uiCompatibilityTest(organ, dbManager);
 				} else {
-					System.out.print("Organ has NOT been introduced");
+					System.out.println("Organ has NOT been introduced");
 				}
 				System.out.println("Is the donor going to donate another organ? [yes/no]");
 				String another = console.readLine();

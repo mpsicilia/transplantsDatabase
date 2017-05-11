@@ -9,7 +9,6 @@ import java.util.List;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Donor;
 
-import transplants.db.pojos.Organ;
 
 public class UI_Donor {
 
@@ -29,10 +28,10 @@ public class UI_Donor {
 			String birth = console.readLine();
 			Date birthDate = Date.valueOf(birth);
 			
-			System.out.print("Height: ");
+			System.out.print("Height (cm): ");
 			Float height = Float.parseFloat(console.readLine());
 			
-			System.out.print("Weight: ");
+			System.out.print("Weight (kg): ");
 			Float weight = Float.parseFloat(console.readLine());
 			
 			System.out.print("Gender: ");

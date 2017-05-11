@@ -36,12 +36,12 @@ public class JPAdonor {
 		try{
 			jpaManager.getEManager().getTransaction().begin();
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT id FROM Donors "
-					+ "WHERE (name LIKE '" + don.getName() + "') "
-					+ "AND (weight = " + don.getWeight() + ")"
-					+ "AND (height = " + don.getHeight() + ") "
-					+ "AND (gender LIKE '" + don.getGender() + "')"
-					+ "AND (deadAlive LIKE '" + don.getDeadOrAlive() + "') "
-					+ "AND (bloodType LIKE '" + don.getBloodType() + "')", Donor.class);
+					+ "WHERE name LIKE '" + don.getName() + "' "
+					+ "AND weight LIKE '" + don.getWeight() + "' "
+					+ "AND height LIKE '" + don.getHeight() + "' "
+					+ "AND gender LIKE '" + don.getGender() + "' "
+					+ "AND deadAlive LIKE '" + don.getDeadOrAlive() + "' "
+					+ "AND bloodType LIKE '" + don.getBloodType() + "'", Donor.class);
 			donor = (Donor) q1.getSingleResult();
 			jpaManager.getEManager().getTransaction().commit();		
 			

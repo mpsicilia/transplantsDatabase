@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 
 import transplants.db.dbInterface.DBManagerInterface;
-import transplants.db.jdbc.SQL_Donor;
 import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
@@ -19,12 +18,11 @@ import transplants.db.pojos.Requested_organ;
 
 public class JPAmanager implements DBManagerInterface {
 	
-	private EntityManager em;
-	private JPAhospital hosp;
-	
+	private EntityManager em;	
 	private JPAdoctor doct;
 	private JPApatient pat;
 	private JPAdonor don;
+	private JPAorgan org;
 
 
 	public JPAmanager(){
@@ -53,14 +51,6 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public  boolean insert(Object obj) {
 		try {
-
-			if (Hospital.class == obj.getClass()) {
-				// create connection
-				hosp = new JPAhospital(this); 				
-				Hospital hospital = (Hospital) obj;
-				return hosp.insert(hospital);
-			}
-			
 			if (Doctor.class == obj.getClass()) {
 				doct = new JPAdoctor(this);
 				Doctor doctor = (Doctor) obj;
@@ -101,7 +91,7 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2) {
-		// TODO Auto-generated method stub
+		// DONE IN JDBC
 		return false;
 	}
 	@Override
@@ -121,13 +111,16 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public boolean insertFKInPatient(Integer patID, Integer hospID) {
-		
 		return false;
 	}
 	@Override
 	public boolean donorFKinOrgan(Integer idD, Integer idO) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	public Organ organOfADonor(Integer donorId){
+		org= new JPAorgan(this);
+		return org.selectOrgan(donorId);
 	}
 	@Override
 	public boolean requestedFKinOrgan(int idR, int idO) {

@@ -39,11 +39,7 @@ public class DBManager implements DBManagerInterface {
 	public void connect() {
 		try {
 			Class.forName("org.sqlite.JDBC");// to create a connection
-			this.c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");// specific
-																					// directory(.:
-																					// actual
-																					// current
-																					// directory)
+			this.c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 		} catch (Exception e) {
 			e.printStackTrace();

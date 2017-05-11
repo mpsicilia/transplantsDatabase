@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import transplants.db.pojos.Organ;
-import transplants.db.pojos.Requested_organ;
+
 
 public class JPAorgan {
 
@@ -32,6 +32,19 @@ public class JPAorgan {
 		return false;
 	}
 	
+	public Organ selectOrgan (Integer id){
+		Organ newOrgan=new Organ ();
+		try{
+			jpaManager.getEManager().getTransaction().begin();
+			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Organs WHERE id = " + id + "", JPAorgan.class);
+			newOrgan = (Organ) q.getSingleResult();
+			jpaManager.getEManager().getTransaction().commit();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return newOrgan;
+	}
+	
 	public List<Organ> searchOrgan (String name){
 		List<Organ> organs = new ArrayList<Organ>();
 		try{
@@ -44,23 +57,6 @@ public class JPAorgan {
 		}
 		return organs;
 	}
-	
-	/*public boolean updateOrgan (Organ orgOld, Organ orgNew){
-		try{
-			jpaManager.getEManager().getTransaction().begin();
-			orgOld.setName(orgNew.getName());
-			orgOld.setWeight(orgNew.getWeight());
-			orgOld.setTypeOfDonation(orgNew.getTypeOfDonation());
-			orgOld.setLifeOfOrgan(orgNew.getLifeOfOrgan());
-			
-			jpaManager.getEManager().getTransaction().commit();
-			//both directions
-			return true;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}*/
 	
 	public boolean delete(Organ organ){
 		try{
