@@ -181,7 +181,7 @@ public class SQL_Patient {
 				String gen = rs.getString("gender");
 				String patho =  rs.getString("pathology");
 				String bt = rs.getString("bloodType");
-				String addString = rs.getString("birthDate");
+				String addString = rs.getString("additionDate");
 				Date doa = Date.valueOf(addString);
 				String lifeExp= rs.getString("lifeExpectancy");
 				Date lifeExpectancy= Date.valueOf(lifeExp);

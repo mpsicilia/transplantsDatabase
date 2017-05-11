@@ -224,7 +224,7 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public Integer idPatient(Patient patient) {
-		Integer id=3000; //por ejemplo
+		Integer id=30; //por ejemplo
 		try {
 			pat = new JPApatient(this);
 			id = pat.getIdOfPatient(patient);

@@ -39,7 +39,7 @@ public class JPApatient {
 	}
 	
 	public Integer getIdOfPatient(Patient pat){
-		Integer id=3000; //por darle un valor
+		Integer id=30; //por darle un valor
 		try{
 			jpaManager.getEManager().getTransaction().begin();
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT id FROM Patients "
@@ -54,9 +54,11 @@ public class JPApatient {
 				    +"AND (lifeExpectancy  LIKE '" +pat.getLifeExpectancy() + "')",Patient.class);
 				
 					
-			id = (Integer) q1.getSingleResult();
+			id =  (Integer) q1.getSingleResult();
 			jpaManager.getEManager().getTransaction().commit();	
 			return id;
+			
+			
 			
 		}catch (Exception ex){
 			ex.printStackTrace();
