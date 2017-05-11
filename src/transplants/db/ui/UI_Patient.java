@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
@@ -25,7 +26,7 @@ public class UI_Patient {
 	public UI_Patient(){		
 	}
 	
-	public Patient introduceNewPatient (JPAmanager jpaManager){
+	public Patient introduceNewPatient (JPAmanager jpaManager,DBManager dbmanager){
 		try{
 			System.out.println("Name: ");
 			String name = console.readLine();
@@ -60,30 +61,35 @@ public class UI_Patient {
 			
 			boolean introduced=jpaManager.insert(p);
 			//getting the FK
-			//Integer patId=jpaManager.idPatient(p); 
-			//System.out.println("ID===="+patId);&&(patId!=30)
-			if(introduced ){
+			/*Integer patId=jpaManager.idPatient(p);
+			System.out.println("id="+patId); 
+			
+			
+			if(introduced &&(patId!=30)){
 				System.out.println("the patient has been introduced ");
 			}
 			else{
 				System.out.println("the patient has NOT  been introduced");
 			}
-			
+			//JDBC*/
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
-			List <Hospital>hosps= jpaManager.selectAllHospitals();
+			List <Hospital>hosps= dbmanager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
 			while (itH.hasNext()){
 				Hospital h=itH.next();
 				System.out.println(h);
 			}
-			Integer idHosp= Integer.parseInt(console.readLine());	
-			
-			//here we are introducing the FK hospital_id in table patients
-			Integer patId=jpaManager.idPatient(p); 
-			System.out.println("ID===="+patId);
+			Integer idHosp= Integer.parseInt(console.readLine());
 			
 			
-			boolean introduced2=jpaManager.insertFKInPatient(patId,idHosp);
+			//RELATIONSHIP BETWEEN HOSP AND PATIENT
+			Hospital hospital=jpaManager.getHospitalPatient(idHosp);
+			jpaManager.getEManager().getTransaction().begin();
+			
+			hospital.addPatient(p);
+			p.setHospital(hospital);
+			jpaManager.getEManager().getTransaction().commit();
+			
 			
 			
 			/*System.out.println("How many doctors are attending the patient?");

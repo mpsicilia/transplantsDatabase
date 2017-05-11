@@ -36,6 +36,22 @@ public class JPAmanager implements DBManagerInterface {
 		return em;
 	}
 	
+	public Hospital getHospitalPatient(Integer id){
+		Hospital hosp=new Hospital();
+
+		try{
+			pat=new JPApatient(this);
+			hosp=pat.getHospitalbyid(id);
+			return hosp;
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return hosp;
+		
+		
+	}
+	
 	@Override
 	public void connect() {
 		try{
@@ -69,7 +85,10 @@ public class JPAmanager implements DBManagerInterface {
 			if(Patient.class==obj.getClass()){ 
 				pat = new JPApatient(this); 
 				Patient patient=(Patient) obj; 
-				return pat.insert(patient);
+				
+				boolean r=  pat.insert(patient);
+				this.getEManager().refresh(patient);
+				return r;
 				} 
 			if (Donor.class==obj.getClass()){
 				don=new JPAdonor(this);
@@ -204,12 +223,8 @@ public class JPAmanager implements DBManagerInterface {
 	
 	@Override
 	public boolean update(Object obj) {
-		if(Patient.class==obj.getClass()){ 
-			pat = new JPApatient(this); 
-			Patient patient=(Patient) obj; 
-			return pat.insert(patient);
-			} 
-     return false;
+		em.flush();
+     return true;
 	}
 	
 	@Override
