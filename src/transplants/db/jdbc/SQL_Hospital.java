@@ -60,7 +60,7 @@ public class SQL_Hospital {
 	}
 
 	// new method that searches for a hospital with an id-->to use in UIDOCTOR
-	public String Hospitalofdoctor(Integer idhosp) {
+	/*public String Hospitalofdoctor(Integer idhosp) {
 		String hosp = "";
 		try {
 			Statement stmt = dmanager.getC().createStatement();
@@ -75,7 +75,7 @@ public class SQL_Hospital {
 			e.printStackTrace();
 		}
 		return hosp;
-	}
+	}*/
 
 	// method that tell us given a specific doctor, in which hospital he works
 	public List<Hospital> searchHospitalsOfDoctor(String doctorName) {
@@ -207,30 +207,6 @@ public class SQL_Hospital {
 			e.printStackTrace();
 		}
 		return false;
-	}
-	
-
-	public List <Doctor> doctorsWorkingInHospital (String nameHosp){
-		List<Doctor> docsInHosp = new ArrayList<Doctor>();
-		try{
-			Statement stm = dmanager.getC().createStatement();
-			String sql = "SELECT * FROM Doctors AS Doc JOIN HospitalsDoctors AS HospDoc ON Doc.id = HospDoc.doctor_id"
-					+ "JOIN Hospitals AS Hosp ON HospDoc.hospital_id = Hosp.id WHERE Hosp.name LIKE '" + nameHosp + "'";
-			ResultSet rs = stm.executeQuery(sql);
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String nameDoctor = rs.getString("name");
-				String regNumber = rs.getString("registrationNumber");
-				String specializ = rs.getString("specialization");
-				Doctor doctor = new Doctor(id, nameDoctor,regNumber,specializ);
-				docsInHosp.add(doctor);
-			}
-			rs.close();
-			stm.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return docsInHosp;
 	}
 
 	public void createTable() {

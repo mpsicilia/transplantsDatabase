@@ -139,6 +139,29 @@ public class SQL_Doctor {
 		}
 		return lookForDoctor;
 	}
+	
+	public List <Doctor> doctorsWorkingInHospital (String nameHosp){
+		List<Doctor> docsInHosp = new ArrayList<Doctor>();
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Doctors AS Doc JOIN HospitalsDoctors AS HospDoc ON Doc.id = HospDoc.doctor_id"
+					+ "JOIN Hospitals AS Hosp ON HospDoc.hospital_id = Hosp.id WHERE Hosp.name LIKE '" + nameHosp + "'";
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String nameDoctor = rs.getString("name");
+				String regNumber = rs.getString("registrationNumber");
+				String specializ = rs.getString("specialization");
+				Doctor doctor = new Doctor(id, nameDoctor,regNumber,specializ);
+				docsInHosp.add(doctor);
+			}
+			rs.close();
+			stm.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return docsInHosp;
+	}
 
 	public List<Doctor> doctorsAttendingPatient (String patName){//n-n relation
 		List<Doctor> patDoctors = new ArrayList<Doctor>();

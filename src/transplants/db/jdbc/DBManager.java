@@ -44,7 +44,6 @@ public class DBManager implements DBManagerInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -54,7 +53,6 @@ public class DBManager implements DBManagerInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -121,7 +119,6 @@ public class DBManager implements DBManagerInterface {
 		try {
 
 			if (Hospital.class == obj.getClass()) {
-				// create connection
 				hosp = new SQL_Hospital(this);
 				Hospital hospital = (Hospital) obj;
 				return hosp.insertHospital(hospital);
@@ -133,16 +130,6 @@ public class DBManager implements DBManagerInterface {
 				return doct.insertDoctor(doctor);
 			}
 
-			if (Patient.class == obj.getClass()) {
-				pat = new SQL_Patient(this);
-				Patient patient = (Patient) obj;
-				return pat.insertPatient(patient);
-			}
-			if (Donor.class == obj.getClass()) {
-				don = new SQL_Donor(this);
-				Donor donor = (Donor) obj;
-				return don.insertDonor(donor);
-			}
 			if (Organ.class == obj.getClass()) {
 				org = new SQL_Organ(this);
 				Organ organ = (Organ) obj;
@@ -208,7 +195,7 @@ public class DBManager implements DBManagerInterface {
 	public List<Hospital> searchHosp(String name) {
 
 		try {
-			hosp = new SQL_Hospital(this); // create connection
+			hosp = new SQL_Hospital(this); 
 			List<Hospital> hospList = hosp.searchHospital(name);
 			return hospList;
 		} catch (Exception e) {
@@ -217,22 +204,22 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	// new method to use in UIDOCTOR
+	/*
 	public String searchHospital(Integer id) {
 		try {
-			hosp = new SQL_Hospital(this); // create connection
+			hosp = new SQL_Hospital(this); 
 			String namehosp = hosp.Hospitalofdoctor(id);
 			return namehosp;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
 
 	@Override
 	public List<Doctor> searchDoctor(String name) {
 		try {
-			doct = new SQL_Doctor(this); // create connection
+			doct = new SQL_Doctor(this); 
 			List<Doctor> doctList = doct.searchDoctor(name);
 			return doctList;
 		} catch (Exception e) {
@@ -258,25 +245,19 @@ public class DBManager implements DBManagerInterface {
 		// DONE WITH JPA
 		return null;
 	}
-
+	
+	@Override
+	public List<Patient> searchPatient(String name) {
+		//DONE IN JPA
+		return null;
+	}
+	
 	@Override
 	public List<Organ> searchOrgan(String name) {
 		try {
 			org = new SQL_Organ(this);
 			List<Organ> organList = org.searchOrgan(name);
 			return organList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public List<Patient> searchPatient(String name) {
-		try {
-			pat = new SQL_Patient(this);
-			List<Patient> patientList = pat.searchPatient(name);
-			return patientList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -314,13 +295,11 @@ public class DBManager implements DBManagerInterface {
 		return pat.selectAllPatients();
 	}
 
-	
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
-		org=new SQL_Organ(this);
+		org = new SQL_Organ(this);
 		return org.CompatibilityTest(organ);
 	}
-
 
 	@Override
 	public boolean update(Object obj) {
@@ -334,16 +313,6 @@ public class DBManager implements DBManagerInterface {
 				doct = new SQL_Doctor(this);
 				Doctor doctor = (Doctor) obj;
 				return doct.updateDoctor(doctor);
-			}
-			if (Patient.class == obj.getClass()) {
-				pat = new SQL_Patient(this);
-				Patient patient = (Patient) obj;
-				return pat.updatePatient(patient);
-			}
-			if (Donor.class == obj.getClass()) {
-				don = new SQL_Donor(this);
-				Donor donor = (Donor) obj;
-				return don.updateDonor(donor);
 			}
 			if (Organ.class == obj.getClass()) {
 				org = new SQL_Organ(this);
@@ -380,16 +349,6 @@ public class DBManager implements DBManagerInterface {
 				Doctor doctor = (Doctor) obj;
 				return doct.deleteDoctor(doctor);
 			}
-			if (Patient.class == obj.getClass()) {
-				pat = new SQL_Patient(this);
-				Patient patient = (Patient) obj;
-				return pat.deletePatient(patient);
-			}
-			if (Donor.class == obj.getClass()) {
-				don = new SQL_Donor(this);
-				Donor donor = (Donor) obj;
-				return don.deleteDonor(donor);
-			}
 			if (Organ.class == obj.getClass()) {
 				org = new SQL_Organ(this);
 				Organ organ = (Organ) obj;
@@ -411,9 +370,9 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 
-	// ID getters
+	// METHODS IN ORDER TO GET THE ID
 	@Override
-	public Integer idPatient(Patient patient) {
+	public Integer idPatient(Patient patient) {//delete from here once we have it in jpa
 		Integer id = 0;
 		try {
 			pat = new SQL_Patient(this);
@@ -449,7 +408,7 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	@Override
-	public Integer idDonor(Donor d) {
+	public Integer idDonor(Donor d) {//delete from here once we have it in jpa
 		Integer id = 0;
 		try {
 			don = new SQL_Donor(this);
