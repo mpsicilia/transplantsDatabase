@@ -136,7 +136,7 @@ public class Patient extends Person implements Serializable {
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", birthDate=" + birthDate + ", weight=" + weight + 
-				", height=" + height + ", gender=" + gender + "lifeExpectancy=" + lifeExpectancy + 
+				", height=" + height + ", gender=" + gender + " lifeExpectancy=" + lifeExpectancy + 
 				", additionDate=" + additionDate + ", bloodType=" + bloodType + "]";
 	}
 	

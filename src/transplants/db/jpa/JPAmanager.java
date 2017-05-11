@@ -121,7 +121,7 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public boolean insertFKInPatient(Integer patID, Integer hospID) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 	@Override
@@ -204,8 +204,12 @@ public class JPAmanager implements DBManagerInterface {
 	
 	@Override
 	public boolean update(Object obj) {
-		// TODO Auto-generated method stub
-    return false;
+		if(Patient.class==obj.getClass()){ 
+			pat = new JPApatient(this); 
+			Patient patient=(Patient) obj; 
+			return pat.insert(patient);
+			} 
+     return false;
 	}
 	
 	@Override

@@ -105,8 +105,7 @@ public class JPApatient {
 				
 			}
 			
-			 
-			patient.setGender(newpatient.getGender());
+			 patient.setGender(newpatient.getGender());
 
 			patient.setHeight(newpatient.getHeight());
 
@@ -115,8 +114,8 @@ public class JPApatient {
 			patient.setLifeExpectancy(newpatient.getLifeExpectancy());
 
 			patient.setHospital(hosp);
-			//1-N relationship
-			hosp.addPatient(newpatient);
+			hosp.addPatient(patient);
+		
 
 			patient.setPathology(newpatient.getPathology());
 
@@ -129,6 +128,17 @@ public class JPApatient {
 
 		}
 		return false;
+	}
+	public Hospital updateHospitalofPatient (Patient pat,Hospital hosp){
+		try{
+			jpaManager.getEManager().getTransaction().begin();
+			pat.setHospital(hosp);
+			hosp.addPatient(pat);
+			}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return hosp;
 	}
 	public List<Patient> searchPatient (String name){
 		List<Patient> patients = new ArrayList<Patient>();

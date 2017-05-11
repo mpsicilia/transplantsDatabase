@@ -60,28 +60,33 @@ public class UI_Patient {
 			
 			boolean introduced=jpaManager.insert(p);
 			//getting the FK
-			Integer patId=jpaManager.idPatient(p); 
-			System.out.println("ID===="+patId);
-			if(introduced &&(patId!=30)){
+			//Integer patId=jpaManager.idPatient(p); 
+			//System.out.println("ID===="+patId);&&(patId!=30)
+			if(introduced ){
 				System.out.println("the patient has been introduced ");
 			}
 			else{
 				System.out.println("the patient has NOT  been introduced");
 			}
 			
-			/*System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
+			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= jpaManager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
 			while (itH.hasNext()){
 				Hospital h=itH.next();
 				System.out.println(h);
 			}
-			Integer idHosp= Integer.parseInt(console.readLine());			
+			Integer idHosp= Integer.parseInt(console.readLine());	
+			
 			//here we are introducing the FK hospital_id in table patients
+			Integer patId=jpaManager.idPatient(p); 
+			System.out.println("ID===="+patId);
+			
+			
 			boolean introduced2=jpaManager.insertFKInPatient(patId,idHosp);
 			
 			
-			System.out.println("How many doctors are attending the patient?");
+			/*System.out.println("How many doctors are attending the patient?");
 			Integer Xtimes= Integer.parseInt(console.readLine());
 			Integer counter=1;
 			Integer doctId=0;
@@ -126,6 +131,10 @@ public class UI_Patient {
 		}
 		return null; 
 	}
+	/*public void updateHosp(Patient pat, Hospital hosp, JPAmanager jpaManager){
+	 jpaManager.update(hosp);
+		
+	}*/
 
 	
 	public void updatePatient(Patient p, JPAmanager jpaManager){
