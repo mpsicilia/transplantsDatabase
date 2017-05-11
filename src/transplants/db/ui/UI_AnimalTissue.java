@@ -3,6 +3,7 @@ package transplants.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
@@ -26,10 +27,10 @@ public class UI_AnimalTissue {
 			System.out.print("Pathology: ");
 			String pathology = console.readLine();
 				
-			System.out.print("Country: ");
-			Integer timeLasts = Integer.parseInt(console.readLine());
+			System.out.print("Time the tissue lasts before the transplant: ");
+			Date lifeExpTissue= Date.valueOf(console.readLine());
 			
-			Animal_tissue animalT= new Animal_tissue(name, typeOfTissue, pathology, timeLasts);
+			Animal_tissue animalT= new Animal_tissue(name, typeOfTissue, pathology, lifeExpTissue);
 			boolean ok=dbManager.insert(animalT);
 			if (ok){
 				System.out.print("The animal tissue has been introduced");
@@ -63,7 +64,7 @@ public class UI_AnimalTissue {
 				System.out.println("1. Name");
 				System.out.println("2. Type of tissue");
 				System.out.println("3. Pathology ");
-				System.out.println("4. Time the tissue lasts");				
+				System.out.println("4. Time the tissue lasts before being transplanted");				
 				int op = Integer.parseInt(console.readLine());
 				switch (op){
 					case 1:
@@ -80,7 +81,7 @@ public class UI_AnimalTissue {
 						break;
 					case 4:
 						System.out.println("Introduce the new time the tissue lasts: ");
-						animalT.setTimeItLasts(Integer.parseInt(console.readLine()));
+						animalT.setLifeExpTissue(Date.valueOf(console.readLine()));
 						break;
 
 				}

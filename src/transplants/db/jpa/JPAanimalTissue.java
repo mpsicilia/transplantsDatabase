@@ -50,9 +50,10 @@ private JPAmanager jpaManager;
 		try{
 			jpaManager.getEManager().getTransaction().begin();
 			atOld.setName(atNew.getName());
-			atOld.setPathology(atNew.getPathology());
-			atOld.setTimeItLasts(atNew.getTimeItLasts());
 			atOld.setTypeOfTissue(atNew.getTypeOfTissue());
+			atOld.setPathology(atNew.getPathology());
+			atOld.setLifeExpTissue(atNew.getLifeExpTissue());
+			
 			atOld.setRequested_organs(atNew.getRequested_organs());
 			jpaManager.getEManager().getTransaction().commit();
 			//change in both directions!!!

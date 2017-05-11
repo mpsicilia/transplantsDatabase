@@ -73,7 +73,7 @@ public class SQL_Organ {
 			prep.setFloat(2, organ.getWeight());
 			prep.setString(3, organ.getTypeOfDonation());
 			prep.setDate(4, organ.getLifeOfOrgan());
-			prep.setInt(4, organ.getId());
+			prep.setInt(5, organ.getId());
 			prep.executeUpdate();
 			prep.close();			
 		return true;
@@ -160,9 +160,10 @@ public class SQL_Organ {
 				Integer id = rs.getInt(1);
 				String nameOrgan = rs.getString(2);
 				Float weight = rs.getFloat(3);
-				String lifeOfOrg= rs.getString(4);
+				String typeDon = rs.getString(4);
+				String lifeOfOrg= rs.getString(5);
 				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);
-				String typeDon = rs.getString("typeOfDonation");
+				
 				Organ organ = new Organ(id, nameOrgan, weight, typeDon, lifeOfOrgan);
 				orgs.add(organ);
 			}

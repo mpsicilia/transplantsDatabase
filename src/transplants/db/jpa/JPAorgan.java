@@ -50,8 +50,9 @@ public class JPAorgan {
 			jpaManager.getEManager().getTransaction().begin();
 			orgOld.setName(orgNew.getName());
 			orgOld.setWeight(orgNew.getWeight());
-			orgOld.setLifeOfOrgan(orgNew.getLifeOfOrgan());
 			orgOld.setTypeOfDonation(orgNew.getTypeOfDonation());
+			orgOld.setLifeOfOrgan(orgNew.getLifeOfOrgan());
+			
 			jpaManager.getEManager().getTransaction().commit();
 			//both directions
 			return true;

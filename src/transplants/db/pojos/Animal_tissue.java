@@ -1,6 +1,7 @@
 package transplants.db.pojos;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Animal_tissue implements Serializable {
 	private String name;
 	private String typeOfTissue;
 	private String pathology;
-	private Integer timeItLasts;
+	private Date lifeExpTissue;
 	
 	@ManyToMany(mappedBy = "animalTissues") //bc it is mapped by the list of the other class. ver apuntes
 	private List<Requested_organ> requested_organs;
@@ -32,21 +33,21 @@ public class Animal_tissue implements Serializable {
 	}
 	
 		
-	public Animal_tissue(Integer id, String name, String typeOfTissue, String pathology, int time) {
+	public Animal_tissue(Integer id, String name, String typeOfTissue, String pathology, Date lifeExpTissue) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
 		this.pathology = pathology;
-		this.timeItLasts = time;
+		this.lifeExpTissue= lifeExpTissue;
 	}
 	
-	public Animal_tissue(String name, String typeOfTissue, String pathology, int time) {
+	public Animal_tissue(String name, String typeOfTissue, String pathology, Date lifeExpTissue) {
 		super();
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
 		this.pathology = pathology;
-		this.timeItLasts = time;
+		this.lifeExpTissue= lifeExpTissue;
 	}
 
 
@@ -76,8 +77,8 @@ public class Animal_tissue implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Animal_tissue [id = " + id + ", name=" + name + ", type_of_tissue=" + typeOfTissue + ", pathology="
-				+ pathology + ", time=" + timeItLasts + "]";
+		return "Animal_tissue [id = " + id + ", name=" + name + ", typeOfTissue=" + typeOfTissue + ", pathology="
+				+ pathology + ", lifeExpTissue =" + lifeExpTissue + "]";
 	}
 
 
@@ -105,12 +106,17 @@ public class Animal_tissue implements Serializable {
 	public void setPathology(String pathology) {
 		this.pathology = pathology;
 	}
-	public int getTimeItLasts() {
-		return timeItLasts;
+	
+	public Date getLifeExpTissue() {
+		return lifeExpTissue;
 	}
-	public void setTimeItLasts(int timeItLasts) {
-		this.timeItLasts = timeItLasts;
+
+
+	public void setLifeExpTissue(Date lifeExpTissue) {
+		this.lifeExpTissue = lifeExpTissue;
 	}
+
+
 	public List<Requested_organ> getRequested_organs(){
 		return requested_organs;
 	}
