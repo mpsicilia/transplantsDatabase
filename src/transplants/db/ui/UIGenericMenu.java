@@ -37,7 +37,7 @@ public class UIGenericMenu {
 		UI_RequestedOrgan uiRequested = new UI_RequestedOrgan();
 		try{
 				        
-	        System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
+	       /* System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 	        String drop = console.readLine();
 	        if(drop.equalsIgnoreCase("Y")){
 	        	boolean dropped = dbManager.dropTables();
@@ -47,7 +47,7 @@ public class UIGenericMenu {
 	        	else{
 	        		System.out.println("Tables have not been dropped. ");
 	        	}
-	        }
+	        } */
 	        
 	        System.out.println("Do you want to create the tables?: [yes/no]");
 	        String decider= console.readLine();
@@ -104,9 +104,7 @@ public class UIGenericMenu {
 		                    	uiOrgan.introduceNewOrgan(d, dbManager, jpaManager);
 		                    			                    	
 		                    	//foreign keys
-
-
-		                    	uiOrgan.introduceNewOrgan(d, dbManager,jpaManager); 
+		                    	
 
 
 		                    	break;
