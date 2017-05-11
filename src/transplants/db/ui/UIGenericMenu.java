@@ -105,7 +105,7 @@ public class UIGenericMenu {
 		                    	
 		                    	break;
 		                    case 4:
-		                    	Patient p = uiPatient.introduceNewPatient(jpaManager);
+		                    	Patient p = uiPatient.introduceNewPatient(jpaManager,dbManager);
 		                    	System.out.println("Introduce the organ that the patient needs. ");
 		                    	//patient in JPA but requested organ in jdbc
 		                    	uiRequested.introduceNewReqOrgan(p,dbManager);
@@ -287,7 +287,7 @@ public class UIGenericMenu {
 	                	 		if(counterPat ==1){
 	                	 			System.out.println("Patient not found, would you like to introduce a new patient?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiPatient.introduceNewPatient(jpaManager);
+	                	 				uiPatient.introduceNewPatient(jpaManager,dbManager);
 	                	 				break;
 	                	 			}
 	                	 		}
