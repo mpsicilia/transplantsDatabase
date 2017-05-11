@@ -10,7 +10,9 @@ import javax.xml.bind.Marshaller;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
+import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
+import transplants.db.xml.XMLmanager;
 
 public class UI_Hospitals {
 	
@@ -159,16 +161,9 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	/*
+	
 	public void javaToXmlHospital (DBManager dbManager){
 		try{
-			//JAXBContext is like the entity manager for xml, I pass the class thats going to be the root element
-			JAXBContext jaxbContext = JAXBContext.newInstance(Hospital.class);
-			// Get the marshaller, create mashaller object
-			Marshaller marshaller = jaxbContext.createMarshaller();
-			
-			// Pretty formatting
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 			
 			//Show the user all the hospitals, so he can choose what hospital is going to turn into XML
 			List<Hospital> hosps = dbManager.selectAllHospitals();
@@ -184,13 +179,43 @@ public class UI_Hospitals {
 			//get the hospital from the list
 			Hospital hospToXml = hosps.get(hospNumb-1);
 			
+			//get the doctors of the hospital and add it to the hospital
+			List<Doctor> doctorsOfHosp = dbManager.workingDoctorsOfHosp(hospToXml.getName()); //create the method in DB
+			Iterator<Doctor> itD = doctorsOfHosp.iterator();
+			counter = 1;
+			while (itD.hasNext()){
+				Doctor d = itD.next();
+				boolean doctorOK = hospToXml.addDoctor(d);
+				//this if is not needed but just to be sure that the doctors are being introduced well
+				if (doctorOK){
+					System.out.println(counter + ". " + d.getNameOfDoctor() + "added.");
+				}
+				else {
+					System.out.println(counter + ". " + d.getNameOfDoctor() + "NOT added.");
+				}
+				counter ++;
+			}
+			
+			XMLmanager hospXml = new XMLmanager();
+			boolean xmlOK = hospXml.javaToXml(hospToXml);
+			
+			if(xmlOK){
+				System.out.println("Xml of hospital created. ");
+			}
+			else{
+				System.out.println("Xml of hospital NOT created. ");
+			}
+			
+			
+			
+			
 			// Marshal the hospital to a file
-			File file = new File("./xmlFiles/Hospitals.xml");
+			/*File file = new File("./xmlFiles/Hospitals.xml");
 			marshaller.marshal(hospToXml, file); //store the hospital in that file
 			//print
-			marshaller.marshal(hospToXml, System.out);
+			marshaller.marshal(hospToXml, System.out);*/
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
