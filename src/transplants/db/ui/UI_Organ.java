@@ -43,8 +43,7 @@ public class UI_Organ {
 				//inserting the new organ w/JDBC
 				boolean ok = dbManager.insert(organ);
 				// get the id of the donor with JPA
-				int idDonor = jpaManager.idDonor(donor);
-				
+				int idDonor = jpaManager.idDonor(donor);				
 				organ= jpaManager.organOfADonor(idDonor);
 				boolean okFKDonor= donor.addOrgan(organ);
 
