@@ -18,9 +18,8 @@ import transplants.db.pojos.Requested_organ;
 public class JPAmanager implements DBManagerInterface {
 
 	private EntityManager em;
-	private JPApatient pat;
-	private JPAdonor don;
-	private JPAorgan org;
+	private JPApatient pat= new JPApatient(this);
+	private JPAdonor don=new JPAdonor(this);
 
 	public JPAmanager() {
 		super();
@@ -48,7 +47,6 @@ public class JPAmanager implements DBManagerInterface {
 	public boolean insert(Object obj) {
 		try {
 			if (Patient.class == obj.getClass()) {
-				pat = new JPApatient(this);
 				Patient patient = (Patient) obj;
 
 				boolean r = pat.insert(patient);
@@ -56,7 +54,6 @@ public class JPAmanager implements DBManagerInterface {
 				return r;
 			}
 			if (Donor.class == obj.getClass()) {
-				don = new JPAdonor(this);
 				Donor donor = (Donor) obj;
 				return don.insert(donor);
 			}
@@ -118,7 +115,6 @@ public class JPAmanager implements DBManagerInterface {
 		Hospital hosp = new Hospital();
 
 		try {
-			pat = new JPApatient(this);
 			hosp = pat.getHospitalbyid(id);
 			return hosp;
 		} catch (Exception ex) {
@@ -134,8 +130,8 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	public Organ organOfADonor(Integer donorId) {
-		org = new JPAorgan(this);
-		return org.selectOrgan(donorId);
+		
+		return don.selectOrgan(donorId);
 	}
 
 	@Override
@@ -165,7 +161,6 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public List<Donor> searchDonor(String name) {
 		try {
-			don = new JPAdonor(this);
 			List<Donor> donorList = don.searchDonor(name);
 			return donorList;
 		} catch (Exception e) {
@@ -183,7 +178,6 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public List<Patient> searchPatient(String name) {
 		try {
-			pat = new JPApatient(this);
 			List<Patient> patients = pat.searchPatient(name);
 			return patients;
 		} catch (Exception e) {
@@ -228,12 +222,10 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public boolean delete(Object obj) {
 		if (Donor.class == obj.getClass()) {
-			don = new JPAdonor(this);
 			Donor donor = (Donor) obj;
 			return don.removeDonor(donor);
 		}
 		if (Patient.class == obj.getClass()) {
-			pat = new JPApatient(this);
 			Patient patient = (Patient) obj;
 			return pat.removePatient(patient);
 		}
@@ -244,7 +236,6 @@ public class JPAmanager implements DBManagerInterface {
 	public Integer idPatient(Patient patient) {
 		Integer id = 30; // por ejemplo
 		try {
-			pat = new JPApatient(this);
 			id = pat.getIdOfPatient(patient);
 			return id;
 		} catch (Exception e) {
@@ -270,7 +261,6 @@ public class JPAmanager implements DBManagerInterface {
 	public Integer idDonor(Donor d) {
 		Integer id = 0;
 		try {
-			don = new JPAdonor(this);
 			id = don.getIdOfDonor(d);
 		} catch (Exception e) {
 			e.printStackTrace();
