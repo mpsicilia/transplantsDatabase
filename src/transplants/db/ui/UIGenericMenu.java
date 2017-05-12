@@ -352,7 +352,7 @@ public class UIGenericMenu {
 	        	         	
 	        	 	case 3:
 	        	 		//In rodrigos, the xml thing is done with jpa, im going to try to do it with jdbc
-	        	 		//uiHospital.javaToXmlHospital(dbManager);
+	        	 		uiHospital.javaToXmlHospital(dbManager);
 	        	 		break;
 	        	 	
 	        	 	case 4:

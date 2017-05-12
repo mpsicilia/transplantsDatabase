@@ -180,7 +180,7 @@ public class UI_Hospitals {
 			Hospital hospToXml = hosps.get(hospNumb-1);
 			
 			//get the doctors of the hospital and add it to the hospital
-			List<Doctor> doctorsOfHosp = dbManager.workingDoctorsOfHosp(hospToXml.getName()); //create the method in DB
+			List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(hospToXml.getName()); //create the method in DB
 			Iterator<Doctor> itD = doctorsOfHosp.iterator();
 			counter = 1;
 			while (itD.hasNext()){
@@ -188,10 +188,10 @@ public class UI_Hospitals {
 				boolean doctorOK = hospToXml.addDoctor(d);
 				//this if is not needed but just to be sure that the doctors are being introduced well
 				if (doctorOK){
-					System.out.println(counter + ". " + d.getNameOfDoctor() + "added.");
+					System.out.println(counter + ". Doctor: " + d.getNameOfDoctor() + " added.");
 				}
 				else {
-					System.out.println(counter + ". " + d.getNameOfDoctor() + "NOT added.");
+					System.out.println(counter + ". Doctor: " + d.getNameOfDoctor() + " NOT added.");
 				}
 				counter ++;
 			}

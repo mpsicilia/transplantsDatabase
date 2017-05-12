@@ -144,12 +144,12 @@ public class SQL_Doctor {
 		List<Doctor> docsInHosp = new ArrayList<Doctor>();
 		try{
 			Statement stm = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Doctors AS Doc JOIN HospitalsDoctors AS HospDoc ON Doc.id = HospDoc.doctor_id"
+			String sql = "SELECT * FROM Doctors AS Doc JOIN HospitalsDoctors AS HospDoc ON Doc.id = HospDoc.doctor_id "
 					+ "JOIN Hospitals AS Hosp ON HospDoc.hospital_id = Hosp.id WHERE Hosp.name LIKE '" + nameHosp + "'";
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				int id = rs.getInt("id");
-				String nameDoctor = rs.getString("name");
+				int id = rs.getInt(1);
+				String nameDoctor = rs.getString(2);
 				String regNumber = rs.getString("registrationNumber");
 				String specializ = rs.getString("specialization");
 				Doctor doctor = new Doctor(id, nameDoctor,regNumber,specializ);
