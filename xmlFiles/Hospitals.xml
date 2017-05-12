@@ -2,4 +2,9 @@
 <Hospital name="monteprincipe" phoneNumber="34343542" address="boadilla" postcode="232334">
     <Country>spain</Country>
     <City>madrid</City>
+    <Doctors>
+        <Doctor nameOfDoctor="miguel" specialization="trauma" registrationNumber="3435432344"/>
+        <Doctor nameOfDoctor="maria" specialization="ped" registrationNumber="9873"/>
+    </Doctors>
+    <Patients/>
 </Hospital>

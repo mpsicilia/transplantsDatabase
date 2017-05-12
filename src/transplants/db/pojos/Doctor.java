@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "doctors")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"nameOfDoctor", "specialization", "registrationNumber",})
+@XmlType(propOrder = {"nameOfDoctor", "specialization", "registrationNumber", "hospital", "patients"})
 public class Doctor implements Serializable{
 
 	private static final long serialVersionUID = -1701687912909197672L;

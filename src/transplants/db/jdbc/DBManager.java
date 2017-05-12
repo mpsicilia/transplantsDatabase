@@ -513,4 +513,14 @@ public class DBManager implements DBManagerInterface {
 		return d;
 	}
 
+	public List<Doctor> workingDoctorsInHosp (String hospName){
+		List<Doctor> docs = new ArrayList<Doctor> ();
+		try{
+			doct = new SQL_Doctor(this);
+			docs = doct.doctorsWorkingInHospital(hospName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return docs;
+	}
 }

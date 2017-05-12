@@ -70,6 +70,9 @@ public class Hospital implements Serializable{
 		this.city = city;
 		this.postcode = postcode;
 		this.country = country;
+
+		this.doctors= new ArrayList<Doctor>();
+		this.patients= new ArrayList<Patient>();
 	}	
 	
 	public Hospital (String name){
@@ -85,6 +88,9 @@ public class Hospital implements Serializable{
 		this.city = city;
 		this.postcode = postcode;
 		this.country = country;
+
+		this.doctors= new ArrayList<Doctor>();
+		this.patients= new ArrayList<Patient>();
 	}
 
 	@Override
