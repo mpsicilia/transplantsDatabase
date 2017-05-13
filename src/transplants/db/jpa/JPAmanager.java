@@ -52,7 +52,7 @@ public class JPAmanager implements DBManagerInterface {
 				Patient patient = (Patient) obj;
 
 				boolean r = pat.insert(patient);
-				this.getEManager().refresh(patient);
+				//this.getEManager().refresh(patient);
 				return r;
 			}
 			if (Donor.class == obj.getClass()) {
@@ -213,8 +213,9 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public List<Patient> selectAllPatients() {
 		this.getEManager().getTransaction().begin();
-		Query q1 = em.createNativeQuery("SELECT * FROM Patients ", Patient.class);
+		Query q1 = em.createNativeQuery("SELECT * FROM Patients", Patient.class);
 		List<Patient> allpatients = (List<Patient>) q1.getResultList();
+		this.getEManager().getTransaction().commit();
 		return allpatients;
 	}
 

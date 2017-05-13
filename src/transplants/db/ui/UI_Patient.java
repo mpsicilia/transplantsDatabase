@@ -58,10 +58,11 @@ public class UI_Patient {
 			Date life = Date.valueOf(console.readLine());
 			
 			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
-			
+
 			boolean introduced=jpaManager.insert(p);
+			int patId = p.getId();
 			//getting the FK
-			/*Integer patId=jpaManager.idPatient(p);
+//			Integer patId=jpaManager.idPatient(p);
 			System.out.println("id="+patId); 
 			
 			
@@ -72,7 +73,7 @@ public class UI_Patient {
 				System.out.println("the patient has NOT  been introduced");
 			}
 			//JDBC*/
-			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
+			/*System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= dbmanager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
 			while (itH.hasNext()){

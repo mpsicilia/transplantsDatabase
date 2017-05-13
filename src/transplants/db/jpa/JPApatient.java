@@ -27,6 +27,7 @@ public class JPApatient {
 			jpaManager.getEManager().persist(patient);
 			jpaManager.getEManager().getTransaction().commit();
 
+			System.out.println(patient);
 			return true;
 
 		} catch (Exception e) {
@@ -38,17 +39,13 @@ public class JPApatient {
 	public Integer getIdOfPatient(Patient pat) {
 		Patient patient = new Patient();
 		try {
-			jpaManager.getEManager().getTransaction().begin();
+			//RODRIGO: FINISH THIS!!
 			Query q1 = jpaManager.getEManager()
-					.createNativeQuery("SELECT id FROM Patients " + "WHERE (name LIKE '" + pat.getName() + "') "
-							+ "AND ( birthDate  LIKE '" + pat.getBirthDate() + "')" + "AND (weight = " + pat.getWeight()
-							+ ")" + "AND (height = " + pat.getHeight() + ") " + "AND (gender LIKE '" + pat.getGender()
-							+ "')" + "AND (pathology LIKE '" + pat.getPathology() + "') " + "AND (bloodType LIKE '"
-							+ pat.getBloodType() + "')" + "AND (additionDate  LIKE '" + pat.getAdditionDate() + "')"
-							+ "AND (lifeExpectancy  LIKE '" + pat.getLifeExpectancy() + "')", Patient.class);
-
+					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ? AND weight = ? AND height = ?", Patient.class);
+			q1.setParameter(1, pat.getName());
+			q1.setParameter(2, pat.getWeight());
+			q1.setParameter(3, pat.getHeight());
 			patient = (Patient) q1.getSingleResult();
-			jpaManager.getEManager().getTransaction().commit();
 			return patient.getId();
 
 		} catch (Exception ex) {
@@ -73,6 +70,7 @@ public class JPApatient {
 
 	public boolean updatePatient(Patient patient, Patient newpatient) {
 		List<Doctor> listofdoctors = newpatient.getDoctors();
+		//List<Requested_organ> lisreq=newpatient.getRequested_organ();
 		Hospital hosp = newpatient.getHospital();
 		try {
 
@@ -110,7 +108,7 @@ public class JPApatient {
 			patient.setPathology(newpatient.getPathology());
 
 			patient.setRequested_organ(newpatient.getRequested_organ());
-			// patient.set
+			
 			jpaManager.getEManager().getTransaction().commit();
 			return true;
 		} catch (Exception ex) {
