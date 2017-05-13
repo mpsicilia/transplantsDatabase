@@ -40,16 +40,12 @@ public class UI_Organ {
 				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);	
 
 				Organ organ = new Organ(name, weight, typeOfDonation, lifeOfOrgan);
+				//inserting the new organ w/JDBC
 				boolean ok = dbManager.insert(organ);
-				// get the id of the donor
-				int idDonor = dbManager.idDonor(donor);
+				// get the id of the donor with JPA
+				int idDonor = jpaManager.idDonor(donor);				
 				organ= jpaManager.organOfADonor(idDonor);
 				boolean okFKDonor= donor.addOrgan(organ);
-				
-				// get the id of the organ
-				//int idOrgan = dbManager.idOrgan(organ);
-				//boolean upDated=jpaManager.organOfDonor(idDonor);
-				//boolean okFKDonor = dbManager.donorFKinOrgan(idDonor, idOrgan);
 
 				if (ok && okFKDonor) {
 					System.out.println("Organ has been introduced");

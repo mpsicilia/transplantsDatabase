@@ -18,13 +18,13 @@ import transplants.db.pojos.Requested_organ;
 
 public class DBManager implements DBManagerInterface {
 	private Connection c;
-	private SQL_Hospital hosp;
-	private SQL_Doctor doct;
-	private SQL_Patient pat;
-	private SQL_AnimalTissue animalT;
-	private SQL_Organ org;
-	private SQL_Donor don;
-	private SQL_Request req;
+	private SQL_Hospital hosp=new SQL_Hospital(this);
+	private SQL_Doctor doct=new SQL_Doctor(this);
+	private SQL_Patient pat= new SQL_Patient(this);
+	private SQL_AnimalTissue animalT= new SQL_AnimalTissue(this);
+	private SQL_Organ org= new SQL_Organ(this);
+	private SQL_Donor don= new SQL_Donor(this);
+	private SQL_Request req = new SQL_Request(this);
 
 	public DBManager() {
 		super();
@@ -58,15 +58,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public boolean createTables() {
 		try {
-
-			hosp = new SQL_Hospital(this);
-			doct = new SQL_Doctor(this);
-			pat = new SQL_Patient(this);
-			animalT = new SQL_AnimalTissue(this);
-			org = new SQL_Organ(this);
-			don = new SQL_Donor(this);
-			req = new SQL_Request(this);
-
 			hosp.createTable();
 			doct.createTable();
 			pat.createTable();
@@ -86,15 +77,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public boolean dropTables() {
 		try {
-
-			hosp = new SQL_Hospital(this);
-			doct = new SQL_Doctor(this);
-			pat = new SQL_Patient(this);
-			animalT = new SQL_AnimalTissue(this);
-			org = new SQL_Organ(this);
-			don = new SQL_Donor(this);
-			req = new SQL_Request(this);
-
 			hosp.dropTable();
 			doct.dropTable();
 			pat.dropTable();
@@ -119,29 +101,24 @@ public class DBManager implements DBManagerInterface {
 		try {
 
 			if (Hospital.class == obj.getClass()) {
-				hosp = new SQL_Hospital(this);
 				Hospital hospital = (Hospital) obj;
 				return hosp.insertHospital(hospital);
 			}
 
 			if (Doctor.class == obj.getClass()) {
-				doct = new SQL_Doctor(this);
 				Doctor doctor = (Doctor) obj;
 				return doct.insertDoctor(doctor);
 			}
 
 			if (Organ.class == obj.getClass()) {
-				org = new SQL_Organ(this);
 				Organ organ = (Organ) obj;
 				return org.insertOrgan(organ);
 			}
 			if (Animal_tissue.class == obj.getClass()) {
-				animalT = new SQL_AnimalTissue(this);
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.insertAnimalTissue(animalTi);
 			}
 			if (Requested_organ.class == obj.getClass()) {
-				req = new SQL_Request(this);
 				Requested_organ reqOrgan = (Requested_organ) obj;
 				return req.insertRequest(reqOrgan);
 			}
@@ -195,7 +172,6 @@ public class DBManager implements DBManagerInterface {
 	public List<Hospital> searchHosp(String name) {
 
 		try {
-			hosp = new SQL_Hospital(this); 
 			List<Hospital> hospList = hosp.searchHospital(name);
 			return hospList;
 		} catch (Exception e) {
@@ -219,7 +195,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public List<Doctor> searchDoctor(String name) {
 		try {
-			doct = new SQL_Doctor(this); 
 			List<Doctor> doctList = doct.searchDoctor(name);
 			return doctList;
 		} catch (Exception e) {
@@ -231,7 +206,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public List<Animal_tissue> searchAnimalTissue(String name) {
 		try {
-			animalT = new SQL_AnimalTissue(this); // create connection
 			List<Animal_tissue> animalTList = animalT.searchAnimalTissue(name);
 			return animalTList;
 		} catch (Exception e) {
@@ -255,7 +229,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public List<Organ> searchOrgan(String name) {
 		try {
-			org = new SQL_Organ(this);
 			List<Organ> organList = org.searchOrgan(name);
 			return organList;
 		} catch (Exception e) {
@@ -267,7 +240,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public List<Requested_organ> searchRequest(String name) {
 		try {
-			req = new SQL_Request(this);
 			List<Requested_organ> requestList = req.searchReqOrgan(name);
 			return requestList;
 		} catch (Exception e) {
@@ -279,25 +251,21 @@ public class DBManager implements DBManagerInterface {
 	// selects
 	@Override
 	public List<Hospital> selectAllHospitals() {
-		hosp = new SQL_Hospital(this);
 		return hosp.selectAllHospitals();
 	}
 
 	@Override
 	public List<Doctor> selectAllDoctors() {
-		doct = new SQL_Doctor(this);
 		return doct.selectAllDoctors();
 	}
 
 	@Override
 	public List<Patient> selectAllPatients() {
-		pat = new SQL_Patient(this);
 		return pat.selectAllPatients();
 	}
 
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
-		org = new SQL_Organ(this);
 		return org.CompatibilityTest(organ);
 	}
 
@@ -305,27 +273,22 @@ public class DBManager implements DBManagerInterface {
 	public boolean update(Object obj) {
 		try {
 			if (Hospital.class == obj.getClass()) {
-				hosp = new SQL_Hospital(this);
 				Hospital hospital = (Hospital) obj;
 				return hosp.updateHospital(hospital);
 			}
 			if (Doctor.class == obj.getClass()) {
-				doct = new SQL_Doctor(this);
 				Doctor doctor = (Doctor) obj;
 				return doct.updateDoctor(doctor);
 			}
 			if (Organ.class == obj.getClass()) {
-				org = new SQL_Organ(this);
 				Organ organ = (Organ) obj;
 				return org.updateOrgan(organ);
 			}
 			if (Animal_tissue.class == obj.getClass()) {
-				animalT = new SQL_AnimalTissue(this);
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.updateAnimalTissue(animalTi);
 			}
 			if (Requested_organ.class == obj.getClass()) {
-				req = new SQL_Request(this);
 				Requested_organ reqOrgan = (Requested_organ) obj;
 				return req.updateReqOrgan(reqOrgan);
 			}
@@ -340,27 +303,22 @@ public class DBManager implements DBManagerInterface {
 	public boolean delete(Object obj) {
 		try {
 			if (Hospital.class == obj.getClass()) {
-				hosp = new SQL_Hospital(this);
 				Hospital hospital = (Hospital) obj;
 				return hosp.deleteHospital(hospital);
 			}
 			if (Doctor.class == obj.getClass()) {
-				doct = new SQL_Doctor(this);
 				Doctor doctor = (Doctor) obj;
 				return doct.deleteDoctor(doctor);
 			}
 			if (Organ.class == obj.getClass()) {
-				org = new SQL_Organ(this);
 				Organ organ = (Organ) obj;
 				return org.deleteOrgan(organ);
 			}
 			if (Animal_tissue.class == obj.getClass()) {
-				animalT = new SQL_AnimalTissue(this);
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.deleteAnimalTissue(animalTi);
 			}
 			if (Requested_organ.class == obj.getClass()) {
-				req = new SQL_Request(this);
 				Requested_organ reqOrgan = (Requested_organ) obj;
 				return req.deleteReqOrgan(reqOrgan);
 			}
@@ -375,7 +333,6 @@ public class DBManager implements DBManagerInterface {
 	public Integer idPatient(Patient patient) {//delete from here once we have it in jpa
 		Integer id = 0;
 		try {
-			pat = new SQL_Patient(this);
 			id = pat.getPatientID(patient);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -387,7 +344,6 @@ public class DBManager implements DBManagerInterface {
 	public Integer idRequestedOrgan(Requested_organ r) {
 		Integer id = 0;
 		try {
-			req = new SQL_Request(this);
 			id = req.getRequestedId(r);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -399,7 +355,6 @@ public class DBManager implements DBManagerInterface {
 	public Integer idOrgan(Organ o) {
 		Integer id = 0;
 		try {
-			org = new SQL_Organ(this);
 			id = org.getOrganId(o);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -411,7 +366,6 @@ public class DBManager implements DBManagerInterface {
 	public Integer idDonor(Donor d) {//delete from here once we have it in jpa
 		Integer id = 0;
 		try {
-			don = new SQL_Donor(this);
 			id = don.getDonorID(d);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -429,7 +383,6 @@ public class DBManager implements DBManagerInterface {
 	public String patientReq(Requested_organ req) {
 		String namePat = "";
 		try {
-			pat = new SQL_Patient(this);
 			namePat = pat.patientRequested(req.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -442,7 +395,6 @@ public class DBManager implements DBManagerInterface {
 	public List<Requested_organ> characteristicsOfRequestedOrgans(int idPatient) {
 		List<Requested_organ> reqsOfPat = new ArrayList<Requested_organ>();
 		try {
-			req = new SQL_Request(this);
 			reqsOfPat = req.characteristicsOfRequests(idPatient);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -455,7 +407,6 @@ public class DBManager implements DBManagerInterface {
 	public List<Organ> organsOfDonor(int idDonor) {
 		List<Organ> orgsOfDonor = new ArrayList<Organ>();
 		try {
-			org = new SQL_Organ(this);
 			orgsOfDonor = org.organOfDonor(idDonor);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -467,7 +418,6 @@ public class DBManager implements DBManagerInterface {
 	public List<Doctor> doctorOfPatient(String pName) {
 		List<Doctor> doctor = new ArrayList<Doctor>();
 		try {
-			doct = new SQL_Doctor(this);
 			doctor = doct.doctorsAttendingPatient(pName);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -479,7 +429,6 @@ public class DBManager implements DBManagerInterface {
 	public String hospitalOfPatient(String pName) {
 		String hospital = "";
 		try {
-			hosp = new SQL_Hospital(this);
 			hospital = hosp.hospitalOfPatient(pName);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -505,7 +454,6 @@ public class DBManager implements DBManagerInterface {
 	public Donor getDonorOfOrg(String nameO) {
 		Donor d = new Donor();
 		try {
-			don = new SQL_Donor(this);
 			d = don.getDonorOfOrgan(nameO);
 		} catch (Exception e) {
 			e.printStackTrace();

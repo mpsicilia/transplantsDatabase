@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.Query;
 import transplants.db.pojos.Donor;
+import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
+import transplants.db.pojos.Person;
 
 public class JPAdonor {
 	private JPAmanager jpaManager;
@@ -31,30 +33,37 @@ public class JPAdonor {
 
 	}
 	
+	public Organ selectOrgan (Integer id){
+		Organ newOrgan=new Organ ();
+		try{			
+			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Organs WHERE id = " + id + "", Organ.class);
+			newOrgan = (Organ) q.getSingleResult();			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return newOrgan;
+	}
+	
+	
 	public Integer getIdOfDonor(Donor don){
 		Donor donor= new Donor();
 		try{
-			jpaManager.getEManager().getTransaction().begin();
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT id FROM Donors "
-					+ "WHERE name LIKE '" + don.getName() + "' "
-					+ "AND weight LIKE '" + don.getWeight() + "' "
-					+ "AND height LIKE '" + don.getHeight() + "' "
-					+ "AND gender LIKE '" + don.getGender() + "' "
-					+ "AND deadAlive LIKE '" + don.getDeadOrAlive() + "' "
-					+ "AND bloodType LIKE '" + don.getBloodType() + "'", Donor.class);
-			donor = (Donor) q1.getSingleResult();
-			jpaManager.getEManager().getTransaction().commit();		
+					+ "WHERE name LIKE ? AND weight LIKE ? AND height LIKE ? "
+					+ "AND gender LIKE ? AND deadAlive LIKE ? AND bloodType LIKE ? ", Donor.class);
+			q1.setParameter(1, don.getName());
+			q1.setParameter(2, don.getWeight());
+			q1.setParameter(3, don.getHeight());
+			q1.setParameter(4, don.getGender());
+			q1.setParameter(5, don.getDeadOrAlive());
+			q1.setParameter(6, don.getBloodType());
 			
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
 		return donor.getId();
 	}
-	
-	public boolean insertDonorFK (int idDonor, int idOrg){
-		return false;
-	}
-	
+
 	public List <Donor> searchDonor (String name){
 		List<Donor> donorList = new ArrayList<Donor>();
 		try{
