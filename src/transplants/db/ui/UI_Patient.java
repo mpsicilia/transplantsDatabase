@@ -66,7 +66,7 @@ public class UI_Patient {
 			System.out.println("id="+patId); 
 			
 			
-			if(introduced &&(patId!=30)){
+			/*if(introduced &&(patId!=30)){
 				System.out.println("the patient has been introduced ");
 			}
 			else{

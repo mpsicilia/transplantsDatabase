@@ -206,11 +206,15 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public List<Patient> selectAllPatients() {
-		this.getEManager().getTransaction().begin();
-		Query q1 = em.createNativeQuery("SELECT * FROM Patients", Patient.class);
-		List<Patient> allpatients = (List<Patient>) q1.getResultList();
-		this.getEManager().getTransaction().commit();
-		return allpatients;
+		try{
+			List<Patient> list=pat.selectAllPatients();
+			return list;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 
 	@Override
