@@ -41,13 +41,13 @@ public class JPApatient {
 		try {
 			//RODRIGO: FINISH THIS!!
 			Query q1 = jpaManager.getEManager()
-					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ? AND weight = ? AND height = ?", Patient.class);
+					.createNativeQuery("SELECT * FROM Patients WHERE "
+							+ "name LIKE ? AND weight = ? AND height = ?", Patient.class);
 			q1.setParameter(1, pat.getName());
 			q1.setParameter(2, pat.getWeight());
 			q1.setParameter(3, pat.getHeight());
 			patient = (Patient) q1.getSingleResult();
-			return patient.getId();
-
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -67,8 +67,9 @@ public class JPApatient {
 		}
 		return false;
 	}
-
-	public boolean updatePatient(Patient patient, Patient newpatient) {
+	//lo puedes borrar mira mi donor
+	
+	/*public boolean updatePatient(Patient patient, Patient newpatient) {
 		List<Doctor> listofdoctors = newpatient.getDoctors();
 		//List<Requested_organ> lisreq=newpatient.getRequested_organ();
 		Hospital hosp = newpatient.getHospital();
@@ -116,7 +117,7 @@ public class JPApatient {
 
 		}
 		return false;
-	}
+	}*/
 
 	public Hospital updateHospitalofPatient(Patient pat, Hospital hosp) {
 		try {

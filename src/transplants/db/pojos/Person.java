@@ -10,10 +10,6 @@ import javax.persistence.*;
 public abstract class Person {
 	
 	private static final long serialVersionUID = 6256446381306555938L;
-	//aun asi deberia indicar que id es una PK?-->porque luego heredan patient and donor
-	//Cuando comprobemos que las que no son de inheritance funcionan, tenemos que comprobar si inheritance 
-	//funciona definiendo el id en person (la padre), doctor y patient, y si no, borramos id de person y lo ponemos en las hijas
-//	protected Integer id;
 	@Id
 	private Integer id;
 	protected String name;
@@ -22,7 +18,7 @@ public abstract class Person {
 	protected Float height;
 	protected String gender;
 	protected String bloodType;
-	//faltan las FK
+
 	
 	public Person (){
 	}
@@ -37,24 +33,24 @@ public abstract class Person {
 		this.bloodType = bloodType;
 	}
 	
-//	public Person(Integer id, String name, Date birthDate, Float weight, Float height, String gender, String bloodType) {
-//		super();
-//		this.id = id;
-//		this.name=name;
-//		this.birthDate=birthDate;
-//		this.weight = weight;
-//		this.height = height;
-//		this.gender = gender;
-//		this.bloodType = bloodType;
-//	}
-//	
-//	
-//	public Integer getId() {
-//		return id;
-//	}
-//	public void setId(Integer id) {
-//		this.id = id;
-//	}
+	public Person(Integer id, String name, Date birthDate, Float weight, Float height, String gender, String bloodType) {
+		super();
+		this.id = id;
+		this.name=name;
+		this.birthDate=birthDate;
+		this.weight = weight;
+		this.height = height;
+		this.gender = gender;
+		this.bloodType = bloodType;
+	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	public String getName() {
 		return name;

@@ -48,15 +48,16 @@ public class JPAdonor {
 	public Integer getIdOfDonor(Donor don){
 		Donor donor= new Donor();
 		try{
-			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT id FROM Donors "
-					+ "WHERE name LIKE ? AND weight LIKE ? AND height LIKE ? "
-					+ "AND gender LIKE ? AND deadAlive LIKE ? AND bloodType LIKE ? ", Donor.class);
+			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Donors "
+					+ "WHERE name LIKE ? AND weight = ? AND height = ? "
+					+ "AND gender = ? AND deadAlive = ? AND bloodType = ? ", Donor.class);
 			q1.setParameter(1, don.getName());
 			q1.setParameter(2, don.getWeight());
 			q1.setParameter(3, don.getHeight());
 			q1.setParameter(4, don.getGender());
 			q1.setParameter(5, don.getDeadOrAlive());
 			q1.setParameter(6, don.getBloodType());
+			donor =(Donor)q1.getSingleResult();
 			
 		}catch (Exception ex){
 			ex.printStackTrace();

@@ -18,8 +18,7 @@ public class UI_Doctor {
 	}
 
 	// This class is going to work with JDBC
-	public void introduceNewDoctor(
-			DBManager dbManager/* , JPAmanager jpaManager */) {
+	public void introduceNewDoctor(DBManager dbManager) {
 		try {
 			System.out.print("Name of the doctor: ");
 			String name = console.readLine();
