@@ -363,14 +363,9 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	@Override
-	public Integer idDonor(Donor d) {//delete from here once we have it in jpa
-		Integer id = 0;
-		try {
-			id = don.getDonorID(d);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return id;
+	public Integer idDonor(Donor d) {
+		//DONE IN JPA
+		return null;
 	}
 
 	@Override
@@ -452,13 +447,8 @@ public class DBManager implements DBManagerInterface {
 
 	@Override
 	public Donor getDonorOfOrg(String nameO) {
-		Donor d = new Donor();
-		try {
-			d = don.getDonorOfOrgan(nameO);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return d;
+		//DONE IN JPA
+		return null;
 	}
 
 	public List<Doctor> workingDoctorsInHosp (String hospName){

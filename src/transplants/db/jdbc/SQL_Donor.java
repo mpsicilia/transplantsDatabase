@@ -1,9 +1,5 @@
 package transplants.db.jdbc;
 
-
-import java.sql.Date;
-
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 import transplants.db.pojos.Donor;
@@ -16,52 +12,6 @@ public class SQL_Donor {
 
 	public SQL_Donor(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-	}
-	
-	public int getDonorID (Donor d){
-		Donor donor =  new Donor();
-		try{
-			Statement stm = dbManager.getC().createStatement();
-			String sql ="SELECT id FROM Donors "
-					+ "WHERE (name LIKE '" + d.getName() + "') "
-							+ "AND (weight = " + d.getWeight() + ")"
-							+ " AND (height = " + d.getHeight() + ") "
-							+ "AND (gender LIKE '" + d.getGender() + "')"
-							+ "AND (deadAlive LIKE '" + d.getDeadOrAlive() + "') "
-							+ "AND (bloodType LIKE '" + d.getBloodType() + "')";
-			ResultSet rs = stm.executeQuery(sql);
-			int idD = rs.getInt("id");
-			donor = new Donor (idD, d.getName(), d.getBirthDate(), d.getWeight(), d.getHeight(), d.getGender(), d.getDeadOrAlive(), d.getBloodType());
-			
-			rs.close();
-			stm.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return donor.getId();
-	}
-	
-	public Donor getDonorOfOrgan (String nameOrg){
-		Donor donor = new Donor();
-		try{
-			Statement stmt  = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Donors AS Don JOIN Organs AS Org ON Don.id = Org.donor_id "
-					+ " WHERE Org.name LIKE '" + nameOrg + "'";
-			ResultSet rs = stmt.executeQuery(sql);
-			Integer id = rs.getInt(1);
-			String nameDon = rs.getString(2);
-			String birthString = rs.getString("birthDate");
-			Date dob = Date.valueOf(birthString);
-			Float weight = rs.getFloat(4);
-			Float height = rs.getFloat("height");
-			String gender = rs.getString("gender");
-			String deadAlive = rs.getString("deadAlive");
-			String bloodType= rs.getString("bloodType");
-			donor = new Donor(id, nameDon, dob, weight, height, gender, deadAlive, bloodType);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return donor;
 	}
 	
 	public Donor compatibleDonor (Patient p, Donor d){

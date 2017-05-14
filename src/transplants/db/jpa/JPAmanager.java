@@ -260,13 +260,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public Integer idDonor(Donor d) {
-		Integer id = 0;
-		try {
-			id = don.getIdOfDonor(d);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return id;
+		return don.getIdOfDonor(d);
 	}
 
 	@Override
@@ -312,15 +306,9 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	@Override
-	public Donor getDonorOfOrg(String nameO) {
-		// TODO Auto-generated method stub
-		return null;
+	public Donor getDonorOfOrg(String nameO) {		
+		return don.getDonorOfOrgan(nameO);
 	}
-
-	/*public String searchHospital(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {

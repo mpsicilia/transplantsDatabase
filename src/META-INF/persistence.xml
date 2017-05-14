@@ -33,6 +33,11 @@
 			<!-- <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> -->
 			<property name="eclipselink.allow-zero-id" value="true" />
 			<property name="eclipselink.id-validation" value="NONE" />
+  		</properties>
+   
+  	</persistence-unit>
+			
+			
 		</properties>
  
 	</persistence-unit>
