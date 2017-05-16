@@ -66,6 +66,7 @@ public class Patient extends Person implements Serializable {
 		this.id= id;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
+		this.score= generateScore();
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
 	}
