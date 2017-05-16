@@ -71,7 +71,7 @@ public class UIGenericMenu {
 	        	System.out.println("\nBASIC MENU: ");
 	        	System.out.println("1. Introduce new information to the database. ");
 	        	System.out.println("2. Search for specific information in the database. ");
-	        	System.out.println("3. Save the database information in an XML file. ");
+	        	System.out.println("3. Work with XML. ");
 	            System.out.println("4. Exit from the database. ");
 	        		        	
 	        	 do{
@@ -356,7 +356,20 @@ public class UIGenericMenu {
 	        	         	
 	        	 	case 3:
 	        	 		//In rodrigos, the xml thing is done with jpa, im going to try to do it with jdbc
-	        	 		uiHospital.javaToXmlHospital(dbManager);
+	        	 		System.out.println("1. Save the database information in the XML file.");
+	        	 		System.out.println("2. Store information in the database from the XML file.");
+	        	 		System.out.println("Choose an option: ");
+	        	 		int opt = Integer.parseInt(console.readLine());
+	        	 		
+	        	 		switch (opt){
+	        	 		case 1:
+	        	 			uiHospital.javaToXmlHospital(dbManager);
+	        	 			break;
+	        	 		case 2:
+	        	 			
+	        	 			break;
+	        	 		}
+	        	 		
 	        	 		break;
 	        	 	
 	        	 	case 4:

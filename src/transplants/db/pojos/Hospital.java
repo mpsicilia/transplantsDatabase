@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.*;
 @Table(name = "Hospitals")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement (name = "Hospital")
-@XmlType(propOrder = {"name", "phoneNumber", "address", "postcode", "country","city", "doctors", "patients"}) //idk if its the proper order :S
+@XmlType(propOrder = {"name", "phoneNumber",   "country","city", "address","postcode", "doctors", "patients"}) //idk if its the proper order :S
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = -2900229453507535621L;
@@ -24,9 +24,9 @@ public class Hospital implements Serializable{
 	private Integer id;
 	@XmlAttribute
 	private String name;
-	@XmlAttribute
+	@XmlElement
 	private String phoneNumber;
-	@XmlAttribute
+	@XmlElement
 	private String address;
 	@XmlElement (name = "City")
 	//@XmlElementWrapper (name="Cities") 
@@ -34,7 +34,7 @@ public class Hospital implements Serializable{
 	//no van a ser wrappers xq no envuelven nada, cada hosp tiene una ciudad y un country
 	//wrapper son doctors y patients pq cada hosp tiene varios
 	private String city;
-	@XmlAttribute
+	@XmlElement
 	private String postcode;
 	@XmlElement(name = "Country")
 	//@XmlElementWrapper (name="Countries")
@@ -53,6 +53,7 @@ public class Hospital implements Serializable{
 	@XmlElement (name = "Patient")
 	@XmlElementWrapper (name = "Patients")
 	private List<Patient> patients;
+	
 	
 	
 	public Hospital (){

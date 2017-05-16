@@ -5,23 +5,25 @@ import java.io.File;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Hospital;
 
-public class XMLHospital {
+public class XMLAnimalTissue {
+
 	
 	private File fileHosp;
 	private XMLmanager xml;
 	
-	public XMLHospital (XMLmanager xmlmanager){
-		fileHosp = new File ("./xmlFiles/Hospitals.xml");
+	public XMLAnimalTissue (XMLmanager xmlmanager){
+		fileHosp = new File ("./xmlFiles/Hospital.xml");
 		this.xml = xmlmanager;
 		
 	}
 	
-	public boolean javaToXmlHospital (Marshaller marsh, Hospital hosp){
+	public boolean javaToXmlAnimal (Marshaller marsh, Animal_tissue animal){
 		try{
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
-			marsh.marshal(hosp, fileHosp);
+			marsh.marshal(animal, fileHosp);
 			return true;
 		}catch (Exception ex){
 			ex.printStackTrace();
@@ -29,14 +31,13 @@ public class XMLHospital {
 		return false;
 	}
 	
-	public Hospital xmlToJavaHospital (Unmarshaller unmarsh){
-		Hospital hosp = new Hospital();
+	public Animal_tissue xmlToJavaHospital (Unmarshaller unmarsh){
+		Animal_tissue at = new Animal_tissue();
 		try{
-			hosp = (Hospital) unmarsh.unmarshal(fileHosp);
+			at = (Animal_tissue) unmarsh.unmarshal(fileHosp);
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
-		return hosp;
+		return at;
 	}
-
 }

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -25,9 +26,9 @@ public class Doctor implements Serializable{
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="doctors")
 	@XmlTransient
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String registrationNumber;
-	@XmlAttribute
+	@XmlElement
 	private String specialization;
 	@XmlAttribute
 	private String nameOfDoctor;
@@ -36,7 +37,6 @@ public class Doctor implements Serializable{
 	private List<Hospital> hospital;
 	@ManyToMany(mappedBy = "doctors")
 	private List<Patient> patients;
-	
 
 	//our default constructor
 	public Doctor (){
