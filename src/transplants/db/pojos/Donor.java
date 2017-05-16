@@ -80,11 +80,9 @@ public class Donor extends Person implements Serializable{
 				+ ", weight=" + weight + ", height=" + height + ", gender=" + gender + ","
 				+ " bloodType=" + bloodType + ", deadOrAlive=" + deadAlive + "]";
 	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}

@@ -48,10 +48,10 @@ public class UIGenericMenu {
 		        		System.out.println("Tables have not been dropped. ");
 		        	}
 		        } */
-		        List<Patient> list=uiPatient.allPatients(jpaManager);
+		       /* List<Patient> list=uiPatient.allPatients(jpaManager);
 		        for  (Patient patient : list) {
 		        	System.out.println(patient);
-				}
+				}*/
 		        
 		        System.out.println("Do you want to create the tables?: [yes/no]");
 		        String decider= console.readLine();
