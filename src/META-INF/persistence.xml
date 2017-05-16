@@ -14,16 +14,14 @@
 		<class>transplants.db.pojos.Person</class>
 		<class>transplants.db.pojos.Animal_tissue</class>
 		<class>transplants.db.pojos.Doctor</class>
-		<class>transplants.db.pojos.Doctor</class>
 		<class>transplants.db.pojos.Hospital</class>
-		<class>transplants.db.pojos.Organ</class>
 		<class>transplants.db.pojos.Requested_organ</class>
-		<class>transplants.db.pojos.Animal_tissue</class>
+		<class>transplants.db.pojos.Organ</class>
 		<class>transplants.db.pojos.Donor</class>
-		<class>transplants.db.pojos.Hospital</class>
-		<class>transplants.db.pojos.Organ</class>
 		<class>transplants.db.pojos.Patient</class>
-		<class>transplants.db.pojos.Requested_organ</class>
+		
+		
+		
  
 		<properties>	
 			<!-- Connection properties -->
