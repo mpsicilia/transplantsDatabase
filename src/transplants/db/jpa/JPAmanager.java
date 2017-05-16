@@ -110,16 +110,29 @@ public class JPAmanager implements DBManagerInterface {
 		return false;
 	}
 	
-	public Hospital getHospitalPatient(Integer id) {
+	public Hospital getHospitalPatient(Integer idhosp) {
 		Hospital hosp = new Hospital();
 
 		try {
-			hosp = pat.getHospitalbyid(id);
+			hosp = pat.getHospitalbyid(idhosp);
 			return hosp;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return hosp;
+	}
+	public Patient getPatient(Patient patient){
+		Patient patito=new Patient();
+		try{
+			patito=pat.getPatient(patient);
+			return patito;
+			
+			
+		
+	} catch (Exception ex) {
+		ex.printStackTrace();
+	}
+		return patito;
 	}
 
 	@Override
@@ -237,14 +250,17 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public Integer idPatient(Patient patient) {
-		Integer id = 30; // por ejemplo
+		return 0;
+		/*
+		 
+	Integer id = 30; // por ejemplo
 		try {
 			id = pat.getIdOfPatient(patient);
 			return id;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return id;*/
 
 	}
 

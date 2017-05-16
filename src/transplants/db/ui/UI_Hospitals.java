@@ -1,6 +1,7 @@
 package transplants.db.ui;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -205,10 +206,7 @@ public class UI_Hospitals {
 			else{
 				System.out.println("Xml of hospital NOT created. ");
 			}
-			
-			
-			
-			
+						
 			// Marshal the hospital to a file
 			/*File file = new File("./xmlFiles/Hospitals.xml");
 			marshaller.marshal(hospToXml, file); //store the hospital in that file
@@ -218,4 +216,15 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
+	
+	public void xmlToJavaHospital (){
+		try{
+			XMLmanager hospXml = new XMLmanager();
+			List <Hospital> hosps = new ArrayList<Hospital>();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 }

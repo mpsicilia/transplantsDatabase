@@ -17,14 +17,15 @@ public class SQL_Patient {
 	public SQL_Patient(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
+	//SEGUIR AÑADIENDO SCORE 
 	
 	public boolean insertPatient (Patient p){
 		try{
 			Statement stmt = dbManager.getC().createStatement();
 			String sql = "INSERT INTO Patients (name, birthDate, weight, height, gender, pathology, bloodType, "
-					+ "additionDate, lifeExpectancy) VALUES ('"+ p.getName() + "','" + p.getBirthDate() + "' , '" + p.getWeight() +
+					+ "additionDate, lifeExpectancy, score) VALUES ('"+ p.getName() + "','" + p.getBirthDate() + "' , '" + p.getWeight() +
 					"' , '" + p.getHeight() + "' , '" + p.getGender() + "' , '" + p.getPathology() + "' , '" +
-					p.getBloodType() + "' , '" + p.getAdditionDate() + "' , '" + p.getLifeExpectancy() + "');";
+					p.getBloodType() + "' , '" + p.getAdditionDate() + "' , '" + p.getLifeExpectancy() + "' , '" +p.getScore()+ "');";
 			stmt.executeUpdate(sql);			
 			stmt.close();
 			return true;
@@ -61,6 +62,7 @@ public class SQL_Patient {
 				String lifeExp= rs.getString("lifeExpectancy");
 				Date lifeExpectancy = Date.valueOf(lifeExp);
 				
+				
 				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, doa, lifeExpectancy);
 				lookForPatient.add(patientToShow);
 			}
@@ -79,7 +81,7 @@ public class SQL_Patient {
 	public boolean updatePatient (Patient p){
 		try{
 			String sql = "UPDATE Patients SET name=?, birthDate=?, weight=?, height=?, gender=?, pathology=?,"
-					+ "bloodType=?, additionDate=?, lifeExpectancy=? WHERE id=?";
+					+ "bloodType=?, additionDate=?, lifeExpectancy=?, score=? WHERE id=?";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setDate(2, p.getBirthDate());
@@ -90,7 +92,7 @@ public class SQL_Patient {
 			prep.setString(7, p.getBloodType());
 			prep.setDate(8, p.getAdditionDate());
 			prep.setDate(9, p.getLifeExpectancy());
-			prep.setInt(10, p.getId());
+			prep.setInt(10, p.getId());			
 			prep.executeUpdate();
 			prep.close();			
 		return true;

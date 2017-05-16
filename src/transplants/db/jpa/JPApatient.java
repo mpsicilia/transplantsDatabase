@@ -27,7 +27,7 @@ public class JPApatient {
 			jpaManager.getEManager().persist(patient);
 			jpaManager.getEManager().getTransaction().commit();
 
-			// System.out.println(patient);
+			
 			return true;
 
 		} catch (Exception e) {
@@ -36,7 +36,7 @@ public class JPApatient {
 		return false;
 	}
 
-	public Integer getIdOfPatient(Patient pat) {
+	public Patient getPatient(Patient pat) {
 		Patient patient = new Patient();
 		try {
 			// RODRIGO: FINISH THIS!!
@@ -50,7 +50,7 @@ public class JPApatient {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return patient.getId();
+		return patient;
 	}
 
 	public boolean removePatient(Patient patient) {
@@ -66,7 +66,7 @@ public class JPApatient {
 		}
 		return false;
 	}
-	// lo puedes borrar mira mi donor
+	
 
 	/*
 	 * public boolean updatePatient(Patient patient, Patient newpatient) {
@@ -111,15 +111,18 @@ public class JPApatient {
 	 * } return false; }
 	 */
 
-	public Hospital updateHospitalofPatient(Patient pat, Hospital hosp) {
+	public boolean updateHospitalofPatient(Patient pat, Hospital hosp) {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			pat.setHospital(hosp);
 			hosp.addPatient(pat);
+			jpaManager.getEManager().getTransaction().commit();
+			return true;
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return hosp;
+		return false;
 	}
 
 	public List<Patient> selectAllPatients() {
@@ -140,7 +143,8 @@ public class JPApatient {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			Query q = jpaManager.getEManager()
-					.createNativeQuery("SELECT * FROM Patients WHERE " + "name LIKE '%" + name + "%'", Patient.class);
+					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE = ?", Patient.class);
+			q.setParameter(1, name);
 			patients = (List<Patient>) q.getResultList();
 			jpaManager.getEManager().getTransaction().commit();
 
@@ -155,9 +159,10 @@ public class JPApatient {
 		Hospital hosp = new Hospital();
 		try {
 			jpaManager.getEManager().getTransaction().begin();
-			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Hospitals WHERE id= " + id,
-					Hospital.class);
+			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Hospitals WHERE id= ? ",Hospital.class);
+			q1.setParameter(1, id);
 			hosp = (Hospital) q1.getSingleResult();
+			System.out.println("hosp"+hosp);
 			jpaManager.getEManager().getTransaction().commit();
 			return hosp;
 

@@ -5,7 +5,10 @@ import java.util.List;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 @Entity
 @Table(name = "Patients")
@@ -39,6 +42,7 @@ public class Patient extends Person implements Serializable {
 	
 	@OneToMany(mappedBy="patient")
 	private List<Requested_organ> requested_organ;
+	private long score;
 	public Patient(){
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
@@ -51,6 +55,9 @@ public class Patient extends Person implements Serializable {
 		this.pathology = pathology;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
+		this.score= generateScore();
+		doctors= new ArrayList<Doctor>();
+		requested_organ=new ArrayList<Requested_organ>();
 	}
 	
 	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
@@ -59,8 +66,27 @@ public class Patient extends Person implements Serializable {
 		this.id= id;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
+		this.score= generateScore();
+		doctors= new ArrayList<Doctor>();
+		requested_organ=new ArrayList<Requested_organ>();
 	}
-	
+	private long generateScore(){
+		LocalDate localLifeExp= lifeExpectancy.toLocalDate();
+		LocalDate localAdditionDate= additionDate.toLocalDate();
+		LocalDate today= LocalDate.now();
+		Duration daysSinceAddition= Duration.between(today, localAdditionDate);
+		Duration daysLifeExp= Duration.between(localLifeExp, today);
+		long s1= daysLifeExp.toDays();
+		long s2= daysSinceAddition.toDays();
+		long score= s1*9+ s2;
+		return score;
+		
+	}
+	public long getScore(){
+		
+		this.score= generateScore();
+		return score;
+	}
 	//what about the parent class?? Do we create them in the parent class??
 	public Date getLifeExpectancy() {
 		return lifeExpectancy;
