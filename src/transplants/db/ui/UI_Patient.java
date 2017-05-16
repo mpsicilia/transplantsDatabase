@@ -14,6 +14,7 @@ import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
+import transplants.db.jpa.JPApatient;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
@@ -60,20 +61,13 @@ public class UI_Patient {
 			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
 
 			boolean introduced=jpaManager.insert(p);
-			int patId = p.getId();
-			//getting the FK
-//			Integer patId=jpaManager.idPatient(p);
-			System.out.println("id="+patId); 
+			//int patId = p.getId();
 			
+			//System.out.println("id="+patId); 
 			
-			/*if(introduced &&(patId!=30)){
-				System.out.println("the patient has been introduced ");
-			}
-			else{
-				System.out.println("the patient has NOT  been introduced");
-			}
-			//JDBC*/
-			/*System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
+		
+			
+			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= dbmanager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
 			while (itH.hasNext()){
@@ -81,15 +75,25 @@ public class UI_Patient {
 				System.out.println(h);
 			}
 			Integer idHosp= Integer.parseInt(console.readLine());
+			jpaManager.getPatient(p);
 			
 			
 			//RELATIONSHIP BETWEEN HOSP AND PATIENT
 			Hospital hospital=jpaManager.getHospitalPatient(idHosp);
-			jpaManager.getEManager().getTransaction().begin();
-			
+			//jpaManager.getEManager().getTransaction().begin();
 			hospital.addPatient(p);
 			p.setHospital(hospital);
-			jpaManager.getEManager().getTransaction().commit();
+			jpaManager.update(hospital);
+			jpaManager.update(p);
+			//jpaManager.getEManager().getTransaction().commit();
+			
+			
+			
+			/*JPApatient jp=new JPApatient (jpaManager);
+			jp.updateHospitalofPatient(p, hospital);*/
+			//jpaManager.getEManager().getTransaction().begin();
+			
+			//jpaManager.getEManager().getTransaction().commit();
 			
 			
 			
