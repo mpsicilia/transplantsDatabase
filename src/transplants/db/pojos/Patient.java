@@ -82,7 +82,9 @@ public class Patient extends Person implements Serializable {
 		
 	}
 	public long getScore(){
-		return this.score;
+		
+		this.score= generateScore();
+		return score;
 	}
 	//what about the parent class?? Do we create them in the parent class??
 	public Date getLifeExpectancy() {
