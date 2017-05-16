@@ -12,16 +12,13 @@
 		<!-- Entity Class -->
 		<!-- Rodrigo: Added Person superclass -->
 		<class>transplants.db.pojos.Person</class>
-<<<<<<< HEAD
 		<class>transplants.db.pojos.Animal_tissue</class>
 		<class>transplants.db.pojos.Doctor</class>
-=======
 		<class>transplants.db.pojos.Doctor</class>
 		<class>transplants.db.pojos.Hospital</class>
 		<class>transplants.db.pojos.Organ</class>
 		<class>transplants.db.pojos.Requested_organ</class>
 		<class>transplants.db.pojos.Animal_tissue</class>
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		<class>transplants.db.pojos.Donor</class>
 		<class>transplants.db.pojos.Hospital</class>
 		<class>transplants.db.pojos.Organ</class>
@@ -44,15 +41,7 @@
 			<property name="eclipselink.ddl-generation" value="none" />
 			<!-- JPA destroys and recreates the schema -->
 			<!-- <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> -->
-<<<<<<< HEAD
 		</properties>
  
-=======
-			<property name="eclipselink.allow-zero-id" value="true" />
-			<property name="eclipselink.id-validation" value="NONE" />
-  		</properties>
-   
-			 
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 	</persistence-unit>
 </persistence>
