@@ -17,14 +17,15 @@ public class SQL_Patient {
 	public SQL_Patient(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
+	//SEGUIR AÑADIENDO SCORE 
 	
 	public boolean insertPatient (Patient p){
 		try{
 			Statement stmt = dbManager.getC().createStatement();
 			String sql = "INSERT INTO Patients (name, birthDate, weight, height, gender, pathology, bloodType, "
-					+ "additionDate, lifeExpectancy) VALUES ('"+ p.getName() + "','" + p.getBirthDate() + "' , '" + p.getWeight() +
+					+ "additionDate, lifeExpectancy, score) VALUES ('"+ p.getName() + "','" + p.getBirthDate() + "' , '" + p.getWeight() +
 					"' , '" + p.getHeight() + "' , '" + p.getGender() + "' , '" + p.getPathology() + "' , '" +
-					p.getBloodType() + "' , '" + p.getAdditionDate() + "' , '" + p.getLifeExpectancy() + "');";
+					p.getBloodType() + "' , '" + p.getAdditionDate() + "' , '" + p.getLifeExpectancy() + "' , '" +p.getScore()+ "');";
 			stmt.executeUpdate(sql);			
 			stmt.close();
 			return true;
