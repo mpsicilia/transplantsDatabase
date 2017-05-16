@@ -151,6 +151,7 @@ public class Doctor implements Serializable{
 		}
 		else return false;
 	}
+	//FALTA EL REMOVE NO?????
 	
 	
 	

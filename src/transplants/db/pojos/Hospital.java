@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.*;
 
-
 @Entity
 @Table(name = "Hospitals")
 @XmlAccessorType(XmlAccessType.FIELD)

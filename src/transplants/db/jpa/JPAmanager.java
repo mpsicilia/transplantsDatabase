@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 import transplants.db.dbInterface.DBManagerInterface;
 import transplants.db.pojos.Animal_tissue;
@@ -129,8 +128,7 @@ public class JPAmanager implements DBManagerInterface {
 		return false;
 	}
 
-	public Organ organOfADonor(Integer donorId) {
-		
+	public Organ organOfADonor(Integer donorId) {		
 		return don.selectOrgan(donorId);
 	}
 
