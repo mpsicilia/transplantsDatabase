@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.util.List;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Donor;
+import transplants.db.pojos.Organ;
 
 
 public class UI_Donor {
@@ -136,8 +137,13 @@ public class UI_Donor {
 	
 	public void deleteDonor (Donor donor, JPAmanager jpaManager){
 		try{
+			Organ organToRemove= new Organ ();
+			int idDonor = jpaManager.idDonor(donor);
+			organToRemove= jpaManager.organOfADonor(idDonor);
+			boolean deletedOrgan=donor.removeOrgan(organToRemove);
 			boolean deleted = jpaManager.delete(donor);
-			if(deleted){
+			
+			if(deleted && deletedOrgan){
 				System.out.println("Donor has been deleted.");
 			}
 			else{
