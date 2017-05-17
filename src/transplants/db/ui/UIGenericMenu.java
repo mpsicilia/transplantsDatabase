@@ -37,7 +37,7 @@ public class UIGenericMenu {
 			
 		try{
 				        
-		       /* System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
+		       System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 		        String drop = console.readLine();
 		        if(drop.equalsIgnoreCase("Y")){
 		        	boolean dropped = dbManager.dropTables();
@@ -47,7 +47,7 @@ public class UIGenericMenu {
 		        	else{
 		        		System.out.println("Tables have not been dropped. ");
 		        	}
-		        } */
+		        } 
 		       /* List<Patient> list=uiPatient.allPatients(jpaManager);
 		        for  (Patient patient : list) {
 		        	System.out.println(patient);

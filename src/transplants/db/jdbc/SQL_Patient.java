@@ -214,6 +214,7 @@ public class SQL_Patient {
 					   + " bloodType		TEXT,"
 					   + " additionDate 	DATE,"
 					   + " lifeExpectancy 	DATE,"
+					   + " score            REAL,"
 					   + " hospital_id		INTEGER REFERENCES Hospitals (id))";
 			stmt3.executeUpdate(patients);
 			stmt3.close();
