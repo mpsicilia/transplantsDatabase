@@ -19,6 +19,9 @@ public class JPAmanager implements DBManagerInterface {
 	private EntityManager em;
 	private JPApatient pat= new JPApatient(this);
 	private JPAdonor don=new JPAdonor(this);
+	// RODRIGO: BEGIN
+	private JPAorgan org = new JPAorgan(this);
+	// RODRIGO: END
 
 	public JPAmanager() {
 		super();
@@ -49,13 +52,20 @@ public class JPAmanager implements DBManagerInterface {
 				Patient patient = (Patient) obj;
 
 				boolean r = pat.insert(patient);
-				//this.getEManager().refresh(patient);
 				return r;
 			}
 			if (Donor.class == obj.getClass()) {
 				Donor donor = (Donor) obj;
 				return don.insert(donor);
 			}
+			// RODRIGO: BEGIN
+			if (Organ.class == obj.getClass()) {
+				Organ organ = (Organ) obj;
+
+				boolean r = org.insert(organ);
+				return r;
+			}
+			// RODRIGO: END
 
 		} catch (Exception e) {
 			e.printStackTrace();

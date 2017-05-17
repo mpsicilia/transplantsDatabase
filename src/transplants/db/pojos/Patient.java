@@ -16,11 +16,6 @@ public class Patient extends Person implements Serializable {
 
 	private static final long serialVersionUID = 5283904286714952072L;
 
-	@Id
-	@GeneratedValue(generator="Patients")
-	@TableGenerator(name="Patients", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Patients")
-	private Integer id;
 	private Date lifeExpectancy;
 	private String pathology;
 	private Date additionDate;
@@ -62,8 +57,8 @@ public class Patient extends Person implements Serializable {
 	
 	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
 			String bloodType, Date additionDate, Date lifeExpectancy){
-		super(name, birthDate,weight,height,gender, bloodType);
-		this.id= id;
+		super(id, name, birthDate,weight,height,gender, bloodType);
+//		this.id= id;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
 		this.score= generateScore();
@@ -104,16 +99,6 @@ public class Patient extends Person implements Serializable {
 		this.additionDate = additionDate;
 	}
 	
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
 	public String getPathology() {
 		return pathology;
 	}
@@ -161,7 +146,7 @@ public class Patient extends Person implements Serializable {
 		}
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", birthDate=" + birthDate + ", weight=" + weight + 
+		return "Patient [id=" + this.getId() + ", name=" + name + ", birthDate=" + birthDate + ", weight=" + weight + 
 				", height=" + height + ", gender=" + gender + " lifeExpectancy=" + lifeExpectancy + 
 				", additionDate=" + additionDate + ", bloodType=" + bloodType + "]";
 	}
