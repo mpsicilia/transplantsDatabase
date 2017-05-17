@@ -270,6 +270,7 @@ public class UIGenericMenu {
                     				numDon = Integer.parseInt(console.readLine());
                     				Donor donDel = donor.get(numDon-1);
                     				uiDonor.deleteDonor(donDel, jpaManager);
+                    				
                     				break;
                     			case 3:
                     				System.out.println("Introduce the number of the donor: ");

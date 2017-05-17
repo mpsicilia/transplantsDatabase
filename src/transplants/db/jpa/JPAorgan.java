@@ -27,6 +27,20 @@ public class JPAorgan {
 		}
 		return false;
 	}
+	
+	public boolean delete(Organ organ) {
+
+		try {
+			jpaManager.getEManager().getTransaction().begin();
+			jpaManager.getEManager().remove(organ);
+			jpaManager.getEManager().getTransaction().commit();			
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 }
 // RODRIGO: END

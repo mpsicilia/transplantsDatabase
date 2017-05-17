@@ -137,13 +137,18 @@ public class UI_Donor {
 	
 	public void deleteDonor (Donor donor, JPAmanager jpaManager){
 		try{
-			Organ organToRemove= new Organ ();
-			int idDonor = jpaManager.idDonor(donor);
-			organToRemove= jpaManager.organOfADonor(idDonor);
-			boolean deletedOrgan=donor.removeOrgan(organToRemove);
-			boolean deleted = jpaManager.delete(donor);
+			boolean donorDeleted = jpaManager.delete(donor);
+			Integer donorId= jpaManager.idDonor(donor);
+			Organ organOfDonor= jpaManager.organOfADonor(donorId);
+			boolean organDeleted=jpaManager.delete(organOfDonor);
+			System.out.println(organOfDonor);
+			donor.removeOrgan(organOfDonor);
+			organOfDonor.setDonor(donor);
 			
-			if(deleted && deletedOrgan){
+			boolean okUpdateOrgan = jpaManager.update(organOfDonor);
+			boolean okUpdateDonor = jpaManager.update(donor);
+			
+			if(donorDeleted && okUpdateOrgan && okUpdateDonor){
 				System.out.println("Donor has been deleted.");
 			}
 			else{

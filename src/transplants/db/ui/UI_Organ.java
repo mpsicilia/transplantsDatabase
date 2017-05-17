@@ -40,9 +40,7 @@ public class UI_Organ {
 				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);	
 
 				Organ organ = new Organ(name, weight, typeOfDonation, lifeOfOrgan);
-				
-				//RODRIGO: BEGINNING
-				
+						
 				// Organ needs to be inserted with JPA
 				boolean ok = jpaManager.insert(organ);
 				
@@ -55,7 +53,6 @@ public class UI_Organ {
 
 				// Changed OK booleans
 				if (ok && okUpdateOrgan && okUpdateDonor) {
-				// RODRIGO: END
 					System.out.println("Organ has been introduced");
 					//uiCompatibilityTest(organ, dbManager);
 				} else {

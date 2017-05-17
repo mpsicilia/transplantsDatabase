@@ -255,6 +255,12 @@ public class JPAmanager implements DBManagerInterface {
 			Patient patient = (Patient) obj;
 			return pat.removePatient(patient);
 		}
+		if (Organ.class == obj.getClass()) {
+			Organ organ = (Organ) obj;
+
+			boolean r = org.delete(organ);
+			return r;
+		}
 		return false;
 	}
 
@@ -291,7 +297,7 @@ public class JPAmanager implements DBManagerInterface {
 		return don.getIdOfDonor(d);
 	}
 
-	@Override
+	
 	public Integer getIdOfDoctor(Doctor doct) {
 		// TODO Auto-generated method stub
 		return null;
