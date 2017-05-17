@@ -94,7 +94,7 @@ public class UIGenericMenu {
 		                    
 	                    switch (option1){
 		                    case 1:
-		                    	uiHospital.introduceNewHospital(dbManager);
+		                    	uiHospital.introduceNewHospital(dbManager,jpaManager);
 		                    	break;
 		                    	
 		                    case 2:
@@ -148,7 +148,7 @@ public class UIGenericMenu {
 	                	 		if(counter ==1){
 	                	 			System.out.println("Hospital not found, would you like to introduce a new hospital?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiHospital.introduceNewHospital(dbManager);
+	                	 				uiHospital.introduceNewHospital(dbManager,jpaManager);
 	                	 				break;
 	                	 			}
 	                	 		}

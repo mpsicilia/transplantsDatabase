@@ -58,42 +58,47 @@ public class UI_Patient {
 			System.out.println("Life expectancy: ");
 			Date life = Date.valueOf(console.readLine());
 			
-			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
+			
+			
+			
+			
+			/*//Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
 
-			boolean introduced=jpaManager.insert(p);
-			//int patId = p.getId();
+			boolean introduced=dbmanager.insert(p);
 			
-			//System.out.println("id="+patId); 
 			
+			if(introduced){
+			System.out.println("patient introduced");
+			}
+			else{
+				System.out.println("patient not introduced");
+			}*/
 		
 			
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
-			List <Hospital>hosps= dbmanager.selectAllHospitals();
+			List <Hospital>hosps= jpaManager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
 			while (itH.hasNext()){
 				Hospital h=itH.next();
 				System.out.println(h);
 			}
 			Integer idHosp= Integer.parseInt(console.readLine());
-			jpaManager.getPatient(p);
+			//jpaManager.getPatient(p);
 			
 			
-			//RELATIONSHIP BETWEEN HOSP AND PATIENT
+			//FUNCIONA!!
 			Hospital hospital=jpaManager.getHospitalPatient(idHosp);
+			//Hospital hospit=jpaManager.getHospital(hospital);
+			System.out.println("hosp of patient"+hospital);
+			
 			//jpaManager.getEManager().getTransaction().begin();
-			hospital.addPatient(p);
+			/*hospital.addPatient(p);
 			p.setHospital(hospital);
 			jpaManager.update(hospital);
 			jpaManager.update(p);
 			//jpaManager.getEManager().getTransaction().commit();
 			
 			
-			
-			/*JPApatient jp=new JPApatient (jpaManager);
-			jp.updateHospitalofPatient(p, hospital);*/
-			//jpaManager.getEManager().getTransaction().begin();
-			
-			//jpaManager.getEManager().getTransaction().commit();
 			
 			
 			
@@ -123,7 +128,7 @@ public class UI_Patient {
 			}*/
 			
 			
-			return p;
+			return null;
 			
 		}catch (IOException ex){
 			ex.printStackTrace();

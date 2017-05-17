@@ -23,7 +23,7 @@ public class UI_Hospitals {
 	}
 	
 	
-	public void introduceNewHospital(DBManager dbManager){
+	public void introduceNewHospital(DBManager dbManager, JPAmanager jpaManager){
 		try{
 			System.out.print("Name: ");
 			String name = console.readLine();
@@ -45,8 +45,8 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
-			
-			boolean ok=dbManager.insert(hosp);
+			boolean ok=jpaManager.insert(hosp);
+			//boolean ok=dbManager.insert(hosp);
 			
 			if (ok){
 				System.out.print("Hospital has been introduced");

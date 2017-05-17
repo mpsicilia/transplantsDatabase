@@ -33,11 +33,11 @@ public class JPAdonor {
 	public Organ selectOrgan (Integer id){
 		Organ newOrgan=new Organ ();
 		try{	
-			jpaManager.getEManager().getTransaction().begin();
+			
 			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Organs WHERE id = ? ", Organ.class);
 			q.setParameter(1, id);
 			newOrgan = (Organ) q.getSingleResult();	
-			jpaManager.getEManager().getTransaction().commit();	
+			
 			return newOrgan;
 		}catch (Exception e){
 			e.printStackTrace();
