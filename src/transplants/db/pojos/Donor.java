@@ -2,7 +2,6 @@ package transplants.db.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Donors")
 public class Donor extends Person implements Serializable{
-	@Id
-	@GeneratedValue(generator="Donors")
-	@TableGenerator(name="Donors", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Donors")
-	private Integer id;
+
 	private static final long serialVersionUID = 6705263044123670258L;
 	private String deadAlive;
    
@@ -37,9 +32,7 @@ public class Donor extends Person implements Serializable{
 	public Donor (Integer id, String name, Date birthDate, Float weight, Float height, String gender, 
 		      String deadOrAlive, String bloodType){
 		
-		super(name, birthDate, weight, height, gender, bloodType);
-		
-		this.id = id;
+		super(id, name, birthDate, weight, height, gender, bloodType);
 		this.deadAlive=deadOrAlive;
 		super.birthDate=birthDate;
     }
@@ -76,16 +69,10 @@ public class Donor extends Person implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Donor [id=" + id + ", name=" + name + ", birthDate=" + birthDate
+		return "Donor [id=" + this.getId() + ", name=" + name + ", birthDate=" + birthDate
 				+ ", weight=" + weight + ", height=" + height + ", gender=" + gender + ","
 				+ " bloodType=" + bloodType + ", deadOrAlive=" + deadAlive + "]";
 	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
+
 }
 
