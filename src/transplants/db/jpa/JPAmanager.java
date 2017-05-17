@@ -17,17 +17,18 @@ import transplants.db.pojos.Requested_organ;
 public class JPAmanager implements DBManagerInterface {
 
 	private EntityManager em;
-	private JPApatient pat= new JPApatient(this);
-	private JPAdonor don=new JPAdonor(this);
+	private JPApatient pat = new JPApatient(this);
+	private JPAdonor don = new JPAdonor(this);
 	// RODRIGO: BEGIN
 	private JPAorgan org = new JPAorgan(this);
 	// RODRIGO: END
+	private JPAhospital hosp = new JPAhospital(this);
 
 	public JPAmanager() {
 		super();
 		connect();
 	}
-	
+
 	public EntityManager getEManager() {
 		return em;
 	}
@@ -48,6 +49,13 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public boolean insert(Object obj) {
 		try {
+			if (Hospital.class == obj.getClass()) {
+				Hospital hospital = (Hospital) obj;
+
+				boolean r = hosp.insert(hospital);
+				return r;
+			}
+
 			if (Patient.class == obj.getClass()) {
 				Patient patient = (Patient) obj;
 
@@ -56,7 +64,9 @@ public class JPAmanager implements DBManagerInterface {
 			}
 			if (Donor.class == obj.getClass()) {
 				Donor donor = (Donor) obj;
-				return don.insert(donor);
+				
+				boolean r = don.insert(donor);
+				return r;
 			}
 			// RODRIGO: BEGIN
 			if (Organ.class == obj.getClass()) {
@@ -119,31 +129,43 @@ public class JPAmanager implements DBManagerInterface {
 	public boolean insertFKInPatient(Integer patID, Integer hospID) {
 		return false;
 	}
-	
+
 	public Hospital getHospitalPatient(Integer idhosp) {
-		Hospital hosp = new Hospital();
+		Hospital hospital = new Hospital();
 
 		try {
-			hosp = pat.getHospitalbyid(idhosp);
-			return hosp;
+			hospital = hosp.getHospitalbyid(idhosp);
+			return hospital;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return hosp;
+		return hospital;
 	}
-	public Patient getPatient(Patient patient){
-		Patient patito=new Patient();
-		try{
-			patito=pat.getPatient(patient);
+
+	public Patient getPatient(Patient patient) {
+		Patient patito = new Patient();
+		try {
+			patito = pat.getPatient(patient);
 			return patito;
-			
-			
-		
-	} catch (Exception ex) {
-		ex.printStackTrace();
-	}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		return patito;
 	}
+	//NEW
+	public Hospital getHospital (Hospital hospital){
+		Hospital hospi = new Hospital();
+		try {
+			hospi = hosp.getHospital(hospital);
+			return hospi;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return hospi;
+	}
+	
 
 	@Override
 	public boolean donorFKinOrgan(Integer idD, Integer idO) {
@@ -151,7 +173,7 @@ public class JPAmanager implements DBManagerInterface {
 		return false;
 	}
 
-	public Organ organOfADonor(Integer donorId) {		
+	public Organ organOfADonor(Integer donorId) {
 		return don.selectOrgan(donorId);
 	}
 
@@ -215,8 +237,15 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public List<Hospital> selectAllHospitals() {
-		// DONE WITH JDBC
+		try {
+			List<Hospital> list = hosp.selectAllHospitals();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
+
+		
 	}
 
 	@Override
@@ -227,15 +256,14 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public List<Patient> selectAllPatients() {
-		try{
-			List<Patient> list=pat.selectAllPatients();
+		try {
+			List<Patient> list = pat.selectAllPatients();
 			return list;
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	@Override
@@ -262,15 +290,11 @@ public class JPAmanager implements DBManagerInterface {
 	public Integer idPatient(Patient patient) {
 		return 0;
 		/*
-		 
-	Integer id = 30; // por ejemplo
-		try {
-			id = pat.getIdOfPatient(patient);
-			return id;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return id;*/
+		 * 
+		 * Integer id = 30; // por ejemplo try { id =
+		 * pat.getIdOfPatient(patient); return id; } catch (Exception e) {
+		 * e.printStackTrace(); } return id;
+		 */
 
 	}
 
@@ -334,7 +358,7 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	@Override
-	public Donor getDonorOfOrg(String nameO) {		
+	public Donor getDonorOfOrg(String nameO) {
 		return don.getDonorOfOrgan(nameO);
 	}
 

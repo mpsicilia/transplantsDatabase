@@ -33,6 +33,7 @@ public class JPAdonor {
 	public Organ selectOrgan (Integer id){
 		Organ newOrgan=new Organ ();
 		try{	
+			//LUX:NO HACE FALTA COMIT Y BEGIN?
 			System.out.println("HERE" +id);
 			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Organs WHERE id = ? ", Organ.class);
 			

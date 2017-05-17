@@ -39,12 +39,18 @@ public class JPApatient {
 	public Patient getPatient(Patient pat) {
 		Patient patient = new Patient();
 		try {
-			// RODRIGO: FINISH THIS!!
 			Query q1 = jpaManager.getEManager().createNativeQuery(
-					"SELECT * FROM Patients WHERE " + "name LIKE ? AND weight = ? AND height = ?", Patient.class);
+					"SELECT * FROM Patients WHERE name LIKE ? AND birthDate = ? AND weight = ? AND height = ? AND gender"
+							+ " LIKE ? AND pathology LIKE ? AND bloodType LIKE ? AND additionDate = ?"
+							+ "AND lifeExpectancy = ?", Patient.class);
 			q1.setParameter(1, pat.getName());
-			q1.setParameter(2, pat.getWeight());
-			q1.setParameter(3, pat.getHeight());
+			q1.setParameter(2, pat.getBirthDate());
+			q1.setParameter(3, pat.getWeight());
+			q1.setParameter(4, pat.getHeight());
+			q1.setParameter(5, pat.getGender());
+			q1.setParameter(6, pat.getPathology());
+			q1.setParameter(7, pat.getBloodType());
+			q1.setParameter(8, pat.getAdditionDate());
 			patient = (Patient) q1.getSingleResult();
 
 		} catch (Exception ex) {
@@ -66,50 +72,8 @@ public class JPApatient {
 		}
 		return false;
 	}
-	
 
-	/*
-	 * public boolean updatePatient(Patient patient, Patient newpatient) {
-	 * List<Doctor> listofdoctors = newpatient.getDoctors();
-	 * //List<Requested_organ> lisreq=newpatient.getRequested_organ(); Hospital
-	 * hosp = newpatient.getHospital(); try {
-	 * 
-	 * jpaManager.getEManager().getTransaction().begin();
-	 * 
-	 * patient.setName(newpatient.getName());
-	 * 
-	 * patient.setAdditionDate(newpatient.getAdditionDate());
-	 * 
-	 * patient.setBirthDate(newpatient.getBirthDate());
-	 * 
-	 * patient.setBloodType(newpatient.getBloodType());
-	 * 
-	 * patient.setDoctors(listofdoctors); Iterator<Doctor> it =
-	 * listofdoctors.iterator(); // N-N relationship while (it.hasNext()) {
-	 * Doctor doct = it.next(); patient.addDoctor(doct);
-	 * doct.addPatient(patient);
-	 * 
-	 * }
-	 * 
-	 * patient.setGender(newpatient.getGender());
-	 * 
-	 * patient.setHeight(newpatient.getHeight());
-	 * 
-	 * patient.setWeight(newpatient.getWeight());
-	 * 
-	 * patient.setLifeExpectancy(newpatient.getLifeExpectancy());
-	 * 
-	 * patient.setHospital(hosp); hosp.addPatient(patient);
-	 * 
-	 * patient.setPathology(newpatient.getPathology());
-	 * 
-	 * patient.setRequested_organ(newpatient.getRequested_organ());
-	 * 
-	 * jpaManager.getEManager().getTransaction().commit(); return true; } catch
-	 * (Exception ex) { ex.printStackTrace();
-	 * 
-	 * } return false; }
-	 */
+	 
 
 	public boolean updateHospitalofPatient(Patient pat, Hospital hosp) {
 		try {
@@ -143,7 +107,7 @@ public class JPApatient {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			Query q = jpaManager.getEManager()
-					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE = ?", Patient.class);
+					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ?", Patient.class);
 			q.setParameter(1, name);
 			patients = (List<Patient>) q.getResultList();
 			jpaManager.getEManager().getTransaction().commit();
@@ -154,22 +118,7 @@ public class JPApatient {
 		return patients;
 	}
 
-	// PARA LA RELACION ENTRE PACIENTE Y EL HOSPITAL
-	public Hospital getHospitalbyid(Integer id) {
-		Hospital hosp = new Hospital();
-		try {
-			jpaManager.getEManager().getTransaction().begin();
-			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Hospitals WHERE id= ? ",Hospital.class);
-			q1.setParameter(1, id);
-			hosp = (Hospital) q1.getSingleResult();
-			System.out.println("hosp"+hosp);
-			jpaManager.getEManager().getTransaction().commit();
-			return hosp;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return hosp;
-	}
+	
+	
 
 }
