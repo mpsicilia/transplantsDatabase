@@ -2,21 +2,12 @@ package transplants.db.jdbc;
 
 import java.sql.Statement;
 
-import transplants.db.pojos.Donor;
-
-import transplants.db.pojos.Patient;
-
 public class SQL_Donor {
 	
 	private DBManager dbManager;
 
 	public SQL_Donor(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-	}
-	
-	public Donor compatibleDonor (Patient p, Donor d){
-		Donor compDonor = new Donor();
-		return compDonor;
 	}
 	
 	/*METHODS RELATED WITH THE TABLES*/
