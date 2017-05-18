@@ -1,6 +1,7 @@
 package transplants.db.xml;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.Marshaller;
@@ -22,7 +23,12 @@ public class XMLHospital {
 	public boolean javaToXmlHospital (Marshaller marsh, List<Hospital> hs){
 		try{
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
-			marsh.marshal(hs, fileHosp);
+			Iterator<Hospital> it = hs.iterator();
+			while (it.hasNext()){
+				Hospital h = it.next();
+				marsh.marshal(h, fileHosp);
+			}
+			
 			return true;
 		}catch (Exception ex){
 			ex.printStackTrace();

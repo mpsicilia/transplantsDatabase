@@ -13,6 +13,7 @@ import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.TransplantDatabase;
 import transplants.db.xml.XMLmanager;
 
 public class UI_Hospitals {
@@ -23,7 +24,7 @@ public class UI_Hospitals {
 	}
 	
 	
-	public void introduceNewHospital(DBManager dbManager, JPAmanager jpaManager){
+	public void introduceNewHospital(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase database){
 		try{
 			System.out.print("Name: ");
 			String name = console.readLine();
@@ -45,10 +46,11 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
+			boolean okDatabase = database.addHospital(hosp);
 			boolean ok=jpaManager.insert(hosp);
 			//boolean ok=dbManager.insert(hosp);
 			
-			if (ok){
+			if (ok && okDatabase){
 				System.out.print("Hospital has been introduced");
 				
 				
