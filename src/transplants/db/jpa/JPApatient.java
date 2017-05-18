@@ -75,19 +75,6 @@ public class JPApatient {
 
 	 
 
-	public boolean updateHospitalofPatient(Patient pat, Hospital hosp) {
-		try {
-			jpaManager.getEManager().getTransaction().begin();
-			pat.setHospital(hosp);
-			hosp.addPatient(pat);
-			jpaManager.getEManager().getTransaction().commit();
-			return true;
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return false;
-	}
 
 	public List<Patient> selectAllPatients() {
 		try {
@@ -124,6 +111,23 @@ public class JPApatient {
 			ex.printStackTrace();
 		}
 		return null;
+	}
+	//NEW-->it returns all the patients a hospital has
+	public List<Patient> searchAllPatients(String namehosp){
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			jpaManager.getEManager().getTransaction().begin();
+			Query q = jpaManager.getEManager()
+					.createNativeQuery("SELECT * FROM Patients AS Pat JOIN Hospitals AS Hosp ON Pat.hospital_id=Hosp.id "
+					+ "WHERE Hosp.name LIKE ? ", Patient.class);
+			q.setParameter(1, namehosp);
+			patients = (List<Patient>) q.getResultList();
+			jpaManager.getEManager().getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
 	}
 	
 
