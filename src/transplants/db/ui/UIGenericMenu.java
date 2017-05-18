@@ -368,7 +368,7 @@ public class UIGenericMenu {
 	        	 		
 	        	 		switch (opt){
 	        	 		case 1:
-	        	 			uiHospital.javaToXmlHospital(dbManager);
+	        	 			uiHospital.javaToXmlHospital(dbManager, database);
 	        	 			break;
 	        	 		case 2:
 	        	 			
