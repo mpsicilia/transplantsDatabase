@@ -46,11 +46,11 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
-		//	boolean okDatabase = database.addHospital(hosp);
+			boolean okDatabase = data.addHospital(hosp);
 			boolean ok=jpaManager.insert(hosp);
 			//boolean ok=dbManager.insert(hosp);
 			
-			if (ok){
+			if (ok && okDatabase){
 				System.out.print("Hospital has been introduced");
 				
 				
@@ -165,11 +165,11 @@ public class UI_Hospitals {
 		}
 	}
 	
-	public void javaToXmlHospital (DBManager dbManager){
+	public void javaToXmlHospital (DBManager dbManager, TransplantDatabase data){
 		try{
 			
 			//Get all the hospitals to marshall
-			List<Hospital> hospsToMarshall = dbManager.selectAllHospitals();
+			List<Hospital> hospsToMarshall = data.getAllHospOFDatabase();
 			Iterator<Hospital> itH = hospsToMarshall.iterator();
 			//get the doctors of the hospital and add it to the hospital
 			while (itH.hasNext()){
@@ -184,7 +184,7 @@ public class UI_Hospitals {
 			}
 			
 			XMLmanager hospXml = new XMLmanager();
-			boolean xmlOK = hospXml.javaToXmlHospital(hospsToMarshall);
+			boolean xmlOK = hospXml.javaToXmlHospitals(data);
 			
 			if(xmlOK){
 				System.out.println("Xml of hospital created. ");

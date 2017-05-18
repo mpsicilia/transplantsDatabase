@@ -9,6 +9,7 @@ import javax.xml.bind.Unmarshaller;
 
 import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.TransplantDatabase;
 
 public class XMLmanager {
 
@@ -24,9 +25,9 @@ public class XMLmanager {
 		unmarshaller = jaxb.createUnmarshaller();
 	}
 	//marshalling method
-	public boolean javaToXmlHospital (List<Hospital> hospsToXml){
+	public boolean javaToXmlHospitals (TransplantDatabase dataHosp){
 		try{
-			return XMLhosp.javaToXmlHospital(marshaller, hospsToXml);
+			return XMLhosp.javaToXmlHospital(marshaller, dataHosp);
 			
 		}catch (Exception e){
 			e.printStackTrace();

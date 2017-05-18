@@ -8,6 +8,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.TransplantDatabase;
 
 public class XMLHospital {
 	
@@ -20,14 +21,15 @@ public class XMLHospital {
 		
 	}
 	
-	public boolean javaToXmlHospital (Marshaller marsh, List<Hospital> hs){
+	public boolean javaToXmlHospital (Marshaller marsh, TransplantDatabase dataH){
 		try{
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
-			Iterator<Hospital> it = hs.iterator();
+			/*Iterator<Hospital> it = hs.iterator();
 			while (it.hasNext()){
 				Hospital h = it.next();
 				marsh.marshal(h, fileHosp);
-			}
+			}*/
+			marsh.marshal(dataH, fileHosp);
 			
 			return true;
 		}catch (Exception ex){
