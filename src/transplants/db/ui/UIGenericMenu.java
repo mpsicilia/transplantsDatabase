@@ -39,7 +39,7 @@ public class UIGenericMenu {
 			
 		try{
 				        
-		       System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
+		       /*System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 		        String drop = console.readLine();
 		        if(drop.equalsIgnoreCase("Y")){
 		        	boolean dropped = dbManager.dropTables();
@@ -49,11 +49,11 @@ public class UIGenericMenu {
 		        	else{
 		        		System.out.println("Tables have not been dropped. ");
 		        	}
-		        } 
-		       /* List<Patient> list=uiPatient.allPatients(jpaManager);
+		        } */
+		       List<Patient> list=uiPatient.allPatients(jpaManager);
 		        for  (Patient patient : list) {
 		        	System.out.println(patient);
-				}*/
+				}
 		        
 		        System.out.println("Do you want to create the tables?: [yes/no]");
 		        String decider= console.readLine();
@@ -325,13 +325,13 @@ public class UIGenericMenu {
 	                    				System.out.println("Introduce the number of the patient: ");
 	                    				int numPat2 = Integer.parseInt(console.readLine());
 	                    				Patient patDel = pat.get(numPat2-1);
-	                    				uiPatient.deletePatient(patDel, jpaManager);
+	                    				uiPatient.deletePatient(patDel, jpaManager,dbManager);
 	                    				break;
 	                    			case 3:
 	                    				System.out.println("Introduce the number of the patient: ");
 	                    				int numPat3 = Integer.parseInt(console.readLine());
 	                    				Patient patHD = pat.get(numPat3-1);
-	                    				uiPatient.patientHospitalAndDoctor(patHD.getName(),jpaManager);
+	                    				uiPatient.patientHospitalAndDoctor(patHD.getName(),jpaManager,dbManager);
 	                    				break;
 	                    			case 4:
 	                    				System.out.println("Introduce the number of the patient: ");

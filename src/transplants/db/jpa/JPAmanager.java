@@ -189,7 +189,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	public List<Organ> organOfADonor(Integer donorId) {
 		return don.selectOrgan(donorId);
-		return null;
+		
 	}
 
 	@Override
@@ -243,6 +243,16 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return null;
 	}
+	//NEW
+	public List<Patient> searchallpatients(String namehosp){
+		try {
+			List<Patient> patients = pat.searchAllPatients(namehosp);
+			return patients;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Override
 	public List<Requested_organ> searchRequest(String name) {
@@ -251,13 +261,15 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	@Override
+	//DONE WITH JDBC
+	
 	public List<Hospital> selectAllHospitals() {
-		try {
+		/*try {
 			List<Hospital> list = hosp.selectAllHospitals();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		return null;
 
 		

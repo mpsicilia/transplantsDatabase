@@ -112,6 +112,23 @@ public class JPApatient {
 		}
 		return null;
 	}
+	//NEW-->it returns all the patients a hospital has
+	public List<Patient> searchAllPatients(String namehosp){
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			jpaManager.getEManager().getTransaction().begin();
+			Query q = jpaManager.getEManager()
+					.createNativeQuery("SELECT * FROM Patients AS Pat JOIN Hospitals AS Hosp ON Pat.hospital_id=Hosp.id "
+					+ "WHERE Hosp.name LIKE ? ", Patient.class);
+			q.setParameter(1, namehosp);
+			patients = (List<Patient>) q.getResultList();
+			jpaManager.getEManager().getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
+	}
 	
 
 

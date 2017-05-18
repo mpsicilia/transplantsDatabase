@@ -107,6 +107,26 @@ public class SQL_Request {
 		
 		return false;
 	}
+	//NEW
+	
+	public boolean deleteallreq (String namepat){
+		try{
+			String sql = "DELETE FROM Requested_organs AS Req JOIN Patients AS Pat "
+					+ "ON  Req.patient_id = Pat.id WHERE Pat.name LIKE ? ";
+			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
+			prep.setString(1,namepat );
+			prep.executeUpdate();
+			prep.close();
+			
+			return true;
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return false;
+		
+	}
 	
 	public List<Requested_organ> characteristicsOfRequests (int idPat){
 		List <Requested_organ> reqs = new ArrayList<Requested_organ>();
