@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.*;
 @Entity
 @Table(name = "Hospitals")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement (name = "Hospital")
 @XmlType(propOrder = {"name", "phoneNumber",   "country","city", "address","postcode", "doctors", "patients"}) //idk if its the proper order :S
 public class Hospital implements Serializable{
 

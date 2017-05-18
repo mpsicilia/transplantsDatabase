@@ -3,8 +3,19 @@ package transplants.db.pojos;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement (name = "TransplantDatabase")
+@XmlType (propOrder = {"hospitalsOfDatabase"})
 public class TransplantDatabase {
-	
+	@XmlElement (name = "Hospital")
+	@XmlElementWrapper (name = "Hospitals")
 	private List<Hospital> hospitalsOfDatabase;
 	
 	public TransplantDatabase(){
