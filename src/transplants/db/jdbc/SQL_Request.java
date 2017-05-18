@@ -160,8 +160,11 @@ public class SQL_Request {
 			String sql ="SELECT id FROM Requested_organs WHERE (name LIKE '" + request.getName() + "') AND (maxWeight = " + request.getMaxWeight() + ")"
 					+ " AND (minWeight = " + request.getMinWeight() + ")";
 			ResultSet rs = stm.executeQuery(sql);
-			idR = rs.getInt("id");
-			ro = new Requested_organ (idR, request.getName(), request.getMaxWeight(), request.getMinWeight());
+			while(rs.next()){
+				idR = rs.getInt("id");
+				ro = new Requested_organ (idR, request.getName(), request.getMaxWeight(), request.getMinWeight());
+			}
+			
 			
 			rs.close();
 			stm.close();

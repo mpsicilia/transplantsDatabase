@@ -157,7 +157,7 @@ public class JPAmanager implements DBManagerInterface {
 		return hospital;
 	}
 
-	public Patient getPatient(Patient patient) {
+	/*public Patient getPatient(Patient patient) {
 		Patient patito = new Patient();
 		try {
 			patito = pat.getPatient(patient);
@@ -167,7 +167,7 @@ public class JPAmanager implements DBManagerInterface {
 			ex.printStackTrace();
 		}
 		return patito;
-	}
+	}*/
 	//NEW
 	public Hospital getHospital (Hospital hospital){
 		Hospital hospi = new Hospital();
@@ -244,9 +244,9 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 	//NEW
-	public List<Patient> searchallpatients(String namehosp){
+	public List<Patient> searchallpatients(Hospital hospital){
 		try {
-			List<Patient> patients = pat.searchAllPatients(namehosp);
+			List<Patient> patients = hosp.searchAllPatients(hospital);
 			return patients;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -316,6 +316,11 @@ public class JPAmanager implements DBManagerInterface {
 			boolean r = org.delete(organ);
 			return r;
 		}
+		if(Hospital.class== obj.getClass()){
+			Hospital hospital=(Hospital) obj;
+			boolean r=  hosp.removeHospital(hospital);
+			return r;
+		}
 		return false;
 	}
 	@Override
@@ -336,13 +341,18 @@ public class JPAmanager implements DBManagerInterface {
   //FOR WHAT DO I USE IT?
 	@Override
 	public Integer idPatient(Patient patient) {
-		return 0;
-		/*
-		 * 
-		 * Integer id = 30; // por ejemplo try { id =
-		 * pat.getIdOfPatient(patient); return id; } catch (Exception e) {
-		 * e.printStackTrace(); } return id;
-		 */
+		
+		 
+		 Integer id = 30; 
+		 try { 
+			 id = pat.getIdpatient(patient);
+		  return id; 
+		  } 
+		 catch (Exception e) {
+		  e.printStackTrace(); 
+		  } 
+		 return id;
+		 
 
 	}
 

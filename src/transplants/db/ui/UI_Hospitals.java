@@ -13,6 +13,7 @@ import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Patient;
 import transplants.db.pojos.TransplantDatabase;
 import transplants.db.xml.XMLmanager;
 
@@ -210,6 +211,19 @@ public class UI_Hospitals {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+	public List<Patient> seeallpatients(JPAmanager jpamanager,Hospital hosp){
+		List<Patient> listpatients=new ArrayList<Patient>();
+		try{
+			listpatients=jpamanager.searchallpatients(hosp);
+			return listpatients;
+			
+			}
+			
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return listpatients;
 	}
 	
 }

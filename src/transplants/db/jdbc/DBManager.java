@@ -340,13 +340,7 @@ public class DBManager implements DBManagerInterface {
 	// METHODS IN ORDER TO GET THE ID
 	@Override
 	public Integer idPatient(Patient patient) {//delete from here once we have it in jpa
-		Integer id = 0;
-		try {
-			id = pat.getPatientID(patient);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return id;
+		return pat.getPatientID(patient);
 	}
 
 	@Override

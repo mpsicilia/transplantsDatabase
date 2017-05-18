@@ -3,6 +3,7 @@ package transplants.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -114,7 +115,7 @@ public class UIGenericMenu {
 		                    	//patient in JPA but requested organ in jdbc
 		                    	Patient p = uiPatient.introduceNewPatient(jpaManager,dbManager);
 		                    	System.out.println("Introduce the organ that the patient needs. ");		                    	
-		                    	uiRequested.introduceNewReqOrgan(p,dbManager);
+		                    	uiRequested.introduceNewReqOrgan(p,dbManager,jpaManager);
 		                    	break;
 		                    	
 		                    case 5:
@@ -161,7 +162,8 @@ public class UIGenericMenu {
 	                    		System.out.print("\nRELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete hospital.");
-	                    		System.out.print("\n3. Go back to the menu. ");
+	                    		System.out.print("\n3. Patients the hospital has. ");
+	                    		System.out.print("\n4. Go back to the menu. ");
 	                    		System.out.print("\nChoose an option[1-3]:");
 	                    		String opt = console.readLine();
 	                    		int op = Integer.parseInt(opt);
@@ -179,6 +181,18 @@ public class UIGenericMenu {
 	                    				uiHospital.deleteHospital(hospDel, dbManager);
 	                    				break;
 	                    			case 3:
+	                    				System.out.println("Introduce the number of the hospital: ");
+	                    				int num2 = Integer.parseInt(console.readLine());
+	                    				Hospital hospital = hosps.get(num2-1);
+	                    				List<Patient> listpatients=new ArrayList<Patient>();
+	                    				Iterator <Patient> it2=listpatients.iterator();
+	                    				listpatients=uiHospital.seeallpatients(jpaManager, hospital);
+	                    				while(it2.hasNext()){
+	                    					Patient patient=it2.next();
+	                    					System.out.println(patient);
+	                    				}
+	                    				
+	                    			case 4:
 	                    				break;
 	                    		}
 	                    		break;

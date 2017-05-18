@@ -36,13 +36,13 @@ public class JPApatient {
 		return false;
 	}
 
-	public Patient getPatient(Patient pat) {
+	/*public Patient getPatient(Patient pat) {
 		Patient patient = new Patient();
 		try {
 			Query q1 = jpaManager.getEManager().createNativeQuery(
 					"SELECT * FROM Patients WHERE name LIKE ? AND birthDate = ? AND weight = ? AND height = ? AND gender"
 							+ " LIKE ? AND pathology LIKE ? AND bloodType LIKE ? AND additionDate = ?"
-							+ "AND lifeExpectancy = ?", Patient.class);
+							+ "AND lifeExpectancy = ? ", Patient.class);
 			q1.setParameter(1, pat.getName());
 			q1.setParameter(2, pat.getBirthDate());
 			q1.setParameter(3, pat.getWeight());
@@ -51,13 +51,14 @@ public class JPApatient {
 			q1.setParameter(6, pat.getPathology());
 			q1.setParameter(7, pat.getBloodType());
 			q1.setParameter(8, pat.getAdditionDate());
+			q1.setParameter(9, pat.getLifeExpectancy());
 			patient = (Patient) q1.getSingleResult();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return patient;
-	}
+	}*/
 
 	public boolean removePatient(Patient patient) {
 
@@ -90,12 +91,12 @@ public class JPApatient {
 	}
 	public Integer getIdpatient(Patient pat){
 		
-		//Integer id;
+		Patient patient=new Patient();
 		try {
 			Query q1 = jpaManager.getEManager().createNativeQuery(
 					"SELECT id FROM Patients WHERE name LIKE ? AND birthDate = ? AND weight = ? AND height = ? AND gender"
 							+ " LIKE ? AND pathology LIKE ? AND bloodType LIKE ? AND additionDate = ?"
-							+ "AND lifeExpectancy = ?", Patient.class);
+							+ " AND lifeExpectancy = ? ", Patient.class);
 			q1.setParameter(1, pat.getName());
 			q1.setParameter(2, pat.getBirthDate());
 			q1.setParameter(3, pat.getWeight());
@@ -104,31 +105,17 @@ public class JPApatient {
 			q1.setParameter(6, pat.getPathology());
 			q1.setParameter(7, pat.getBloodType());
 			q1.setParameter(8, pat.getAdditionDate());
-			Integer id=(Integer) q1.getSingleResult();
-			return id;
+			q1.setParameter(9, pat.getLifeExpectancy());
+			
+			patient=(Patient) q1.getSingleResult();
+			return patient.getId();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return null;
+		return 30;
 	}
-	//NEW-->it returns all the patients a hospital has
-	public List<Patient> searchAllPatients(String namehosp){
-		List<Patient> patients = new ArrayList<Patient>();
-		try {
-			jpaManager.getEManager().getTransaction().begin();
-			Query q = jpaManager.getEManager()
-					.createNativeQuery("SELECT * FROM Patients AS Pat JOIN Hospitals AS Hosp ON Pat.hospital_id=Hosp.id "
-					+ "WHERE Hosp.name LIKE ? ", Patient.class);
-			q.setParameter(1, namehosp);
-			patients = (List<Patient>) q.getResultList();
-			jpaManager.getEManager().getTransaction().commit();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return patients;
-	}
 	
 
 

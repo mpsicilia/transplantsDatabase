@@ -61,7 +61,7 @@ public class UI_Patient {
 			
 			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
 
-			boolean introduced=dbmanager.insert(p);
+			boolean introduced=jpaManager.insert(p);
 			
 			
 			if(introduced){
@@ -70,31 +70,33 @@ public class UI_Patient {
 			else{
 				System.out.println("patient not introduced");
 			}
-		
+			//FUNCIONA!!
 			//RELATIONSHIP BETWEEN HOSPITAL AND PATIENT
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
-			List <Hospital>hosps= jpaManager.selectAllHospitals();
+			List <Hospital>hosps= dbmanager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
 			while (itH.hasNext()){
 				Hospital h=itH.next();
 				System.out.println(h);
 			}
 			Integer idHosp= Integer.parseInt(console.readLine());
-			
-			
-			//FUNCIONA!!
 			Hospital hospital=jpaManager.getHospitalPatient(idHosp);
 			
-			System.out.println("hosp of patient"+hospital);
+	
 			
 			//NOW IT CANT WORK BECAUSE OF THE GENERATE SCORE
-			jpaManager.getPatient(p);
-			jpaManager.getEManager().getTransaction().begin();
+			
 			hospital.addPatient(p);
 			p.setHospital(hospital);
-			jpaManager.update(hospital);
-			jpaManager.update(p);
-			jpaManager.getEManager().getTransaction().commit();
+			boolean okUpdatepatient = jpaManager.update(p);
+			boolean okUpdatehospital = jpaManager.update(hospital);
+			if (okUpdatepatient && okUpdatehospital) {
+				System.out.println("Patient has been introduced");
+				
+			} else {
+				System.out.println("Patient has NOT been introduced");
+			}
+			
 			
 			//RELATIONSHIP BETWEEN DOCTOR AND PATIENT
 			/*System.out.println("How many doctors are attending the patient?");
@@ -225,6 +227,7 @@ public class UI_Patient {
 			boolean deleted = jpaManager.delete(pat);
 			
 			boolean deleted1=dbmanager.deleteallReq(pat.getName());
+			
 			
 	        
 			if(deleted && deleted1){

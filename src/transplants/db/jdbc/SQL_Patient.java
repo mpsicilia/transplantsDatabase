@@ -17,7 +17,7 @@ public class SQL_Patient {
 	public SQL_Patient(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-	//SEGUIR AÑADIENDO SCORE 
+	//SEGUIR Aï¿½ADIENDO SCORE 
 	
 	public boolean insertPatient (Patient p){
 		try{
@@ -147,7 +147,7 @@ public class SQL_Patient {
 	}
 	
 	public Integer getPatientID (Patient p){
-		int idP = 0;
+		
 		Patient patient =  new Patient();
 		try{
 			Statement stm = dbManager.getC().createStatement();
@@ -156,9 +156,11 @@ public class SQL_Patient {
 							+ "(pathology LIKE '" + p.getPathology() + "') AND (bloodType LIKE '" + p.getBloodType() + "')"
 									+ "AND (lifeExpectancy = " + p.getLifeExpectancy() + ")";
 			ResultSet rs = stm.executeQuery(sql);
-			idP = rs.getInt("id");
-			patient = new Patient (idP, p.getName(), p.getBirthDate(), p.getWeight(), p.getHeight(), p.getGender(), p.getPathology(), p.getBloodType(), p.getAdditionDate(), p.getLifeExpectancy());
-			
+			while(rs.next()){
+			int idP = rs.getInt("id");
+			patient = new Patient ( idP, p.getName(), p.getBirthDate(), p.getWeight(), p.getHeight(), p.getGender(), p.getPathology(), p.getBloodType(), p.getAdditionDate(), p.getLifeExpectancy());
+			System.out.println("ID "+idP);
+			}
 			rs.close();
 			stm.close();
 		}catch (Exception e){

@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
@@ -19,7 +20,7 @@ public class UI_RequestedOrgan {
 		
 	}
 	
-	public void introduceNewReqOrgan(Patient p, DBManager dbManager){
+	public void introduceNewReqOrgan(Patient p, DBManager dbManager, JPAmanager jpam){
 		try{
 			boolean more = true;//one patient can request many organs so...
 			while (more){
@@ -36,7 +37,9 @@ public class UI_RequestedOrgan {
 				boolean ok=dbManager.insert(reqOrgan);
 				
 				//get the id of the patient
-				int idPatient = dbManager.idPatient(p);
+				
+				int idPatient =jpam.idPatient(p);
+				
 				//get the id of the  requested organ
 				int idRequested =  dbManager.idRequestedOrgan(reqOrgan);
 				
