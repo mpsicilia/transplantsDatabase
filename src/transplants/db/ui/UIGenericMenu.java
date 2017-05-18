@@ -14,7 +14,6 @@ import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
-import transplants.db.pojos.TransplantDatabase;
 
 public class UIGenericMenu {
 
@@ -35,7 +34,6 @@ public class UIGenericMenu {
 			UI_Organ uiOrgan= new UI_Organ();
 			UI_AnimalTissue uiAnimalT= new UI_AnimalTissue();
 			UI_RequestedOrgan uiRequested = new UI_RequestedOrgan();
-			TransplantDatabase database = new TransplantDatabase();
 			
 		try{
 				        
@@ -96,7 +94,7 @@ public class UIGenericMenu {
 		                    
 	                    switch (option1){
 		                    case 1:
-		                    	uiHospital.introduceNewHospital(dbManager,jpaManager, database);
+		                    	uiHospital.introduceNewHospital(dbManager,jpaManager);
 		                    	break;
 		                    	
 		                    case 2:
@@ -147,10 +145,12 @@ public class UIGenericMenu {
 	                	 			counter++;
 	                	 		}	
 	                	 		
+	                	 		
+	                	 	
 	                	 		if(counter ==1){
 	                	 			System.out.println("Hospital not found, would you like to introduce a new hospital?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
-	                	 				uiHospital.introduceNewHospital(dbManager,jpaManager, database);
+	                	 				uiHospital.introduceNewHospital(dbManager,jpaManager);
 	                	 				break;
 	                	 			}
 	                	 		}
