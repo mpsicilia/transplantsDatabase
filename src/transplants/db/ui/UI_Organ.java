@@ -73,7 +73,7 @@ public class UI_Organ {
 		boolean again = true;
 		try {
 			while (again) {
-				System.out.println("Choose the information that is going to be updated [1-7]: ");
+				System.out.println("Choose the information that is going to be updated [1-4]: ");
 				System.out.println("1. Name");
 				System.out.println("2. Weight");				
 				System.out.println("3. Type of donation");
@@ -116,10 +116,15 @@ public class UI_Organ {
 		}
 	}
 
-	public void deleteOrgan(Organ organ, DBManager dbManager) {
+	public void deleteOrgan(Donor donor, Organ organ, JPAmanager jpaManager) {
 		try {
-			boolean deleted = dbManager.delete(organ);
-			if (deleted) {
+			donor.removeOrgan(organ);
+			organ.setDonor(donor);
+			boolean okUpdateOrgan = jpaManager.update(organ);
+			boolean okUpdateDonor = jpaManager.update(donor);
+			
+			boolean deleted = jpaManager.delete(organ);
+			if (deleted && okUpdateOrgan && okUpdateDonor) {
 				System.out.println("Organ has been deleted.");
 			} else {
 				System.out.println("Organ has NOT been deleted. ");
@@ -130,15 +135,23 @@ public class UI_Organ {
 
 	}
 
-	public void organsOfDonor(Donor d, JPAmanager jpaManager) {
+	public List<Organ> organsOfDonor(Donor d, JPAmanager jpaManager) {
 		try {
 			List<Organ> organs = d.getOrgans();
-			for (Organ organ : organs) {
-				System.out.println(organ);
+			Integer counterOrg= 1;
+			if (!organs.isEmpty()){
+				System.out.print("\nThe organs that this donor is donating are:\n");
+				for (Organ organ : organs) {
+					System.out.println(counterOrg + ". " + organ);
+					counterOrg++;
+				}
+				return organs;
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public List<Organ> organsThatMatchRequestByName(String reqName, DBManager dbManager) {
