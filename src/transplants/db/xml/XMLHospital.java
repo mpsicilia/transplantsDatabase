@@ -1,6 +1,7 @@
 package transplants.db.xml;
 
 import java.io.File;
+import java.util.List;
 
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -18,10 +19,10 @@ public class XMLHospital {
 		
 	}
 	
-	public boolean javaToXmlHospital (Marshaller marsh, Hospital hosp){
+	public boolean javaToXmlHospital (Marshaller marsh, List<Hospital> hs){
 		try{
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
-			marsh.marshal(hosp, fileHosp);
+			marsh.marshal(hs, fileHosp);
 			return true;
 		}catch (Exception ex){
 			ex.printStackTrace();

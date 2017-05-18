@@ -1,5 +1,7 @@
 package transplants.db.xml;
 
+import java.util.List;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -22,13 +24,10 @@ public class XMLmanager {
 		unmarshaller = jaxb.createUnmarshaller();
 	}
 	//marshalling method
-	public boolean javaToXml (Object obj){
+	public boolean javaToXmlHospital (List<Hospital> hospsToXml){
 		try{
-			if (Hospital.class == obj.getClass()) {
-				// create file				
-				Hospital hospital = (Hospital) obj;
-				return XMLhosp.javaToXmlHospital(marshaller, hospital);
-			}
+			return XMLhosp.javaToXmlHospital(marshaller, hospsToXml);
+			
 		}catch (Exception e){
 			e.printStackTrace();
 		}

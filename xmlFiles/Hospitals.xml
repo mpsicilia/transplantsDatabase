@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Hospital name="monteprincipe" phoneNumber="34343542" address="boadilla" postcode="232334">
+<Hospital name="monte">
+    <phoneNumber>8765</phoneNumber>
     <Country>spain</Country>
-    <City>madrid</City>
-    <Doctors>
-        <Doctor nameOfDoctor="miguel" specialization="trauma" registrationNumber="3435432344"/>
-        <Doctor nameOfDoctor="maria" specialization="ped" registrationNumber="9873"/>
-    </Doctors>
+    <City>mad</City>
+    <address>boadilla</address>
+    <postcode>89003</postcode>
+    <Doctors/>
     <Patients/>
 </Hospital>
