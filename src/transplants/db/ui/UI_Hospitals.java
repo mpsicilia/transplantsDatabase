@@ -166,39 +166,23 @@ public class UI_Hospitals {
 	public void javaToXmlHospital (DBManager dbManager){
 		try{
 			
-			//Show the user all the hospitals, so he can choose what hospital is going to turn into XML
-			List<Hospital> hosps = dbManager.selectAllHospitals();
-			Iterator<Hospital> itH = hosps.iterator();
-			int counter = 1;
+			//Get all the hospitals to marshall
+			List<Hospital> hospsToMarshall = dbManager.selectAllHospitals();
+			Iterator<Hospital> itH = hospsToMarshall.iterator();
+			//get the doctors of the hospital and add it to the hospital
 			while (itH.hasNext()){
 				Hospital h = itH.next();
-				System.out.println(counter + ". " + h.getName());
-				counter++;
-			}
-			System.out.print("Introduce the number of the hospital that is going to turn into an XML file:");
-			int hospNumb = Integer.parseInt(console.readLine());
-			//get the hospital from the list
-			Hospital hospToXml = hosps.get(hospNumb-1);
-			
-			//get the doctors of the hospital and add it to the hospital
-			List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(hospToXml.getName()); //create the method in DB
-			Iterator<Doctor> itD = doctorsOfHosp.iterator();
-			counter = 1;
-			while (itD.hasNext()){
-				Doctor d = itD.next();
-				boolean doctorOK = hospToXml.addDoctor(d);
-				//this if is not needed but just to be sure that the doctors are being introduced well
-				if (doctorOK){
-					System.out.println(counter + ". Doctor: " + d.getNameOfDoctor() + " added.");
-				}
-				else {
-					System.out.println(counter + ". Doctor: " + d.getNameOfDoctor() + " NOT added.");
-				}
-				counter ++;
+				List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(h.getName()); //create the method in DB
+				Iterator<Doctor> itD = doctorsOfHosp.iterator();
+				
+				while (itD.hasNext()){
+					Doctor d = itD.next();
+					boolean doctorOK = h.addDoctor(d);
+				}			
 			}
 			
 			XMLmanager hospXml = new XMLmanager();
-			boolean xmlOK = hospXml.javaToXml(hospToXml);
+			boolean xmlOK = hospXml.javaToXmlHospital(hospsToMarshall);
 			
 			if(xmlOK){
 				System.out.println("Xml of hospital created. ");
@@ -206,21 +190,20 @@ public class UI_Hospitals {
 			else{
 				System.out.println("Xml of hospital NOT created. ");
 			}
-						
-			// Marshal the hospital to a file
-			/*File file = new File("./xmlFiles/Hospitals.xml");
-			marshaller.marshal(hospToXml, file); //store the hospital in that file
-			//print
-			marshaller.marshal(hospToXml, System.out);*/
+			
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}
 	
-	public void xmlToJavaHospital (){
+	public void xmlToJavaHospital (){//choose the hospi that it's going to be unmarshall
 		try{
 			XMLmanager hospXml = new XMLmanager();
 			List <Hospital> hosps = new ArrayList<Hospital>();
+			Iterator<Hospital> hi = hosps.iterator();
+			while (h.hasNext()){
+				h 
+			}
 			
 		}catch (Exception e){
 			e.printStackTrace();
