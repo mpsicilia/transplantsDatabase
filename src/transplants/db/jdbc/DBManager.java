@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omg.CORBA.Request;
-
 import transplants.db.dbInterface.DBManagerInterface;
 import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Doctor;

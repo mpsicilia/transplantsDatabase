@@ -30,15 +30,13 @@ public class JPAdonor {
 
 	}
 	
-	public Organ selectOrgan (Integer id){
-		Organ newOrgan=new Organ ();
-		try{	
-			
+	public List<Organ> selectOrgan (Integer id){
+		List <Organ> newOrgan =new ArrayList < Organ> ();
+		try{				
 			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Organs WHERE id = ? ", Organ.class);
 			q.setParameter(1, id);
-			newOrgan = (Organ) q.getSingleResult();	
+			newOrgan = (List<Organ>) q.getResultList();	
 			
-			return newOrgan;
 		}catch (Exception e){
 			e.printStackTrace();
 		}

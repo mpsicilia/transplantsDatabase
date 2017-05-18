@@ -145,6 +145,8 @@ public class UIGenericMenu {
 	                	 			counter++;
 	                	 		}	
 	                	 		
+	                	 		
+	                	 	
 	                	 		if(counter ==1){
 	                	 			System.out.println("Hospital not found, would you like to introduce a new hospital?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
@@ -276,7 +278,7 @@ public class UIGenericMenu {
                     				System.out.println("Introduce the number of the donor: ");
                     				numDon = Integer.parseInt(console.readLine());
                     				Donor donOrg = donor.get(numDon-1);
-                    				uiOrgan.organsOfDonor(donOrg, dbManager);
+                    				uiOrgan.organsOfDonor(donOrg, jpaManager);
                     				break;
                     			case 4:
                     				break;                    				

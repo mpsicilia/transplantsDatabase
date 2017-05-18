@@ -54,7 +54,7 @@ public class UI_Organ {
 				// Changed OK booleans
 				if (ok && okUpdateOrgan && okUpdateDonor) {
 					System.out.println("Organ has been introduced");
-					//uiCompatibilityTest(organ, dbManager);
+					uiCompatibilityTest(organ, dbManager);
 				} else {
 					System.out.println("Organ has NOT been introduced");
 				}
@@ -67,36 +67,6 @@ public class UI_Organ {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}
-
-	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
-		List<Patient> compatiblePatients = new ArrayList<Patient>();
-
-		try {
-			compatiblePatients = dbManager.dbCompatibilityTest(organ);
-			Iterator<Patient> it = compatiblePatients.iterator();
-			int counterPat = 1;
-			while (it.hasNext()) {
-				Patient p = it.next();
-				System.out.println(counterPat + ". " + p);
-				counterPat++;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public List<Organ> searchOrgan(DBManager dbManager) {
-		try {
-			System.out.println("Introduce the name of the organ: ");
-			String name = console.readLine();
-			List<Organ> organ = dbManager.searchOrgan(name);
-			return organ;
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		return null;
 	}
 
 	public void updateOrgan(Organ organ, DBManager dbManager) {
@@ -160,17 +130,11 @@ public class UI_Organ {
 
 	}
 
-	public void organsOfDonor(Donor d, DBManager dbManager) {
+	public void organsOfDonor(Donor d, JPAmanager jpaManager) {
 		try {
-			int idDon = d.getId();
-			List<Organ> organs = dbManager.organsOfDonor(idDon);
-			System.out.println("Donor: " + d.getName() + " donates the following organs: \n");
-			Iterator<Organ> itOrg = organs.iterator();
-			int countOrg = 1;
-			while (itOrg.hasNext()) {
-				Organ o = itOrg.next();
-				System.out.println(countOrg + ". " + o.getName());
-				countOrg++;
+			List<Organ> organs = d.getOrgans();
+			for (Organ organ : organs) {
+				System.out.println(organ);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -205,4 +169,35 @@ public class UI_Organ {
 		}
 		return don;
 	}
+	
+	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
+		List<Patient> compatiblePatients = new ArrayList<Patient>();
+
+		try {
+			compatiblePatients = dbManager.dbCompatibilityTest(organ);
+			Iterator<Patient> it = compatiblePatients.iterator();
+			int counterPat = 1;
+			while (it.hasNext()) {
+				Patient p = it.next();
+				System.out.println(counterPat + ". " + p);
+				counterPat++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public List<Organ> searchOrgan(DBManager dbManager) {
+		try {
+			System.out.println("Introduce the name of the organ: ");
+			String name = console.readLine();
+			List<Organ> organ = dbManager.searchOrgan(name);
+			return organ;
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
 }
