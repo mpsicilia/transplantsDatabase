@@ -19,6 +19,7 @@ import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
+import transplants.db.pojos.Requested_organ;
 
 public class UI_Patient {
 	
@@ -83,10 +84,10 @@ public class UI_Patient {
 			
 			//FUNCIONA!!
 			Hospital hospital=jpaManager.getHospitalPatient(idHosp);
-			//Hospital hospit=jpaManager.getHospital(hospital);
+			
 			System.out.println("hosp of patient"+hospital);
 			
-			//NOW IT CANT WORK BEACUSE OF THE GENERATE SCORE
+			//NOW IT CANT WORK BECAUSE OF THE GENERATE SCORE
 			jpaManager.getPatient(p);
 			jpaManager.getEManager().getTransaction().begin();
 			hospital.addPatient(p);
@@ -96,11 +97,12 @@ public class UI_Patient {
 			jpaManager.getEManager().getTransaction().commit();
 			
 			//RELATIONSHIP BETWEEN DOCTOR AND PATIENT
-			System.out.println("How many doctors are attending the patient?");
+			/*System.out.println("How many doctors are attending the patient?");
 			Integer Xtimes= Integer.parseInt(console.readLine());
 			Integer counter=1;
 			Integer doctId=0;
-			boolean introduced3=false;
+			boolean introduced2=false;
+			
 			Integer patId=jpaManager.getIdpatient(p);
 			do {
 				System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
@@ -111,16 +113,16 @@ public class UI_Patient {
 					System.out.println(d);
 				}		
 				doctId = Integer.parseInt(console.readLine());
-				introduced3= dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
+				introduced2= dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
 				counter++;
-			}while(counter<=Xtimes);
+			}while(counter<=Xtimes);*/
 			
-			if(introduced && introduced3){
+			/*if(introduced && introduced2){
 				System.out.println("Patient has been introduced. ");
 			}
 			else{
 				System.out.println("Patient has not been introduced. ");
-			}
+			}*/
 			
 			
 			return p;
@@ -142,10 +144,7 @@ public class UI_Patient {
 		}
 		return null; 
 	}
-	/*public void updateHosp(Patient pat, Hospital hosp, JPAmanager jpaManager){
-	 jpaManager.update(hosp);
-		
-	}*/
+
 
 	
 	public void updatePatient(Patient p, JPAmanager jpaManager){
@@ -212,7 +211,7 @@ public class UI_Patient {
 						+ p.toString());
 			}
 			else{
-				System.out.println("Patient has not been updated. ");
+				System.out.println("Patient has NOT been updated. ");
 			}
 		}catch (IOException e){
 			e.printStackTrace();
@@ -220,10 +219,15 @@ public class UI_Patient {
 		
 	}
 	
-	public void deletePatient (Patient pat, JPAmanager jpaManager){
+	//PROVE THIS METHOD
+	public void deletePatient (Patient pat, JPAmanager jpaManager,DBManager dbmanager){
 		try{
 			boolean deleted = jpaManager.delete(pat);
-			if(deleted){
+			
+			boolean deleted1=dbmanager.deleteallReq(pat.getName());
+			
+	        
+			if(deleted && deleted1){
 				System.out.println("Patient has been deleted.");
 			}
 			else{
@@ -233,11 +237,12 @@ public class UI_Patient {
 			e.printStackTrace();
 		}
 	}
-	
-	public void patientHospitalAndDoctor (String ptName, JPAmanager jpaManager){
+	 
+	//PROVE THIS METHOD
+	public void patientHospitalAndDoctor (String ptName, JPAmanager jpaManager,DBManager dbmanager){
 		try{
 			String nameOfHosp= jpaManager.hospitalOfPatient(ptName);
-			List<Doctor> patDoctors = jpaManager.doctorOfPatient(ptName);
+			List<Doctor> patDoctors = dbmanager.doctorOfPatient(ptName);
 			
 			System.out.println("Patient: " + ptName + ", is admitted in the hospital: " + nameOfHosp + 
 					". The doctors that take care of him are: \n" + patDoctors);

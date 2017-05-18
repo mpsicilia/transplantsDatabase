@@ -177,6 +177,17 @@ public class DBManager implements DBManagerInterface {
 		}
 		return null;
 	}
+	//THIS METHOD DELETES ALL THE REQUESTED ORGANS FROM A PATIENT
+	public boolean deleteallReq (String patname){
+		try {
+			boolean ok=req.deleteallreq(patname);
+			
+			return ok;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	/*
 	public String searchHospital(Integer id) {
@@ -428,6 +439,7 @@ public class DBManager implements DBManagerInterface {
 		}
 		return hospital;
 	}
+	
 
 	@Override
 

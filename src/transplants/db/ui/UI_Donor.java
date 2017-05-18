@@ -25,7 +25,7 @@ public class UI_Donor {
 			System.out.print("Name: ");
 			String name = console.readLine();
 
-			System.out.println("Date of birth: [yyyy-mm-dd]: ");
+			System.out.print("Date of birth: [yyyy-mm-dd]: ");
 			String birth = console.readLine();
 			Date birthDate = Date.valueOf(birth);
 			
@@ -146,10 +146,10 @@ public class UI_Donor {
 			boolean donorDeleted = jpaManager.delete(donor);		
 			
 			if(donorDeleted && organsDeleted){
-				System.out.println("Donor has been deleted.");
+				System.out.println("Donor has been correctly deleted.");
 			}
 			else{
-				System.out.println("Donor has NOT been deleted. ");
+				System.out.println("Donor has NOT been correctly deleted. ");
 			}
 		}catch (Exception ex){
 			ex.printStackTrace();
