@@ -173,7 +173,7 @@ public class JPAmanager implements DBManagerInterface {
 		return false;
 	}
 
-	public Organ organOfADonor(Integer donorId) {
+	public List<Organ> organOfADonor(Integer donorId) {
 		return don.selectOrgan(donorId);
 	}
 
