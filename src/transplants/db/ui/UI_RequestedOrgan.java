@@ -37,7 +37,7 @@ public class UI_RequestedOrgan {
 				boolean ok=dbManager.insert(reqOrgan);
 				
 				//get the id of the patient
-				//
+				//ttttt
 				int idPatient =jpam.idPatient(p);
 				
 				//get the id of the  requested organ
