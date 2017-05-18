@@ -24,7 +24,7 @@ public class XMLmanager {
 		unmarshaller = jaxb.createUnmarshaller();
 	}
 	//marshalling method
-	public boolean javaToXmlHospital (List<Hospital> hospsToXml){
+	public boolean javaToXmlHospitals (List<Hospital> hospsToXml){
 		try{
 			return XMLhosp.javaToXmlHospital(marshaller, hospsToXml);
 			

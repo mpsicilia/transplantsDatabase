@@ -46,11 +46,11 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
-		//	boolean okDatabase = database.addHospital(hosp);
+			boolean okDatabase = data.addHospital(hosp);
 			boolean ok=jpaManager.insert(hosp);
 			//boolean ok=dbManager.insert(hosp);
 			
-			if (ok){
+			if (ok && okDatabase){
 				System.out.print("Hospital has been introduced");
 				
 				
@@ -184,7 +184,7 @@ public class UI_Hospitals {
 			}
 			
 			XMLmanager hospXml = new XMLmanager();
-			boolean xmlOK = hospXml.javaToXmlHospital(hospsToMarshall);
+			boolean xmlOK = hospXml.javaToXmlHospitals(hospsToMarshall);
 			
 			if(xmlOK){
 				System.out.println("Xml of hospital created. ");
