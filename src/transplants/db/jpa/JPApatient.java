@@ -101,6 +101,34 @@ public class JPApatient {
 		}
 		return null;
 	}
+	public Integer getIdpatient(Patient pat){
+		
+		//Integer id;
+		try {
+			Query q1 = jpaManager.getEManager().createNativeQuery(
+					"SELECT id FROM Patients WHERE name LIKE ? AND birthDate = ? AND weight = ? AND height = ? AND gender"
+							+ " LIKE ? AND pathology LIKE ? AND bloodType LIKE ? AND additionDate = ?"
+							+ "AND lifeExpectancy = ?", Patient.class);
+			q1.setParameter(1, pat.getName());
+			q1.setParameter(2, pat.getBirthDate());
+			q1.setParameter(3, pat.getWeight());
+			q1.setParameter(4, pat.getHeight());
+			q1.setParameter(5, pat.getGender());
+			q1.setParameter(6, pat.getPathology());
+			q1.setParameter(7, pat.getBloodType());
+			q1.setParameter(8, pat.getAdditionDate());
+			Integer id=(Integer) q1.getSingleResult();
+			return id;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+
+
+	
 
 	public List<Patient> searchPatient(String name) {
 		List<Patient> patients = new ArrayList<Patient>();

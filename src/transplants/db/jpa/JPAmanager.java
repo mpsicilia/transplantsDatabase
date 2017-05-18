@@ -100,6 +100,21 @@ public class JPAmanager implements DBManagerInterface {
 		// DONE IN JDBC
 		return false;
 	}
+	
+	//NEW
+	public Integer getIdpatient(Patient patient){
+		Integer patid;
+		try{
+			patid=pat.getIdpatient(patient);
+			
+			return patid;
+		}
+		 catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		return null;
+		
+	}
 
 	@Override
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2) {
@@ -167,14 +182,14 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	
 
-	@Override
 	public boolean donorFKinOrgan(Integer idD, Integer idO) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public List<Organ> organOfADonor(Integer donorId) {
-		return don.selectOrgan(donorId);
+		//return don.selectOrgan(donorId);
+		return null;
 	}
 
 	@Override
@@ -323,7 +338,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	
 	public Integer getIdOfDoctor(Doctor doct) {
-		// TODO Auto-generated method stub
+		//DONE WITH JDBC
 		return null;
 	}
 
@@ -353,7 +368,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public String hospitalOfPatient(String pName) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
