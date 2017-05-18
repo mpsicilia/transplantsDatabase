@@ -145,6 +145,8 @@ public class UIGenericMenu {
 	                	 			counter++;
 	                	 		}	
 	                	 		
+	                	 		
+	                	 	
 	                	 		if(counter ==1){
 	                	 			System.out.println("Hospital not found, would you like to introduce a new hospital?: [yes/no]");
 	                	 			if ((console.readLine()).equalsIgnoreCase("yes")){
