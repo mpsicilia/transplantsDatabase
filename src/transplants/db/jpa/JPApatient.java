@@ -75,19 +75,6 @@ public class JPApatient {
 
 	 
 
-	public boolean updateHospitalofPatient(Patient pat, Hospital hosp) {
-		try {
-			jpaManager.getEManager().getTransaction().begin();
-			pat.setHospital(hosp);
-			hosp.addPatient(pat);
-			jpaManager.getEManager().getTransaction().commit();
-			return true;
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return false;
-	}
 
 	public List<Patient> selectAllPatients() {
 		try {

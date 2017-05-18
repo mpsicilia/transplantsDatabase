@@ -430,6 +430,7 @@ public class DBManager implements DBManagerInterface {
 		}
 		return hospital;
 	}
+	//FINISH THIS METHOD IN JPAHOSPITAL!!!!!!!!!!!!!!!!
 
 	@Override
 

@@ -29,6 +29,30 @@ public class JPAhospital {
 		}
 		return false;
 	}
+
+	public boolean updateHospitalofPatient(Patient pat, Hospital hosp) {
+		try {
+			jpaManager.getEManager().getTransaction().begin();
+			pat.setHospital(hosp);
+			hosp.addPatient(pat);
+			jpaManager.getEManager().getTransaction().commit();
+			return true;
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
+	public String hospitalofpatient(String namepat){
+		
+		try{
+			
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public Hospital getHospitalbyid(Integer idhosp) {
 		Hospital hosp = new Hospital();

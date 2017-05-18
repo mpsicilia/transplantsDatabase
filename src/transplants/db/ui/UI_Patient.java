@@ -83,10 +83,10 @@ public class UI_Patient {
 			
 			//FUNCIONA!!
 			Hospital hospital=jpaManager.getHospitalPatient(idHosp);
-			//Hospital hospit=jpaManager.getHospital(hospital);
+			
 			System.out.println("hosp of patient"+hospital);
 			
-			//NOW IT CANT WORK BEACUSE OF THE GENERATE SCORE
+			//NOW IT CANT WORK BECAUSE OF THE GENERATE SCORE
 			jpaManager.getPatient(p);
 			jpaManager.getEManager().getTransaction().begin();
 			hospital.addPatient(p);
@@ -100,7 +100,8 @@ public class UI_Patient {
 			Integer Xtimes= Integer.parseInt(console.readLine());
 			Integer counter=1;
 			Integer doctId=0;
-			boolean introduced3=false;
+			boolean introduced2=false;
+			
 			Integer patId=jpaManager.getIdpatient(p);
 			do {
 				System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
@@ -111,11 +112,11 @@ public class UI_Patient {
 					System.out.println(d);
 				}		
 				doctId = Integer.parseInt(console.readLine());
-				introduced3= dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
+				introduced2= dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
 				counter++;
 			}while(counter<=Xtimes);
 			
-			if(introduced && introduced3){
+			if(introduced && introduced2){
 				System.out.println("Patient has been introduced. ");
 			}
 			else{
@@ -142,10 +143,11 @@ public class UI_Patient {
 		}
 		return null; 
 	}
-	/*public void updateHosp(Patient pat, Hospital hosp, JPAmanager jpaManager){
-	 jpaManager.update(hosp);
+	public void updateHosp(Patient pat, Hospital hosp, JPAmanager jpaManager){
+	 
+		jpaManager.update(hosp);
 		
-	}*/
+	}
 
 	
 	public void updatePatient(Patient p, JPAmanager jpaManager){
@@ -212,7 +214,7 @@ public class UI_Patient {
 						+ p.toString());
 			}
 			else{
-				System.out.println("Patient has not been updated. ");
+				System.out.println("Patient has NOT been updated. ");
 			}
 		}catch (IOException e){
 			e.printStackTrace();
@@ -220,9 +222,14 @@ public class UI_Patient {
 		
 	}
 	
+	//CONTINUE THIS METHOD
 	public void deletePatient (Patient pat, JPAmanager jpaManager){
 		try{
 			boolean deleted = jpaManager.delete(pat);
+			//we have to delete also the requested organ
+			//new method you give a patient and it returns its reqorgan 
+			//and then call the method in sqlreq that deletes reqorgan
+	        
 			if(deleted){
 				System.out.println("Patient has been deleted.");
 			}
