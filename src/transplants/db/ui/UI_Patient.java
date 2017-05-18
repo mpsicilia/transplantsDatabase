@@ -58,11 +58,7 @@ public class UI_Patient {
 			System.out.println("Life expectancy: ");
 			Date life = Date.valueOf(console.readLine());
 			
-			
-			
-			
-			
-			/*//Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
+			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
 
 			boolean introduced=dbmanager.insert(p);
 			
@@ -72,9 +68,9 @@ public class UI_Patient {
 			}
 			else{
 				System.out.println("patient not introduced");
-			}*/
+			}
 		
-			
+			//RELATIONSHIP BETWEEN HOSPITAL AND PATIENT
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List <Hospital>hosps= jpaManager.selectAllHospitals();
 			Iterator <Hospital> itH=hosps.iterator();
@@ -83,7 +79,6 @@ public class UI_Patient {
 				System.out.println(h);
 			}
 			Integer idHosp= Integer.parseInt(console.readLine());
-			//jpaManager.getPatient(p);
 			
 			
 			//FUNCIONA!!
@@ -91,44 +86,44 @@ public class UI_Patient {
 			//Hospital hospit=jpaManager.getHospital(hospital);
 			System.out.println("hosp of patient"+hospital);
 			
-			//jpaManager.getEManager().getTransaction().begin();
-			/*hospital.addPatient(p);
+			//NOW IT CANT WORK BEACUSE OF THE GENERATE SCORE
+			jpaManager.getPatient(p);
+			jpaManager.getEManager().getTransaction().begin();
+			hospital.addPatient(p);
 			p.setHospital(hospital);
 			jpaManager.update(hospital);
 			jpaManager.update(p);
-			//jpaManager.getEManager().getTransaction().commit();
+			jpaManager.getEManager().getTransaction().commit();
 			
-			
-			
-			
-			
-			/*System.out.println("How many doctors are attending the patient?");
+			//RELATIONSHIP BETWEEN DOCTOR AND PATIENT
+			System.out.println("How many doctors are attending the patient?");
 			Integer Xtimes= Integer.parseInt(console.readLine());
 			Integer counter=1;
 			Integer doctId=0;
 			boolean introduced3=false;
+			Integer patId=jpaManager.getIdpatient(p);
 			do {
 				System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
-				List <Doctor> docs = jpaManager.selectAllDoctors();
+				List <Doctor> docs = dbmanager.selectAllDoctors();
 				Iterator <Doctor> itD = docs.iterator();
 				while (itD.hasNext()){
 					Doctor d = itD.next();
 					System.out.println(d);
 				}		
 				doctId = Integer.parseInt(console.readLine());
-				introduced3= jpaManager.insertPrimaryKeyDoctorPatient(patId, doctId);
+				introduced3= dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
 				counter++;
 			}while(counter<=Xtimes);
 			
-			if(introduced && introduced2 && introduced3){
+			if(introduced && introduced3){
 				System.out.println("Patient has been introduced. ");
 			}
 			else{
 				System.out.println("Patient has not been introduced. ");
-			}*/
+			}
 			
 			
-			return null;
+			return p;
 			
 		}catch (IOException ex){
 			ex.printStackTrace();

@@ -54,7 +54,7 @@ public class UI_Organ {
 				// Changed OK booleans
 				if (ok && okUpdateOrgan && okUpdateDonor) {
 					System.out.println("Organ has been introduced");
-					//uiCompatibilityTest(organ, dbManager);
+					uiCompatibilityTest(organ, dbManager);
 				} else {
 					System.out.println("Organ has NOT been introduced");
 				}
@@ -160,17 +160,11 @@ public class UI_Organ {
 
 	}
 
-	public void organsOfDonor(Donor d, DBManager dbManager) {
+	public void organsOfDonor(Donor d, JPAmanager jpaManager) {
 		try {
-			int idDon = d.getId();
-			List<Organ> organs = dbManager.organsOfDonor(idDon);
-			System.out.println("Donor: " + d.getName() + " donates the following organs: \n");
-			Iterator<Organ> itOrg = organs.iterator();
-			int countOrg = 1;
-			while (itOrg.hasNext()) {
-				Organ o = itOrg.next();
-				System.out.println(countOrg + ". " + o.getName());
-				countOrg++;
+			List<Organ> organs = d.getOrgans();
+			for (Organ organ : organs) {
+				System.out.println(organ);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

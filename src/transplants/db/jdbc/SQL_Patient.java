@@ -187,7 +187,9 @@ public class SQL_Patient {
 				Date doa = Date.valueOf(addString);
 				String lifeExp= rs.getString("lifeExpectancy");
 				Date lifeExpectancy= Date.valueOf(lifeExp);
-				Patient pat = new Patient (id, name, dob, weight, height, gen, patho, bt, doa,lifeExpectancy);
+				Long score= rs.getLong("score");
+				Patient pat = new Patient (id, name, dob, weight, height, gen, patho, bt, doa,lifeExpectancy,score);
+				pat.generateScore();
 				patients.add(pat);
 			}
 			rs.close();

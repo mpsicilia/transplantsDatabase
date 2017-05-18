@@ -50,7 +50,7 @@ public class Patient extends Person implements Serializable {
 		this.pathology = pathology;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
-		this.score= generateScore();
+		this.generateScore();
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
 	}
@@ -61,11 +61,22 @@ public class Patient extends Person implements Serializable {
 //		this.id= id;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
-		this.score= generateScore();
+		this.generateScore();
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
 	}
-	private long generateScore(){
+	
+	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
+			String bloodType, Date additionDate, Date lifeExpectancy, Long score){
+		super(id, name, birthDate,weight,height,gender, bloodType);
+//		this.id= id;
+		this.lifeExpectancy=lifeExpectancy;
+		this.additionDate=additionDate;
+		this.score= score;
+		doctors= new ArrayList<Doctor>();
+		requested_organ=new ArrayList<Requested_organ>();
+	}
+	public void generateScore(){
 		LocalDate localLifeExp= lifeExpectancy.toLocalDate();
 		LocalDate localAdditionDate= additionDate.toLocalDate();
 		LocalDate today= LocalDate.now();
@@ -74,13 +85,15 @@ public class Patient extends Person implements Serializable {
 		long s1= daysLifeExp.toDays();
 		long s2= daysSinceAddition.toDays();
 		long score= s1*9+ s2;
-		return score;
+		this.score = score;
 		
 	}
 	public long getScore(){
 		
-		this.score= generateScore();
 		return score;
+	}
+	public void setScore(long score){
+		this.score= score;
 	}
 	//what about the parent class?? Do we create them in the parent class??
 	public Date getLifeExpectancy() {

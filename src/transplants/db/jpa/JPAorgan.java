@@ -2,7 +2,7 @@ package transplants.db.jpa;
 
 import transplants.db.pojos.Organ;
 
-// RODRIGO: BEGIN
+
 public class JPAorgan {
 
 	private JPAmanager jpaManager;
@@ -43,4 +43,4 @@ public class JPAorgan {
 	}
 
 }
-// RODRIGO: END
+
