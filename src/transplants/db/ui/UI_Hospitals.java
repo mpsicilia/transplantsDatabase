@@ -24,7 +24,7 @@ public class UI_Hospitals {
 	}
 	
 	
-	public void introduceNewHospital(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase database){
+	public void introduceNewHospital(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data){
 		try{
 			System.out.print("Name: ");
 			String name = console.readLine();
@@ -46,11 +46,11 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
-			boolean okDatabase = database.addHospital(hosp);
+		//	boolean okDatabase = database.addHospital(hosp);
 			boolean ok=jpaManager.insert(hosp);
 			//boolean ok=dbManager.insert(hosp);
 			
-			if (ok && okDatabase){
+			if (ok){
 				System.out.print("Hospital has been introduced");
 				
 				
@@ -203,8 +203,8 @@ public class UI_Hospitals {
 			XMLmanager hospXml = new XMLmanager();
 			List <Hospital> hosps = new ArrayList<Hospital>();
 			Iterator<Hospital> hi = hosps.iterator();
-			while (h.hasNext()){
-				h 
+			while (hi.hasNext()){
+				//h 
 			}
 			
 		}catch (Exception e){
