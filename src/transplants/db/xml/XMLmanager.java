@@ -28,7 +28,7 @@ public class XMLmanager {
 		}
 		
 	}
-	//marshalling method!!!!
+	//marshalling method!
 	public boolean javaToXmlHospitals (TransplantDatabase dataHosp){
 		try{
 			return XMLhosp.javaToXmlHospital(marshaller, dataHosp);
