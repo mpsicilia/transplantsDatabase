@@ -127,7 +127,7 @@ public class UIGenericMenu {
 	        	 	break;
 	        	 	
 	        	 	case 2:{	        	 		
-	        	 		System.out.print("\n1. Search a specific hospital. ");
+	        	 		System.out.print("\n1. Check the information of a specific hospital.");
 	        	 		System.out.print("\n2. Check the information of a specific doctor. ");
 	        	 		System.out.print("\n3. Check the information of a specific donor. ");
 	        	 		System.out.print("\n4. Check the information of a specific patient. ");
@@ -403,7 +403,15 @@ public class UIGenericMenu {
 	                    				}
 	                    				
 	                    				break;
+	                    				
 	                    			case 5:
+	                    				System.out.println("Introduce the name of the organ. ");
+	                    				//lo que habia pensado era que tenemos la posibilidad de buscar organos  atraves
+	                    				//de sus donantes/pacientes, pero no tenemos una opcion que los busque directamente
+	                    				//habia pensado pues que en esta opcion se pidiese al ususario que se introdujese 
+	                    				//el organo que desea busacar, y le aparezacan todos los organos con ese nombre
+	                    				//el donante de cada organo, y el paciente que lo recibe?
+	                    				//os parece?
 	                    				break;                    				
 	                    		}
 	                    		break;

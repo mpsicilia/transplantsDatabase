@@ -11,35 +11,37 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement (name = "TransplantDatabase")
-@XmlType (propOrder = {"hospitalsOfDatabase"})
+@XmlRootElement(name = "TransplantDatabase")
+@XmlType(propOrder = { "hospitalsOfDatabase" })
+
 public class TransplantDatabase {
-	@XmlElement (name = "Hospital")
-	@XmlElementWrapper (name = "Hospitals")
+
+	@XmlElement(name = "Hospital")
+	@XmlElementWrapper(name = "Hospitals")
 	private List<Hospital> hospitalsOfDatabase;
-	
-	public TransplantDatabase(){
+
+	public TransplantDatabase() {
 		hospitalsOfDatabase = new ArrayList<Hospital>();
 	}
-	
-	public List<Hospital> getAllHospOFDatabase(){
+
+	public List<Hospital> getAllHospOFDatabase() {
 		return hospitalsOfDatabase;
 	}
-	
-	//Addition of Hospitals
-	public boolean addHospital (Hospital hosp){
-		if(!hospitalsOfDatabase.contains(hosp)){
+
+	// Addition of Hospitals
+	public boolean addHospital(Hospital hosp) {
+		if (!hospitalsOfDatabase.contains(hosp)) {
 			return this.hospitalsOfDatabase.add(hosp);
-		}
-		else return false;
+		} else
+			return false;
 	}
-	
-	//Remove hospital
-	public boolean removeHospital (Hospital hosp){
-		if(!hospitalsOfDatabase.contains(hosp)){
+
+	// Remove hospital
+	public boolean removeHospital(Hospital hosp) {
+		if (!hospitalsOfDatabase.contains(hosp)) {
 			return this.hospitalsOfDatabase.remove(hosp);
-		}
-		else return false;
-	}			
+		} else
+			return false;
+	}
 
 }
