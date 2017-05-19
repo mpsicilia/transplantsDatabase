@@ -9,14 +9,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "doctors")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"nameOfDoctor", "specialization", "registrationNumber", "hospital", "patients"})
+@XmlType(propOrder = {"id", "nameOfDoctor", "specialization", "registrationNumber", "hospital", "patients"})
 public class Doctor implements Serializable{
 
 	private static final long serialVersionUID = -1701687912909197672L;
@@ -24,7 +23,7 @@ public class Doctor implements Serializable{
 	@GeneratedValue(generator="doctors")
 	@TableGenerator(name="doctors", table="sqlite_sequence",
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="doctors")
-	@XmlTransient
+	@XmlAttribute
 	private Integer id;
 	@XmlElement
 	private String registrationNumber;
@@ -32,7 +31,7 @@ public class Doctor implements Serializable{
 	private String specialization;
 	@XmlAttribute
 	private String nameOfDoctor;
-	//no estaba antes el atributo de Hospital ni lista de pacientes
+	
 	@ManyToMany(mappedBy= "doctors") 	
 	private List<Hospital> hospital;
 	@ManyToMany(mappedBy = "doctors")
@@ -126,34 +125,39 @@ public class Doctor implements Serializable{
 	}
 	
 	// Additional method to add to a list
-			public boolean addPatient(Patient patient) {
-				if (!patients.contains(patient)) {
-					return this.patients.add(patient);
-				}
-				else return false;
-			}
-
-			// Additional method to remove from a list
-			public boolean removePatient(Patient patient) {
-				if (patients.contains(patient)) {
-					return this.patients.remove(patient);
-				}
-				else return false;
-			}
-	@Override
-	public String toString() {
-		return "Doctor [id=" + id + ", nameOfDoctor=" + nameOfDoctor + ", registrationNumber=" + registrationNumber + ", "
-				+ "specialization=" + specialization + "]";
+	public boolean addPatient(Patient patient) {
+		if (!patients.contains(patient)) {
+			return this.patients.add(patient);
+		}
+		else return false;
 	}
+
+	// Additional method to remove from a list
+	public boolean removePatient(Patient patient) {
+		if (patients.contains(patient)) {
+			return this.patients.remove(patient);
+		}
+		else return false;
+	}
+	
 	public boolean addHospital(Hospital hospi) {
 		if (!hospital.contains(hospi)) {
 			return this.hospital.add(hospi);
 		}
 		else return false;
 	}
-	//FALTA EL REMOVE NO?????
 	
-	
+	public boolean removeHospital(Hospital hosp) {
+		if (hospital.contains(hosp)) {
+			return this.hospital.remove(hosp);
+		}
+		else return false;
+	}
+	@Override
+	public String toString() {
+		return "Doctor [id=" + id + ", nameOfDoctor=" + nameOfDoctor + ", registrationNumber=" + registrationNumber + ", "
+				+ "specialization=" + specialization + "]";
+	}
 	
 	
 }

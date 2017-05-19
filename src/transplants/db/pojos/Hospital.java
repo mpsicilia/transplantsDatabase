@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.*;
 
 @Entity
 @Table(name = "Hospitals")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"name", "phoneNumber",   "country","city", "address","postcode", "doctors", "patients"}) //idk if its the proper order :S
+@XmlType(propOrder = {"id", "name", "phoneNumber","address", "city", "postcode", "country", "doctors", "patients"}) 
+
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = -2900229453507535621L;
@@ -19,7 +19,7 @@ public class Hospital implements Serializable{
 	@GeneratedValue(generator="Hospitals")
 	@TableGenerator(name="Hospitals", table="sqlite_sequence",
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Hospitals")
-	@XmlTransient
+	@XmlAttribute
 	private Integer id;
 	@XmlAttribute
 	private String name;
