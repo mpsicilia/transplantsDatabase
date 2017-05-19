@@ -173,8 +173,11 @@ public class UI_Hospitals {
 			List<Hospital> hospsToMarshall = data.getAllHospOFDatabase();
 			Iterator<Hospital> itH = hospsToMarshall.iterator();
 			//get the doctors of the hospital and add it to the hospital
+			int counterH = 1;
 			while (itH.hasNext()){
 				Hospital h = itH.next();
+				//print all the hospitals in order to see if all of them are marshalled
+				System.out.println(counterH + ". Hospital: " + h.getName());
 				List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(h.getName()); //create the method in DB
 				Iterator<Doctor> itD = doctorsOfHosp.iterator();
 				
