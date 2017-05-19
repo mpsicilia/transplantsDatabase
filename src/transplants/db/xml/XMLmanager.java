@@ -17,10 +17,16 @@ public class XMLmanager {
 	
 	private XMLHospital XMLhosp = new XMLHospital (this);
 	
-	public XMLmanager () throws JAXBException{
-		jaxb = JAXBContext.newInstance(Hospital.class);
-		marshaller = jaxb.createMarshaller();
-		unmarshaller = jaxb.createUnmarshaller();
+	public XMLmanager (){
+		try{
+			jaxb = JAXBContext.newInstance(Hospital.class);
+			marshaller = jaxb.createMarshaller();
+			unmarshaller = jaxb.createUnmarshaller();
+			
+		}catch(JAXBException ex){
+			ex.printStackTrace();
+		}
+		
 	}
 	//marshalling method
 	public boolean javaToXmlHospitals (TransplantDatabase dataHosp){
