@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +12,6 @@ import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.jpa.JPApatient;
 import transplants.db.pojos.Doctor;
-import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
@@ -30,44 +25,39 @@ public class UI_Patient {
 
 	public Patient introduceNewPatient(JPAmanager jpaManager, DBManager dbmanager) {
 		try {
-			System.out.println("Name: ");
+			System.out.print("Name: ");
 			String name = console.readLine();
 
-			System.out.println("Birth date [yyyy-mm-dd]: ");
+			System.out.print("Birth date [yyyy-mm-dd]: ");
 			String birth = console.readLine();
 			Date birthDate = Date.valueOf(birth);
 
-			System.out.println("Weight: ");
+			System.out.print("Weight (kg): ");
 			Float weight = Float.parseFloat(console.readLine());
 
-			System.out.println("Height: ");
+			System.out.print("Height (cm): ");
 			Float height = Float.parseFloat(console.readLine());
 
-			System.out.println("Gender: ");
+			System.out.print("Gender: ");
 			String gender = console.readLine();
 
-			System.out.println("Pathology: ");
+			System.out.print("Pathology: ");
 			String path = console.readLine();
 
-			System.out.println("Blood type: ");
+			System.out.print("Blood type: ");
 			String bt = console.readLine();
 
-			System.out.println("Date of addition: ");
+			System.out.print("Date of addition [yyyy-mm-dd]: ");
 			String doa = console.readLine();
 			Date addition = Date.valueOf(doa);
 
-			System.out.println("Life expectancy: ");
+			System.out.print("Life expectancy [yyyy-mm-dd]: ");
 			Date life = Date.valueOf(console.readLine());
 
 			Patient p = new Patient(name, birthDate, weight, height, gender, path, bt, addition, life);
 
 			boolean introduced = jpaManager.insert(p);
-
-			if (introduced) {
-				System.out.println("patient introduced");
-			} else {
-				System.out.println("patient not introduced");
-			}
+			
 			// FUNCIONA!!
 			// RELATIONSHIP BETWEEN HOSPITAL AND PATIENT
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
@@ -85,42 +75,37 @@ public class UI_Patient {
 			p.setHospital(hospital);
 			boolean okUpdatepatient = jpaManager.update(p);
 			boolean okUpdatehospital = jpaManager.update(hospital);
-			if (okUpdatepatient && okUpdatehospital) {
-				System.out.println("Patient has been introduced");
-
-			} else {
-				System.out.println("Patient has NOT been introduced");
-			}
 
 			// RELATIONSHIP BETWEEN DOCTOR AND PATIENT
 			//FUNCIONA
-
 			System.out.println("How many doctors are attending the patient?");
+			List<Doctor> docs = dbmanager.selectAllDoctors();
+			Iterator<Doctor> itD = docs.iterator();
+			while (itD.hasNext()) {
+				Doctor d = itD.next();
+				System.out.println(d);
+			}
 			Integer Xtimes = Integer.parseInt(console.readLine());
 			Integer counter = 1;
 			Integer doctId = 0;
 			boolean introduced2 = false;
 
 			Integer patId = jpaManager.getIdpatient(p);
-			System.out.println("ID "+patId);
+			//System.out.println("ID "+patId);
 			do {
-
 				System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
-				List<Doctor> docs = dbmanager.selectAllDoctors();
-				Iterator<Doctor> itD = docs.iterator();
-				while (itD.hasNext()) {
-					Doctor d = itD.next();
-					System.out.println(d);
-				}
 				doctId = Integer.parseInt(console.readLine());
 				introduced2 = dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
 				counter++;
+				//como se podria hacer para que te mostrase los
+					//medicos resultantes??
+				
 			} while (counter <= Xtimes);
 
-			if (introduced && introduced2) {
+			if (introduced && introduced2 && okUpdatepatient && okUpdatehospital) {
 				System.out.println("Patient has been introduced. ");
 			} else {
-				System.out.println("Patient has not been introduced. ");
+				System.out.println("Patient has NOT been introduced. ");
 			}
 
 			return p;
