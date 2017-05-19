@@ -116,20 +116,22 @@ public class JPApatient {
 		return 30;
 	}
 	//NEW
-	public Patient searchPatientbyname(String name){
-		Patient patient = new Patient();
+	public List<Patient> searchPatientbyname(String name){
+		//Patient patient = new Patient();
+		List<Patient> patients=new ArrayList<>();
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			Query q = jpaManager.getEManager()
-					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ?", Patient.class);
+					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ? ", Patient.class);
 			q.setParameter(1, name);
-			patient = (Patient) q.getResultList();
+			patients =  q.getResultList();
 			jpaManager.getEManager().getTransaction().commit();
+			return patients;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return patient;
+		return patients;
 	}
 
 	

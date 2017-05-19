@@ -1,5 +1,6 @@
 package transplants.db.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -356,8 +357,19 @@ public class JPAmanager implements DBManagerInterface {
 		 
 
 	}
-	public Patient searchPatbyname(String name){
-		return pat.searchPatientbyname(name);
+	public List<Patient> searchPatbyname(String name){
+		//Patient patient=new Patient();
+		List<Patient> patients=new ArrayList<>();
+		 try { 
+			 patients=pat.searchPatientbyname(name);
+			 return patients;
+			
+		  } 
+		 catch (Exception e) {
+		  e.printStackTrace(); 
+		  } 
+		
+		return patients;
 	}
 
 	@Override
