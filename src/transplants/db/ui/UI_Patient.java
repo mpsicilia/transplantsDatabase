@@ -93,6 +93,7 @@ public class UI_Patient {
 			}
 
 			// RELATIONSHIP BETWEEN DOCTOR AND PATIENT
+			//FUNCIONA
 
 			System.out.println("How many doctors are attending the patient?");
 			Integer Xtimes = Integer.parseInt(console.readLine());
@@ -229,16 +230,20 @@ public class UI_Patient {
 		}
 	}
 
-	// PROVE THIS METHOD
+
 	public void patientHospitalAndDoctor(String ptName, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
-
+			List<Patient> patients=new ArrayList<>();
+			List<Doctor> patDoctors=new ArrayList<>();
 			String nameOfHosp = jpaManager.hospitalOfPatient(ptName);
-			Patient pat = jpaManager.searchPatbyname(ptName);
-			System.out.println("patient" + pat);
-			// List<Doctor> patDoctors=pat.getDoctors();
-
-			List<Doctor> patDoctors = dbmanager.doctorOfPatient(ptName);
+			patients = jpaManager.searchPatbyname(ptName);
+			Iterator<Patient> it1 = patients.iterator();
+			while(it1.hasNext()){
+				Patient p=it1.next();
+				p.getName();
+				patDoctors = dbmanager.doctorOfPatient(ptName);
+			}
+			
 
 			System.out.println("Patient: " + ptName + ", is admitted in the hospital: " + nameOfHosp
 					+ ". The doctors that take care of him are: \n");
