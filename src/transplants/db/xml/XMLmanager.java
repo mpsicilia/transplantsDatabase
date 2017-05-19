@@ -17,6 +17,7 @@ public class XMLmanager {
 	
 	private XMLHospital XMLhosp = new XMLHospital (this);
 	
+	
 	public XMLmanager (){
 		try{
 			jaxb = JAXBContext.newInstance(Hospital.class);
