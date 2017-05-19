@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 
@@ -80,10 +81,10 @@ public class Patient extends Person implements Serializable {
 		LocalDate localLifeExp= lifeExpectancy.toLocalDate();
 		LocalDate localAdditionDate= additionDate.toLocalDate();
 		LocalDate today= LocalDate.now();
-		Duration daysSinceAddition= Duration.between(today, localAdditionDate);
-		Duration daysLifeExp= Duration.between(localLifeExp, today);
-		long s1= daysLifeExp.toDays();
-		long s2= daysSinceAddition.toDays();
+		Period daysSinceAddition= Period.between(today, localAdditionDate);
+		Period daysLifeExp= Period.between(localLifeExp, today);
+		long s1= daysLifeExp.getDays();
+		long s2= daysSinceAddition.getDays();
 		long score= s1*9+ s2;
 		this.score = score;
 		
