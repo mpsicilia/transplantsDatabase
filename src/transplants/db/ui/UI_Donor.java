@@ -145,7 +145,7 @@ public class UI_Donor {
 			}						
 			boolean donorDeleted = jpaManager.delete(donor);		
 			
-			if(donorDeleted && organsDeleted){
+			if(donorDeleted && (organsDeleted || organsOfDonor.isEmpty())){
 				System.out.println("Donor has been correctly deleted.");
 			}
 			else{

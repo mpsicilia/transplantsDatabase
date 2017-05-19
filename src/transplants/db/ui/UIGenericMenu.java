@@ -325,9 +325,11 @@ public class UIGenericMenu {
             	                    				Organ orgDe = organsOfDon.get(numOrg-1);
             	                    				uiOrgan.deleteOrgan(donOrg, orgDe, jpaManager);
             	                    			break;
+            	                    			case 4:
+            	                    				break;
             	                    		}
                     					}
-                    					System.out.print("\nThis donor hasn't got any organs.");
+                    					System.out.println("\nThis donor hasn't got any organs.");
                     					System.out.println("Do you then want to introduce a new organ? [yes/no]");
                     					if ((console.readLine()).equalsIgnoreCase("yes")){
     	                	 				uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager); 
