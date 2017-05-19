@@ -19,7 +19,7 @@ public class XMLmanager {
 	
 	public XMLmanager (){
 		try{
-			jaxb = JAXBContext.newInstance(Hospital.class);
+			jaxb = JAXBContext.newInstance(TransplantDatabase.class);
 			marshaller = jaxb.createMarshaller();
 			unmarshaller = jaxb.createUnmarshaller();
 			

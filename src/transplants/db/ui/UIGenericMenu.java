@@ -22,6 +22,8 @@ public class UIGenericMenu {
 
 	private BufferedReader console=new BufferedReader (new InputStreamReader (System.in));
    	private Integer option=0;
+   	private TransplantDatabase database = new TransplantDatabase();
+
 	
 	public static void main (String []args){		
 		UIGenericMenu genericMenu= new UIGenericMenu();
@@ -37,7 +39,7 @@ public class UIGenericMenu {
 			UI_Organ uiOrgan= new UI_Organ();
 			UI_AnimalTissue uiAnimalT= new UI_AnimalTissue();
 			UI_RequestedOrgan uiRequested = new UI_RequestedOrgan();
-			TransplantDatabase database = new TransplantDatabase();
+			
 			
 		try{
 				        
