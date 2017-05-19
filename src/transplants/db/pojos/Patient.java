@@ -51,7 +51,7 @@ public class Patient extends Person implements Serializable {
 		this.pathology = pathology;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
-		//this.generateScore();
+		this.generateScore();
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
 	}
