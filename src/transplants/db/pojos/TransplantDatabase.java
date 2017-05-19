@@ -41,7 +41,7 @@ public class TransplantDatabase {
 		if (!hospitalsOfDatabase.contains(hosp)) {
 			return this.hospitalsOfDatabase.remove(hosp);
 		} else
-			return false;
+		return false;
 	}
 
 }
