@@ -79,9 +79,8 @@ public class UI_Patient {
 			}
 			Integer idHosp = Integer.parseInt(console.readLine());
 			Hospital hospital = jpaManager.getHospitalPatient(idHosp);
-
-			// NOW IT CANT WORK BECAUSE OF THE GENERATE SCORE
-
+         
+			//FUNCIONA!!!
 			hospital.addPatient(p);
 			p.setHospital(hospital);
 			boolean okUpdatepatient = jpaManager.update(p);
@@ -94,26 +93,34 @@ public class UI_Patient {
 			}
 
 			// RELATIONSHIP BETWEEN DOCTOR AND PATIENT
-			/*
-			 * System.out.println("How many doctors are attending the patient?"
-			 * ); Integer Xtimes= Integer.parseInt(console.readLine()); Integer
-			 * counter=1; Integer doctId=0; boolean introduced2=false;
-			 * 
-			 * Integer patId=jpaManager.getIdpatient(p); do { System.out.
-			 * println("Introduce the id of the doctor that is going to take care of the patient. "
-			 * ); List <Doctor> docs = dbmanager.selectAllDoctors(); Iterator
-			 * <Doctor> itD = docs.iterator(); while (itD.hasNext()){ Doctor d =
-			 * itD.next(); System.out.println(d); } doctId =
-			 * Integer.parseInt(console.readLine()); introduced2=
-			 * dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
-			 * counter++; }while(counter<=Xtimes);
-			 */
 
-			/*
-			 * if(introduced && introduced2){
-			 * System.out.println("Patient has been introduced. "); } else{
-			 * System.out.println("Patient has not been introduced. "); }
-			 */
+			System.out.println("How many doctors are attending the patient?");
+			Integer Xtimes = Integer.parseInt(console.readLine());
+			Integer counter = 1;
+			Integer doctId = 0;
+			boolean introduced2 = false;
+
+			Integer patId = jpaManager.getIdpatient(p);
+			System.out.println("ID "+patId);
+			do {
+
+				System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
+				List<Doctor> docs = dbmanager.selectAllDoctors();
+				Iterator<Doctor> itD = docs.iterator();
+				while (itD.hasNext()) {
+					Doctor d = itD.next();
+					System.out.println(d);
+				}
+				doctId = Integer.parseInt(console.readLine());
+				introduced2 = dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
+				counter++;
+			} while (counter <= Xtimes);
+
+			if (introduced && introduced2) {
+				System.out.println("Patient has been introduced. ");
+			} else {
+				System.out.println("Patient has not been introduced. ");
+			}
 
 			return p;
 
@@ -225,16 +232,16 @@ public class UI_Patient {
 	// PROVE THIS METHOD
 	public void patientHospitalAndDoctor(String ptName, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
-			//comprobar relacion entre patient y doctor en uipatient
+
 			String nameOfHosp = jpaManager.hospitalOfPatient(ptName);
-			Patient pat=jpaManager.searchPatbyname(ptName);
-			System.out.println("patient"+ pat);
-			//List<Doctor> patDoctors=pat.getDoctors();
-			
+			Patient pat = jpaManager.searchPatbyname(ptName);
+			System.out.println("patient" + pat);
+			// List<Doctor> patDoctors=pat.getDoctors();
+
 			List<Doctor> patDoctors = dbmanager.doctorOfPatient(ptName);
 
 			System.out.println("Patient: " + ptName + ", is admitted in the hospital: " + nameOfHosp
-					+ ". The doctors that take care of him are: \n" );
+					+ ". The doctors that take care of him are: \n");
 			Iterator<Doctor> it = patDoctors.iterator();
 
 			while (it.hasNext()) {
