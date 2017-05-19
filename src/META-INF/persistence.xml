@@ -10,7 +10,7 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
  
 		<!-- Entity Class -->
-		<!-- Rodrigo: Added Person superclass -->
+		<class>transplants.db.pojos.TransplantDatabase</class>
 		<class>transplants.db.pojos.Person</class>
 		<class>transplants.db.pojos.Animal_tissue</class>
 		<class>transplants.db.pojos.Doctor</class>
