@@ -369,8 +369,10 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	@Override
-	public Integer idDonor(Donor d) {
-		return don.getIdOfDonor(d);
+	public Integer idDonor(Donor d) {//por ahora este metodo no lo usamos
+		// TODO Auto-generated method stub
+		// don.getIdOfDonor(d);
+		return null;
 	}
 
 	

@@ -72,7 +72,7 @@ public class JPAdonor {
 		return false;
 	}
 	
-	public Integer getIdOfDonor(Donor don){
+	/*public Integer getIdOfDonor(Donor don){
 		Donor donor= new Donor();
 		try{
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Donors "
@@ -90,7 +90,7 @@ public class JPAdonor {
 			ex.printStackTrace();
 		}
 		return donor.getId();
-	}
+	}*/
 	
 	public Donor getDonorOfOrgan (String name){
 		
