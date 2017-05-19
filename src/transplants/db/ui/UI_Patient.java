@@ -22,137 +22,123 @@ import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
 public class UI_Patient {
-	
-	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
-	
-	public UI_Patient(){		
+
+	BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+
+	public UI_Patient() {
 	}
-	
-	public Patient introduceNewPatient (JPAmanager jpaManager,DBManager dbmanager){
-		try{
+
+	public Patient introduceNewPatient(JPAmanager jpaManager, DBManager dbmanager) {
+		try {
 			System.out.println("Name: ");
 			String name = console.readLine();
-			
+
 			System.out.println("Birth date [yyyy-mm-dd]: ");
 			String birth = console.readLine();
 			Date birthDate = Date.valueOf(birth);
-			
+
 			System.out.println("Weight: ");
 			Float weight = Float.parseFloat(console.readLine());
-			
+
 			System.out.println("Height: ");
-			Float height =Float.parseFloat(console.readLine());
-			
+			Float height = Float.parseFloat(console.readLine());
+
 			System.out.println("Gender: ");
 			String gender = console.readLine();
-			
+
 			System.out.println("Pathology: ");
 			String path = console.readLine();
-			
+
 			System.out.println("Blood type: ");
 			String bt = console.readLine();
-			
+
 			System.out.println("Date of addition: ");
 			String doa = console.readLine();
 			Date addition = Date.valueOf(doa);
-			
+
 			System.out.println("Life expectancy: ");
 			Date life = Date.valueOf(console.readLine());
-			
-			Patient p = new Patient (name, birthDate, weight, height, gender, path, bt, addition, life);
 
-			boolean introduced=jpaManager.insert(p);
-			
-			
-			if(introduced){
-			System.out.println("patient introduced");
-			}
-			else{
+			Patient p = new Patient(name, birthDate, weight, height, gender, path, bt, addition, life);
+
+			boolean introduced = jpaManager.insert(p);
+
+			if (introduced) {
+				System.out.println("patient introduced");
+			} else {
 				System.out.println("patient not introduced");
 			}
-			//FUNCIONA!!
-			//RELATIONSHIP BETWEEN HOSPITAL AND PATIENT
+			// FUNCIONA!!
+			// RELATIONSHIP BETWEEN HOSPITAL AND PATIENT
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
-			List <Hospital>hosps= dbmanager.selectAllHospitals();
-			Iterator <Hospital> itH=hosps.iterator();
-			while (itH.hasNext()){
-				Hospital h=itH.next();
+			List<Hospital> hosps = dbmanager.selectAllHospitals();
+			Iterator<Hospital> itH = hosps.iterator();
+			while (itH.hasNext()) {
+				Hospital h = itH.next();
 				System.out.println(h);
 			}
-			Integer idHosp= Integer.parseInt(console.readLine());
-			Hospital hospital=jpaManager.getHospitalPatient(idHosp);
-			
-	
-			
-			//NOW IT CANT WORK BECAUSE OF THE GENERATE SCORE
-			
+			Integer idHosp = Integer.parseInt(console.readLine());
+			Hospital hospital = jpaManager.getHospitalPatient(idHosp);
+
+			// NOW IT CANT WORK BECAUSE OF THE GENERATE SCORE
+
 			hospital.addPatient(p);
 			p.setHospital(hospital);
 			boolean okUpdatepatient = jpaManager.update(p);
 			boolean okUpdatehospital = jpaManager.update(hospital);
 			if (okUpdatepatient && okUpdatehospital) {
 				System.out.println("Patient has been introduced");
-				
+
 			} else {
 				System.out.println("Patient has NOT been introduced");
 			}
-			
-			
-			//RELATIONSHIP BETWEEN DOCTOR AND PATIENT
-			/*System.out.println("How many doctors are attending the patient?");
-			Integer Xtimes= Integer.parseInt(console.readLine());
-			Integer counter=1;
-			Integer doctId=0;
-			boolean introduced2=false;
-			
-			Integer patId=jpaManager.getIdpatient(p);
-			do {
-				System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
-				List <Doctor> docs = dbmanager.selectAllDoctors();
-				Iterator <Doctor> itD = docs.iterator();
-				while (itD.hasNext()){
-					Doctor d = itD.next();
-					System.out.println(d);
-				}		
-				doctId = Integer.parseInt(console.readLine());
-				introduced2= dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
-				counter++;
-			}while(counter<=Xtimes);*/
-			
-			/*if(introduced && introduced2){
-				System.out.println("Patient has been introduced. ");
-			}
-			else{
-				System.out.println("Patient has not been introduced. ");
-			}*/
-			
-			
+
+			// RELATIONSHIP BETWEEN DOCTOR AND PATIENT
+			/*
+			 * System.out.println("How many doctors are attending the patient?"
+			 * ); Integer Xtimes= Integer.parseInt(console.readLine()); Integer
+			 * counter=1; Integer doctId=0; boolean introduced2=false;
+			 * 
+			 * Integer patId=jpaManager.getIdpatient(p); do { System.out.
+			 * println("Introduce the id of the doctor that is going to take care of the patient. "
+			 * ); List <Doctor> docs = dbmanager.selectAllDoctors(); Iterator
+			 * <Doctor> itD = docs.iterator(); while (itD.hasNext()){ Doctor d =
+			 * itD.next(); System.out.println(d); } doctId =
+			 * Integer.parseInt(console.readLine()); introduced2=
+			 * dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
+			 * counter++; }while(counter<=Xtimes);
+			 */
+
+			/*
+			 * if(introduced && introduced2){
+			 * System.out.println("Patient has been introduced. "); } else{
+			 * System.out.println("Patient has not been introduced. "); }
+			 */
+
 			return p;
-			
-		}catch (IOException ex){
+
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 		return null;
 	}
-	
-	public List<Patient> searchPatient(JPAmanager jpaManager){
-		try{
+
+	public List<Patient> searchPatient(JPAmanager jpaManager) {
+		try {
 			System.out.println("Introduce the name of the patient: ");
-	 		String name = console.readLine();	 	
+			String name = console.readLine();
 			List<Patient> patient = jpaManager.searchPatient(name);
-	 		return patient;
-		}catch (IOException ex){
+			return patient;
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		return null; 
+		return null;
 	}
 
-
-	
-	public void updatePatient(Patient p, JPAmanager jpaManager){
+	public void updatePatient(Patient p, JPAmanager jpaManager) {
 		boolean again = true;
-		try{
-			while(again){
+		try {
+			while (again) {
 				System.out.println("1. Name: ");
 				System.out.println("2. Birth date. ");
 				System.out.println("3. Weight. ");
@@ -164,101 +150,108 @@ public class UI_Patient {
 				System.out.println("9. Life expectancy. ");
 				System.out.println("Choose the information that is going to be updated [1-9]: ");
 				int op = Integer.parseInt(console.readLine());
-				switch (op){
-					case 1:
-						System.out.println("Introduce the new name: ");
-						p.setName(console.readLine());
-						break;
-					case 2:
-						System.out.println("Introduce the new birth date: ");
-						p.setBirthDate(Date.valueOf(console.readLine()));
-						break;
-					case 3:
-						System.out.println("Introduce the new weight: ");
-						p.setWeight(Float.parseFloat(console.readLine()));
-						break;
-					case 4:
-						System.out.println("Introduce the new height: ");
-						p.setHeight(Float.parseFloat(console.readLine()));
-						break;
-					case 5:
-						System.out.println("Introduce the new gender: ");
-						p.setGender(console.readLine());
-						break;
-					case 6:
-						System.out.println("Introduce the new pathology: ");
-						p.setPathology(console.readLine());
-						break;
-					case 7:
-						System.out.println("Introduce the new blood type: ");
-						p.setBloodType(console.readLine());
-						break;
-					case 8:
-						System.out.println("Introduce the new date of addition: ");
-						p.setAdditionDate(Date.valueOf(console.readLine()));
-						break;
-					case 9: 
-						System.out.println("Introduce the new life expectancy: ");
-						p.setLifeExpectancy(Date.valueOf(console.readLine()));
-						break;
+				switch (op) {
+				case 1:
+					System.out.println("Introduce the new name: ");
+					p.setName(console.readLine());
+					break;
+				case 2:
+					System.out.println("Introduce the new birth date: ");
+					p.setBirthDate(Date.valueOf(console.readLine()));
+					break;
+				case 3:
+					System.out.println("Introduce the new weight: ");
+					p.setWeight(Float.parseFloat(console.readLine()));
+					break;
+				case 4:
+					System.out.println("Introduce the new height: ");
+					p.setHeight(Float.parseFloat(console.readLine()));
+					break;
+				case 5:
+					System.out.println("Introduce the new gender: ");
+					p.setGender(console.readLine());
+					break;
+				case 6:
+					System.out.println("Introduce the new pathology: ");
+					p.setPathology(console.readLine());
+					break;
+				case 7:
+					System.out.println("Introduce the new blood type: ");
+					p.setBloodType(console.readLine());
+					break;
+				case 8:
+					System.out.println("Introduce the new date of addition: ");
+					p.setAdditionDate(Date.valueOf(console.readLine()));
+					break;
+				case 9:
+					System.out.println("Introduce the new life expectancy: ");
+					p.setLifeExpectancy(Date.valueOf(console.readLine()));
+					break;
 				}
 				System.out.println("Do you want to update more information? [yes/no]");
-				if((console.readLine()).equals("no")){
-					again =  false;
+				if ((console.readLine()).equals("no")) {
+					again = false;
 				}
 			}
 			boolean updated = jpaManager.update(p);
-			if(updated){
-				System.out.println("Patient has been updated. \n"
-						+ p.toString());
-			}
-			else{
+			if (updated) {
+				System.out.println("Patient has been updated. \n" + p.toString());
+			} else {
 				System.out.println("Patient has NOT been updated. ");
 			}
-		}catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	//PROVE THIS METHOD
-	public void deletePatient (Patient pat, JPAmanager jpaManager,DBManager dbmanager){
-		try{
+
+	// PROVE THIS METHOD
+	public void deletePatient(Patient pat, JPAmanager jpaManager, DBManager dbmanager) {
+		try {
 			boolean deleted = jpaManager.delete(pat);
-			
-			boolean deleted1=dbmanager.deleteallReq(pat.getName());
-			
-			
-	        
-			if(deleted && deleted1){
+
+			boolean deleted1 = dbmanager.deleteallReq(pat.getName());
+
+			if (deleted && deleted1) {
 				System.out.println("Patient has been deleted.");
-			}
-			else{
+			} else {
 				System.out.println("Patient has not been deleted. ");
 			}
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	 
-	//PROVE THIS METHOD
-	public void patientHospitalAndDoctor (String ptName, JPAmanager jpaManager,DBManager dbmanager){
-		try{
-			String nameOfHosp= jpaManager.hospitalOfPatient(ptName);
-			List<Doctor> patDoctors = dbmanager.doctorOfPatient(ptName);
+
+	// PROVE THIS METHOD
+	public void patientHospitalAndDoctor(String ptName, JPAmanager jpaManager, DBManager dbmanager) {
+		try {
+			//comprobar relacion entre patient y doctor en uipatient
+			String nameOfHosp = jpaManager.hospitalOfPatient(ptName);
+			Patient pat=jpaManager.searchPatbyname(ptName);
+			System.out.println("patient"+ pat);
+			//List<Doctor> patDoctors=pat.getDoctors();
 			
-			System.out.println("Patient: " + ptName + ", is admitted in the hospital: " + nameOfHosp + 
-					". The doctors that take care of him are: \n" + patDoctors);
-		}catch (Exception e){
+			List<Doctor> patDoctors = dbmanager.doctorOfPatient(ptName);
+
+			System.out.println("Patient: " + ptName + ", is admitted in the hospital: " + nameOfHosp
+					+ ". The doctors that take care of him are: \n" );
+			Iterator<Doctor> it = patDoctors.iterator();
+
+			while (it.hasNext()) {
+				Doctor d = it.next();
+				System.out.println(d);
+
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public List<Patient> allPatients (JPAmanager jpaManager){
+
+	public List<Patient> allPatients(JPAmanager jpaManager) {
 		List<Patient> patList = new ArrayList<Patient>();
-		try{
+		try {
 			patList = jpaManager.selectAllPatients();
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return patList;

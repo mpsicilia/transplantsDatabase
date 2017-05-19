@@ -115,6 +115,22 @@ public class JPApatient {
 		}
 		return 30;
 	}
+	//NEW
+	public Patient searchPatientbyname(String name){
+		Patient patient = new Patient();
+		try {
+			jpaManager.getEManager().getTransaction().begin();
+			Query q = jpaManager.getEManager()
+					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ?", Patient.class);
+			q.setParameter(1, name);
+			patient = (Patient) q.getResultList();
+			jpaManager.getEManager().getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patient;
+	}
 
 	
 
@@ -125,9 +141,8 @@ public class JPApatient {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
 			jpaManager.getEManager().getTransaction().begin();
-			Query q = jpaManager.getEManager()
-					.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ?", Patient.class);
-			q.setParameter(1, name);
+			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Patients WHERE name LIKE '%" + name + "%'", Patient.class);
+			//q.setParameter(1, name);
 			patients = (List<Patient>) q.getResultList();
 			jpaManager.getEManager().getTransaction().commit();
 

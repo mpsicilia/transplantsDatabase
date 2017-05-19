@@ -235,6 +235,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 	
+	
 	@Override
 	public List<Organ> searchOrgan(String name) {
 		try {

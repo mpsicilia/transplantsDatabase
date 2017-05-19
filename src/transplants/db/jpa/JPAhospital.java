@@ -44,21 +44,21 @@ public class JPAhospital {
 		}
 		return false;
 	}
-	public String hospitalofpatient(String namepat){
-		String namehosp = "";
+	public Hospital hospitalofpatient(String namepat){
+		Hospital hospital=new Hospital();
 		try{
 			jpaManager.getEManager().getTransaction().begin();
-			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT name FROM Hospitals AS Hosp JOIN Patients AS Pat ON Hosp.id=Pat.hospital_id "
-					+ "WHERE Pat.name LIKE ? '" ,Hospital.class);
-			q1.setParameter(1, namepat);
-			namehosp=(String) q1.getSingleResult();
+			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Hospitals AS Hosp JOIN Patients AS Pat ON Hosp.id=Pat.hospital_id"
+					+ " WHERE Pat.name LIKE '" + namepat + "'" ,Hospital.class);
+			//q1.setParameter(1, namepat);
+			hospital=(Hospital) q1.getSingleResult();
 			jpaManager.getEManager().getTransaction().commit();
-			return namehosp;
+			return hospital;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return namehosp;
+		return hospital;
 	}
 	
 	public Hospital getHospitalbyid(Integer idhosp) {

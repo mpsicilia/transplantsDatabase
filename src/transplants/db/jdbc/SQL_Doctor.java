@@ -163,7 +163,7 @@ public class SQL_Doctor {
 		return docsInHosp;
 	}
 
-	public List<Doctor> doctorsAttendingPatient (String patName){//n-n relation
+	public List<Doctor> doctorsAttendingPatient (String patName){
 		List<Doctor> patDoctors = new ArrayList<Doctor>();
 		try{
 			Statement stmt = dbManager.getC().createStatement();

@@ -325,17 +325,18 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	@Override
 	public String hospitalOfPatient(String pName) {
-		String namehosp="";
+		Hospital hospital=new Hospital();
 		try{
-			namehosp=hosp.hospitalofpatient(pName);
 			
-			return namehosp;
+			hospital=hosp.hospitalofpatient(pName);
+			
+			return hospital.getName();
 		
 	}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return namehosp;
+		return hospital.getName();
 		}
 		
   //FOR WHAT DO I USE IT?
@@ -354,6 +355,9 @@ public class JPAmanager implements DBManagerInterface {
 		 return id;
 		 
 
+	}
+	public Patient searchPatbyname(String name){
+		return pat.searchPatientbyname(name);
 	}
 
 	@Override
