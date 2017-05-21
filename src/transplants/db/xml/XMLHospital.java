@@ -12,16 +12,14 @@ import transplants.db.pojos.TransplantDatabase;
 
 public class XMLHospital {
 	
-	private File fileHosp;
 	private XMLmanager xml;
 	
 	public XMLHospital (XMLmanager xmlmanager){
-		fileHosp = new File ("./xmlFiles/Hospitals.xml");
 		this.xml = xmlmanager;
 		
 	}
 	
-	public boolean javaToXmlHospital (Marshaller marsh, TransplantDatabase dataH){
+	public boolean javaToXmlHospital (Marshaller marsh, TransplantDatabase dataH, File fileXML){
 		try{
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 			/*Iterator<Hospital> it = hs.iterator();
@@ -29,7 +27,7 @@ public class XMLHospital {
 				Hospital h = it.next();
 				marsh.marshal(h, fileHosp);
 			}*/
-			marsh.marshal(dataH, fileHosp);
+			marsh.marshal(dataH, fileXML);
 			
 			return true;
 		}catch (Exception ex){
@@ -38,10 +36,10 @@ public class XMLHospital {
 		return false;
 	}
 	
-	public Hospital xmlToJavaHospital (Unmarshaller unmarsh){
+	public Hospital xmlToJavaHospital (Unmarshaller unmarsh, File fileXML){
 		Hospital hosp = new Hospital();
 		try{
-			hosp = (Hospital) unmarsh.unmarshal(fileHosp);
+			hosp = (Hospital) unmarsh.unmarshal(fileXML);
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}

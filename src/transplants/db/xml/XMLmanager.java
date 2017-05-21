@@ -1,5 +1,7 @@
 package transplants.db.xml;
 
+import java.io.File;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -14,12 +16,13 @@ public class XMLmanager {
 	private JAXBContext jaxb;
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;
+	private File xmlFile = new File ("./xmlFiles/TransplantsDatabase.xml");
 	
 	private XMLHospital XMLhosp = new XMLHospital (this);
 	
 	public XMLmanager (){
 		try{
-			jaxb = JAXBContext.newInstance(Hospital.class);
+			jaxb = JAXBContext.newInstance(TransplantDatabase.class);
 			marshaller = jaxb.createMarshaller();
 			unmarshaller = jaxb.createUnmarshaller();
 			
@@ -31,7 +34,7 @@ public class XMLmanager {
 	//marshalling method!
 	public boolean javaToXmlHospitals (TransplantDatabase dataHosp){
 		try{
-			return XMLhosp.javaToXmlHospital(marshaller, dataHosp);
+			return XMLhosp.javaToXmlHospital(marshaller, dataHosp, xmlFile);
 			
 		}catch (Exception e){
 			e.printStackTrace();
@@ -43,7 +46,7 @@ public class XMLmanager {
 	public Hospital unmarshallHospital (){
 		Hospital hospital = new Hospital();
 		try{
-			hospital = XMLhosp.xmlToJavaHospital(unmarshaller);
+			hospital = XMLhosp.xmlToJavaHospital(unmarshaller, xmlFile);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

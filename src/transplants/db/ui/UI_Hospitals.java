@@ -184,7 +184,8 @@ public class UI_Hospitals {
 				while (itD.hasNext()){
 					Doctor d = itD.next();
 					boolean doctorOK = h.addDoctor(d);
-				}			
+				}	
+				counterH++;
 			}
 			
 			XMLmanager hospXml = new XMLmanager();
@@ -201,7 +202,7 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	
+	//incomplete method, first make work marshall method
 	public void xmlToJavaHospital (){//choose the hospi that it's going to be unmarshall
 		try{
 			XMLmanager hospXml = new XMLmanager();
