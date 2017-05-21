@@ -91,8 +91,7 @@ public class UIGenericMenu {
 		    	        	System.out.println("2. Introduce a new doctor. ");
 		    	        	System.out.println("3. Introduce a new donor."); 
 		    	        	System.out.println("4. Introduce a new patient. "); 
-		    	            System.out.println("5. Introduce a new animal tissue in order to be donated. ");
-		    	        	System.out.println("\nChoose an option[1-5]:");
+		    	        	System.out.println("\nChoose an option[1-4]:");
 		                    String read1= console.readLine();
 		                    int option1= Integer.parseInt(read1); 
 		                    
@@ -114,15 +113,22 @@ public class UIGenericMenu {
 		                    	
 		                    case 4:
 		                    	//patient in JPA but requested organ in jdbc
+		                    	//¡¡¡¡HAY QUE BUSCAR MANERA DE LINKEARLOOOOOO!!!!!!
+		                    	//BUSCAR MANERA DE LINKEAR REQUEST CON ANIMAL, SE ME OCURRE CON PACIENTE Y ANIMAL
+		                    	//PERO DE LA OTRA MANERA NO MUCHO. 
+		                    	//INCOMPLETO, HAY QUE ACABARLO
 		                    	Patient p = uiPatient.introduceNewPatient(jpaManager,dbManager);
-		                    	System.out.println("Introduce the organ that the patient needs. ");		                    	
-		                    	uiRequested.introduceNewReqOrgan(p,dbManager,jpaManager);
+		                    	System.out.println("Introduce the organ that the patient needs."
+		                    			+ "Does the patient need collagen or skin transplantation? [yes/no]");
+		                    	String animalT= console.readLine();
+		                    	List <Requested_organ> reqOrg= new ArrayList <>();
+		                    	if(animalT.equalsIgnoreCase("no")){
+		        					reqOrg= uiRequested.introduceNewReqOrgan(p,dbManager,jpaManager);
+		        				}else{
+		        					uiAnimalT.introduceNewAnimalTissue(reqOrg, dbManager, jpaManager);
+		        				}	
 		                    	break;
-		                    	
-		                    case 5:
-		                    	uiAnimalT.introduceNewAnimalTissue(dbManager);
-		                    	break;
-	                    } 
+		                   } 
 	        	 	}
 	        	 	break;
 	        	 	

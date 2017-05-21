@@ -7,8 +7,11 @@ import java.sql.Date;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
+import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Patient;
+import transplants.db.pojos.Requested_organ;
 
 public class UI_AnimalTissue {
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
@@ -16,7 +19,7 @@ public class UI_AnimalTissue {
 	public UI_AnimalTissue(){		
 	}	
 	
-	public void introduceNewAnimalTissue(DBManager dbManager){
+	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager, JPAmanager jpaManager){
 		try{
 			System.out.print("Name of the animal tissue: ");
 			String name = console.readLine();
@@ -32,6 +35,10 @@ public class UI_AnimalTissue {
 			
 			Animal_tissue animalT= new Animal_tissue(name, typeOfTissue, pathology, lifeExpTissue);
 			boolean ok=dbManager.insert(animalT);
+			//get the id of the requested organ.....
+			//FALTA POR HACER LA CONEXION. PRIMERO MIRAR COMO LO VAMOS A LINKEAR Y LUEGO
+			//YA HACEMOS LO QUE FALTE. SEGURAMENTE HAYA QUE QUITAR EL JPA DE ESTE METODO
+			
 			if (ok){
 				System.out.print("The animal tissue has been introduced");
 			}else{

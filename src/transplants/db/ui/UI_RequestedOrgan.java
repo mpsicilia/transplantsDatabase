@@ -20,7 +20,8 @@ public class UI_RequestedOrgan {
 		
 	}
 	
-	public void introduceNewReqOrgan(Patient p, DBManager dbManager, JPAmanager jpam){
+	public List<Requested_organ> introduceNewReqOrgan(Patient p, DBManager dbManager, JPAmanager jpam){
+		List<Requested_organ> reqOrg= new ArrayList<>();
 		try{
 			boolean more = true;//one patient can request many organs so...
 			while (more){
@@ -37,14 +38,13 @@ public class UI_RequestedOrgan {
 				boolean ok=dbManager.insert(reqOrgan);
 				
 				//get the id of the patient
-				//tttt
 				int idPatient =jpam.idPatient(p);
 				
 				//get the id of the  requested organ
-				int idRequested =  dbManager.idRequestedOrgan(reqOrgan);
-				
+				int idRequested =  dbManager.idRequestedOrgan(reqOrgan);				
 				boolean okFK = dbManager.insertFKinRequestedOrgan(idPatient, idRequested);
-				if (ok && okFK){
+				boolean organAdded=reqOrg.add(reqOrgan);
+				if (ok && okFK && organAdded){
 					System.out.print("The request Organ has been introduced.\n");
 				}else{
 					System.out.print("The request Organ has NOT been introduced. \n");
@@ -56,10 +56,12 @@ public class UI_RequestedOrgan {
 				}
 			
 			}
+			return reqOrg;
 			
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
+		return null;
 	}
 	public boolean OrganComingFromDonor(Requested_organ req){
 		//mirariamos si nuestro request esta entre los organos que se van a donar. 
