@@ -365,7 +365,13 @@ public class DBManager implements DBManagerInterface {
 		return id;
 	}
 	public Integer idOfAnimal(Animal_tissue animalTissue){
-		return animalT.getAnimalId(animalTissue);
+		Integer id = 0;
+		try {
+			id = animalT.getAnimalId(animalTissue);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 	@Override
