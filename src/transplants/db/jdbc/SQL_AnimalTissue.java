@@ -110,6 +110,31 @@ public class SQL_AnimalTissue {
 		return false;
 	}
 
+	public Integer getAnimalId(Animal_tissue animalT){
+		Animal_tissue animalToShow= new Animal_tissue();
+		try {
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT id FROM Animal_tissues "
+					+ "WHERE name LIKE '%" + animalT.getName() + "%' AND typeOfTissue"
+					+ " LIKE '" + animalT.getTypeOfTissue()+ "' AND pathology "
+					+ "LIKE '" + animalT.getPathology()+ "' AND lifeExpTissue "
+					+ "LIKE '" + animalT.getLifeExpTissue() + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				animalToShow = new Animal_tissue(id, animalT.getName(),animalT.getTypeOfTissue(),
+						                        animalT.getPathology(), animalT.getLifeExpTissue());
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return animalT.getId();
+		
+	}
 	public void createTable() {
 		try {
 

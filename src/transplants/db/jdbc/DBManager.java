@@ -140,7 +140,6 @@ public class DBManager implements DBManagerInterface {
 
 	@Override
 	public boolean insertPrimaryKeyRequestedAnimal(Integer idRequest, Integer idAnimal) {
-		// falta llamarlo desde el main
 		return animalT.insertRequestedAnimal(idRequest, idAnimal);
 	}
 
@@ -364,6 +363,9 @@ public class DBManager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 		return id;
+	}
+	public Integer idOfAnimal(Animal_tissue animalTissue){
+		return animalT.getAnimalId(animalTissue);
 	}
 
 	@Override

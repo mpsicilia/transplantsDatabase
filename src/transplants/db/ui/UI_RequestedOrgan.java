@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
-import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 

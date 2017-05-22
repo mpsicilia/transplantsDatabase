@@ -7,7 +7,6 @@ import java.sql.Date;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
-import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Requested_organ;
 
@@ -17,15 +16,16 @@ public class UI_AnimalTissue {
 	public UI_AnimalTissue(){		
 	}	
 	
-	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager, JPAmanager jpaManager){
+	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager){
 		try{
-			System.out.print("Name of the animal tissue: ");
+			System.out.print("Name of the animal tissue [skin/collagen]: ");
 			String name = console.readLine();
-
+			
+			//esto no es lo mismo que la de arriba???
 			System.out.print("Type of tissue of the animal: ");
 			String typeOfTissue = console.readLine();
 			
-			System.out.print("Pathology: ");
+			System.out.print("Pathology of the patient: ");
 			String pathology = console.readLine();
 				
 			System.out.print("Time the tissue lasts before the transplant: ");
@@ -33,11 +33,17 @@ public class UI_AnimalTissue {
 			
 			Animal_tissue animalT= new Animal_tissue(name, typeOfTissue, pathology, lifeExpTissue);
 			boolean ok=dbManager.insert(animalT);
-			//get the id of the requested organ.....
-			//FALTA POR HACER LA CONEXION. PRIMERO MIRAR COMO LO VAMOS A LINKEAR Y LUEGO
-			//YA HACEMOS LO QUE FALTE. SEGURAMENTE HAYA QUE QUITAR EL JPA DE ESTE METODO
 			
-			if (ok){
+			Integer idAnimal= dbManager.idOfAnimal(animalT);
+			Integer idRequest= 0;
+			boolean idGotOk= false;
+			
+			for(Requested_organ reqOrgan: reOrg){
+				idRequest= dbManager.idRequestedOrgan(reqOrgan);
+				idGotOk= dbManager.insertPrimaryKeyRequestedAnimal(idRequest, idAnimal);
+			}
+			
+			if (ok && idGotOk){
 				System.out.print("The animal tissue has been introduced");
 			}else{
 				System.out.print("The animal tissue has NOT been introduced");

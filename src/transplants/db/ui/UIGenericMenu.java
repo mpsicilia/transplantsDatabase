@@ -114,20 +114,14 @@ public class UIGenericMenu {
 		                    	break;
 		                    	
 		                    case 4:
-		                    	//patient in JPA but requested organ in jdbc
-		                    	//¡¡¡¡HAY QUE BUSCAR MANERA DE LINKEARLOOOOOO!!!!!!
-		                    	//BUSCAR MANERA DE LINKEAR REQUEST CON ANIMAL, SE ME OCURRE CON PACIENTE Y ANIMAL
-		                    	//PERO DE LA OTRA MANERA NO MUCHO. 
-		                    	//INCOMPLETO, HAY QUE ACABARLO
 		                    	Patient p = uiPatient.introduceNewPatient(jpaManager,dbManager);
-		                    	System.out.println("Introduce the organ that the patient needs."
-		                    			+ "Does the patient need collagen or skin transplantation? [yes/no]");
+		                    	System.out.println("Introduce the organ that the patient needs.");
+		                    	List <Requested_organ> reqOrg= uiRequested.introduceNewReqOrgan(p,dbManager,jpaManager);
+		                    	System.out.println("Did the patient need skin or collagen transplantation? [yes/no]");
 		                    	String animalT= console.readLine();
-		                    	List <Requested_organ> reqOrg= new ArrayList <>();
-		                    	if(animalT.equalsIgnoreCase("no")){
-		        					reqOrg= uiRequested.introduceNewReqOrgan(p,dbManager,jpaManager);
-		        				}else{
-		        					uiAnimalT.introduceNewAnimalTissue(reqOrg, dbManager, jpaManager);
+		                    	if(animalT.equalsIgnoreCase("yes")){
+		                    		System.out.println("Please, introduce the following information in order to compleate the request.");
+		        					uiAnimalT.introduceNewAnimalTissue(reqOrg, dbManager);
 		        				}	
 		                    	break;
 		                   } 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import transplants.db.pojos.Doctor;
-import transplants.db.pojos.Hospital;
 
 public class SQL_Doctor {
 	
