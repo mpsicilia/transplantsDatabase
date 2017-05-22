@@ -6,6 +6,7 @@ import java.util.*;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Organ;
+import transplants.db.pojos.TransplantDatabase;
 
 public class SQL_Hospital {
 
@@ -208,6 +209,20 @@ public class SQL_Hospital {
 		}
 		return false;
 	}
+	
+	public boolean createDatabase (TransplantDatabase database){
+		try{
+			Statement stm = dmanager.getC().createStatement();
+			String sql = "INSERT INTO TransplantDatabase (id, nameOfDatabase) "
+					+ "VALUES (" + database.getIdDatabase() + " , " + database.getNameOfDatabase() + ");";
+			stm.executeUpdate(sql);
+			stm.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	public void createTable() {
 		try {
@@ -219,7 +234,8 @@ public class SQL_Hospital {
 					+ " address  		TEXT	 NOT NULL, " 
 					+ " city 			TEXT,              "
 					+ " postcode		TEXT,              " 
-					+ " country			TEXT     NOT NULL)";
+					+ " country			TEXT     NOT NULL,"
+					+ " database_id 		INTEGER REFERENCES TransplantDatabase(id))";
 			stmt1.executeUpdate(hospitals);
 			stmt1.close();
 
@@ -231,6 +247,14 @@ public class SQL_Hospital {
 			stmt2.executeUpdate(hospitalsDoctors);
 			stmt2.close();
 
+			//database table
+			Statement stmt3 = dmanager.getC().createStatement();
+			String database = "CREATE TABLE TransplantDatabase "
+					+ "(id INTEGER PRIMARY KEY,"
+					+ "nameOfDatabase TEXT)";
+			stmt3.executeUpdate(database);
+			stmt3.close();
+			
 			// initialize primary key
 			Statement stmtSeq1 = dmanager.getC().createStatement();
 			String sqlSeq1 = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Hospitals', 1)";

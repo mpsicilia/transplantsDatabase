@@ -73,6 +73,21 @@ public class UIGenericMenu {
 		        	System.out.println("Tables should be already created");
 		        }
 		        
+		        //database creation
+		        System.out.println("Create database? [yes/no]");
+		        String data = console.readLine();
+		        if(data.equals("yes")){
+		        	boolean createDatabase = dbManager.createDatabase(database);
+		        	if (createDatabase){
+		        		System.out.println("Database has been created. ");
+		        	}
+		        	else{
+		        		System.out.println("Database hasn't been created. ");
+		        	}
+		        }else{
+		        		System.out.println("Database should be already created. ");
+		        }
+		        
 	        while(true){
 	        	System.out.println("\nBASIC MENU: ");
 	        	System.out.println("1. Introduce new information to the database. ");

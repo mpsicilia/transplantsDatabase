@@ -47,11 +47,15 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
-			boolean okDatabase = data.addHospital(hosp);
 			boolean ok=jpaManager.insert(hosp);
 			//boolean ok=dbManager.insert(hosp);
 			
-			if (ok && okDatabase){
+			//Relationship between the database and the hospitals (database values are always the same, the user doesn't choose)
+			boolean okDatabase = data.addHospital(hosp);
+			hosp.setDatabase(data.getIdDatabase());
+			boolean okHospDatabase = jpaManager.update(hosp);
+			
+			if (ok && okDatabase && okHospDatabase){
 				System.out.print("Hospital has been introduced");
 				
 				
