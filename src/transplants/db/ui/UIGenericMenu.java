@@ -108,8 +108,7 @@ public class UIGenericMenu {
 		    	        	System.out.println("2. Introduce a new doctor. ");
 		    	        	System.out.println("3. Introduce a new donor."); 
 		    	        	System.out.println("4. Introduce a new patient. "); 
-		    	            System.out.println("5. Introduce a new animal tissue in order to be donated. ");
-		    	        	System.out.println("\nChoose an option[1-5]:");
+		    	        	System.out.println("\nChoose an option[1-4]:");
 		                    String read1= console.readLine();
 		                    int option1= Integer.parseInt(read1); 
 		                    
@@ -130,16 +129,17 @@ public class UIGenericMenu {
 		                    	break;
 		                    	
 		                    case 4:
-		                    	//patient in JPA but requested organ in jdbc
 		                    	Patient p = uiPatient.introduceNewPatient(jpaManager,dbManager);
-		                    	System.out.println("Introduce the organ that the patient needs. ");		                    	
-		                    	uiRequested.introduceNewReqOrgan(p,dbManager,jpaManager);
+		                    	System.out.println("Introduce the organ that the patient needs.");
+		                    	List <Requested_organ> reqOrg= uiRequested.introduceNewReqOrgan(p,dbManager,jpaManager);
+		                    	System.out.println("Did the patient need skin or collagen transplantation? [yes/no]");
+		                    	String animalT= console.readLine();
+		                    	if(animalT.equalsIgnoreCase("yes")){
+		                    		System.out.println("Please, introduce the following information in order to compleate the request.");
+		        					uiAnimalT.introduceNewAnimalTissue(reqOrg, dbManager);
+		        				}	
 		                    	break;
-		                    	
-		                    case 5:
-		                    	uiAnimalT.introduceNewAnimalTissue(dbManager);
-		                    	break;
-	                    } 
+		                   } 
 	        	 	}
 	        	 	break;
 	        	 	

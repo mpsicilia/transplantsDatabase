@@ -58,8 +58,8 @@ public class UI_Patient {
 
 			boolean introduced = jpaManager.insert(p);
 			
-			// FUNCIONA!!
-			// RELATIONSHIP BETWEEN HOSPITAL AND PATIENT
+			// FALTA:::: -->>>>> PONER QUE PASA SI NO HAY HOSPITALESSSS!!!!!!! LO MISMO CON DOCTORES
+			//HABRA QUE CHEQUEAR PRIMERO ANTES DE METER UN NUEVO PATIENT
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
 			List<Hospital> hosps = dbmanager.selectAllHospitals();
 			Iterator<Hospital> itH = hosps.iterator();
