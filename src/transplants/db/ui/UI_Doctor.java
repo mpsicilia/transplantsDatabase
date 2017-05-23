@@ -54,15 +54,6 @@ public class UI_Doctor {
 
 				count++;
 
-				// TENIENDO EL ID DEL HOSPITAL, BUSCO SU NOMBRE Y UNA VEZ LO
-				// TENGO BUSCO
-				// HOSPITAL CON ESE NOMBRE Y LO GUARDO EN LA LISTA
-				// DE HOSPITALES DEL DOCTOR.
-				// String namehospital =
-				// dbManager.searchHospital(idHospYouChoose);
-				// listHospital = dbManager.searchHosp(namehospital);
-				// doct.setHospital(listHospital);
-
 			} while (count < times);
 				
 			if (ok && ok2) {

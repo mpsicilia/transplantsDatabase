@@ -43,7 +43,8 @@ public class UIGenericMenu {
 			
 		try{
 				        
-		       /*System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
+		      
+		       System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 		        String drop = console.readLine();
 		        if(drop.equalsIgnoreCase("Y")){
 		        	boolean dropped = dbManager.dropTables();
@@ -53,12 +54,8 @@ public class UIGenericMenu {
 		        	else{
 		        		System.out.println("Tables have not been dropped. ");
 		        	}
-		        } */
-		      /* List<Patient> list=uiPatient.allPatients(jpaManager);
-		        for  (Patient patient : list) {
-		        	System.out.println(patient);
-				}
-		        */
+		        } 
+		     
 		        System.out.println("Do you want to create the tables?: [yes/no]");
 		        String decider= console.readLine();
 		        if (decider.equals("yes")){
@@ -73,20 +70,7 @@ public class UIGenericMenu {
 		        	System.out.println("Tables should be already created");
 		        }
 		        
-		        //database creation
-		        System.out.println("Create database? [yes/no]");
-		        String data = console.readLine();
-		        if(data.equals("yes")){
-		        	boolean createDatabase = dbManager.createDatabase(database);
-		        	if (createDatabase){
-		        		System.out.println("Database has been created. ");
-		        	}
-		        	else{
-		        		System.out.println("Database hasn't been created. ");
-		        	}
-		        }else{
-		        		System.out.println("Database should be already created. ");
-		        }
+		       
 		        
 	        while(true){
 	        	System.out.println("\nBASIC MENU: ");
@@ -482,7 +466,7 @@ public class UIGenericMenu {
 	        	 		
 	        	 		switch (opt){
 	        	 		case 1:
-	        	 			uiHospital.javaToXmlHospital(dbManager, database);
+	        	 			//uiHospital.javaToXmlHospital(dbManager, database);
 	        	 			break;
 	        	 		case 2:
 	        	 			

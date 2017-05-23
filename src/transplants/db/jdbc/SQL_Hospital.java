@@ -210,7 +210,7 @@ public class SQL_Hospital {
 		return false;
 	}
 	
-	public boolean createDatabase (TransplantDatabase database){
+	/*public boolean createDatabase (TransplantDatabase database){
 		try{
 			Statement stm = dmanager.getC().createStatement();
 			String sql = "INSERT INTO TransplantDatabase (id, nameOfDatabase) "
@@ -222,7 +222,7 @@ public class SQL_Hospital {
 			e.printStackTrace();
 		}
 		return false;
-	}
+	}*/
 
 	public void createTable() {
 		try {
@@ -234,8 +234,8 @@ public class SQL_Hospital {
 					+ " address  		TEXT	 NOT NULL, " 
 					+ " city 			TEXT,              "
 					+ " postcode		TEXT,              " 
-					+ " country			TEXT     NOT NULL,"
-					+ " database_id 		INTEGER REFERENCES TransplantDatabase(id))";
+					+ " country			TEXT     NOT NULL)";
+			//faltaria añadir la FK de datbase
 			stmt1.executeUpdate(hospitals);
 			stmt1.close();
 
@@ -247,13 +247,13 @@ public class SQL_Hospital {
 			stmt2.executeUpdate(hospitalsDoctors);
 			stmt2.close();
 
-			//database table
+			/*//database table
 			Statement stmt3 = dmanager.getC().createStatement();
 			String database = "CREATE TABLE TransplantDatabase "
 					+ "(id INTEGER PRIMARY KEY,"
 					+ "nameOfDatabase TEXT)";
 			stmt3.executeUpdate(database);
-			stmt3.close();
+			stmt3.close();*/
 			
 			// initialize primary key
 			Statement stmtSeq1 = dmanager.getC().createStatement();

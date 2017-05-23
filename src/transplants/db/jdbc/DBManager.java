@@ -128,10 +128,10 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 	
-	//create database
+	/*//create database
 	public boolean createDatabase (TransplantDatabase td){
 		return hosp.createDatabase(td);
-	}
+	}*/
 
 	// PKs
 	@Override
