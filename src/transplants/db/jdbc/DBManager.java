@@ -13,6 +13,7 @@ import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
+import transplants.db.pojos.TransplantDatabase;
 
 public class DBManager implements DBManagerInterface {
 	private Connection c;
@@ -125,6 +126,11 @@ public class DBManager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	//create database
+	public boolean createDatabase (TransplantDatabase td){
+		return hosp.createDatabase(td);
 	}
 
 	// PKs
