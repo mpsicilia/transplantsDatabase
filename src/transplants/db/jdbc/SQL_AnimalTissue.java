@@ -99,8 +99,8 @@ public class SQL_AnimalTissue {
 	public boolean insertRequestedAnimal(Integer id_requested, Integer id_animal) {
 		try {
 			Statement st = dbManager.getC().createStatement();
-			String sql = "INSERT INTO RequestedOrgan_AnimalTissues (requested_id, animal_id) " + "VALUES ("
-					+ id_requested + ", " + id_animal + ");";
+			String sql = "INSERT INTO RequestedOrgan_AnimalsTissues (requested_id, animal_id) "
+					+ "VALUES (" + id_requested + ", " + id_animal + ");";
 			st.executeUpdate(sql);
 			st.close();
 			return true;
@@ -110,6 +110,31 @@ public class SQL_AnimalTissue {
 		return false;
 	}
 
+	public Integer getAnimalId(Animal_tissue animalT){
+		Animal_tissue animalToShow= new Animal_tissue();
+		try {
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT id FROM Animal_tissues "
+					+ "WHERE name LIKE '%" + animalT.getName() + "%' AND typeOfTissue"
+					+ " LIKE '" + animalT.getTypeOfTissue()+ "' AND pathology "
+					+ "LIKE '" + animalT.getPathology()+ "' AND lifeExpTissue "
+					+ "LIKE '" + animalT.getLifeExpTissue() + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				animalToShow = new Animal_tissue(id, animalT.getName(),animalT.getTypeOfTissue(),
+						                        animalT.getPathology(), animalT.getLifeExpTissue());
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return animalToShow.getId();
+		
+	}
 	public void createTable() {
 		try {
 

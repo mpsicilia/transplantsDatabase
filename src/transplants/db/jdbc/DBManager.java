@@ -13,6 +13,7 @@ import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
+import transplants.db.pojos.TransplantDatabase;
 
 public class DBManager implements DBManagerInterface {
 	private Connection c;
@@ -126,6 +127,11 @@ public class DBManager implements DBManagerInterface {
 		}
 		return false;
 	}
+	
+	//create database
+	public boolean createDatabase (TransplantDatabase td){
+		return hosp.createDatabase(td);
+	}
 
 	// PKs
 	@Override
@@ -140,7 +146,6 @@ public class DBManager implements DBManagerInterface {
 
 	@Override
 	public boolean insertPrimaryKeyRequestedAnimal(Integer idRequest, Integer idAnimal) {
-		// falta llamarlo desde el main
 		return animalT.insertRequestedAnimal(idRequest, idAnimal);
 	}
 
@@ -360,6 +365,15 @@ public class DBManager implements DBManagerInterface {
 		Integer id = 0;
 		try {
 			id = org.getOrganId(o);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	public Integer idOfAnimal(Animal_tissue animalTissue){
+		Integer id = 0;
+		try {
+			id = animalT.getAnimalId(animalTissue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

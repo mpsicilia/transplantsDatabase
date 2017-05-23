@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import transplants.db.pojos.Doctor;
-import transplants.db.pojos.Hospital;
 
 public class SQL_Doctor {
 	
@@ -241,10 +240,10 @@ public class SQL_Doctor {
 			stm1.executeUpdate(drop1);
 			stm1.close();
 			
-			Statement stm2 = dbManager.getC().createStatement();
+			/*Statement stm2 = dbManager.getC().createStatement();
 			String drop2 = "DROP TABLE Doctors_patients";
 			stm2.executeUpdate(drop2);
-			stm2.close();
+			stm2.close();*/
 		}catch (Exception e){
 			e.printStackTrace();
 		}

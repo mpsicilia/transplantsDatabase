@@ -53,6 +53,8 @@ public class Hospital implements Serializable{
 	@XmlElementWrapper (name = "Patients")
 	private List<Patient> patients;
 	
+	private int database;
+	
 	
 	
 	public Hospital (){
@@ -188,8 +190,16 @@ public class Hospital implements Serializable{
 	public void setPatients(List<Patient> patients){
 		this.patients=patients;
 	}
+	
+	public int getDatabase() {
+		return database;
+	}
 
-	// Additional method to add to a list
+	public void setDatabase(int database) {
+		this.database = database;
+	}
+
+		// Additional method to add to a list
 		public boolean addDoctor(Doctor doctor) {
 			if (!doctors.contains(doctor)) {
 				 return this.doctors.add(doctor);

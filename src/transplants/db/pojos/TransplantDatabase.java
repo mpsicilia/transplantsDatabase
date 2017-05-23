@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,6 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
+@Table (name = "TransplantDatabase")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "TransplantDatabase")
 @XmlType(propOrder = { "hospitalsOfDatabase" })
@@ -23,6 +25,7 @@ public class TransplantDatabase {
 	@Id
 	@XmlTransient
 	int idDatabase = 1;
+	String nameOfDatabase = "TransplantDatabase";
 	@XmlElement(name = "Hospital")
 	@XmlElementWrapper(name = "Hospitals")
 	private List<Hospital> hospitalsOfDatabase;
@@ -50,5 +53,23 @@ public class TransplantDatabase {
 		} else
 		return false;
 	}
+
+	public int getIdDatabase() {
+		return idDatabase;
+	}
+
+	public void setIdDatabase(int idDatabase) {
+		this.idDatabase = idDatabase;
+	}
+
+	public String getNameOfDatabase() {
+		return nameOfDatabase;
+	}
+
+	public void setNameOfDatabase(String nameOfDatabase) {
+		this.nameOfDatabase = nameOfDatabase;
+	}
+	
+	
 
 }
