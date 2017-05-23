@@ -226,6 +226,14 @@ public class SQL_Hospital {
 
 	public void createTable() {
 		try {
+			//database table
+			Statement stmt3 = dmanager.getC().createStatement();
+			String database = "CREATE TABLE TransplantDatabase "
+					+ "(id INTEGER PRIMARY KEY,"
+					+ "nameOfDatabase TEXT)";
+			stmt3.executeUpdate(database);
+			stmt3.close();
+			
 			Statement stmt1 = dmanager.getC().createStatement();
 			String hospitals = "CREATE TABLE Hospitals " 
 			        + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
@@ -247,13 +255,7 @@ public class SQL_Hospital {
 			stmt2.executeUpdate(hospitalsDoctors);
 			stmt2.close();
 
-			//database table
-			Statement stmt3 = dmanager.getC().createStatement();
-			String database = "CREATE TABLE TransplantDatabase "
-					+ "(id INTEGER PRIMARY KEY,"
-					+ "nameOfDatabase TEXT)";
-			stmt3.executeUpdate(database);
-			stmt3.close();
+			
 			
 			// initialize primary key
 			Statement stmtSeq1 = dmanager.getC().createStatement();
@@ -277,6 +279,11 @@ public class SQL_Hospital {
 			String drop2 = "DROP TABLE HospitalsDoctors";
 			stm2.executeUpdate(drop2);
 			stm2.close();
+			
+			Statement stm3 = dmanager.getC().createStatement();
+			String drop3 = "DROP TABLE TransplantDatabase";
+			stm3.executeUpdate(drop3);
+			stm3.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

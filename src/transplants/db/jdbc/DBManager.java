@@ -128,7 +128,7 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 	
-	//create database
+	//create database DOESN'T WORK
 	public boolean createDatabase (TransplantDatabase td){
 		return hosp.createDatabase(td);
 	}

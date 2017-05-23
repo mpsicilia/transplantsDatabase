@@ -52,7 +52,7 @@ public class UI_Hospitals {
 			
 			//Relationship between the database and the hospitals (database values are always the same, the user doesn't choose)
 			boolean okDatabase = data.addHospital(hosp);
-			hosp.setDatabase(data.getIdDatabase());
+			hosp.setDatabase(data);
 			boolean okHospDatabase = jpaManager.update(hosp);
 			
 			if (ok && okDatabase && okHospDatabase){

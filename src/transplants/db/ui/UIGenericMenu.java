@@ -22,7 +22,7 @@ public class UIGenericMenu {
 
 	private BufferedReader console=new BufferedReader (new InputStreamReader (System.in));
    	private Integer option=0;
-   	private TransplantDatabase database = new TransplantDatabase();
+   	private TransplantDatabase database = new TransplantDatabase(1, "TransplantDatabase");
 
 	
 	public static void main (String []args){		
@@ -43,7 +43,7 @@ public class UIGenericMenu {
 			
 		try{
 				        
-		       /*System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
+		       System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 		        String drop = console.readLine();
 		        if(drop.equalsIgnoreCase("Y")){
 		        	boolean dropped = dbManager.dropTables();
@@ -53,7 +53,7 @@ public class UIGenericMenu {
 		        	else{
 		        		System.out.println("Tables have not been dropped. ");
 		        	}
-		        } */
+		        }
 		      /* List<Patient> list=uiPatient.allPatients(jpaManager);
 		        for  (Patient patient : list) {
 		        	System.out.println(patient);
@@ -77,7 +77,8 @@ public class UIGenericMenu {
 		        System.out.println("Create database? [yes/no]");
 		        String data = console.readLine();
 		        if(data.equals("yes")){
-		        	boolean createDatabase = dbManager.createDatabase(database);
+		        	boolean createDatabase = jpaManager.createDatabase(database);
+		        	//boolean createDatabase = dbManager.createDatabase(database);
 		        	if (createDatabase){
 		        		System.out.println("Database has been created. ");
 		        	}
