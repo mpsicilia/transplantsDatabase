@@ -43,6 +43,10 @@ public class UIGenericMenu {
 			
 		try{
 				        
+<<<<<<< HEAD
+=======
+		      
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		       System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 		        String drop = console.readLine();
 		        if(drop.equalsIgnoreCase("Y")){
@@ -53,12 +57,17 @@ public class UIGenericMenu {
 		        	else{
 		        		System.out.println("Tables have not been dropped. ");
 		        	}
+<<<<<<< HEAD
 		        }
 		      /* List<Patient> list=uiPatient.allPatients(jpaManager);
 		        for  (Patient patient : list) {
 		        	System.out.println(patient);
 				}
 		        */
+=======
+		        } 
+		     
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		        System.out.println("Do you want to create the tables?: [yes/no]");
 		        String decider= console.readLine();
 		        if (decider.equals("yes")){
@@ -73,6 +82,7 @@ public class UIGenericMenu {
 		        	System.out.println("Tables should be already created");
 		        }
 		        
+<<<<<<< HEAD
 		        //database creation
 		        System.out.println("Create database? [yes/no]");
 		        String data = console.readLine();
@@ -88,6 +98,9 @@ public class UIGenericMenu {
 		        }else{
 		        		System.out.println("Database should be already created. ");
 		        }
+=======
+		       
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		        
 	        while(true){
 	        	System.out.println("\nBASIC MENU: ");
@@ -298,61 +311,63 @@ public class UIGenericMenu {
 	                    		int opDonor = Integer.parseInt(optDonor);
 	                    		int numDon = 0;
 	                    		switch (opDonor){
-                    			case 1:
-                    				System.out.println("Introduce the number of the donor: ");
-                    				numDon = Integer.parseInt(console.readLine());
-                    				Donor donUp = donor.get(numDon-1);
-                    				uiDonor.updateDonor(donUp, jpaManager);
-                    				break;
-                    			case 2:
-                    				System.out.println("Introduce the number of the donor: ");
-                    				numDon = Integer.parseInt(console.readLine());
-                    				Donor donDel = donor.get(numDon-1);
-                    				uiDonor.deleteDonor(donDel, jpaManager);
-                    				
-                    				break;
-                    			case 3:
-                    				System.out.println("Introduce the number of the donor: ");
-                    				numDon = Integer.parseInt(console.readLine());
-                    				Donor donOrg = donor.get(numDon-1);
-                    				List <Organ> organsOfDon= uiOrgan.organsOfDonor(donOrg, jpaManager);
-                    					if (organsOfDon!=null){
-                    						System.out.print("\nRELATED WITH THE ORGANS:");
-                    						System.out.print("\n1.Introduce a new organ for donating.");
-                    						System.out.print("\n2.Update information of an organ");
-                    						System.out.print("\n3.Delete an organ");
-                    						System.out.print("\nChoose an option[1-3]:");
-            	                    		String optOrgan = console.readLine();
-            	                    		int opOrgan = Integer.parseInt(optOrgan);
-            	                    		int numOrg = 0;
-            	                    		switch(opOrgan){
-            	                    			case 1:
-            	                    				uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager); 
-            	                    			break;
-            	                    				
-            	                    			case 2: 
-            	                    				System.out.println("Introduce the number of the organ: ");                 
-            	                    				numOrg = Integer.parseInt(console.readLine());
-            	                    				Organ orgUp = organsOfDon.get(numOrg-1);
-            	                    				uiOrgan.updateOrgan(orgUp, dbManager); 
-            	                    			break;
-            	                    			
-            	                    			case 3:
-            	                    				System.out.println("Introduce the number of the organ: ");
-            	                    				numOrg = Integer.parseInt(console.readLine());
-            	                    				Organ orgDe = organsOfDon.get(numOrg-1);
-            	                    				uiOrgan.deleteOrgan(donOrg, orgDe, jpaManager);
-            	                    			break;
-            	                    			case 4:
-            	                    				break;
-            	                    		}
-                    					}
-                    					System.out.println("\nThis donor hasn't got any organs.");
-                    					System.out.println("Do you then want to introduce a new organ? [yes/no]");
-                    					if ((console.readLine()).equalsIgnoreCase("yes")){
-    	                	 				uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager); 
-    	                	 				break;
-    	                	 			}
+	                    			case 1:
+	                    				System.out.println("Introduce the number of the donor: ");
+	                    				numDon = Integer.parseInt(console.readLine());
+	                    				Donor donUp = donor.get(numDon-1);
+	                    				uiDonor.updateDonor(donUp, jpaManager);
+	                    				break;
+	                    				
+	                    			case 2:
+	                    				System.out.println("Introduce the number of the donor: ");
+	                    				numDon = Integer.parseInt(console.readLine());
+	                    				Donor donDel = donor.get(numDon-1);
+	                    				uiDonor.deleteDonor(donDel, jpaManager);
+	                    				break;
+	                    				
+	                    			case 3:
+	                    				System.out.println("Introduce the number of the donor: ");
+	                    				numDon = Integer.parseInt(console.readLine());
+	                    				Donor donOrg = donor.get(numDon-1);
+	                    				List <Organ> organsOfDon= uiOrgan.organsOfDonor(donOrg, jpaManager);
+	                    					if (organsOfDon!=null){
+	                    						System.out.print("\nRELATED WITH THE ORGANS:");
+	                    						System.out.print("\n1.Introduce a new organ for donating.");
+	                    						System.out.print("\n2.Update information of an organ");
+	                    						System.out.print("\n3.Delete an organ. ");
+	                    						System.out.print("\n4.Go back to menu.");
+	                    						System.out.print("\nChoose an option[1-3]:");
+	            	                    		String optOrgan = console.readLine();
+	            	                    		int opOrgan = Integer.parseInt(optOrgan);
+	            	                    		int numOrg = 0;
+	            	                    		switch(opOrgan){
+	            	                    			case 1:
+	            	                    				uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager); 
+	            	                    			break;
+	            	                    				
+	            	                    			case 2: 
+	            	                    				System.out.println("Introduce the number of the organ: ");                 
+	            	                    				numOrg = Integer.parseInt(console.readLine());
+	            	                    				Organ orgUp = organsOfDon.get(numOrg-1);
+	            	                    				uiOrgan.updateOrgan(orgUp, dbManager); 
+	            	                    			break;
+	            	                    			
+	            	                    			case 3:
+	            	                    				System.out.println("Introduce the number of the organ: ");
+	            	                    				numOrg = Integer.parseInt(console.readLine());
+	            	                    				Organ orgDe = organsOfDon.get(numOrg-1);
+	            	                    				uiOrgan.deleteOrgan(donOrg, orgDe, jpaManager);
+	            	                    			break;
+	            	                    			case 4:
+	            	                    				break;
+	            	                    		}
+	                    					}
+	                    					System.out.println("\nThis donor hasn't got any organs.");
+	                    					System.out.println("Do you then want to introduce a new organ? [yes/no]");
+	                    					if ((console.readLine()).equalsIgnoreCase("yes")){
+	    	                	 				uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager); 
+	    	                	 				break;
+	    	                	 			}
                     				break;
                     			case 4:
                     				break;                    				
@@ -381,7 +396,7 @@ public class UIGenericMenu {
 	                    		System.out.print("\n1. Update information.");
 	                    		System.out.print("\n2. Delete information.");
 	                    		System.out.print("\n3. See where the patient is hospitalised and the doctors that treat him. ");
-	                    		System.out.print("\n4. Check the characteristics of the requested organ. ");
+	                    		System.out.print("\n4. See the organ/s that the patient needs. ");
 	                    		System.out.print("\n5. Go back to the menu. ");
 	                    		System.out.print("\nChoose an option[1-5]:");
 	                    		String optP = console.readLine();
@@ -408,8 +423,8 @@ public class UIGenericMenu {
 	                    			case 4:
 	                    				System.out.println("Introduce the number of the patient: ");
 	                    				int numPat4 = Integer.parseInt(console.readLine());
-	                    				//metodo al que le pasas el id paciente y te muestra las caracteristicas del organo que necesita el paciente
 	                    				Patient patReq = pat.get(numPat4-1);
+	                    				//TODO mirar como esta gecho donor, se puede hacer más simple
 	                    				List<Requested_organ> reqs = uiRequested.characteristicsOfRequestedOrgans(patReq.getId(), dbManager);
 	                    				System.out.println("Patient: " + patReq.getName() + " needs the following organs: \n");
 	                    				Iterator <Requested_organ> itReq = reqs.iterator();
@@ -419,21 +434,54 @@ public class UIGenericMenu {
 	                    					System.out.println(countReq + ". " + r);
 	                    					countReq++;
 	                    				}
-	                    				
-	                    				break;
-	                    				
-	                    			case 5:
-	                    				System.out.println("Introduce the name of the organ. ");
-	                    				//lo que habia pensado era que tenemos la posibilidad de buscar organos  atraves
-	                    				//de sus donantes/pacientes, pero no tenemos una opcion que los busque directamente
-	                    				//habia pensado pues que en esta opcion se pidiese al ususario que se introdujese 
-	                    				//el organo que desea busacar, y le aparezacan todos los organos con ese nombre
-	                    				//el donante de cada organo, y el paciente que lo recibe?
-	                    				//os parece?
-	                    				break;                    				
-	                    		}
-	                    		break;
+	                    				if (reqs!=null){
+                    						System.out.print("\nRELATED WITH THE ORGANS:");
+                    						System.out.print("\n1.Introduce a new request.");
+                    						System.out.print("\n2.Update information of requested organ.");
+                    						System.out.print("\n3.Delete an request. ");
+                    						System.out.print("\n4.Go back to menu.");
+                    						System.out.print("\nChoose an option[1-4]:");
+            	                    		String optReq = console.readLine();
+            	                    		int opOrgan = Integer.parseInt(optReq);
+            	                    		int numOrg = 0;
+            	                    		switch(opOrgan){
+            	                    			case 1:
+            	                    				uiRequested.introduceNewReqOrgan(patReq, dbManager, jpaManager);  
+            	                    				//TODO ver si es de animal....
+            	                    			break;
+            	                    				
+            	                    			case 2: 
+            	                    				System.out.println("Introduce the number of the organ: ");                 
+            	                    				numOrg = Integer.parseInt(console.readLine());
+            	                    				Requested_organ orgUp = reqs.get(numOrg-1);
+            	                    				uiRequested.updateReqOrgan(orgUp, dbManager);  
+            	                    				//TODO Podriamos ponerle que despues de que haya actualizo la info se la muestre 
+            	                    				//al usuario y que aqui le diga si le ha tocado organo de animal o de persona???
+            	                    			break;
+            	                    			
+            	                    			case 3:
+            	                    				System.out.println("Introduce the number of the organ: ");
+            	                    				numOrg = Integer.parseInt(console.readLine());
+            	                    				Requested_organ orgDe = reqs.get(numOrg-1);
+            	                    				uiRequested.deleteRequestOrgan(orgDe, dbManager); 
+            	                    			break;
+            	                    			case 4:
+            	                    				break;
+            	                    		}
+                    					}
+	                    		}	                	 		
 	                	 	}
+
+	                    	break;
+	                    	case 5:
+                				System.out.println("Introduce the name of the organ. ");
+                				//TODO lo que habia pensado era que tenemos la posibilidad de buscar organos  atraves
+                				//de sus donantes/pacientes, pero no tenemos una opcion que los busque directamente
+                				//habia pensado pues que en esta opcion se pidiese al ususario que se introdujese 
+                				//el organo que desea busacar, y le aparezacan todos los organos con ese nombre
+                				//el donante de cada organo, y el paciente que lo recibe?
+                				//os parece?
+                				 
 	                    	break;
 	                    }	        	 		
 	        	 	}
@@ -448,7 +496,7 @@ public class UIGenericMenu {
 	        	 		
 	        	 		switch (opt){
 	        	 		case 1:
-	        	 			uiHospital.javaToXmlHospital(dbManager, database);
+	        	 			//uiHospital.javaToXmlHospital(dbManager, database);
 	        	 			break;
 	        	 		case 2:
 	        	 			
