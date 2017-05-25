@@ -47,9 +47,18 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
-			boolean ok=jpaManager.insert(hosp);			
-
+			boolean ok=jpaManager.insert(hosp);
+			//boolean ok=dbManager.insert(hosp);
+			
+			//Relationship between the database and the hospitals (database values are always the same, the user doesn't choose)
+//
 			boolean okDatabase = data.addHospital(hosp);
+//			hosp.setDatabase(data);
+//			boolean okHospDatabase = jpaManager.update(hosp);
+//			boolean okUpdateDatabase = jpaManager.update(data);
+
+			
+//			if (ok && okDatabase && okHospDatabase && okUpdateDatabase){
 				if (ok && okDatabase){
 
 				System.out.print("Hospital has been introduced");
@@ -166,7 +175,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	public void javaToXmlDatabase (DBManager dbManager, TransplantDatabase data){
+	public void javaToXmlHospital (DBManager dbManager, TransplantDatabase data){
 		try{
 			
 			//Get all the hospitals to marshall
@@ -186,11 +195,10 @@ public class UI_Hospitals {
 					boolean doctorOK = h.addDoctor(d);
 				}	
 				counterH++;
-				///patients inside doctor?????? do it? if i have time
 			}
 			
 			XMLmanager hospXml = new XMLmanager();
-			boolean xmlOK = hospXml.marshalDatabase(data);
+			boolean xmlOK = hospXml.javaToXmlHospitals(data);
 			
 			if(xmlOK){
 				System.out.println("Xml of hospital created. ");
@@ -203,27 +211,14 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	
-	public void xmlToJavaDatabase (TransplantDatabase database, DBManager dbManager){
+	//incomplete method, first make work marshall method
+	public void xmlToJavaHospital (){//choose the hospi that it's going to be unmarshall
 		try{
-			XMLmanager unmarshalXML = new XMLmanager();
-			TransplantDatabase dataUnmarshalled = unmarshalXML.unmarshalDatabase(database);
-			//update the information for the xml in the tables
-			//I do the updates with JDBC because they don't function with JPA the way I want them to function
-			List<Hospital> hospsUnmarsh = dataUnmarshalled.getAllHospOFDatabase();
-			for (Hospital h: hospsUnmarsh){
-				List<Doctor> docsUnmarsh = h.getDoctors();
-				for (Doctor d: docsUnmarsh){
-					boolean updatedDoctor = dbManager.update(d);
-					if (updatedDoctor){
-						System.out.println("Doctor " + d.getNameOfDoctor() + " updated.");
-					}
-				}
-				boolean updatedHospital = dbManager.update(h);
-				if(updatedHospital){
-					System.out.println("Hospital " + h.getName() + " updated.");
-				}
-				
+			XMLmanager hospXml = new XMLmanager();
+			List <Hospital> hosps = new ArrayList<Hospital>();
+			Iterator<Hospital> hi = hosps.iterator();
+			while (hi.hasNext()){
+				//h 
 			}
 			
 		}catch (Exception e){

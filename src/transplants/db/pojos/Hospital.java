@@ -49,6 +49,8 @@ public class Hospital implements Serializable{
 	private List<Doctor> doctors;
 	//in the case of patients we have one to many because 1 hospital can host many patients
 	@OneToMany(mappedBy="hospital")
+	@XmlElement (name = "Patient")
+	@XmlElementWrapper (name = "Patients")
 	private List<Patient> patients;
 	
 	
