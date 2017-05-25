@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TransplantDatabase nameOfDatabase="TransplantDatabase">
-    <Hospitals/>
+    <Hospitals>
+        <Hospital id="2" name="cuchh">
+            <phoneNumber>09</phoneNumber>
+            <address>monteprincipe</address>
+            <City>boadilla</City>
+            <postcode>4923</postcode>
+            <Country>spain</Country>
+            <Doctors>
+                <Doctor id="2" nameOfDoctor="rafa">
+                    <specialization>cardio</specialization>
+                    <registrationNumber>3245948</registrationNumber>
+                </Doctor>
+                <Doctor id="3" nameOfDoctor="abraham">
+                    <specialization>traumatology</specialization>
+                    <registrationNumber>9087</registrationNumber>
+                </Doctor>
+            </Doctors>
+        </Hospital>
+        <Hospital id="3" name="boadillalovers">
+            <phoneNumber>349</phoneNumber>
+            <address>bbt</address>
+            <City>ny</City>
+            <postcode>248</postcode>
+            <Country>usa</Country>
+            <Doctors>
+                <Doctor id="3" nameOfDoctor="abraham">
+                    <specialization>traumatology</specialization>
+                    <registrationNumber>9087</registrationNumber>
+                </Doctor>
+            </Doctors>
+        </Hospital>
+    </Hospitals>
 </TransplantDatabase>

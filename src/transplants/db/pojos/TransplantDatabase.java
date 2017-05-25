@@ -63,6 +63,4 @@ public class TransplantDatabase implements Serializable {
 		this.nameOfDatabase = nameOfDatabase;
 	}
 	
-	
-
 }
