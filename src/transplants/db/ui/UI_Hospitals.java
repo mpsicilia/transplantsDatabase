@@ -198,7 +198,7 @@ public class UI_Hospitals {
 			}
 			
 			XMLmanager hospXml = new XMLmanager();
-			boolean xmlOK = hospXml.javaToXmlHospitals(data);
+			boolean xmlOK = hospXml.marshalDatabase(data);
 			
 			if(xmlOK){
 				System.out.println("Xml of hospital created. ");
@@ -211,28 +211,25 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-
-
-	public void xmlToJavaDatabase(TransplantDatabase database, DBManager dbManager){
+	
+	public void xmlToJavaDatabase (DBManager dbManager, TransplantDatabase dataUnmarsh){
 		try{
-		XMLmanager unmarshalXML = new XMLmanager();
-			TransplantDatabase dataUnmarshalled = unmarshalXML.unmarshalDatabase(database);		
-			//update the information for the xml in the tables
-			//I do the updates with JDBC because they don't function with JPA the way I want them to function
-			List<Hospital> hospsUnmarsh = dataUnmarshalled.getAllHospOFDatabase();
-			for (Hospital h: hospsUnmarsh){
+			XMLmanager dataXml = new XMLmanager();
+			dataUnmarsh  = dataXml.unmarshalDatabase(dataUnmarsh);
+			//update everything on the tables, update with jdbc bc it doesn't function with jpa
+			List<Hospital> hospUnmarsh = dataUnmarsh.getAllHospOFDatabase();
+			for(Hospital h: hospUnmarsh){
 				List<Doctor> docsUnmarsh = h.getDoctors();
 				for (Doctor d: docsUnmarsh){
-					boolean updatedDoctor = dbManager.update(d);
-					if (updatedDoctor){
+					boolean docUpdate = dbManager.update(d);
+					if(docUpdate){
 						System.out.println("Doctor " + d.getNameOfDoctor() + " updated.");
 					}
 				}
-				boolean updatedHospital = dbManager.update(h);
-				if(updatedHospital){
+				boolean hospUpdate = dbManager.update(h);
+				if(hospUpdate){
 					System.out.println("Hospital " + h.getName() + " updated.");
 				}
-				
 			}
 		}catch (Exception e){
 			e.printStackTrace();
