@@ -53,7 +53,9 @@ public class Hospital implements Serializable{
 	@XmlElementWrapper (name = "Patients")
 	private List<Patient> patients;
 	
-	private int database;
+	@ManyToOne (fetch = FetchType.LAZY)
+	@JoinColumn (name = "database_id")
+	private TransplantDatabase database;
 	
 	
 	
@@ -191,11 +193,11 @@ public class Hospital implements Serializable{
 		this.patients=patients;
 	}
 	
-	public int getDatabase() {
+	public TransplantDatabase getDatabase() {
 		return database;
 	}
 
-	public void setDatabase(int database) {
+	public void setDatabase(TransplantDatabase database) {
 		this.database = database;
 	}
 

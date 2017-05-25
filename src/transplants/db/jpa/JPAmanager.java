@@ -14,6 +14,7 @@ import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
+import transplants.db.pojos.TransplantDatabase;
 
 public class JPAmanager implements DBManagerInterface {
 
@@ -99,6 +100,16 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public boolean dropTables() {
 		// DONE IN JDBC
+		return false;
+	}
+	
+	//create database, it doesn't work with JDBC, let's prove with JPA
+	public boolean createDatabase (TransplantDatabase datab){
+		try{
+			return hosp.databaseCreation(datab);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		return false;
 	}
 	

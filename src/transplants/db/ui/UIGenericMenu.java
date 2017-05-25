@@ -22,7 +22,7 @@ public class UIGenericMenu {
 
 	private BufferedReader console=new BufferedReader (new InputStreamReader (System.in));
    	private Integer option=0;
-   	private TransplantDatabase database = new TransplantDatabase();
+   	private TransplantDatabase database = new TransplantDatabase(1, "TransplantDatabase");
 
 	
 	public static void main (String []args){		
@@ -43,7 +43,7 @@ public class UIGenericMenu {
 			
 		try{
 				        
-		      
+
 		       System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 		        String drop = console.readLine();
 		        if(drop.equalsIgnoreCase("Y")){
@@ -54,8 +54,7 @@ public class UIGenericMenu {
 		        	else{
 		        		System.out.println("Tables have not been dropped. ");
 		        	}
-		        } 
-		     
+
 		        System.out.println("Do you want to create the tables?: [yes/no]");
 		        String decider= console.readLine();
 		        if (decider.equals("yes")){
@@ -70,7 +69,23 @@ public class UIGenericMenu {
 		        	System.out.println("Tables should be already created");
 		        }
 		        
-		       
+
+		        //database creation
+		        System.out.println("Create database? [yes/no]");
+		        String data = console.readLine();
+		        if(data.equals("yes")){
+		        	boolean createDatabase = jpaManager.createDatabase(database);
+		        	//boolean createDatabase = dbManager.createDatabase(database);
+		        	if (createDatabase){
+		        		System.out.println("Database has been created. ");
+		        	}
+		        	else{
+		        		System.out.println("Database hasn't been created. ");
+		        	}
+		        }else{
+		        		System.out.println("Database should be already created. ");
+		        }
+
 		        
 	        while(true){
 	        	System.out.println("\nBASIC MENU: ");
@@ -394,7 +409,7 @@ public class UIGenericMenu {
 	                    				System.out.println("Introduce the number of the patient: ");
 	                    				int numPat4 = Integer.parseInt(console.readLine());
 	                    				Patient patReq = pat.get(numPat4-1);
-	                    				//TODO mirar como esta gecho donor, se puede hacer más simple
+	                    				//TODO mirar como esta gecho donor, se puede hacer mï¿½s simple
 	                    				List<Requested_organ> reqs = uiRequested.characteristicsOfRequestedOrgans(patReq.getId(), dbManager);
 	                    				System.out.println("Patient: " + patReq.getName() + " needs the following organs: \n");
 	                    				Iterator <Requested_organ> itReq = reqs.iterator();
@@ -481,11 +496,12 @@ public class UIGenericMenu {
 	        	 }
 	        
 	        }
-		}catch(IOException ex){
+		        }}
+		   catch(IOException ex){
 			ex.printStackTrace();
 		}
 	
 
-}
+		}}
 	
-	}
+	
