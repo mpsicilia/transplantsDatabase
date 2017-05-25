@@ -44,6 +44,7 @@ public class UIGenericMenu {
 		try{
 				        
 
+			/*
 		       System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 		        String drop = console.readLine();
 		        if(drop.equalsIgnoreCase("Y")){
@@ -85,7 +86,7 @@ public class UIGenericMenu {
 		        	}
 		        }else{
 		        		System.out.println("Database should be already created. ");
-		        }
+		        }*/
 
 		        
 	        while(true){
@@ -482,7 +483,7 @@ public class UIGenericMenu {
 	        	 		
 	        	 		switch (opt){
 	        	 		case 1:
-	        	 			//uiHospital.javaToXmlHospital(dbManager, database);
+	        	 			uiHospital.javaToXmlHospital(dbManager, database);
 	        	 			break;
 	        	 		case 2:
 	        	 			
