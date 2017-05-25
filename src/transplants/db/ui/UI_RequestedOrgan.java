@@ -124,8 +124,9 @@ public class UI_RequestedOrgan {
 			
 			boolean updated = dbManager.update(reqOrgan);
 			if(updated){
-				System.out.println("Request Organ has been updated. \n"
+				System.out.println("Request Organ has been updated and it comes from . \n"
 						+ reqOrgan.toString());//see the toString
+				System.out.println();
 			}
 			else{
 				System.out.println(" Request Organ has NOT been updated. ");
