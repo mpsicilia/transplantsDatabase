@@ -18,11 +18,10 @@ public class UI_AnimalTissue {
 	
 	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager){
 		try{
-			System.out.print("Name of the animal tissue [skin/collagen]: ");
+			System.out.print("Name of the animal where the tissue come from: ");
 			String name = console.readLine();
 			
-			//esto no es lo mismo que la de arriba???
-			System.out.print("Type of tissue of the animal: ");
+			System.out.print("Type of tissue of the animal[skin/collagen]: ");
 			String typeOfTissue = console.readLine();
 			
 			System.out.print("Pathology of the patient: ");
