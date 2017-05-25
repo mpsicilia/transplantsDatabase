@@ -54,6 +54,7 @@ public class UIGenericMenu {
 		        	else{
 		        		System.out.println("Tables have not been dropped. ");
 		        	}
+		        }
 
 		        System.out.println("Do you want to create the tables?: [yes/no]");
 		        String decider= console.readLine();
@@ -496,12 +497,10 @@ public class UIGenericMenu {
 	        	 }
 	        
 	        }
-		        }}
-		   catch(IOException ex){
+		}catch(IOException ex){
 			ex.printStackTrace();
-		}
-	
-
-		}}
+	  }
+	}
+}
 	
 	
