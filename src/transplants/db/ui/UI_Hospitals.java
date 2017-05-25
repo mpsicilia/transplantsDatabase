@@ -51,17 +51,16 @@ public class UI_Hospitals {
 			//boolean ok=dbManager.insert(hosp);
 			
 			//Relationship between the database and the hospitals (database values are always the same, the user doesn't choose)
-
+//
 			boolean okDatabase = data.addHospital(hosp);
-			hosp.setDatabase(data);
-			boolean okHospDatabase = jpaManager.update(hosp);
-
-			//boolean okDatabase = data.addHospital(hosp);
-			//hosp.setDatabase(data.getIdDatabase());
-			//boolean okHospDatabase = jpaManager.update(hosp);
+//			hosp.setDatabase(data);
+//			boolean okHospDatabase = jpaManager.update(hosp);
+//			boolean okUpdateDatabase = jpaManager.update(data);
 
 			
-			if (ok /*&& okDatabase && okHospDatabase*/){
+//			if (ok && okDatabase && okHospDatabase && okUpdateDatabase){
+				if (ok && okDatabase){
+
 				System.out.print("Hospital has been introduced");
 				
 				
@@ -175,7 +174,7 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	/*
+
 	public void javaToXmlHospital (DBManager dbManager, TransplantDatabase data){
 		try{
 			
@@ -225,7 +224,7 @@ public class UI_Hospitals {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}*/
+	}
 	public List<Patient> seeallpatients(JPAmanager jpamanager,Hospital hosp){
 		List<Patient> listpatients=new ArrayList<Patient>();
 		try{
