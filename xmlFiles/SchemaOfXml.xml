@@ -17,5 +17,4 @@
 	<!ATTLIST Doctor id ID #REQUIRED  name CDATA #REQUIRED  >
 	<!ELEMENT specialization (#PCDATA)> 
 	<!ELEMENT registrationNumber (#PCDATA)> 
-	
 ]>
