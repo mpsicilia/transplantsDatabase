@@ -204,11 +204,27 @@ public class UI_Hospitals {
 		}
 	}
 	
-	public void xmlToJavaDatabase (TransplantDatabase database){
+	public void xmlToJavaDatabase (TransplantDatabase database, DBManager dbManager){
 		try{
 			XMLmanager unmarshalXML = new XMLmanager();
 			TransplantDatabase dataUnmarshalled = unmarshalXML.unmarshalDatabase(database);
-			
+			//update the information for the xml in the tables
+			//I do the updates with JDBC because they don't function with JPA the way I want them to function
+			List<Hospital> hospsUnmarsh = dataUnmarshalled.getAllHospOFDatabase();
+			for (Hospital h: hospsUnmarsh){
+				List<Doctor> docsUnmarsh = h.getDoctors();
+				for (Doctor d: docsUnmarsh){
+					boolean updatedDoctor = dbManager.update(d);
+					if (updatedDoctor){
+						System.out.println("Doctor " + d.getNameOfDoctor() + " updated.");
+					}
+				}
+				boolean updatedHospital = dbManager.update(h);
+				if(updatedHospital){
+					System.out.println("Hospital " + h.getName() + " updated.");
+				}
+				
+			}
 			
 		}catch (Exception e){
 			e.printStackTrace();

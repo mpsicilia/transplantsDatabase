@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TransplantDatabase nameOfDatabase="TransplantDatabase">
     <Hospitals>
-        <Hospital id="2" name="lhgdgshx">
+        <Hospital id="2" name="monteprincipe">
             <phoneNumber>345</phoneNumber>
             <address>wvf</address>
             <City>hgtfrde</City>
@@ -9,14 +9,22 @@
             <Country>vfdrg</Country>
             <Doctors>
                 <Doctor id="4" nameOfDoctor="cuchi">
-                    <specialization>cardio</specialization>
+                    <specialization>obs</specialization>
                     <registrationNumber>967645</registrationNumber>
                 </Doctor>
-                <Doctor id="5" nameOfDoctor="cuchicuchi">
+                <Doctor id="5" nameOfDoctor="rafa">
                     <specialization>cardio</specialization>
                     <registrationNumber>43567</registrationNumber>
                 </Doctor>
             </Doctors>
+        </Hospital>
+        <Hospital id="52" name="cuchi">
+            <phoneNumber>87</phoneNumber>
+            <address>pa</address>
+            <City>MAD</City>
+            <postcode>0987</postcode>
+            <Country>spain</Country>
+            <Doctors/>
         </Hospital>
     </Hospitals>
 </TransplantDatabase>

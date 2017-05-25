@@ -468,10 +468,10 @@ public class UIGenericMenu {
 	        	 			for (Hospital hospital : hosps) {
 								database.addHospital(hospital);
 							}
-	        	 			uiHospital.javaToXmlHospital(dbManager, database);
+	        	 			uiHospital.javaToXmlDatabase(dbManager, database);
 	        	 			break;
 	        	 		case 2:
-	        	 			
+	        	 			uiHospital.xmlToJavaDatabase(database, dbManager);
 	        	 			break;
 	        	 		}
 	        	 		
