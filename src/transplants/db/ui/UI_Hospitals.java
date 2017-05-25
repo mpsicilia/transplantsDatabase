@@ -211,16 +211,9 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
 	
 	public void xmlToJavaDatabase (DBManager dbManager, TransplantDatabase dataUnmarsh){
-=======
-
-
-	public void xmlToJavaDatabase(TransplantDatabase database, DBManager dbManager){
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 		try{
-<<<<<<< HEAD
 			XMLmanager dataXml = new XMLmanager();
 			dataUnmarsh  = dataXml.unmarshalDatabase(dataUnmarsh);
 			//update everything on the tables, update with jdbc bc it doesn't function with jpa
@@ -237,26 +230,6 @@ public class UI_Hospitals {
 				if(hospUpdate){
 					System.out.println("Hospital " + h.getName() + " updated.");
 				}
-=======
-		XMLmanager unmarshalXML = new XMLmanager();
-			TransplantDatabase dataUnmarshalled = unmarshalXML.unmarshalDatabase(database);		
-			//update the information for the xml in the tables
-			//I do the updates with JDBC because they don't function with JPA the way I want them to function
-			List<Hospital> hospsUnmarsh = dataUnmarshalled.getAllHospOFDatabase();
-			for (Hospital h: hospsUnmarsh){
-				List<Doctor> docsUnmarsh = h.getDoctors();
-				for (Doctor d: docsUnmarsh){
-					boolean updatedDoctor = dbManager.update(d);
-					if (updatedDoctor){
-						System.out.println("Doctor " + d.getNameOfDoctor() + " updated.");
-					}
-				}
-				boolean updatedHospital = dbManager.update(h);
-				if(updatedHospital){
-					System.out.println("Hospital " + h.getName() + " updated.");
-				}
-				
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 			}
 		}catch (Exception e){
 			e.printStackTrace();
