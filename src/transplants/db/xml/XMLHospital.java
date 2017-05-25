@@ -32,14 +32,13 @@ public class XMLHospital {
 		return false;
 	}
 	
-	public Hospital xmlToJavaHospital (Unmarshaller unmarsh, File fileXML){
-		Hospital hosp = new Hospital();
+	public TransplantDatabase xmlToJavaHospital (Unmarshaller unmarsh, File fileXML, TransplantDatabase dataToUnmarsh){
 		try{
-			hosp = (Hospital) unmarsh.unmarshal(fileXML);
-		}catch (Exception ex){
-			ex.printStackTrace();
+			dataToUnmarsh = (TransplantDatabase) unmarsh.unmarshal(fileXML);
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		return hosp;
+		return dataToUnmarsh;
 	}
 
 }

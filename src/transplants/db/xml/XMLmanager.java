@@ -32,7 +32,7 @@ public class XMLmanager {
 		
 	}
 	//marshalling method!
-	public boolean javaToXmlHospitals (TransplantDatabase dataHosp){
+	public boolean marshalDatabase (TransplantDatabase dataHosp){
 		try{
 			return XMLhosp.javaToXmlHospital(marshaller, dataHosp, xmlFile);
 			
@@ -42,25 +42,13 @@ public class XMLmanager {
 		return false;
 	}
 	
-	//unmarshaling methods
-	public Hospital unmarshallHospital (){
-		Hospital hospital = new Hospital();
+	//unmarshalling method
+	public TransplantDatabase unmarshalDatabase (TransplantDatabase data){
 		try{
-			hospital = XMLhosp.xmlToJavaHospital(unmarshaller, xmlFile);
+			data = XMLhosp.xmlToJavaHospital(unmarshaller, xmlFile, data);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return hospital;
+		return data;
 	}
-	
-	public Animal_tissue unmarshallAnimalTissue (){
-		Animal_tissue at = new Animal_tissue();
-		try{
-			//extra
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return at;
-	}
-	
 }

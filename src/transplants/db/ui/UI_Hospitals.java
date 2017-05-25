@@ -47,18 +47,9 @@ public class UI_Hospitals {
 			String country = console.readLine();
 			
 			Hospital hosp= new Hospital(name, phone_number, address, city, post_code, country);
-			boolean ok=jpaManager.insert(hosp);
-			//boolean ok=dbManager.insert(hosp);
-			
-			//Relationship between the database and the hospitals (database values are always the same, the user doesn't choose)
-//
-			boolean okDatabase = data.addHospital(hosp);
-//			hosp.setDatabase(data);
-//			boolean okHospDatabase = jpaManager.update(hosp);
-//			boolean okUpdateDatabase = jpaManager.update(data);
+			boolean ok=jpaManager.insert(hosp);			
 
-			
-//			if (ok && okDatabase && okHospDatabase && okUpdateDatabase){
+			boolean okDatabase = data.addHospital(hosp);
 				if (ok && okDatabase){
 
 				System.out.print("Hospital has been introduced");
@@ -175,7 +166,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	public void javaToXmlHospital (DBManager dbManager, TransplantDatabase data){
+	public void javaToXmlDatabase (DBManager dbManager, TransplantDatabase data){
 		try{
 			
 			//Get all the hospitals to marshall
@@ -195,10 +186,11 @@ public class UI_Hospitals {
 					boolean doctorOK = h.addDoctor(d);
 				}	
 				counterH++;
+				///patients inside doctor?????? do it? if i have time
 			}
 			
 			XMLmanager hospXml = new XMLmanager();
-			boolean xmlOK = hospXml.javaToXmlHospitals(data);
+			boolean xmlOK = hospXml.marshalDatabase(data);
 			
 			if(xmlOK){
 				System.out.println("Xml of hospital created. ");
@@ -211,15 +203,12 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	//incomplete method, first make work marshall method
-	public void xmlToJavaHospital (){//choose the hospi that it's going to be unmarshall
+	
+	public void xmlToJavaDatabase (TransplantDatabase database){
 		try{
-			XMLmanager hospXml = new XMLmanager();
-			List <Hospital> hosps = new ArrayList<Hospital>();
-			Iterator<Hospital> hi = hosps.iterator();
-			while (hi.hasNext()){
-				//h 
-			}
+			XMLmanager unmarshalXML = new XMLmanager();
+			TransplantDatabase dataUnmarshalled = unmarshalXML.unmarshalDatabase(database);
+			
 			
 		}catch (Exception e){
 			e.printStackTrace();
