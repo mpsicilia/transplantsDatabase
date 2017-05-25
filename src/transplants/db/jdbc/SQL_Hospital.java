@@ -243,7 +243,7 @@ public class SQL_Hospital {
 					+ " city 			TEXT,              "
 					+ " postcode		TEXT,              " 
 					+ " country			TEXT     NOT NULL)";
-			//faltaria añadir la FK de datbase
+			//faltaria aï¿½adir la FK de datbase
 			stmt1.executeUpdate(hospitals);
 			stmt1.close();
 
@@ -255,9 +255,7 @@ public class SQL_Hospital {
 			stmt2.executeUpdate(hospitalsDoctors);
 			stmt2.close();
 
-<<<<<<< HEAD
-			
-=======
+
 			/*//database table
 			Statement stmt3 = dmanager.getC().createStatement();
 			String database = "CREATE TABLE TransplantDatabase "
@@ -265,7 +263,7 @@ public class SQL_Hospital {
 					+ "nameOfDatabase TEXT)";
 			stmt3.executeUpdate(database);
 			stmt3.close();*/
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
+
 			
 			// initialize primary key
 			Statement stmtSeq1 = dmanager.getC().createStatement();
