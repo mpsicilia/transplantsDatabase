@@ -112,7 +112,7 @@ public class UIGenericMenu {
 						Patient p = uiPatient.introduceNewPatient(jpaManager, dbManager);
 						System.out.println("Introduce the organ that the patient needs.");
 						List<Requested_organ> reqOrg = uiRequested.introduceNewReqOrgan(p, dbManager, jpaManager);
-						//ESTO TENGO QUE QUOTARLO
+						
 						System.out.println("Did the patient need skin or collagen transplantation? [yes/no]");
 						String animalT = console.readLine();
 						if (animalT.equalsIgnoreCase("yes")) {
