@@ -1,0 +1,18 @@
+<!DOCTYPE TransplantDatabase [
+	<!ELEMENT TransplantDatabase (Hospitals+)> 
+	<!-- I'm puttig the '+' because the transplant contains 1 or more hospitals -->
+	<!ELEMENT Hospital (phoneNumber, address, City, postcode,Country)>
+	<!-- We are doing it with pointers because its important to remark the ids
+		this is because a doctor can be working in different hospitals-->
+	<!-- IDREFS: Bc n-n relationship; IDREF: n-1 relationship -->	
+	<!ATTLIST Hospital id   	ID #REQUIRED 
+					   name 	CDATA #REQUIRED 
+					   Doctors 	IDREFS #REQUIRED
+					   Patients IDREF #REQUIRED >
+	<!ELEMENT phoneNumber (#PCDATA)>
+	<!ELEMENT address (#PCDATA)>
+	<!ELEMENT City (#PCDATA)>
+	<!ELEMENT postcode (#PCDATA)>
+	<!ELEMENT Country (#PCDATA)>
+	
+]>
