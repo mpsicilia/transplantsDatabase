@@ -53,10 +53,6 @@ public class Hospital implements Serializable{
 	@XmlElementWrapper (name = "Patients")
 	private List<Patient> patients;
 	
-	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn (name = "database_id")
-	private TransplantDatabase database;
-	
 	
 	
 	public Hospital (){
@@ -193,14 +189,6 @@ public class Hospital implements Serializable{
 		this.patients=patients;
 	}
 	
-	public TransplantDatabase getDatabase() {
-		return database;
-	}
-
-	public void setDatabase(TransplantDatabase database) {
-		this.database = database;
-	}
-
 		// Additional method to add to a list
 		public boolean addDoctor(Doctor doctor) {
 			if (!doctors.contains(doctor)) {

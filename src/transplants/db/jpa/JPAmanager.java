@@ -102,17 +102,7 @@ public class JPAmanager implements DBManagerInterface {
 		// DONE IN JDBC
 		return false;
 	}
-	
-	//create database, it doesn't work with JDBC, let's prove with JPA
-	public boolean createDatabase (TransplantDatabase datab){
-		try{
-			return hosp.databaseCreation(datab);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
+		
 	//NEW
 	public Integer getIdpatient(Patient patient){
 		Integer patid;

@@ -130,19 +130,7 @@ public class JPAhospital {
 		}
 		return patients;
 	}
-	
-	//NEW: CREATE DATABASE
-	public boolean databaseCreation (TransplantDatabase data) {
-		try{
-			jpaManager.getEManager().getTransaction().begin();
-			jpaManager.getEManager().persist(data);
-			jpaManager.getEManager().getTransaction().commit();
-			return true;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}
+
 	/*public List<Hospital> selectAllHospitals() {
 		try {
 			jpaManager.getEManager().getTransaction().begin();

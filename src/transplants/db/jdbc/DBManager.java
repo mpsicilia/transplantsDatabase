@@ -58,12 +58,12 @@ public class DBManager implements DBManagerInterface {
 	public boolean createTables() {
 		try {
 			hosp.createTable();
-			doct.createTable();
+			/*doct.createTable();
 			pat.createTable();
 			animalT.createTable();
 			org.createTable();
 			don.createTable();
-			req.createTable();
+			req.createTable();*/
 
 			return true;
 
@@ -77,12 +77,12 @@ public class DBManager implements DBManagerInterface {
 	public boolean dropTables() {
 		try {
 			hosp.dropTable();
-			doct.dropTable();
+			/*doct.dropTable();
 			pat.dropTable();
 			animalT.dropTable();
 			org.dropTable();
 			don.dropTable();
-			req.dropTable();
+			req.dropTable();*/
 
 			return true;
 

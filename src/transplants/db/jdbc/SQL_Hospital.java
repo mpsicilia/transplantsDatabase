@@ -226,13 +226,6 @@ public class SQL_Hospital {
 
 	public void createTable() {
 		try {
-			//database table
-			Statement stmt3 = dmanager.getC().createStatement();
-			String database = "CREATE TABLE TransplantDatabase "
-					+ "(id INTEGER PRIMARY KEY,"
-					+ "nameOfDatabase TEXT)";
-			stmt3.executeUpdate(database);
-			stmt3.close();
 			
 			Statement stmt1 = dmanager.getC().createStatement();
 			String hospitals = "CREATE TABLE Hospitals " 
@@ -242,19 +235,18 @@ public class SQL_Hospital {
 					+ " address  		TEXT	 NOT NULL, " 
 					+ " city 			TEXT,              "
 					+ " postcode		TEXT,              " 
-					+ " country			TEXT     NOT NULL,"
-					+ "database_id 		INTEGER REFERENCES TransplantDatabase(id))";
+					+ " country			TEXT     NOT NULL)";
 			//faltaria a�adir la FK de datbase
 			stmt1.executeUpdate(hospitals);
 			stmt1.close();
 
-			Statement stmt2 = dmanager.getC().createStatement();
+			/*Statement stmt2 = dmanager.getC().createStatement();
 			String hospitalsDoctors = "CREATE TABLE HospitalsDoctors "
 					+ "(doctor_id   INTEGER  REFERENCES Doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					+ "hospital_id	INTEGER  REFERENCES Hospitals(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					+ "PRIMARY KEY (doctor_id,hospital_id))";
 			stmt2.executeUpdate(hospitalsDoctors);
-			stmt2.close();
+			stmt2.close();*/
 
 			
 			// initialize primary key
@@ -275,10 +267,10 @@ public class SQL_Hospital {
 			stm1.executeUpdate(drop1);
 			stm1.close();
 
-			Statement stm2 = dmanager.getC().createStatement();
+			/*Statement stm2 = dmanager.getC().createStatement();
 			String drop2 = "DROP TABLE HospitalsDoctors";
 			stm2.executeUpdate(drop2);
-			stm2.close();
+			stm2.close();*/
 			
 			Statement stm3 = dmanager.getC().createStatement();
 			String drop3 = "DROP TABLE TransplantDatabase";
