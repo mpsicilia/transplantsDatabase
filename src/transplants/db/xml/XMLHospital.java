@@ -19,7 +19,7 @@ public class XMLHospital {
 		
 	}
 	
-	public boolean javaToXmlHospital (Marshaller marsh, TransplantDatabase dataH, File fileXML){
+	public boolean javaToXmlDatabase (Marshaller marsh, TransplantDatabase dataH, File fileXML){
 		try{
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 			
@@ -32,14 +32,13 @@ public class XMLHospital {
 		return false;
 	}
 	
-	public Hospital xmlToJavaHospital (Unmarshaller unmarsh, File fileXML){
-		Hospital hosp = new Hospital();
+	public TransplantDatabase xmlToJavaDatabase (Unmarshaller unmarsh, File fileXML, TransplantDatabase dataToUnmarsh){
 		try{
-			hosp = (Hospital) unmarsh.unmarshal(fileXML);
-		}catch (Exception ex){
-			ex.printStackTrace();
+			dataToUnmarsh = (TransplantDatabase) unmarsh.unmarshal(fileXML);
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		return hosp;
+		return dataToUnmarsh;
 	}
 
 }

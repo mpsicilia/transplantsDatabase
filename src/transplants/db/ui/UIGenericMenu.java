@@ -472,7 +472,7 @@ public class UIGenericMenu {
 	        	 			uiHospital.javaToXmlDatabase(dbManager, database);
 	        	 			break;
 	        	 		case 2:
-	        	 			uiHospital.xmlToJavaDatabase(database, dbManager);
+	        	 			uiHospital.xmlToJavaDatabase(dbManager, database);
 	        	 			break;
 	        	 		}
 	        	 		
