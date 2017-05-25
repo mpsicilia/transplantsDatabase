@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
+import transplants.db.pojos.TransplantDatabase;
 
 public class JPAhospital {
 	private JPAmanager jpaManager;
@@ -128,6 +129,19 @@ public class JPAhospital {
 			e.printStackTrace();
 		}
 		return patients;
+	}
+	
+	//NEW: CREATE DATABASE
+	public boolean databaseCreation (TransplantDatabase data) {
+		try{
+			jpaManager.getEManager().getTransaction().begin();
+			jpaManager.getEManager().persist(data);
+			jpaManager.getEManager().getTransaction().commit();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 	/*public List<Hospital> selectAllHospitals() {
 		try {

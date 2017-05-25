@@ -1,10 +1,12 @@
 package transplants.db.pojos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,17 +22,25 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "TransplantDatabase")
 @XmlType(propOrder = { "hospitalsOfDatabase" })
 
-public class TransplantDatabase {
+public class TransplantDatabase implements Serializable {
 
+	private static final long serialVersionUID = 9095209125569144711L;
 	@Id
 	@XmlTransient
-	int idDatabase = 1;
-	String nameOfDatabase = "TransplantDatabase";
+	private int idDatabase;
+	private String nameOfDatabase;
 	@XmlElement(name = "Hospital")
 	@XmlElementWrapper(name = "Hospitals")
+	@OneToMany (mappedBy = "database")
 	private List<Hospital> hospitalsOfDatabase;
 
-	public TransplantDatabase() {
+	public TransplantDatabase (){
+		hospitalsOfDatabase = new ArrayList<Hospital>();
+	}
+	
+	public TransplantDatabase(int id, String name) {
+		this.idDatabase = id;
+		this.nameOfDatabase = name;
 		hospitalsOfDatabase = new ArrayList<Hospital>();
 	}
 

@@ -128,10 +128,14 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 	
-	//create database
+<<<<<<< HEAD
+	//create database DOESN'T WORK
+=======
+	/*//create database
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
 	public boolean createDatabase (TransplantDatabase td){
 		return hosp.createDatabase(td);
-	}
+	}*/
 
 	// PKs
 	@Override
