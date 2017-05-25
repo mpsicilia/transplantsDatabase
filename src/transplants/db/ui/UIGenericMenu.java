@@ -469,10 +469,10 @@ public class UIGenericMenu {
 	        	 			for (Hospital hospital : hosps) {
 								database.addHospital(hospital);
 							}
-	        	 			uiHospital.javaToXmlDatabase(dbManager, database);
+	        	 			uiHospital.javaToXmlHospital(dbManager, database);
 	        	 			break;
 	        	 		case 2:
-	        	 			uiHospital.xmlToJavaDatabase(database, dbManager);
+	        	 			
 	        	 			break;
 	        	 		}
 	        	 		
@@ -484,13 +484,11 @@ public class UIGenericMenu {
 	        	 }
 	        
 	        }
-
-		   } catch(IOException ex){
-		        	ex.printStackTrace();
+		}catch(IOException ex){
+			ex.printStackTrace();
 		}
-	
-
-}}
+	}
+}
 
 	
 	

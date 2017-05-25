@@ -175,7 +175,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	public void javaToXmlHospital (DBManager dbManager, TransplantDatabase data){
+	public void javaToXmlDatabase (DBManager dbManager, TransplantDatabase data){
 		try{
 			
 			//Get all the hospitals to marshall
@@ -211,20 +211,34 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	//incomplete method, first make work marshall method
-	public void xmlToJavaHospital (){//choose the hospi that it's going to be unmarshall
+
+
+	public void xmlToJavaDatabase(TransplantDatabase database, DBManager dbManager){
 		try{
-			XMLmanager hospXml = new XMLmanager();
-			List <Hospital> hosps = new ArrayList<Hospital>();
-			Iterator<Hospital> hi = hosps.iterator();
-			while (hi.hasNext()){
-				//h 
+		XMLmanager unmarshalXML = new XMLmanager();
+			TransplantDatabase dataUnmarshalled = unmarshalXML.unmarshalDatabase(database);		
+			//update the information for the xml in the tables
+			//I do the updates with JDBC because they don't function with JPA the way I want them to function
+			List<Hospital> hospsUnmarsh = dataUnmarshalled.getAllHospOFDatabase();
+			for (Hospital h: hospsUnmarsh){
+				List<Doctor> docsUnmarsh = h.getDoctors();
+				for (Doctor d: docsUnmarsh){
+					boolean updatedDoctor = dbManager.update(d);
+					if (updatedDoctor){
+						System.out.println("Doctor " + d.getNameOfDoctor() + " updated.");
+					}
+				}
+				boolean updatedHospital = dbManager.update(h);
+				if(updatedHospital){
+					System.out.println("Hospital " + h.getName() + " updated.");
+				}
+				
 			}
-			
 		}catch (Exception e){
 			e.printStackTrace();
+		
 		}
-	}
+}
 	public List<Patient> seeallpatients(JPAmanager jpamanager,Hospital hosp){
 		List<Patient> listpatients=new ArrayList<Patient>();
 		try{
