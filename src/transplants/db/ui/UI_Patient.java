@@ -13,6 +13,7 @@ import transplants.db.jpa.JPAmanager;
 import transplants.db.jpa.JPApatient;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
+import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
@@ -25,6 +26,12 @@ public class UI_Patient {
 
 	public Patient introduceNewPatient(JPAmanager jpaManager, DBManager dbmanager) {
 		try {
+			List<Hospital> hosps = dbmanager.selectAllHospitals();
+			List<Doctor> docs = dbmanager.selectAllDoctors();
+			if(hosps.isEmpty() && docs.isEmpty() ){
+				System.out.println("There are no hospitals or doctors");
+				System.out.println("You can not introduce a patient");
+			}
 			System.out.print("Name: ");
 			String name = console.readLine();
 
@@ -58,28 +65,27 @@ public class UI_Patient {
 
 			boolean introduced = jpaManager.insert(p);
 			
-			// FALTA:::: -->>>>> PONER QUE PASA SI NO HAY HOSPITALESSSS!!!!!!! LO MISMO CON DOCTORES
-			//HABRA QUE CHEQUEAR PRIMERO ANTES DE METER UN NUEVO PATIENT
+			
 			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
-			List<Hospital> hosps = dbmanager.selectAllHospitals();
 			Iterator<Hospital> itH = hosps.iterator();
 			while (itH.hasNext()) {
 				Hospital h = itH.next();
 				System.out.println(h);
 			}
+			
 			Integer idHosp = Integer.parseInt(console.readLine());
 			Hospital hospital = jpaManager.getHospitalPatient(idHosp);
          
-			//FUNCIONA!!!
+		
 			hospital.addPatient(p);
 			p.setHospital(hospital);
 			boolean okUpdatepatient = jpaManager.update(p);
 			boolean okUpdatehospital = jpaManager.update(hospital);
 
 			// RELATIONSHIP BETWEEN DOCTOR AND PATIENT
-			//FUNCIONA
+			
 			System.out.println("How many doctors are attending the patient?");
-			List<Doctor> docs = dbmanager.selectAllDoctors();
+			
 			Iterator<Doctor> itD = docs.iterator();
 			while (itD.hasNext()) {
 				Doctor d = itD.next();
@@ -97,9 +103,7 @@ public class UI_Patient {
 				doctId = Integer.parseInt(console.readLine());
 				introduced2 = dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
 				counter++;
-				//
-				//como se podria hacer para que te mostrase los
-					//medicos resultantes??
+				
 				
 			} while (counter <= Xtimes);
 
@@ -199,18 +203,26 @@ public class UI_Patient {
 
 	}
 
-	// PROVE THIS METHOD
+	
 	public void deletePatient(Patient pat, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
-			boolean deleted = jpaManager.delete(pat);
-
-			boolean deleted1 = dbmanager.deleteallReq(pat.getName());
-
-			if (deleted && deleted1) {
+			
+		  boolean reqorgansdeleted=false;
+			
+			List <Requested_organ> reqorgans = pat.getRequested_organ();
+		
+			for (Requested_organ reqorgan : reqorgans) {
+				reqorgansdeleted= jpaManager.delete(reqorgan);
+			}						
+			boolean patientDeleted = jpaManager.delete(pat);		
+			
+			if(patientDeleted && reqorgans.isEmpty()){
 				System.out.println("Patient has been deleted.");
-			} else {
+			}
+			else{
 				System.out.println("Patient has not been deleted. ");
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
