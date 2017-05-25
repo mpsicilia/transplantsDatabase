@@ -97,6 +97,7 @@ public class UI_Patient {
 				doctId = Integer.parseInt(console.readLine());
 				introduced2 = dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
 				counter++;
+				//
 				//como se podria hacer para que te mostrase los
 					//medicos resultantes??
 				
