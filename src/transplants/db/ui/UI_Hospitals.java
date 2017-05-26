@@ -188,12 +188,11 @@ public class UI_Hospitals {
 				//print all the hospitals in order to see if all of them are marshalled
 				System.out.println(counterH + ". Hospital: " + h.getName());
 				List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(h.getName()); //create the method in DB
-				Iterator<Doctor> itD = doctorsOfHosp.iterator();
-				
-				while (itD.hasNext()){
-					Doctor d = itD.next();
-					boolean doctorOK = h.addDoctor(d);
-				}	
+				Iterator<Doctor> itD = doctorsOfHosp.iterator();					
+					while (itD.hasNext()){
+						Doctor d = itD.next();
+						boolean doctorOK = h.addDoctor(d);
+					}	
 				counterH++;
 			}
 			
