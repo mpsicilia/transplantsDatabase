@@ -175,6 +175,20 @@ public class UI_Hospitals {
 		}
 	}
 
+	public List<Patient> seeallpatients(JPAmanager jpamanager,Hospital hosp){
+		List<Patient> listpatients=new ArrayList<Patient>();
+		try{
+			listpatients=jpamanager.searchallpatients(hosp);
+			return listpatients;
+			
+			}
+			
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return listpatients;
+	}
+	
 	public void javaToXmlDatabase (DBManager dbManager, TransplantDatabase data){
 		try{
 			
@@ -235,18 +249,8 @@ public class UI_Hospitals {
 		
 		}
 }
-	public List<Patient> seeallpatients(JPAmanager jpamanager,Hospital hosp){
-		List<Patient> listpatients=new ArrayList<Patient>();
-		try{
-			listpatients=jpamanager.searchallpatients(hosp);
-			return listpatients;
-			
-			}
-			
-		catch (Exception e){
-			e.printStackTrace();
-		}
-		return listpatients;
-	}
-	
+	 public void xmlToHtml (String sourcePath, String xsltPath,String resultDir){
+		 XMLmanager hospXml = new XMLmanager();
+		 hospXml.simpleTransform(sourcePath,xsltPath,resultDir);
+	 }
 }

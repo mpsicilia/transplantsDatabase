@@ -6,7 +6,6 @@
 	<!ELEMENT Hospital (phoneNumber, address, City, postcode,Country, Doctors)>
 	<!-- We are doing it with pointers because its important to remark the ids
 		this is because a doctor can be working in different hospitals-->
-	<!-- IDREFS: Bc n-n relationship; IDREF: n-1 relationship -->
 	<!-- I cannot put the id as ID because if I do that they must have differnt ids
 	     that is why I put them as CDATA-->	
 	<!ATTLIST Hospital id CDATA #REQUIRED  name CDATA #REQUIRED>
