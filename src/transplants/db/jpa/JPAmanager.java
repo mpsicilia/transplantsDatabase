@@ -102,7 +102,8 @@ public class JPAmanager implements DBManagerInterface {
 		// DONE IN JDBC
 		return false;
 	}
-		
+
+	
 	//NEW
 	public Integer getIdpatient(Patient patient){
 		Integer patid;

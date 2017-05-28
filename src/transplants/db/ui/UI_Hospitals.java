@@ -175,56 +175,6 @@ public class UI_Hospitals {
 		}
 	}
 
-	public void javaToXmlHospital (DBManager dbManager, TransplantDatabase data){
-		try{
-			
-			//Get all the hospitals to marshall
-			List<Hospital> hospsToMarshall = data.getAllHospOFDatabase();
-			Iterator<Hospital> itH = hospsToMarshall.iterator();
-			//get the doctors of the hospital and add it to the hospital
-			int counterH = 1;
-			while (itH.hasNext()){
-				Hospital h = itH.next();
-				//print all the hospitals in order to see if all of them are marshalled
-				System.out.println(counterH + ". Hospital: " + h.getName());
-				List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(h.getName()); //create the method in DB
-				Iterator<Doctor> itD = doctorsOfHosp.iterator();
-				
-				while (itD.hasNext()){
-					Doctor d = itD.next();
-					boolean doctorOK = h.addDoctor(d);
-				}	
-				counterH++;
-			}
-			
-			XMLmanager hospXml = new XMLmanager();
-			boolean xmlOK = hospXml.javaToXmlHospitals(data);
-			
-			if(xmlOK){
-				System.out.println("Xml of hospital created. ");
-			}
-			else{
-				System.out.println("Xml of hospital NOT created. ");
-			}
-			
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	//incomplete method, first make work marshall method
-	public void xmlToJavaHospital (){//choose the hospi that it's going to be unmarshall
-		try{
-			XMLmanager hospXml = new XMLmanager();
-			List <Hospital> hosps = new ArrayList<Hospital>();
-			Iterator<Hospital> hi = hosps.iterator();
-			while (hi.hasNext()){
-				//h 
-			}
-			
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
 	public List<Patient> seeallpatients(JPAmanager jpamanager,Hospital hosp){
 		List<Patient> listpatients=new ArrayList<Patient>();
 		try{
@@ -239,4 +189,68 @@ public class UI_Hospitals {
 		return listpatients;
 	}
 	
+	public void javaToXmlDatabase (DBManager dbManager, TransplantDatabase data){
+		try{
+			
+			//Get all the hospitals to marshall
+			List<Hospital> hospsToMarshall = data.getAllHospOFDatabase();
+			Iterator<Hospital> itH = hospsToMarshall.iterator();
+			//get the doctors of the hospital and add it to the hospital
+			int counterH = 1;
+			while (itH.hasNext()){
+				Hospital h = itH.next();
+				//print all the hospitals in order to see if all of them are marshalled
+				System.out.println(counterH + ". Hospital: " + h.getName());
+				List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(h.getName()); //create the method in DB
+				Iterator<Doctor> itD = doctorsOfHosp.iterator();					
+					while (itD.hasNext()){
+						Doctor d = itD.next();
+						boolean doctorOK = h.addDoctor(d);
+					}	
+				counterH++;
+			}
+			
+			XMLmanager hospXml = new XMLmanager();
+			boolean xmlOK = hospXml.marshalDatabase(data);
+			
+			if(xmlOK){
+				System.out.println("Xml of hospital created. ");
+			}
+			else{
+				System.out.println("Xml of hospital NOT created. ");
+			}
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void xmlToJavaDatabase (DBManager dbManager, TransplantDatabase dataUnmarsh){
+		try{
+			XMLmanager dataXml = new XMLmanager();
+			dataUnmarsh  = dataXml.unmarshalDatabase(dataUnmarsh);
+			//update everything on the tables, update with jdbc bc it doesn't function with jpa
+			List<Hospital> hospUnmarsh = dataUnmarsh.getAllHospOFDatabase();
+			for(Hospital h: hospUnmarsh){
+				List<Doctor> docsUnmarsh = h.getDoctors();
+				for (Doctor d: docsUnmarsh){
+					boolean docUpdate = dbManager.update(d);
+					if(docUpdate){
+						System.out.println("Doctor " + d.getNameOfDoctor() + " updated.");
+					}
+				}
+				boolean hospUpdate = dbManager.update(h);
+				if(hospUpdate){
+					System.out.println("Hospital " + h.getName() + " updated.");
+				}
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		
+		}
+}
+	 public void xmlToHtml (String sourcePath, String xsltPath,String resultDir){
+		 XMLmanager hospXml = new XMLmanager();
+		 hospXml.simpleTransform(sourcePath,xsltPath,resultDir);
+	 }
 }

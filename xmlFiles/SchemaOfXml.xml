@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!DOCTYPE TransplantDatabase [
+	<!ELEMENT TransplantDatabase (Hospitals+)> 
+	<!-- I'm puttig the '+' because the transplant contains 1 or more hospitals -->
+	<!ELEMENT Hospital (phoneNumber, address, City, postcode,Country, Doctors)>
+	<!-- We are doing it with pointers because its important to remark the ids
+		this is because a doctor can be working in different hospitals-->
+	<!-- I cannot put the id as ID because if I do that they must have differnt ids
+	     that is why I put them as CDATA-->	
+	<!ATTLIST Hospital id CDATA #REQUIRED  name CDATA #REQUIRED>
+	<!ELEMENT phoneNumber (#PCDATA)>
+	<!ELEMENT address (#PCDATA)>
+	<!ELEMENT City (#PCDATA)>
+	<!ELEMENT postcode (#PCDATA)>
+	<!ELEMENT Country (#PCDATA)>
+	<!-- bc each hospital has at least 1 doctor -->	
+	<!ELEMENT Doctors (Doctor+)> 
+	<!ELEMENT Doctor (specialization, registrationNumber)>
+	<!ATTLIST Doctor id CDATA #REQUIRED  name CDATA #REQUIRED  >
+	<!ELEMENT specialization (#PCDATA)> 
+	<!ELEMENT registrationNumber (#PCDATA)> 
+]>

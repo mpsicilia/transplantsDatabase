@@ -1,95 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TransplantDatabase nameOfDatabase="TransplantDatabase">
     <Hospitals>
-        <Hospital id="2" name="monte">
-            <phoneNumber>2345</phoneNumber>
-            <address>boadilla</address>
-            <City>mad</City>
-            <postcode>324</postcode>
-            <Country>sp</Country>
-            <Doctors/>
-            <Patients/>
+        <Hospital id="2" name="cuchh">
+            <phoneNumber>09</phoneNumber>
+            <address>monteprincipe</address>
+            <City>boadilla</City>
+            <postcode>4923</postcode>
+            <Country>spain</Country>
+            <Doctors>
+                <Doctor id="2" nameOfDoctor="rafa">
+                    <specialization>cardio</specialization>
+                    <registrationNumber>3245948</registrationNumber>
+                </Doctor>
+                <Doctor id="3" nameOfDoctor="abraham">
+                    <specialization>traumatology</specialization>
+                    <registrationNumber>9087</registrationNumber>
+                </Doctor>
+            </Doctors>
         </Hospital>
-        <Hospital id="52" name="pic">
-            <phoneNumber>2345</phoneNumber>
-            <address>ps</address>
-            <City>sdf</City>
-            <postcode>23445</postcode>
-            <Country>gy</Country>
-            <Doctors/>
-            <Patients/>
-        </Hospital>
-        <Hospital id="102" name="de">
-            <phoneNumber>23</phoneNumber>
-            <address>fd</address>
-            <City>tgr</City>
-            <postcode>2345</postcode>
-            <Country>fdg</Country>
-            <Doctors/>
-            <Patients/>
-        </Hospital>
-        <Hospital id="152" name="dsar">
-            <phoneNumber>32534</phoneNumber>
-            <address>sdf</address>
-            <City>fds</City>
-            <postcode>3257</postcode>
-            <Country>gju</Country>
-            <Doctors/>
-            <Patients/>
-        </Hospital>
-        <Hospital id="202" name="julio">
-            <phoneNumber>897</phoneNumber>
-            <address>rywe</address>
-            <City>gjhdf</City>
-            <postcode>988765</postcode>
-            <Country>ue</Country>
-            <Doctors/>
-            <Patients/>
-        </Hospital>
-        <Hospital id="252" name="petersin">
-            <phoneNumber>2345</phoneNumber>
-            <address>sdfr</address>
-            <City>fhyt</City>
-            <postcode>234</postcode>
-            <Country>ckod</Country>
-            <Doctors/>
-            <Patients/>
-        </Hospital>
-        <Hospital id="302" name="gvfd">
-            <phoneNumber>543</phoneNumber>
-            <address>gh</address>
-            <City>vfstrg</City>
-            <postcode>32564</postcode>
-            <Country>fsvg</Country>
-            <Doctors/>
-            <Patients/>
-        </Hospital>
-        <Hospital id="352" name="jhg">
-            <phoneNumber>32456</phoneNumber>
-            <address>fds</address>
-            <City>re</City>
-            <postcode>4534</postcode>
-            <Country>fds</Country>
-            <Doctors/>
-            <Patients/>
-        </Hospital>
-        <Hospital id="353" name="fre">
-            <phoneNumber>435</phoneNumber>
-            <address>fdgh</address>
-            <City>frge</City>
-            <postcode>4657</postcode>
-            <Country>rgfv</Country>
-            <Doctors/>
-            <Patients/>
-        </Hospital>
-        <Hospital id="402" name="frgethryjm">
-            <phoneNumber>436</phoneNumber>
-            <address>wqerfdg</address>
-            <City>dsvf</City>
-            <postcode>32453</postcode>
-            <Country>dsv</Country>
-            <Doctors/>
-            <Patients/>
+        <Hospital id="3" name="boadillalovers">
+            <phoneNumber>349</phoneNumber>
+            <address>bbt</address>
+            <City>ny</City>
+            <postcode>248</postcode>
+            <Country>usa</Country>
+            <Doctors>
+                <Doctor id="3" nameOfDoctor="abraham">
+                    <specialization>traumatology</specialization>
+                    <registrationNumber>9087</registrationNumber>
+                </Doctor>
+            </Doctors>
         </Hospital>
     </Hospitals>
 </TransplantDatabase>

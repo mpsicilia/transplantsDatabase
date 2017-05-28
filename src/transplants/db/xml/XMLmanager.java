@@ -6,6 +6,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Hospital;
@@ -32,9 +36,9 @@ public class XMLmanager {
 		
 	}
 	//marshalling method!
-	public boolean javaToXmlHospitals (TransplantDatabase dataHosp){
+	public boolean marshalDatabase (TransplantDatabase dataHosp){
 		try{
-			return XMLhosp.javaToXmlHospital(marshaller, dataHosp, xmlFile);
+			return XMLhosp.javaToXmlDatabase(marshaller, dataHosp, xmlFile);
 			
 		}catch (Exception e){
 			e.printStackTrace();
@@ -42,25 +46,25 @@ public class XMLmanager {
 		return false;
 	}
 	
-	//unmarshaling methods
-	public Hospital unmarshallHospital (){
-		Hospital hospital = new Hospital();
+	//unmarshaling method
+	public TransplantDatabase unmarshalDatabase (TransplantDatabase database){
 		try{
-			hospital = XMLhosp.xmlToJavaHospital(unmarshaller, xmlFile);
+			database = XMLhosp.xmlToJavaDatabase(unmarshaller, xmlFile, database);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return hospital;
+		return database;		
 	}
+	//method in order to transform an xml into a html
 	
-	public Animal_tissue unmarshallAnimalTissue (){
-		Animal_tissue at = new Animal_tissue();
-		try{
-			//extra
-		}catch (Exception e){
+	public void simpleTransform(String sourcePath, String xsltPath,String resultDir) {
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+		try {
+			Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
+			transformer.transform(new StreamSource(new File(sourcePath)),new StreamResult(new File(resultDir)));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return at;
 	}
 	
 }
