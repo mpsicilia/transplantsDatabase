@@ -498,6 +498,8 @@ public class UIGenericMenu {
 					break;
 
 				case 4:
+					dbManager.disconnect();
+					jpaManager.disconnect();
 					System.out.println("The program has been closed.");
 					System.exit(0);
 				}
