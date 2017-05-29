@@ -10,6 +10,24 @@
    	 <p>This database was created in order to speed up transplantations in order to facilitated work in hospitals.</p>
    	 <!-- This is an empty line before we actually put our tables on it -->
    	 <br/>
+   	 <p>This is a table for the doctors: </p>
+   	    <table border ="1">
+	   	 	<th>id</th>
+	   	 	<th>nameOfDoctor</th>
+	   	 	<th>specialization</th>
+	   	    <th>registrationNumber</th>
+	   	 		<xsl:for-each select= "TransplantDatabase/Hospitals/Hospital/Doctors/Doctor">
+	   	 			<tr>
+	   	 				<td><i><xsl:value-of select ="@id"/></i></td>
+			   			<td><i><xsl:value-of select ="@nameOfDoctor"/></i></td>
+			   			<td><i><xsl:value-of select ="specialization"/></i></td>
+			   			<td><i><xsl:value-of select ="registrationNumber"/></i></td>
+			   			   	
+	   	 			</tr>	   						
+   				</xsl:for-each>
+   		</table>
+   	 <br/>
+   	 <p>This is a table for the hospitals: </p>
   	 <!-- This is going to be the table for a hospital -->
    	 <table border ="1">
 	   	 <th>id</th>
@@ -19,9 +37,22 @@
 	   	 <th>City</th>
 	   	 <th>postcode</th>
 	   	 <th>Country</th>
-   			 <xsl:for-each select="TransplantDatabase/Hospital"></xsl:for-each>
-   	 </table>
-   </body>
+	   	 <th>Doctors</th>
+   			 <xsl:for-each select="TransplantDatabase/Hospitals/Hospital">
+   			 	<!-- For each table row -->
+   			 	<tr>
+   			 	   <td><i><xsl:value-of select ="@id"/></i></td>
+   			 	   <td><i><xsl:value-of select ="@name"/></i></td>
+   			 	   <td><i><xsl:value-of select ="phoneNumber"/></i></td>
+   			 	   <td><i><xsl:value-of select ="address"/></i></td>
+   			 	   <td><i><xsl:value-of select ="City"/></i></td>
+   			 	   <td><i><xsl:value-of select ="postcode"/></i></td>
+   			 	   <td><i><xsl:value-of select ="Country"/></i></td>
+   			 	   <td><i><xsl:value-of select ="Doctors/Doctor/@id"/></i></td>	 	   			 	   		
+   			 	</tr>   			 
+   			 </xsl:for-each> 		
+   	 	</table>
+   	</body>
    </html>
 </xsl:template>
 </xsl:stylesheet>
