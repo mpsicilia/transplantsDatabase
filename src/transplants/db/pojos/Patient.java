@@ -82,11 +82,12 @@ public class Patient extends Person implements Serializable {
 		LocalDate localAdditionDate= additionDate.toLocalDate();
 		LocalDate today= LocalDate.now();
 		Period daysSinceAddition= Period.between(today, localAdditionDate);
-		Period daysLifeExp= Period.between(localLifeExp, today);
-		long s1= daysLifeExp.getDays();
-		long s2= daysSinceAddition.getDays();
-		long score= s1*9+ s2;
+		long s1= daysSinceAddition.getDays();
+		Period daysLifeExp= Period.between(today, localLifeExp);		
+		long s2= daysLifeExp.getDays();
+		long score= s1+ 1/s2*100;		
 		this.score = score;
+
 		
 	}
 	public long getScore(){
