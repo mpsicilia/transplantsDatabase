@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType (propOrder = {"id", "name", "birthDate", "gender", "weight", "height", "bloodType"})
 public abstract class Person {
 	
 	private static final long serialVersionUID = 6256446381306555938L;
@@ -15,12 +18,19 @@ public abstract class Person {
 	@GeneratedValue(generator="Patients")
 	@TableGenerator(name="Patients", table="sqlite_sequence",
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Patients")
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	protected String name;
+	@XmlElement
 	protected Date birthDate;
+	@XmlElement
 	protected Float weight;
+	@XmlElement
 	protected Float height;
+	@XmlElement
 	protected String gender;
+	@XmlElement
 	protected String bloodType;
 
 	

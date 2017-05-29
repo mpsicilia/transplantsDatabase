@@ -11,8 +11,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import transplants.db.pojos.Animal_tissue;
-import transplants.db.pojos.Hospital;
 import transplants.db.pojos.TransplantDatabase;
 
 public class XMLmanager {
@@ -22,7 +20,7 @@ public class XMLmanager {
 	private Unmarshaller unmarshaller;
 	private File xmlFile = new File ("./xmlFiles/TransplantsDatabase.xml");
 	
-	private XMLHospital XMLhosp = new XMLHospital (this);
+	private XMLDatabase XMLhosp = new XMLDatabase (this);
 	
 	public XMLmanager (){
 		try{
@@ -55,8 +53,8 @@ public class XMLmanager {
 		}
 		return database;		
 	}
-	//method in order to transform an xml into a html
 	
+	//method in order to transform an xml into a html
 	public void simpleTransform(String sourcePath, String xsltPath,String resultDir) {
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		try {

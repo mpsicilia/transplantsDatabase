@@ -17,19 +17,9 @@
                     <registrationNumber>9087</registrationNumber>
                 </Doctor>
             </Doctors>
-        </Hospital>
-        <Hospital id="3" name="boadillalovers">
-            <phoneNumber>349</phoneNumber>
-            <address>bbt</address>
-            <City>ny</City>
-            <postcode>248</postcode>
-            <Country>usa</Country>
-            <Doctors>
-                <Doctor id="3" nameOfDoctor="abraham">
-                    <specialization>traumatology</specialization>
-                    <registrationNumber>9087</registrationNumber>
-                </Doctor>
-            </Doctors>
-        </Hospital>
-    </Hospitals>
-</TransplantDatabase>
+            <Patients>
+                <Patient id="2" name="rodrigo">
+                    <birthDate/>
+                    <gender>m</gender>
+                    <weight>58.0</weight>
+                    

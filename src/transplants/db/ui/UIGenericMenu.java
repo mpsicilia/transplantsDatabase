@@ -110,7 +110,9 @@ public class UIGenericMenu {
 						System.out.println("Introduce the organ that the patient needs.");
 						List<Requested_organ> reqOrg = uiRequested.introduceNewReqOrgan(p, dbManager, jpaManager);
 						Iterator<Requested_organ> it = reqOrg.iterator();
-						List<Requested_organ> newreq = new ArrayList<>();
+						//cometado pq sino al introducir un paciente directamene te llevaa a introducir un tissue aunque no quieras!!
+						//ask the user if the patient needs a tissue
+						/*List<Requested_organ> newreq = new ArrayList<>();
 						while (it.hasNext()) {
 							Requested_organ organ = it.next();
 							if (organ.getName().equalsIgnoreCase("collagen") || organ.getName().equalsIgnoreCase("skin")) {
@@ -118,7 +120,7 @@ public class UIGenericMenu {
 							}
 
 						}
-						uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);
+						uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);*/
 
 						
 
@@ -484,7 +486,7 @@ public class UIGenericMenu {
 						for (Hospital hospital : hosps) {
 							database.addHospital(hospital);
 						}
-						uiHospital.javaToXmlDatabase(dbManager, database);
+						uiHospital.javaToXmlDatabase(dbManager, jpaManager, database);
 						break;
 					case 2:
 						uiHospital.xmlToJavaDatabase(dbManager, database);

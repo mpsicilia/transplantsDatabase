@@ -6,11 +6,11 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import transplants.db.pojos.TransplantDatabase;
 
-public class XMLHospital {
+public class XMLDatabase {
 
 	private XMLmanager xml;
 
-	public XMLHospital(XMLmanager xmlmanager) {
+	public XMLDatabase(XMLmanager xmlmanager) {
 		this.xml = xmlmanager;
 
 	}

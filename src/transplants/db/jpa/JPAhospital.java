@@ -122,7 +122,7 @@ public class JPAhospital {
 					.createNativeQuery("SELECT * FROM Patients AS Pat JOIN Hospitals AS Hosp ON Pat.hospital_id=Hosp.id "
 					+ "WHERE Hosp.name LIKE ? ", Patient.class);
 			q.setParameter(1,hospit.getName());
-			patients = (List<Patient>) q.getResultList();
+			patients = ((List<Patient>) q.getResultList());
 			jpaManager.getEManager().getTransaction().commit();
 
 		} catch (Exception e) {

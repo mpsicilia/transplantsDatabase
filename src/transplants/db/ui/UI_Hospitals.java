@@ -189,7 +189,7 @@ public class UI_Hospitals {
 		return listpatients;
 	}
 	
-	public void javaToXmlDatabase (DBManager dbManager, TransplantDatabase data){
+	public void javaToXmlDatabase (DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data){
 		try{
 			
 			//Get all the hospitals to marshall
@@ -206,7 +206,13 @@ public class UI_Hospitals {
 					while (itD.hasNext()){
 						Doctor d = itD.next();
 						boolean doctorOK = h.addDoctor(d);
-					}	
+					}
+				List<Patient> patientsOfHosp = jpaManager.searchallpatients(h);
+				Iterator<Patient> itP = patientsOfHosp.iterator();
+					while(itP.hasNext()){
+						Patient p = itP.next();
+						boolean patientOK = h.addPatient(p);
+					}
 				counterH++;
 			}
 			

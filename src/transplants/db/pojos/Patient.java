@@ -3,6 +3,8 @@ package transplants.db.pojos;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.Duration;
@@ -13,13 +15,21 @@ import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "Patients")
+@XmlAccessorType (XmlAccessType.FIELD)
+@XmlType(propOrder = {"pathology", "additionDate", "lifeExpectancy", "score", "requested_organ", "hospital", "doctors"})
 public class Patient extends Person implements Serializable {
 
 	private static final long serialVersionUID = 5283904286714952072L;
 
+	@XmlElement
 	private Date lifeExpectancy;
+	@XmlElement
 	private String pathology;
+	@XmlElement
 	private Date additionDate;
+	@XmlElement
+	private long score;
+	
 	@ManyToMany
 	//the attribute above joins both tables creating doctors/patients
 	@JoinTable(name="doctors_patients",
@@ -38,7 +48,7 @@ public class Patient extends Person implements Serializable {
 	
 	@OneToMany(mappedBy="patient")
 	private List<Requested_organ> requested_organ;
-	private long score;
+	
 	public Patient(){
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
