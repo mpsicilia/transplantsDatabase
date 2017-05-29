@@ -7,7 +7,9 @@
    <head><title><b>Database for organs transplant.</b></title></head>
    <body>
    	 <h3>Purpose of this database:</h3>
-   	 <p>This database was created in order to speed up transplantations in order to facilitated work in hospitals.</p>
+   	 <p>This database was created in order to speed up transplantations in order to facilitated work in hospitals.
+   	 For example, here we are going to illustrate the information of the hospitals in which transplants can take
+   	 place and the doctors that work on them in a really graphical way.</p>
    	 <!-- This is an empty line before we actually put our tables on it -->
    	 <br/>
    	 <p>This is a table for the doctors: </p>

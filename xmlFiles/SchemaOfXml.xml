@@ -4,8 +4,6 @@
 	<!ELEMENT TransplantDatabase (Hospitals+)> 
 	<!-- I'm puttig the '+' because the transplant contains 1 or more hospitals -->
 	<!ELEMENT Hospital (phoneNumber, address, City, postcode,Country, Doctors)>
-	<!-- We are doing it with pointers because its important to remark the ids
-		this is because a doctor can be working in different hospitals-->
 	<!-- I cannot put the id as ID because if I do that they must have differnt ids
 	     that is why I put them as CDATA-->	
 	<!ATTLIST Hospital id CDATA #REQUIRED  name CDATA #REQUIRED>
