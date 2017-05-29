@@ -491,7 +491,8 @@ public class UIGenericMenu {
 						break;
 					case 3:
 						// Hay que coger los paths
-						uiHospital.xmlToHtml(sourcePath, xsltPath, resultDir);
+						uiHospital.xmlToHtml("./xmlFiles/TransplantsDatabase.xml", "./xmlFiles/TransplantDB.xslt", 
+								    "./xmlFiles/ExternalDatabase.html");
 					}
 
 					break;
