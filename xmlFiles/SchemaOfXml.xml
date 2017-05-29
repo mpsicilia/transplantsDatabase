@@ -17,5 +17,9 @@
 	<!ELEMENT Doctor (specialization, registrationNumber)>
 	<!ATTLIST Doctor id CDATA #REQUIRED  name CDATA #REQUIRED  >
 	<!ELEMENT specialization (#PCDATA)> 
-	<!ELEMENT registrationNumber (#PCDATA)> 
+	<!ELEMENT registrationNumber (#PCDATA)>
+	<!--Because a hosp can contain 0 or more patients--> 
+	<!ELEMENT Patients (Patient)*> 
+	<!ATTLIST Patients id CDATA #REQUIRED name CDATA #REQUIRED>
+
 ]>

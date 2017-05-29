@@ -66,11 +66,14 @@ public class UIGenericMenu {
 			}
 
 			while (true) {
-				System.out.println("\nBASIC MENU: ");
+				System.out.println("\n\n\n");
+				System.out.println("\n  ************   BASIC MENU   ************   ");
+				System.out.println("____________________________________________________");				
 				System.out.println("1. Introduce new information to the database. ");
 				System.out.println("2. Search for specific information in the database. ");
 				System.out.println("3. Work with XML. ");
 				System.out.println("4. Exit from the database. ");
+				System.out.println("____________________________________________________");
 
 				do {
 					System.out.println("\nChoose an option[1-4]:");

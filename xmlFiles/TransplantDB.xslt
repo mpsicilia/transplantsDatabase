@@ -18,13 +18,14 @@
 	   	 	<th>nameOfDoctor</th>
 	   	 	<th>specialization</th>
 	   	    <th>registrationNumber</th>
+	   	    <th>Hospitals</th>
 	   	 		<xsl:for-each select= "TransplantDatabase/Hospitals/Hospital/Doctors/Doctor">
 	   	 			<tr>
 	   	 				<td><i><xsl:value-of select ="@id"/></i></td>
 			   			<td><i><xsl:value-of select ="@nameOfDoctor"/></i></td>
 			   			<td><i><xsl:value-of select ="specialization"/></i></td>
 			   			<td><i><xsl:value-of select ="registrationNumber"/></i></td>
-			   			   	
+			   			<td><i><xsl:value-of select ="Hospitals/Hospital/@id"/></i></td>
 	   	 			</tr>	   						
    				</xsl:for-each>
    		</table>
@@ -39,7 +40,6 @@
 	   	 <th>City</th>
 	   	 <th>postcode</th>
 	   	 <th>Country</th>
-	   	 <th>Doctors</th>
    			 <xsl:for-each select="TransplantDatabase/Hospitals/Hospital">
    			 	<!-- For each table row -->
    			 	<tr>
@@ -49,8 +49,7 @@
    			 	   <td><i><xsl:value-of select ="address"/></i></td>
    			 	   <td><i><xsl:value-of select ="City"/></i></td>
    			 	   <td><i><xsl:value-of select ="postcode"/></i></td>
-   			 	   <td><i><xsl:value-of select ="Country"/></i></td>
-   			 	   <td><i><xsl:value-of select ="Doctors/Doctor/@id"/></i></td>	 	   			 	   		
+   			 	   <td><i><xsl:value-of select ="Country"/></i></td> 	   			 	   		
    			 	</tr>   			 
    			 </xsl:for-each> 		
    	 	</table>
