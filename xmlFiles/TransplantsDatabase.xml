@@ -8,18 +8,65 @@
             <postcode>4923</postcode>
             <Country>spain</Country>
             <Doctors>
-                <Doctor id="2" nameOfDoctor="rafa">
+                <Doctor id="2" name="rafa">
                     <specialization>cardio</specialization>
                     <registrationNumber>3245948</registrationNumber>
                 </Doctor>
-                <Doctor id="3" nameOfDoctor="abraham">
+                <Doctor id="3" name="abraham">
                     <specialization>traumatology</specialization>
                     <registrationNumber>9087</registrationNumber>
                 </Doctor>
             </Doctors>
             <Patients>
                 <Patient id="2" name="rodrigo">
-                    <birthDate/>
+                    <birthDate>1986-05-09</birthDate>
                     <gender>m</gender>
                     <weight>58.0</weight>
-                    
+                    <height>178.0</height>
+                    <bloodType>a</bloodType>
+                    <pathology>sfd</pathology>
+                    <additionDate>2001-04-07</additionDate>
+                    <lifeExpectancy>2018-04-07</lifeExpectancy>
+                    <score>-22</score>
+                </Patient>
+                <Patient id="52" name="pol">
+                    <birthDate>2000-02-04</birthDate>
+                    <gender>m</gender>
+                    <weight>45.0</weight>
+                    <height>125.0</height>
+                    <bloodType>b</bloodType>
+                    <pathology>lkd</pathology>
+                    <additionDate>2015-05-08</additionDate>
+                    <lifeExpectancy>2020-04-07</lifeExpectancy>
+                    <score>-21</score>
+                </Patient>
+            </Patients>
+        </Hospital>
+        <Hospital id="3" name="boadillalovers">
+            <phoneNumber>349</phoneNumber>
+            <address>bbt</address>
+            <City>ny</City>
+            <postcode>248</postcode>
+            <Country>usa</Country>
+            <Doctors>
+                <Doctor id="3" name="abraham">
+                    <specialization>traumatology</specialization>
+                    <registrationNumber>9087</registrationNumber>
+                </Doctor>
+            </Doctors>
+            <Patients>
+                <Patient id="102" name="julio">
+                    <birthDate>1985-04-07</birthDate>
+                    <gender>m</gender>
+                    <weight>45.0</weight>
+                    <height>123.0</height>
+                    <bloodType>b</bloodType>
+                    <pathology>idk</pathology>
+                    <additionDate>2015-04-06</additionDate>
+                    <lifeExpectancy>2018-05-06</lifeExpectancy>
+                    <score>-24</score>
+                </Patient>
+            </Patients>
+        </Hospital>
+    </Hospitals>
+</TransplantDatabase>

@@ -5,6 +5,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import transplants.db.xml.SQLDateAdapter;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -22,7 +25,7 @@ public abstract class Person {
 	private Integer id;
 	@XmlAttribute
 	protected String name;
-	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	protected Date birthDate;
 	@XmlElement
 	protected Float weight;

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.*;
 @Entity
 @Table(name = "doctors")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "nameOfDoctor", "specialization", "registrationNumber", "hospital", "patients"})
+@XmlType(propOrder = {"id", "name", "specialization", "registrationNumber"})
 public class Doctor implements Serializable{
 
 	private static final long serialVersionUID = -1701687912909197672L;
@@ -25,11 +25,13 @@ public class Doctor implements Serializable{
 	@XmlElement
 	private String specialization;
 	@XmlAttribute
-	private String nameOfDoctor;
+	private String name;
 	
-	@ManyToMany(mappedBy= "doctors") 	
+	@ManyToMany(mappedBy= "doctors") 
+	@XmlTransient
 	private List<Hospital> hospital;
 	@ManyToMany(mappedBy = "doctors")
+	@XmlTransient
 	private List<Patient> patients;
 
 	//our default constructor
@@ -39,14 +41,14 @@ public class Doctor implements Serializable{
 	}
 	
 	public Doctor(String nameOfDoctor,String registrationNumber, String specialization){
-		this.nameOfDoctor=nameOfDoctor;
+		this.name=nameOfDoctor;
 		this.registrationNumber=registrationNumber;
 		this.specialization=specialization;		
 	}
 	
 	public Doctor(Integer id, String nameOfDoctor,String registrationNumber, String specialization){
 		this.id=id;
-		this.nameOfDoctor=nameOfDoctor;
+		this.name=nameOfDoctor;
 		this.registrationNumber=registrationNumber;
 		this.specialization=specialization;
 		
@@ -98,10 +100,10 @@ public class Doctor implements Serializable{
 		this.specialization = specialization;
 	}
 	public String getNameOfDoctor() {
-		return nameOfDoctor;
+		return name;
 	}
 	public void setNameOfDoctor(String nameOfDoctor) {
-		this.nameOfDoctor = nameOfDoctor;
+		this.name = nameOfDoctor;
 	}
 
 	public List<Patient> getPatients(){
@@ -150,7 +152,7 @@ public class Doctor implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Doctor [id=" + id + ", nameOfDoctor=" + nameOfDoctor + ", registrationNumber=" + registrationNumber + ", "
+		return "Doctor [id=" + id + ", nameOfDoctor=" + name + ", registrationNumber=" + registrationNumber + ", "
 				+ "specialization=" + specialization + "]";
 	}
 	

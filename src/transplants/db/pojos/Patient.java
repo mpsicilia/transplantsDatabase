@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import transplants.db.xml.SQLDateAdapter;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -16,16 +19,16 @@ import java.time.temporal.ChronoUnit;
 @Entity
 @Table(name = "Patients")
 @XmlAccessorType (XmlAccessType.FIELD)
-@XmlType(propOrder = {"pathology", "additionDate", "lifeExpectancy", "score", "requested_organ", "hospital", "doctors"})
+@XmlType(propOrder = {"pathology", "additionDate", "lifeExpectancy", "score"})
 public class Patient extends Person implements Serializable {
 
 	private static final long serialVersionUID = 5283904286714952072L;
 
-	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date lifeExpectancy;
 	@XmlElement
 	private String pathology;
-	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date additionDate;
 	@XmlElement
 	private long score;
@@ -39,14 +42,18 @@ public class Patient extends Person implements Serializable {
 	//inversejoincolumns makes reference to the opposite class-->doctor
 	//Patient has a list of doctors
 	//Doctor has a list of patients
+	@XmlTransient //to avoid infinite loops, bc a patient has a list of doctors and the doctor has a list of patients and this will never end
 	private List<Doctor> doctors;
 	
 	@ManyToOne(fetch = FetchType.LAZY)//only get the hospital when u ask for it (with gethospital)
 	@JoinColumn(name = "hospital_id") // the FK
+	//Hospitals have list of patients and patient contains hospital, I made it transient to avoid an infinite loop
+	//Each hospital shows its patients
+	@XmlTransient 
 	private Hospital hospital;
 	
-	
 	@OneToMany(mappedBy="patient")
+	@XmlTransient
 	private List<Requested_organ> requested_organ;
 	
 	public Patient(){

@@ -39,7 +39,10 @@ public class UIGenericMenu {
 		UI_AnimalTissue uiAnimalT = new UI_AnimalTissue();
 		UI_RequestedOrgan uiRequested = new UI_RequestedOrgan();
 
+		
 		try {
+			/*DISCOMMENT IF NEEDED*/
+			/*
 			System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
 			String drop = console.readLine();
 			if (drop.equalsIgnoreCase("Y")) {
@@ -63,7 +66,7 @@ public class UIGenericMenu {
 				}
 			} else {
 				System.out.println("Tables should be already created");
-			}
+			}*/
 
 			while (true) {
 				System.out.println("\n\n\n");
@@ -475,8 +478,6 @@ public class UIGenericMenu {
 					break;
 
 				case 3:
-					// In rodrigos, the xml thing is done with jpa, im going to
-					// try to do it with jdbc
 					System.out.println("1. Save the database information in the XML file.");
 					System.out.println("2. Store information in the database from the XML file.");
 					System.out.println("3. Covert the XML into HTML. ");

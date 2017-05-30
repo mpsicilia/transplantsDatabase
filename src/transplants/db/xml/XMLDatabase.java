@@ -18,7 +18,7 @@ public class XMLDatabase {
 	public boolean javaToXmlDatabase(Marshaller marsh, TransplantDatabase dataH, File fileXML) {
 		try {
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
+			System.out.println("Preparing for marshal. ");
 			marsh.marshal(dataH, fileXML);
 
 			return true;

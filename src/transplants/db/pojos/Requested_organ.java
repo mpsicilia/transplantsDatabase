@@ -32,7 +32,7 @@ public class Requested_organ implements Serializable {
 	
 	@ManyToMany
 	//the attribute above joins both tables creating requested_organs/animals
-	@JoinTable(name="Requestedorgan_animaltissues",
+	@JoinTable(name="RequestedOrgan_AnimalsTissues",
 		joinColumns={@JoinColumn(name="requested_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="animal_id", referencedColumnName="id")})
 

@@ -118,9 +118,8 @@ public class JPAhospital {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
 			jpaManager.getEManager().getTransaction().begin();
-			Query q = jpaManager.getEManager()
-					.createNativeQuery("SELECT * FROM Patients AS Pat JOIN Hospitals AS Hosp ON Pat.hospital_id=Hosp.id "
-					+ "WHERE Hosp.name LIKE ? ", Patient.class);
+			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Patients AS Pat JOIN Hospitals AS Hosp "
+					+ "ON Pat.hospital_id=Hosp.id WHERE Hosp.name LIKE ?", Patient.class);
 			q.setParameter(1,hospit.getName());
 			patients = ((List<Patient>) q.getResultList());
 			jpaManager.getEManager().getTransaction().commit();

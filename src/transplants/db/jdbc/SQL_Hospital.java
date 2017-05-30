@@ -210,29 +210,9 @@ public class SQL_Hospital {
 		return false;
 	}
 	
-	/*public boolean createDatabase (TransplantDatabase database){
-		try{
-			Statement stm = dmanager.getC().createStatement();
-			String sql = "INSERT INTO TransplantDatabase (id, nameOfDatabase) "
-					+ "VALUES (" + database.getIdDatabase() + " , " + database.getNameOfDatabase() + ");";
-			stm.executeUpdate(sql);
-			stm.close();
-			return true;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}*/
-
+	
 	public void createTable() {
 		try {
-			//database table
-			Statement stmt3 = dmanager.getC().createStatement();
-			String database = "CREATE TABLE TransplantDatabase "
-					+ "(id INTEGER PRIMARY KEY,"
-					+ "nameOfDatabase TEXT)";
-			stmt3.executeUpdate(database);
-			stmt3.close();
 			
 			Statement stmt1 = dmanager.getC().createStatement();
 			String hospitals = "CREATE TABLE Hospitals " 
@@ -243,7 +223,7 @@ public class SQL_Hospital {
 					+ " city 			TEXT,              "
 					+ " postcode		TEXT,              " 
 					+ " country			TEXT     NOT NULL)";
-			//faltaria a�adir la FK de datbase
+			
 			stmt1.executeUpdate(hospitals);
 			stmt1.close();
 
@@ -254,15 +234,6 @@ public class SQL_Hospital {
 					+ "PRIMARY KEY (doctor_id,hospital_id))";
 			stmt2.executeUpdate(hospitalsDoctors);
 			stmt2.close();
-
-
-			/*//database table
-			Statement stmt3 = dmanager.getC().createStatement();
-			String database = "CREATE TABLE TransplantDatabase "
-					+ "(id INTEGER PRIMARY KEY,"
-					+ "nameOfDatabase TEXT)";
-			stmt3.executeUpdate(database);
-			stmt3.close();*/
 
 			
 			// initialize primary key
@@ -288,10 +259,6 @@ public class SQL_Hospital {
 			stm2.executeUpdate(drop2);
 			stm2.close();
 			
-			Statement stm3 = dmanager.getC().createStatement();
-			String drop3 = "DROP TABLE TransplantDatabase";
-			stm3.executeUpdate(drop3);
-			stm3.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

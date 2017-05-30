@@ -16,8 +16,6 @@ import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "Animal_tissues")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType (propOrder = {"name", "pathology", "typeOfTissue", "lifeExpTissue", "requested_organs"})
 public class Animal_tissue implements Serializable {
 
 	private static final long serialVersionUID = -7167881940806327162L;
@@ -25,20 +23,13 @@ public class Animal_tissue implements Serializable {
 	@GeneratedValue(generator="Animal_tissues")
 	@TableGenerator(name="Animal_tissues", table="sqlite_sequence",
 	    pkColumnName="name", valueColumnName="seq", pkColumnValue="Animal_tissues")
-	@XmlTransient
 	private Integer id;
-	@XmlAttribute
 	private String name;
-	@XmlElement
 	private String typeOfTissue;
-	@XmlElement
 	private String pathology;
-	@XmlElement
 	private Date lifeExpTissue;
 	
 	@ManyToMany(mappedBy = "animalTissues") //bc it is mapped by the list of the other class. ver apuntes
-	@XmlElement (name = "Requested organ")
-	@XmlElementWrapper (name  = "Requested organs")
 	private List<Requested_organ> requested_organs;
 	
 	
