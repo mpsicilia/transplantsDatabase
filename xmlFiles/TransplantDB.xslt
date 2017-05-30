@@ -25,7 +25,7 @@
 			   			<td><i><xsl:value-of select ="@nameOfDoctor"/></i></td>
 			   			<td><i><xsl:value-of select ="specialization"/></i></td>
 			   			<td><i><xsl:value-of select ="registrationNumber"/></i></td>
-			   			<td><i><xsl:value-of select ="Hospitals/Hospital/@id"/></i></td>
+			   			<!-- <td><i><xsl:value-of select ="Hospitals/Hospital/@id"/></i></td>-->
 	   	 			</tr>	   						
    				</xsl:for-each>
    		</table>
@@ -50,6 +50,37 @@
    			 	   <td><i><xsl:value-of select ="City"/></i></td>
    			 	   <td><i><xsl:value-of select ="postcode"/></i></td>
    			 	   <td><i><xsl:value-of select ="Country"/></i></td> 	   			 	   		
+   			 	</tr>   			 
+   			 </xsl:for-each> 		
+   	 	</table>
+   	 <br/>
+   	 <p>This is a table for the patients: </p>
+   	 <table border ="1">
+	   	 <th>id</th>
+	   	 <th>name</th>
+	   	 <th>birthDate</th>
+	   	 <th>gender</th>
+	   	 <th>weight</th>
+	   	 <th>height</th>
+	   	 <th>bloodType</th>
+	   	 <th>pathology</th>
+	   	 <th>additionDate</th>
+	   	 <th>lifeExpectancy</th>
+	   	 <th>score</th>
+   			 <xsl:for-each select="TransplantDatabase/Hospitals/Hospital/Patients/Patient">
+   			 	<!-- For each table row -->
+   			 	<tr>
+   			 	   <td><i><xsl:value-of select ="@id"/></i></td>
+   			 	   <td><i><xsl:value-of select ="@name"/></i></td>
+   			 	   <td><i><xsl:value-of select ="birthDate"/></i></td>
+   			 	   <td><i><xsl:value-of select ="gender"/></i></td>
+   			 	   <td><i><xsl:value-of select ="weight"/></i></td>
+   			 	   <td><i><xsl:value-of select ="height"/></i></td>
+   			 	   <td><i><xsl:value-of select ="bloodType"/></i></td> 	   	
+   			 	   <td><i><xsl:value-of select ="pathology"/></i></td> 
+   			 	   <td><i><xsl:value-of select ="additionDate"/></i></td> 
+   			 	   <td><i><xsl:value-of select ="lifeExpectancy"/></i></td> 
+   			 	   <td><i><xsl:value-of select ="score"/></i></td> 	 	 	 	 		 	   		
    			 	</tr>   			 
    			 </xsl:for-each> 		
    	 	</table>

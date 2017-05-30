@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<!DOCTYPE TransplantDatabase [
-	<!ELEMENT TransplantDatabase (Hospitals+)> 
+<!--  --><!DOCTYPE TransplantDatabase [
+	<!ELEMENT TransplantDatabase (Hospitals+)>
+	<!ATTLIST TransplantDatabase nameOfDatabase CDATA #REQUIRED>
+	<!ELEMENT Hospitals (Hospital+)>
 	<!-- I'm puttig the '+' because the transplant contains 1 or more hospitals -->
-	<!ELEMENT Hospital (phoneNumber, address, City, postcode,Country, Doctors)>
+	<!ELEMENT Hospital (phoneNumber, address, City, postcode,Country, Doctors, Patients)>
 	<!-- I cannot put the id as ID because if I do that they must have differnt ids
 	     that is why I put them as CDATA-->	
 	<!ATTLIST Hospital id CDATA #REQUIRED  name CDATA #REQUIRED>
@@ -18,8 +20,19 @@
 	<!ATTLIST Doctor id CDATA #REQUIRED  name CDATA #REQUIRED  >
 	<!ELEMENT specialization (#PCDATA)> 
 	<!ELEMENT registrationNumber (#PCDATA)>
-	<!--Because a hosp can contain 0 or more patients--> 
-	<!ELEMENT Patients (Patient)*> 
-	<!ATTLIST Patients id CDATA #REQUIRED name CDATA #REQUIRED>
-
+	<!--This is because a hospital is going to contain one or more patients-->
+	<!ELEMENT Patients (Patient+)>
+	<!ATTLIST Patient id CDATA #REQUIRED name CDATA #REQUIRED>
+	<!ELEMENT Patient (birthDate, gender, weight, height, bloodType, pathology, 
+						additionDate, lifeExpectancy, score)>
+	<!--EL DATE LO HACEMOS IGUAL??????-->
+	<!ELEMENT birthDate (#PCDATA)>
+	<!ELEMENT gender (#PCDATA)>
+	<!ELEMENT weight (#PCDATA)>
+	<!ELEMENT height (#PCDATA)>
+	<!ELEMENT bloodType (#PCDATA)>
+	<!ELEMENT pathology (#PCDATA)>
+	<!ELEMENT additionDate (#PCDATA)>
+	<!ELEMENT lifeExpectancy (#PCDATA)>
+	<!ELEMENT score (#PCDATA)>
 ]>

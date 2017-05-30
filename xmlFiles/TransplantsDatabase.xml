@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TransplantDatabase nameOfDatabase="TransplantDatabase">
-    <Hospitals>
+    <Hospitals >
         <Hospital id="2" name="cuchh">
             <phoneNumber>09</phoneNumber>
             <address>monteprincipe</address>
@@ -9,7 +9,7 @@
             <Country>spain</Country>
             <Doctors>
                 <Doctor id="2" name="rafa">
-                    <specialization>cardio</specialization>
+                    <specialization >cardio</specialization>
                     <registrationNumber>3245948</registrationNumber>
                 </Doctor>
                 <Doctor id="3" name="abraham">
