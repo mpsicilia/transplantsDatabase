@@ -373,7 +373,17 @@ public class JPAmanager implements DBManagerInterface {
 		
 		return patients;
 	}
-
+	//used in unmarshall
+	public Patient getPatientById (Integer idP){
+		Patient pat = new Patient();
+		try{
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return pat;
+	}
+	
 	@Override
 	public Integer idRequestedOrgan(Requested_organ r) {
 		// TODO Auto-generated method stub

@@ -499,7 +499,7 @@ public class UIGenericMenu {
 						uiHospital.javaToXmlDatabase(dbManager, jpaManager, database);
 						break;
 					case 2:
-						uiHospital.xmlToJavaDatabase(dbManager, database);
+						uiHospital.xmlToJavaDatabase(dbManager, jpaManager, database);
 						break;
 					case 3:
 						// Hay que coger los paths

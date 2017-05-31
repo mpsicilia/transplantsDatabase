@@ -13,7 +13,7 @@
                     <registrationNumber>3245948</registrationNumber>
                 </Doctor>
                 <Doctor id="3" name="abraham">
-                    <specialization>traumatology</specialization>
+                    <specialization>obstetrics</specialization>
                     <registrationNumber>9087</registrationNumber>
                 </Doctor>
             </Doctors>
@@ -24,7 +24,7 @@
                     <weight>58.0</weight>
                     <height>178.0</height>
                     <bloodType>a</bloodType>
-                    <pathology>sfd</pathology>
+                    <pathology>nephritis</pathology>
                     <additionDate>2001-04-07</additionDate>
                     <lifeExpectancy>2018-04-07</lifeExpectancy>
                     <score>-22</score>
@@ -50,7 +50,7 @@
             <Country>usa</Country>
             <Doctors>
                 <Doctor id="3" name="abraham">
-                    <specialization>traumatology</specialization>
+                    <specialization>obstetrics</specialization>
                     <registrationNumber>9087</registrationNumber>
                 </Doctor>
             </Doctors>
