@@ -24,7 +24,7 @@ public class UI_Hospitals {
 	public UI_Hospitals(){		
 	}
 	
-	
+	//M: usssed
 	public void introduceNewHospital(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data){
 		try{
 			System.out.print("Name: ");
@@ -72,7 +72,7 @@ public class UI_Hospitals {
 		}
 	}
 	
-		
+	//M:used by case 2	
 	public List<Hospital> searchHospital(DBManager dbManager){
 		try{
 			System.out.println("Introduce the name of the hospital: ");
@@ -85,7 +85,7 @@ public class UI_Hospitals {
 		return null; 
 	}
 	
-	
+	//M: in use
 	public void updateHospital(Hospital hosp, DBManager dbManager){
 		boolean again = true;	
 		try{
@@ -144,7 +144,7 @@ public class UI_Hospitals {
 			}
 	}
 	
-	
+	//M: useddd
 	public void deleteHospital (Hospital hosp, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(hosp);
@@ -158,7 +158,7 @@ public class UI_Hospitals {
 			ex.printStackTrace();
 		}
 	}
-		
+	//M: used
 	public void DoctorHospital (String docName, DBManager dbManager){
 		try{
 			List<Hospital> hospitals = dbManager.hospitalsOfDoctor(docName);
@@ -175,6 +175,7 @@ public class UI_Hospitals {
 		}
 	}
 
+	//M: useddd
 	public List<Patient> seeallpatients(JPAmanager jpamanager,Hospital hosp){
 		List<Patient> listpatients=new ArrayList<Patient>();
 		try{

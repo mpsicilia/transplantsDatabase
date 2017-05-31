@@ -16,7 +16,7 @@ public class SQL_Doctor {
 	public SQL_Doctor(DBManager dbmanager){
 		this.dbManager= dbmanager;
 	}
-	
+	//M: used
 	public boolean insertDoctor(Doctor doctor){		
 		try {
 			Statement stmt= dbManager.getC().createStatement();
@@ -31,6 +31,7 @@ public class SQL_Doctor {
 		}
 		return false;	
 	}
+	//M: used
 	public Integer getIdOfLastDoctor(Doctor doctor){
 		Doctor doctorToShow= new Doctor();
 		try {
@@ -54,7 +55,7 @@ public class SQL_Doctor {
 		}
 		return doctorToShow.getId();
 	}
-	
+	//M: used
 	public List<Doctor> searchDoctor(String nameDoct) {
 		List<Doctor> lookForDoctor = new ArrayList<Doctor>();
 		try {
@@ -98,7 +99,7 @@ public class SQL_Doctor {
 		}
 		return false;
 	}
-	
+	//M: in use
 	public boolean deleteDoctor (Doctor doctor){
 		try{
 			String sql = "DELETE FROM Doctors WHERE id=?";

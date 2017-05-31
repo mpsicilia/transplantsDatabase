@@ -39,13 +39,13 @@ public class Doctor implements Serializable{
 		hospital= new ArrayList<Hospital>();
 		patients =new ArrayList<Patient>();
 	}
-	
+	//M: used
 	public Doctor(String nameOfDoctor,String registrationNumber, String specialization){
 		this.name=nameOfDoctor;
 		this.registrationNumber=registrationNumber;
 		this.specialization=specialization;		
 	}
-	
+	//M: used
 	public Doctor(Integer id, String nameOfDoctor,String registrationNumber, String specialization){
 		this.id=id;
 		this.name=nameOfDoctor;

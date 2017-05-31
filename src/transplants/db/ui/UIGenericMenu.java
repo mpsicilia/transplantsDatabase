@@ -146,7 +146,7 @@ public class UIGenericMenu {
 					int option2 = Integer.parseInt(read2);
 
 					switch (option2) {
-					case 1:
+					case 1: //revision done
 						List<Hospital> hosps = uiHospital.searchHospital(dbManager);
 						Iterator<Hospital> it = hosps.iterator();
 						int counter = 1;
@@ -206,7 +206,7 @@ public class UIGenericMenu {
 							break;
 						}
 
-					case 2:
+					case 2://revision completed
 						List<Doctor> doct = uiDoctor.searchDoctor(dbManager);
 						Iterator<Doctor> it1 = doct.iterator();
 						int counterDoctor = 1;

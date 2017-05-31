@@ -60,7 +60,7 @@ public class Hospital implements Serializable{
 		this.doctors= new ArrayList<Doctor>();
 		this.patients= new ArrayList<Patient>();
 		}
-	
+	//M: useede
 	public Hospital(String name, String phone_number, String address, String city, String postcode,
 			String country) {
 		this.name = name;
@@ -77,7 +77,7 @@ public class Hospital implements Serializable{
 	public Hospital (String name){
 		this.name=name;
 	}
-	
+	//M: it's obvious but used :)
 	public Hospital(int id, String name, String phone_number, String address, String city, String postcode,
 			String country) {
 		this.id=id;

@@ -15,6 +15,7 @@ public class JPAhospital {
 		this.jpaManager = jpamanager;
 
 	}
+	//M: used
 	public boolean insert(Hospital hosp) {
 
 		try {
@@ -100,7 +101,8 @@ public class JPAhospital {
 		}
 		return false;
 	}
-	//NEW-->it returns all the patients a hospital has
+	//M: used
+	//it returns all the patients a hospital has
 	public List<Patient> searchAllPatients(Hospital hospit){
 		List<Patient> patients = new ArrayList<Patient>();
 		try {

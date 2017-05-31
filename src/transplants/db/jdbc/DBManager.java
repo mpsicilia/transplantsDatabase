@@ -93,6 +93,7 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	// insertions
+	//M: used by doctor
 	@Override
 	public boolean insert(Object obj) {
 
@@ -129,6 +130,7 @@ public class DBManager implements DBManagerInterface {
 	
 
 	// PKs
+	//M: used
 	@Override
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2) {
 		return hosp.insertHospitalsDoctors(id1, id2);
@@ -167,6 +169,7 @@ public class DBManager implements DBManagerInterface {
 
 	// searches
 	@Override
+	//M: in use
 	public List<Hospital> searchHosp(String name) {
 
 		try {
@@ -190,6 +193,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}*/
 
+	//M: used
 	@Override
 	public List<Doctor> searchDoctor(String name) {
 		try {
@@ -247,7 +251,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	// selects
+	//M: used
 	@Override
 	public List<Hospital> selectAllHospitals() {
 		return hosp.selectAllHospitals();
@@ -268,6 +272,7 @@ public class DBManager implements DBManagerInterface {
 		return org.CompatibilityTest(organ);
 	}
 
+	//M: using hospital and doctor
 	@Override
 	public boolean update(Object obj) {
 		try {
@@ -298,6 +303,7 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 
+	//M: hospital uses it + doctor
 	@Override
 	public boolean delete(Object obj) {
 		try {
@@ -370,6 +376,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
+	//M: used
 	@Override
 	public Integer getIdOfDoctor(Doctor doctor) {
 		return doct.getIdOfLastDoctor(doctor);
@@ -435,7 +442,7 @@ public class DBManager implements DBManagerInterface {
 	
 
 	@Override
-
+	//M: in use
 	public List<Hospital> hospitalsOfDoctor(String name) {
 		List<Hospital> hospitals = new ArrayList<Hospital>();
 		try {

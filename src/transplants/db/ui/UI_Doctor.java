@@ -17,6 +17,7 @@ public class UI_Doctor {
 	public UI_Doctor() {
 	}
 
+	//M: used ;)
 	// This class is going to work with JDBC
 	public void introduceNewDoctor(DBManager dbManager) {
 		try {
@@ -67,6 +68,7 @@ public class UI_Doctor {
 		}
 	}
 
+	//M: used
 	public List<Doctor> searchDoctor(DBManager dbManager) {
 		try {
 			System.out.println("Introduce the name of the doctor: ");
@@ -79,6 +81,7 @@ public class UI_Doctor {
 		return null;
 	}
 
+	//M: used
 	public void updateDoctor(Doctor doct, DBManager dbManager) {
 		boolean again = true;
 		try {
@@ -120,6 +123,7 @@ public class UI_Doctor {
 		}
 	}
 
+	//M: used
 	public void deleteDoctor(Doctor doc, DBManager dbManager) {
 		try {
 			boolean deleted = dbManager.delete(doc);

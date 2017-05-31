@@ -33,6 +33,7 @@ public class SQL_Hospital {
 		return false;
 	}
 
+	//M: in use
 	public List<Hospital> searchHospital(String name) {
 		List<Hospital> lookForHospital = new ArrayList<Hospital>();
 		try {
@@ -78,6 +79,7 @@ public class SQL_Hospital {
 		return hosp;
 	}*/
 
+	//M: used
 	// method that tell us given a specific doctor, in which hospital he works
 	public List<Hospital> searchHospitalsOfDoctor(String doctorName) {
 		List<Hospital> hosps = new ArrayList<Hospital>();
@@ -128,6 +130,7 @@ public class SQL_Hospital {
 		return hosp;
 	}
 
+	//M: used
 	public boolean updateHospital(Hospital hosp) {
 		try {
 			String sql = "UPDATE Hospitals SET name=?, phoneNumber=?, address=?,"
@@ -152,6 +155,7 @@ public class SQL_Hospital {
 		return false;
 	}
 
+	//M: use
 	public boolean deleteHospital(Hospital hospital) {
 		try {
 			String sql = "DELETE FROM Hospitals WHERE id=?";
@@ -169,6 +173,7 @@ public class SQL_Hospital {
 		return false;
 	}
 
+	//M: used
 	public List<Hospital> selectAllHospitals() {
 		List<Hospital> lookForHospital = new ArrayList<Hospital>();
 		try {
@@ -196,6 +201,7 @@ public class SQL_Hospital {
 		return lookForHospital;
 	}
 
+	//M: used
 	public boolean insertHospitalsDoctors(Integer hospitalId, Integer doctorId) {
 		try {
 			Statement st = dmanager.getC().createStatement();

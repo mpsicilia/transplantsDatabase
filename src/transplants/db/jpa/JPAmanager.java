@@ -48,6 +48,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
+	//M: used  by hosp
 	@Override
 	public boolean insert(Object obj) {
 		try {
@@ -246,7 +247,8 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return null;
 	}
-	//NEW
+	
+	//M: used
 	public List<Patient> searchallpatients(Hospital hospital){
 		try {
 			List<Patient> patients = hosp.searchAllPatients(hospital);

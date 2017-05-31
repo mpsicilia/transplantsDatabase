@@ -39,6 +39,7 @@ public class TransplantDatabase implements Serializable {
 		return hospitalsOfDatabase;
 	}
 
+	//M: used
 	// Addition of Hospitals
 	public boolean addHospital(Hospital hosp) {
 		if (!hospitalsOfDatabase.contains(hosp)) {
