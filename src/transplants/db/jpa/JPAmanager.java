@@ -46,6 +46,7 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	// M: used by hosp, donor, organ
+	//C: and pat
 	@Override
 	public boolean insert(Object obj) {
 		try {
