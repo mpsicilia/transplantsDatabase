@@ -40,13 +40,13 @@ public class UI_RequestedOrgan {
 				
 				//get the id of the  requested organ
 				int idRequested =  dbManager.idRequestedOrgan(reqOrgan);				
-				boolean okFK = dbManager.insertFKinRequestedOrgan(idPatient, idRequested);
+				boolean okFK = dbManager.assigmentPatientRequest(idPatient, idRequested);
 				boolean organAdded=reqOrg.add(reqOrgan);
 				
 				if (ok && okFK && organAdded){
-					System.out.print("The request Organ has been introduced.\n");
+					System.out.println("The request Organ has been introduced.\n");
 				}else{
-					System.out.print("The request Organ has NOT been introduced. \n");
+					System.out.println("The request Organ has NOT been introduced. \n");
 				}
 				System.out.println("Is the patient going to request another organ? [yes/no]");
 				String another = console.readLine();

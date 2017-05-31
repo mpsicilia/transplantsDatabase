@@ -36,7 +36,7 @@ public class UI_AnimalTissue {
 			
 			for(Requested_organ reqOrgan: reOrg){
 				idRequest= dbManager.idRequestedOrgan(reqOrgan);
-				idGotOk= dbManager.insertPrimaryKeyRequestedAnimal(idRequest, idAnimal);
+				idGotOk= dbManager.assigmentRequestedAnimal(idRequest, idAnimal);
 			}
 			
 			if (ok && idGotOk){

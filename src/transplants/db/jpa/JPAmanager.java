@@ -115,19 +115,19 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public boolean assigmentDoctorPatient(Integer id1, Integer id2) {
-		// DONE IN JD
+		// DONE IN JDBC
 		return false;
 	}
 
 	@Override
-	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2) {
-		// TODO Auto-generated method stub
+	public boolean assigmentRequestedAnimal(Integer id1, Integer id2) {
+		// DONE IN JDBC
 		return false;
 	}
 
 	@Override
-	public boolean insertFKinRequestedOrgan(int patID, int reqOrg) {
-		// TODO Auto-generated method stub
+	public boolean assigmentPatientRequest(int patID, int reqOrg) {
+		// DONE IN JDBC
 		return false;
 	}
 

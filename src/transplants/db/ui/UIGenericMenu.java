@@ -120,7 +120,7 @@ public class UIGenericMenu {
 							if (organname.equalsIgnoreCase("collagen") || organname.equalsIgnoreCase("skin")) {
 								counter++;
 								newreq.add(organ);
-								System.out.println("The "+counter+" Requested Organ is: " + organ);
+								System.out.println("One of the requested Organ is: " + organ);
 								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager,organname);
 							}
 						}				
