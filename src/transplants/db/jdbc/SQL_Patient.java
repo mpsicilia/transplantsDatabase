@@ -9,7 +9,7 @@ import java.util.List;
 
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
-//88
+
 public class SQL_Patient {
 
 	private DBManager dbManager;

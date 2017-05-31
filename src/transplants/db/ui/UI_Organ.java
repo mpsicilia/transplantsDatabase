@@ -190,11 +190,20 @@ public class UI_Organ {
 			compatiblePatients = dbManager.dbCompatibilityTest(organ);
 			Iterator<Patient> it = compatiblePatients.iterator();
 			int counterPat = 1;
-			while (it.hasNext()) {
+			Boolean hasNext= it.hasNext();
+			if(!hasNext){
+				System.out.println("At this moment there are no compatible patients.");
+			}
+			if(hasNext){ System.out.println("Choose the id of the patient that is going to recieve the organ");
+			do {
 				Patient p = it.next();
 				System.out.println(counterPat + ". " + p);
 				counterPat++;
+			}while(it.hasNext());
+			int patientId=Integer.parseInt(console.readLine());
+			//dbManager.requestedFKinOrgan(idR, idO)
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
