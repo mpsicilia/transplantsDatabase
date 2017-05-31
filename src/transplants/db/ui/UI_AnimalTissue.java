@@ -27,7 +27,7 @@ public class UI_AnimalTissue {
 			System.out.print("Pathology of the patient: ");
 			String pathology = console.readLine();
 				
-			System.out.print("Time the tissue lasts before the transplant: ");
+			System.out.print("Time the tissue lasts before the transplant [yyyy-mm-dd]: ");
 			Date lifeExpTissue= Date.valueOf(console.readLine());
 			
 			Animal_tissue animalT= new Animal_tissue(name, typeOfTissue, pathology, lifeExpTissue);

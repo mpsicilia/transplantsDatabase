@@ -39,40 +39,32 @@ public class UIGenericMenu {
 		UI_AnimalTissue uiAnimalT = new UI_AnimalTissue();
 		UI_RequestedOrgan uiRequested = new UI_RequestedOrgan();
 
-		
 		try {
-			/*DISCOMMENT IF NEEDED*/
+			/* DISCOMMENT IF NEEDED */
 			/*
-			System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]");
-			String drop = console.readLine();
-			if (drop.equalsIgnoreCase("Y")) {
-				boolean dropped = dbManager.dropTables();
-				if (dropped) {
-					System.out.println("Tables have been dropped. ");
-				} else {
-					System.out.println("Tables have not been dropped. ");
-				}
-
-			}
-
-			System.out.println("Do you want to create the tables?: [yes/no]");
-			String decider = console.readLine();
-			if (decider.equals("yes")) {
-				boolean created = dbManager.createTables();
-				if (created) {
-					System.out.println("Tables have been created. ");
-				} else {
-					System.out.println("Tables have not been created. ");
-				}
-			} else {
-				System.out.println("Tables should be already created");
-			}*/
+			 * System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]"
+			 * ); String drop = console.readLine(); if
+			 * (drop.equalsIgnoreCase("Y")) { boolean dropped =
+			 * dbManager.dropTables(); if (dropped) {
+			 * System.out.println("Tables have been dropped. "); } else {
+			 * System.out.println("Tables have not been dropped. "); }
+			 * 
+			 * }
+			 * 
+			 * System.out.println("Do you want to create the tables?: [yes/no]"
+			 * ); String decider = console.readLine(); if
+			 * (decider.equals("yes")) { boolean created =
+			 * dbManager.createTables(); if (created) {
+			 * System.out.println("Tables have been created. "); } else {
+			 * System.out.println("Tables have not been created. "); } } else {
+			 * System.out.println("Tables should be already created"); }
+			 */
 			//
 
 			while (true) {
 				System.out.println("\n\n\n");
 				System.out.println("\n  ************   BASIC MENU   ************   ");
-				System.out.println("____________________________________________________");				
+				System.out.println("____________________________________________________");
 				System.out.println("1. Introduce new information to the database. ");
 				System.out.println("2. Search for specific information in the database. ");
 				System.out.println("3. Work with XML. ");
@@ -117,37 +109,32 @@ public class UIGenericMenu {
 						System.out.println("Introduce the organ that the patient needs.");
 						List<Requested_organ> reqOrg = uiRequested.introduceNewReqOrgan(p, dbManager, jpaManager);
 						Iterator<Requested_organ> it = reqOrg.iterator();
-						
-						
+
 						List<Requested_organ> newreq = new ArrayList<>();
-						boolean okey=false;
+						boolean okey = false;
 						while (it.hasNext()) {
 							Requested_organ organ = it.next();
-							String organname=organ.getName();
-							System.out.println("ESTE ES EL NOMBRE DEL REQORGAN: "+organname);
+							String organname = organ.getName();
+
 							if (organname.equalsIgnoreCase("collagen") || organname.equalsIgnoreCase("skin")) {
 								newreq.add(organ);
-								okey=true;
-								System.out.println("SE ME HA METIDO EN EL IF DE COLLAGEN Y SKIN");
-								System.out.println("OKEY ES: "+okey);
+								okey = true;
+								
 							}
 
 						}
-						
-						if(okey=true){
-						System.out.println("INSERTING AS ANIMAL TISSUE");
-						uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);
-						
+
+						if (okey) {
+
+							uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);
+
 						}
-						
+						System.out.println("LIST OF REQNEW QUE LE PASO A LOS ANIMALES");
 						Iterator<Requested_organ> it2 = newreq.iterator();
-						while(it2.hasNext()){
+						while (it2.hasNext()) {
 							Requested_organ organ = it2.next();
 							System.out.println(organ);
 						}
-						
-					
-						
 
 						break;
 					}
@@ -516,8 +503,8 @@ public class UIGenericMenu {
 						break;
 					case 3:
 						// Hay que coger los paths
-						uiHospital.xmlToHtml("./xmlFiles/TransplantsDatabase.xml", "./xmlFiles/TransplantDB.xslt", 
-								    "./xmlFiles/ExternalDatabase.html");
+						uiHospital.xmlToHtml("./xmlFiles/TransplantsDatabase.xml", "./xmlFiles/TransplantDB.xslt",
+								"./xmlFiles/ExternalDatabase.html");
 					}
 
 					break;
