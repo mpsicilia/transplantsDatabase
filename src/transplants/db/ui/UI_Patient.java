@@ -11,10 +11,8 @@ import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
-import transplants.db.jpa.JPApatient;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
-import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
@@ -62,10 +60,9 @@ public class UI_Patient {
 			System.out.println("Date of adition: " +addition);
 			Patient p = new Patient(name, birthDate, weight, height, gender, path, bt, addition, life);
 
-			boolean introduced = jpaManager.insert(p);
+			boolean introduced = jpaManager.insert(p);			
 			
-			
-			System.out.println("Introduce the id of the hospital in which the patient is hospitalized. ");
+			System.out.println("\nIntroduce the id of the hospital in which the patient is hospitalized. ");
 			Iterator<Hospital> itH = hosps.iterator();
 			while (itH.hasNext()) {
 				Hospital h = itH.next();
@@ -96,14 +93,13 @@ public class UI_Patient {
 			boolean introduced2 = false;
 
 			Integer patId = jpaManager.getIdpatient(p);
-			
+			Integer counterdoct=1;
 			do {
-				System.out.println("Introduce the id of the doctor that is going to take care of the patient. ");
+				System.out.print("Introduce the id of the "+ counterdoct + "º doctor that is going to take care of the patient: ");
 				doctId = Integer.parseInt(console.readLine());
 				introduced2 = dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
 				counter++;
-				
-				
+				counterdoct++;
 			} while (counter <= Xtimes);
 
 			if (introduced && introduced2 && okUpdatepatient && okUpdatehospital) {

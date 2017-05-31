@@ -1,14 +1,9 @@
 package transplants.db.jpa;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Query;
-
-import transplants.db.pojos.Doctor;
-
-import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 
 public class JPApatient {
@@ -25,9 +20,7 @@ public class JPApatient {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			jpaManager.getEManager().persist(patient);
-			jpaManager.getEManager().getTransaction().commit();
-
-			
+			jpaManager.getEManager().getTransaction().commit();			
 			return true;
 
 		} catch (Exception e) {
