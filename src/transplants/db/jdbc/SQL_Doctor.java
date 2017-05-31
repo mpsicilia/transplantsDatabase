@@ -139,7 +139,7 @@ public class SQL_Doctor {
 		}
 		return lookForDoctor;
 	}
-	
+	//M: used
 	public List <Doctor> doctorsWorkingInHospital (String nameHosp){
 		List<Doctor> docsInHosp = new ArrayList<Doctor>();
 		try{

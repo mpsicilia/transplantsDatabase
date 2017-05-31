@@ -14,7 +14,7 @@ public class XMLDatabase {
 		this.xml = xmlmanager;
 
 	}
-
+	//M: used
 	public boolean javaToXmlDatabase(Marshaller marsh, TransplantDatabase dataH, File fileXML) {
 		try {
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -27,7 +27,7 @@ public class XMLDatabase {
 		}
 		return false;
 	}
-
+	//M: used
 	public TransplantDatabase xmlToJavaDatabase(Unmarshaller unmarsh, File fileXML, TransplantDatabase dataToUnmarsh) {
 		try {
 			dataToUnmarsh = (TransplantDatabase) unmarsh.unmarshal(fileXML);

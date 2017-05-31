@@ -464,7 +464,7 @@ public class DBManager implements DBManagerInterface {
 		//DONE IN JPA
 		return null;
 	}
-
+	//M: used
 	public List<Doctor> workingDoctorsInHosp (String hospName){
 		List<Doctor> docs = new ArrayList<Doctor> ();
 		try{
