@@ -54,7 +54,7 @@ public class XMLmanager {
 		}
 		return database;		
 	}
-	
+	//M: used
 	//method in order to transform an xml into a html
 	public void simpleTransform(String sourcePath, String xsltPath,String resultDir) {
 		TransformerFactory tFactory = TransformerFactory.newInstance();

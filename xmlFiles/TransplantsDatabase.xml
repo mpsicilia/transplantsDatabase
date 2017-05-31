@@ -35,7 +35,7 @@
                     <weight>45.0</weight>
                     <height>125.0</height>
                     <bloodType>b</bloodType>
-                    <pathology>lkd</pathology>
+                    <pathology>leukemia</pathology>
                     <additionDate>2015-05-08</additionDate>
                     <lifeExpectancy>2020-04-07</lifeExpectancy>
                     <score>-21</score>
@@ -59,9 +59,9 @@
                     <birthDate>1985-04-07</birthDate>
                     <gender>m</gender>
                     <weight>45.0</weight>
-                    <height>123.0</height>
+                    <height>193.0</height>
                     <bloodType>b</bloodType>
-                    <pathology>idk</pathology>
+                    <pathology>hyperthyroidism</pathology>
                     <additionDate>2015-04-06</additionDate>
                     <lifeExpectancy>2018-05-06</lifeExpectancy>
                     <score>-24</score>

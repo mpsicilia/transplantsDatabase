@@ -143,7 +143,7 @@ public class JPApatient {
 		return patients;
 	}
 
-	
+	//M: used
 	public Patient searchPatientById (Integer idP){
 		Patient p = new Patient();
 		try{

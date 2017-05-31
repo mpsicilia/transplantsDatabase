@@ -244,7 +244,7 @@ public class UI_Hospitals {
 				List<Patient> patsUnmarsh = h.getPatients();
 				for (Patient p : patsUnmarsh) {
 					Patient temp = jpaManager.getPatientById(p.getId());
-					System.out.println(p);
+		
 					temp.setName(p.getName());
 					temp.setBirthDate(p.getBirthDate());
 					temp.setWeight(p.getWeight());
@@ -255,13 +255,12 @@ public class UI_Hospitals {
 					temp.setPathology(p.getPathology());
 					temp.setAdditionDate(p.getAdditionDate());
 					temp.setScore(p.getScore());
-					System.out.println(temp);
 
 					temp.setHospital(h);
 					h.addPatient(temp);
 					jpaManager.update(temp);
 					jpaManager.update(h);
-					System.out.println("Patient " + p.getName() + " updated.");
+					System.out.println("Patient " + temp.getName() + " updated.");
 				}
 				boolean hospUpdate = dbManager.update(h);
 				if (hospUpdate) {
@@ -273,7 +272,7 @@ public class UI_Hospitals {
 
 		}
 	}
-
+	//M: used
 	public void xmlToHtml(String sourcePath, String xsltPath, String resultDir) {
 		XMLmanager hospXml = new XMLmanager();
 		hospXml.simpleTransform(sourcePath, xsltPath, resultDir);

@@ -46,7 +46,6 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	// M: used by hosp, donor, organ
-	//C: and pat
 	@Override
 	public boolean insert(Object obj) {
 		try {
@@ -277,7 +276,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
-	// used by organ, donor
+	// used by organ, donor, patient , hosp
 	@Override
 	public boolean update(Object obj) {
 		em.getTransaction().begin();
@@ -356,13 +355,13 @@ public class JPAmanager implements DBManagerInterface {
 
 	//M: used in unmarshall, unmarshall is not functioning that way so maybe in the future won't be neccesary
 	public Patient getPatientById(Integer idP) {
-		Patient pat = new Patient();
+		Patient p = new Patient();
 		try {
-
+			p = pat.searchPatientById(idP);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return pat;
+		return p;
 	}
 
 	@Override
