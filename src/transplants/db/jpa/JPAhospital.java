@@ -7,7 +7,6 @@ import javax.persistence.Query;
 
 import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
-import transplants.db.pojos.TransplantDatabase;
 
 public class JPAhospital {
 	private JPAmanager jpaManager;
@@ -31,7 +30,7 @@ public class JPAhospital {
 		}
 		return false;
 	}
-
+	//NEW: este METODO NO TE HACE FALTA MIRAR UI ORAN
 	public boolean updateHospitalofPatient(Patient pat, Hospital hosp) {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
