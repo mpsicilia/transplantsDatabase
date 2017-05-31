@@ -106,7 +106,7 @@ public class UIGenericMenu {
 
 					case 4:
 						Patient p = uiPatient.introduceNewPatient(jpaManager, dbManager);
-						System.out.println("Introduce the organ the patient needs.");
+						System.out.println("\nIntroduce the organ the patient needs.");
 						List<Requested_organ> reqOrg = uiRequested.introduceNewReqOrgan(p, dbManager, jpaManager);
 						Iterator<Requested_organ> it = reqOrg.iterator();
 
@@ -122,7 +122,6 @@ public class UIGenericMenu {
 								newreq.add(organ);
 								System.out.println("The "+counter+" Requested Organ is: " + organ);
 								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager,organname);
-
 							}
 						}				
 

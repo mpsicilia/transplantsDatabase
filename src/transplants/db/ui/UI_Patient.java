@@ -70,16 +70,14 @@ public class UI_Patient {
 			}
 			
 			Integer idHosp = Integer.parseInt(console.readLine());
-			Hospital hospital = jpaManager.getHospitalPatient(idHosp);
-         
+			Hospital hospital = jpaManager.getHospitalPatient(idHosp);         
 		
 			hospital.addPatient(p);
 			p.setHospital(hospital);
 			boolean okUpdatepatient = jpaManager.update(p);
 			boolean okUpdatehospital = jpaManager.update(hospital);
 
-			// RELATIONSHIP BETWEEN DOCTOR AND PATIENT
-			
+			// RELATIONSHIP BETWEEN DOCTOR AND PATIENT			
 			System.out.println("How many doctors are attending the patient?");
 			
 			Iterator<Doctor> itD = docs.iterator();
@@ -97,7 +95,7 @@ public class UI_Patient {
 			do {
 				System.out.print("Introduce the id of the "+ counterdoct + "º doctor that is going to take care of the patient: ");
 				doctId = Integer.parseInt(console.readLine());
-				introduced2 = dbmanager.insertPrimaryKeyDoctorPatient(patId, doctId);
+				introduced2 = dbmanager.assigmentDoctorPatient(patId, doctId);
 				counter++;
 				counterdoct++;
 			} while (counter <= Xtimes);

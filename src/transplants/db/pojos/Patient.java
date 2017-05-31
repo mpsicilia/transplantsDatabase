@@ -156,7 +156,7 @@ public class Patient extends Person implements Serializable {
 	public Hospital getHospital() {
 		return hospital;
 	}
-
+	//C used from generic
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 	}

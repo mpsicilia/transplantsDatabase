@@ -82,6 +82,7 @@ public class JPApatient {
 		}
 		return null;
 	}
+	//C: used from getIdpatient(Patient patient)from JPA
 	public Integer getIdpatient(Patient pat){
 		
 		Patient patient=new Patient();

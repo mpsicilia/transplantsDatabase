@@ -135,9 +135,9 @@ public class DBManager implements DBManagerInterface {
 	public boolean assigmentDoctorHospital(Integer id1, Integer id2) {
 		return hosp.insertHospitalsDoctors(id1, id2);
 	}
-
+	//C: used from ui_gen
 	@Override
-	public boolean insertPrimaryKeyDoctorPatient(Integer patId, Integer doctId) {
+	public boolean assigmentDoctorPatient(Integer patId, Integer doctId) {
 		return doct.insertDoctorPatientTable(patId, doctId);
 	}
 

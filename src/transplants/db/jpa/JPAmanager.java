@@ -93,7 +93,7 @@ public class JPAmanager implements DBManagerInterface {
 		return false;
 	}
 
-	// NEW
+	// C: used from ui_patient
 	public Integer getIdpatient(Patient patient) {
 		Integer patid;
 		try {
@@ -114,8 +114,8 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	@Override
-	public boolean insertPrimaryKeyDoctorPatient(Integer id1, Integer id2) {
-		// TODO Auto-generated method stub
+	public boolean assigmentDoctorPatient(Integer id1, Integer id2) {
+		// DONE IN JDBC
 		return false;
 	}
 

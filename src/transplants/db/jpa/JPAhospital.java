@@ -47,7 +47,7 @@ public class JPAhospital {
 		}
 		return hospital;
 	}
-	
+	//C: used from: getHospitalPatient in JPAManager
 	public Hospital getHospitalbyid(Integer idhosp) {
 		Hospital hosp = new Hospital();
 		try {
