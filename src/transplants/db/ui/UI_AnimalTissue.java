@@ -16,13 +16,10 @@ public class UI_AnimalTissue {
 	public UI_AnimalTissue(){		
 	}	
 	
-	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager){
+	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager, String typetissue){
 		try{
 			System.out.print("Name of the animal where the tissue come from: ");
 			String name = console.readLine();
-			
-			System.out.print("Type of tissue of the animal[skin/collagen]: ");
-			String typeOfTissue = console.readLine();
 			
 			System.out.print("Pathology of the patient: ");
 			String pathology = console.readLine();
@@ -30,7 +27,7 @@ public class UI_AnimalTissue {
 			System.out.print("Time the tissue lasts before the transplant [yyyy-mm-dd]: ");
 			Date lifeExpTissue= Date.valueOf(console.readLine());
 			
-			Animal_tissue animalT= new Animal_tissue(name, typeOfTissue, pathology, lifeExpTissue);
+			Animal_tissue animalT= new Animal_tissue(name, typetissue, pathology, lifeExpTissue);
 			boolean ok=dbManager.insert(animalT);
 			
 			Integer idAnimal= dbManager.idOfAnimal(animalT);
@@ -43,9 +40,9 @@ public class UI_AnimalTissue {
 			}
 			
 			if (ok && idGotOk){
-				System.out.print("The animal tissue has been introduced");
+				System.out.println("The animal tissue has been introduced");
 			}else{
-				System.out.print("The animal tissue has NOT been introduced");
+				System.out.println("The animal tissue has NOT been introduced");
 			}
 		}catch(IOException ex){
 			ex.printStackTrace();
