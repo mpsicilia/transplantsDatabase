@@ -50,17 +50,14 @@ public class SQL_Patient {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String namePatient = rs.getString("name");
-				String birthString = rs.getString("birthDate");
-				Date dob = Date.valueOf(birthString);
+				Date dob = rs.getDate("birthDate");				
 				Float weight = rs.getFloat("weight");
 				Float height = rs.getFloat("height");
 				String gen = rs.getString("gender");
 				String patho =  rs.getString("pathology");
 				String bt = rs.getString("bloodType");
-				String addString = rs.getString("additionDate");
-				Date doa = Date.valueOf(addString);
-				String lifeExp= rs.getString("lifeExpectancy");
-				Date lifeExpectancy = Date.valueOf(lifeExp);
+				Date doa = rs.getDate("additionDate");				
+				Date lifeExpectancy= rs.getDate("lifeExpectancy");				
 				
 				
 				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, doa, lifeExpectancy);
@@ -178,17 +175,14 @@ public class SQL_Patient {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				String birthString = rs.getString("birthDate");
-				Date dob = Date.valueOf(birthString);
+				Date dob = rs.getDate("birthDate");
 				Float weight = rs.getFloat("weight");
 				Float height = rs.getFloat("height");
 				String gen = rs.getString("gender");
 				String patho =  rs.getString("pathology");
 				String bt = rs.getString("bloodType");
-				String addString = rs.getString("additionDate");
-				Date doa = Date.valueOf(addString);
-				String lifeExp= rs.getString("lifeExpectancy");
-				Date lifeExpectancy= Date.valueOf(lifeExp);
+				Date doa = rs.getDate("additionDate");				
+				Date lifeExpectancy= rs.getDate("lifeExpectancy");
 				Long score= rs.getLong("score");
 				Patient pat = new Patient (id, name, dob, weight, height, gen, patho, bt, doa,lifeExpectancy,score);
 				pat.generateScore();
