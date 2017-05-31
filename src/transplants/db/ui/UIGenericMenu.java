@@ -111,30 +111,23 @@ public class UIGenericMenu {
 						Iterator<Requested_organ> it = reqOrg.iterator();
 
 						List<Requested_organ> newreq = new ArrayList<>();
-						boolean okey = false;
+						Integer counter=0;
+
 						while (it.hasNext()) {
 							Requested_organ organ = it.next();
 							String organname = organ.getName();
 
 							if (organname.equalsIgnoreCase("collagen") || organname.equalsIgnoreCase("skin")) {
+								counter++;
 								newreq.add(organ);
-								okey = true;
-								
+								System.out.println("The "+counter+" Requested Organ is: " + organ);
+								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);
+
 							}
 
 						}
 
-						if (okey) {
-
-							uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);
-
-						}
-						System.out.println("LIST OF REQNEW QUE LE PASO A LOS ANIMALES");
-						Iterator<Requested_organ> it2 = newreq.iterator();
-						while (it2.hasNext()) {
-							Requested_organ organ = it2.next();
-							System.out.println(organ);
-						}
+					
 
 						break;
 					}
