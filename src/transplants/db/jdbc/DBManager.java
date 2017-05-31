@@ -224,6 +224,9 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 	
+	public Patient searchPatient (Integer idPat){
+		return pat.searchPatientById(idPat);
+	}
 	
 	@Override
 	public List<Organ> searchOrgan(String name) {
