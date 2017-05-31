@@ -26,17 +26,17 @@ public class UI_RequestedOrgan {
 				System.out.print("Name: ");
 				String name = console.readLine();
 				
-				System.out.print("Maximum Weight: ");
+				System.out.print("Maximum Weight(kg): ");
 				Float maxWeight = Float.parseFloat(console.readLine());
 				
-				System.out.print("Minimun Weight: ");
+				System.out.print("Minimun Weight(kg): ");
 				Float minWeight = Float.parseFloat(console.readLine());
 				
 				Requested_organ reqOrgan= new Requested_organ(name, maxWeight, minWeight); 
 				boolean ok=dbManager.insert(reqOrgan);
 				
 				//get the id of the patient
-				int idPatient =jpam.idPatient(p);
+				int idPatient =jpam.getIdPatient(p);
 				
 				//get the id of the  requested organ
 				int idRequested =  dbManager.idRequestedOrgan(reqOrgan);				

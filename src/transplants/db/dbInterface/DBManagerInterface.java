@@ -49,7 +49,7 @@ public interface DBManagerInterface {
 	public boolean delete (Object obj);
 	
 	//I think all these methods the same
-	public Integer idPatient (Patient patient);
+	public Integer getIdPatient (Patient patient);
 	public Integer idRequestedOrgan (Requested_organ r);
 	public Integer idOrgan (Organ o);
 	public Integer idDonor (Donor d);

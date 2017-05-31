@@ -46,6 +46,7 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	// M: used by hosp, donor, organ
+	//C: and pat
 	@Override
 	public boolean insert(Object obj) {
 		try {
@@ -93,7 +94,7 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	// C: used from ui_patient
-	public Integer getIdpatient(Patient patient) {
+	public Integer getIdPatient(Patient patient) {
 		Integer patid;
 		try {
 			patid = pat.getIdpatient(patient);
@@ -114,7 +115,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	@Override
 	public boolean assigmentDoctorPatient(Integer id1, Integer id2) {
-		// DONE IN JDBC
+		// DONE IN JD
 		return false;
 	}
 
@@ -276,7 +277,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
-	// used by organ, donor, patient , hosp
+	// used by organ, donor
 	@Override
 	public boolean update(Object obj) {
 		em.getTransaction().begin();
@@ -324,21 +325,6 @@ public class JPAmanager implements DBManagerInterface {
 		return hospital.getName();
 	}
 
-	// FOR WHAT DO I USE IT?
-	@Override
-	public Integer idPatient(Patient patient) {
-
-		Integer id = 30;
-		try {
-			id = pat.getIdpatient(patient);
-			return id;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return id;
-
-	}
-
 	public List<Patient> searchPatbyname(String name) {
 		// Patient patient=new Patient();
 		List<Patient> patients = new ArrayList<>();
@@ -353,15 +339,15 @@ public class JPAmanager implements DBManagerInterface {
 		return patients;
 	}
 
-	//M: used in unmarshall, unmarshall is not functioning that way so maybe in the future won't be neccesary
+	// used in unmarshall
 	public Patient getPatientById(Integer idP) {
-		Patient p = new Patient();
+		Patient pat = new Patient();
 		try {
-			p = pat.searchPatientById(idP);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return p;
+		return pat;
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class SQL_Request {
 	public SQL_Request(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-	
+	//C: USED from insert from DBMANGER
 	public boolean insertRequest(Requested_organ organ){
 		try{
 			Statement stmt = dbManager.getC().createStatement();

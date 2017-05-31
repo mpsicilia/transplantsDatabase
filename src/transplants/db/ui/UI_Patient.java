@@ -89,7 +89,7 @@ public class UI_Patient {
 			Integer counter = 1;
 			Integer doctId = 0;
 			boolean introduced2 = false;
-			Integer patId = jpaManager.getIdpatient(p);
+			Integer patId = jpaManager.getIdPatient(p);
 			Integer counterdoct=1;
 			
 			do {
