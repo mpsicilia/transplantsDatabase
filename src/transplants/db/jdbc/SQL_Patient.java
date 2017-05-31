@@ -72,7 +72,7 @@ public class SQL_Patient {
 		}
 		return lookForPatient;
 	}
-	
+	//M: used
 	public Patient searchPatientById (Integer idPat) {
 		Patient patientToShow= new Patient();
 		try {

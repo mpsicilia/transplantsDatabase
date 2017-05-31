@@ -64,7 +64,7 @@ public class SQL_Organ {
 		}
 		return lookForOrgan;
 	}
-	
+	//M: used
 	public boolean updateOrgan (Organ organ){
 		try {
 			String sql = "UPDATE Organs SET name=?, weight=?, typeOfDonation =?, lifeOfOrgan=? WHERE id=?";
@@ -177,7 +177,7 @@ public class SQL_Organ {
 		}
 		return orgs;
 	}
-	
+	//M: used
 	public List<Patient> CompatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{

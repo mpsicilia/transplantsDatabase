@@ -39,7 +39,7 @@ public class Organ implements Serializable{
 		this.lifeOfOrgan= lifeOfOrgan;
 		this.typeOfDonation = typeOfDonation;
 	}
-	
+	//M: used
 	public Organ(String name, Float weight, String typeOfDonation,Date lifeOfOrgan) {
 		//super();
 		this.name = name;

@@ -16,11 +16,11 @@ public class Donor extends Person implements Serializable{
    
 	@OneToMany(mappedBy="donor") 
 	private List<Organ> organs;
-	
+	//M: used
 	public Donor() {
 		organs=new ArrayList<Organ>();
 	}
-	
+	//M: used
 	public Donor (String name, Date birthDate, Float weight, Float height, String gender, 
 			      String deadOrAlive, String bloodType){
 		super(name, birthDate, weight, height, gender, bloodType);
@@ -45,6 +45,7 @@ public class Donor extends Person implements Serializable{
 		this.deadAlive = deadOrAlive;
 	}
 
+	//M: used
 	public List<Organ> getOrgans(){
 		return organs;
 	}
@@ -52,6 +53,7 @@ public class Donor extends Person implements Serializable{
 	public void setOrgans(List<Organ> organs){
 		this.organs=organs;
 	}
+	//M: used
 	public boolean addOrgan(Organ organ) {
 		if (!organs.contains(organ)) {
 			 return this.organs.add(organ);
@@ -59,6 +61,7 @@ public class Donor extends Person implements Serializable{
 		else return false;
 	}
 
+	//M: used
 	// Additional method to remove from a list
 	public boolean removeOrgan(Organ organ) {
 		if (organs.contains(organ)) {

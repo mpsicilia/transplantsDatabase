@@ -15,6 +15,7 @@ public class JPAdonor {
 
 	}
 
+	//M: used
 	public boolean insert(Donor donor) {
 
 		try {
@@ -43,7 +44,7 @@ public class JPAdonor {
 		return newOrgan;
 	}
 	
-
+	//M: used
 	public List <Donor> searchDonor (String name){
 		List<Donor> donorList = new ArrayList<Donor>();
 		try{
@@ -58,7 +59,7 @@ public class JPAdonor {
 		}
 		return donorList;
 	}
-	
+	//M: used
 	public boolean removeDonor(Donor donor){		
 		try {			
 			jpaManager.getEManager().getTransaction().begin();

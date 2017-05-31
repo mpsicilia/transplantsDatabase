@@ -55,7 +55,7 @@ public class Patient extends Person implements Serializable {
 	@OneToMany(mappedBy="patient")
 	@XmlTransient
 	private List<Requested_organ> requested_organ;
-	
+	//M: used
 	public Patient(){
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
@@ -72,7 +72,7 @@ public class Patient extends Person implements Serializable {
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
 	}
-	
+	//M: used
 	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
 			String bloodType, Date additionDate, Date lifeExpectancy){
 		super(id, name, birthDate,weight,height,gender, bloodType);

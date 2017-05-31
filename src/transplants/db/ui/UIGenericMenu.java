@@ -258,7 +258,7 @@ public class UIGenericMenu {
 						}
 						break;
 
-					case 3:
+					case 3://revised
 						List<Donor> donor = uiDonor.searchDonor(jpaManager);
 						Iterator<Donor> it2 = donor.iterator();
 						int counterDonor = 1;

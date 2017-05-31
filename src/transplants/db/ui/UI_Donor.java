@@ -19,6 +19,7 @@ public class UI_Donor {
 		
 	}
 
+	//M: used
 	public Donor introduceNewDonor(JPAmanager jpaManager){
 		Donor donor = new Donor();
 		try{
@@ -59,7 +60,7 @@ public class UI_Donor {
 		}
 		return donor;
 	}
-	
+	//M: used
 	public List<Donor> searchDonor(JPAmanager jpaManager){
 		try{
 			System.out.println("Introduce the name of the donor: ");
@@ -71,7 +72,7 @@ public class UI_Donor {
 		}
 		return null; 
 	}
-	
+	//M: used
 	public void updateDonor(Donor donor, JPAmanager jpaManager){
 		boolean again = true;	
 		try{
@@ -134,7 +135,7 @@ public class UI_Donor {
 				ex.printStackTrace();
 			}
 	}
-	
+	//M: used
 	public void deleteDonor (Donor donor, JPAmanager jpaManager){
 		try{
 			boolean organsDeleted=false;

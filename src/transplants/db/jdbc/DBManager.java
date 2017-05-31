@@ -227,7 +227,7 @@ public class DBManager implements DBManagerInterface {
 		//DONE IN JPA
 		return null;
 	}
-	
+	//M: used
 	public Patient searchPatient (Integer idPat){
 		return pat.searchPatientById(idPat);
 	}
@@ -270,12 +270,13 @@ public class DBManager implements DBManagerInterface {
 		return pat.selectAllPatients();
 	}
 
+	//M: used
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
 		return org.CompatibilityTest(organ);
 	}
 
-	//M: using hospital and doctor
+	//M: using hospital and doctor, organ
 	@Override
 	public boolean update(Object obj) {
 		try {

@@ -48,7 +48,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
-	//M: used  by hosp
+	//M: used  by hosp, donor, organ
 	@Override
 	public boolean insert(Object obj) {
 		try {
@@ -220,6 +220,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
+	//M: used
 	@Override
 	public List<Donor> searchDonor(String name) {
 		try {
@@ -298,6 +299,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
+	//used by organ, donor
 	@Override
 	public boolean update(Object obj) {
 		em.getTransaction().begin();
@@ -305,6 +307,7 @@ public class JPAmanager implements DBManagerInterface {
 		return true;
 	}
 
+	//used by donor, organ
 	@Override
 	public boolean delete(Object obj) {
 		if (Donor.class == obj.getClass()) {
