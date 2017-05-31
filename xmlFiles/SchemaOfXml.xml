@@ -6,7 +6,7 @@
 	<!-- I'm puttig the '+' because the transplant contains 1 or more hospitals -->
 	<!ELEMENT Hospital (phoneNumber, address, City, postcode,Country, Doctors, Patients)>
 	<!-- I cannot put the id as ID because if I do that they must have differnt ids
-	     that is why I put them as CDATA-->	
+	     that is why I put them as CDATA-->	 
 	<!ATTLIST Hospital id CDATA #REQUIRED  name CDATA #REQUIRED>
 	<!ELEMENT phoneNumber (#PCDATA)>
 	<!ELEMENT address (#PCDATA)>
