@@ -115,7 +115,7 @@ public class SQL_Doctor {
 		
 		return false;
 	}
-	
+	//C:used to show all doctors in ui_patient
 	public List<Doctor> selectAllDoctors() {
 		List<Doctor> lookForDoctor = new ArrayList<Doctor>();
 		try {

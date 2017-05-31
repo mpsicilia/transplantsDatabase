@@ -205,7 +205,7 @@ public class Hospital implements Serializable{
 			else return false;
 		}
 		
-		
+		//C:used from hospital.addPatient(p) in generic menu
 		// Additional method to add to a list
 		public boolean addPatient(Patient patient) {
 			if (!patients.contains(patient)) {
