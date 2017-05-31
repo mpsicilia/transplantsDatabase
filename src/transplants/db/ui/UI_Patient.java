@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -54,13 +55,11 @@ public class UI_Patient {
 			System.out.print("Blood type: ");
 			String bt = console.readLine();
 
-			System.out.print("Date of addition [yyyy-mm-dd]: ");
-			String doa = console.readLine();
-			Date addition = Date.valueOf(doa);
-
 			System.out.print("Life expectancy [yyyy-mm-dd]: ");
 			Date life = Date.valueOf(console.readLine());
-
+			LocalDate doa= LocalDate.now();
+			Date addition= Date.valueOf(doa);
+			System.out.println("Date of adition: " +addition);
 			Patient p = new Patient(name, birthDate, weight, height, gender, path, bt, addition, life);
 
 			boolean introduced = jpaManager.insert(p);

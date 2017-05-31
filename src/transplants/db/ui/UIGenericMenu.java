@@ -106,35 +106,28 @@ public class UIGenericMenu {
 
 					case 4:
 						Patient p = uiPatient.introduceNewPatient(jpaManager, dbManager);
-						System.out.println("Introduce the organ that the patient needs.");
+						System.out.println("Introduce the organ the patient needs.");
 						List<Requested_organ> reqOrg = uiRequested.introduceNewReqOrgan(p, dbManager, jpaManager);
 						Iterator<Requested_organ> it = reqOrg.iterator();
 
 						List<Requested_organ> newreq = new ArrayList<>();
-						boolean okey = false;
+						Integer counter=0;
+
 						while (it.hasNext()) {
 							Requested_organ organ = it.next();
 							String organname = organ.getName();
 
 							if (organname.equalsIgnoreCase("collagen") || organname.equalsIgnoreCase("skin")) {
+								counter++;
 								newreq.add(organ);
-								okey = true;
-								
+								System.out.println("The "+counter+" Requested Organ is: " + organ);
+								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager,organname);
+
 							}
 
 						}
 
-						if (okey) {
-
-							uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);
-
-						}
-						System.out.println("LIST OF REQNEW QUE LE PASO A LOS ANIMALES");
-						Iterator<Requested_organ> it2 = newreq.iterator();
-						while (it2.hasNext()) {
-							Requested_organ organ = it2.next();
-							System.out.println(organ);
-						}
+					
 
 						break;
 					}
@@ -142,10 +135,10 @@ public class UIGenericMenu {
 					break;
 
 				case 2: {
-					System.out.print("\n1. Check the information of a specific hospital.");
-					System.out.print("\n2. Check the information of a specific doctor. ");
-					System.out.print("\n3. Check the information of a specific donor. ");
-					System.out.print("\n4. Check the information of a specific patient. ");
+					System.out.print("\n1. Check the information of a hospital.");
+					System.out.print("\n2. Check the information of a doctor. ");
+					System.out.print("\n3. Check the information of a donor. ");
+					System.out.print("\n4. Check the information of a patient. ");
 					System.out.print("\n5. Check the characteristics of an organ. ");
 
 					System.out.println("\nChoose an option[1-5]:");
@@ -344,13 +337,14 @@ public class UIGenericMenu {
 									case 4:
 										break;
 									}
-								}
-								System.out.println("\nThis donor hasn't got any organs.");
-								System.out.println("Do you then want to introduce a new organ? [yes/no]");
-								if ((console.readLine()).equalsIgnoreCase("yes")) {
-									uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager);
-									break;
-								}
+								}if (organsOfDon==null){
+									System.out.println("\nThis donor hasn't got any organs.");
+									System.out.println("Do you then want to introduce a new organ? [yes/no]");
+									if ((console.readLine()).equalsIgnoreCase("yes")) {
+										uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager);
+										break;
+									}
+								}								
 								break;
 							case 4:
 								break;
@@ -466,6 +460,7 @@ public class UIGenericMenu {
 						break;
 					case 5:
 						System.out.println("Introduce the name of the organ. ");
+						//CCUANDO IDREQUESTED ORGAN SEA NULL
 						// TODO lo que habia pensado era que tenemos la
 						// posibilidad de buscar organos atraves
 						// de sus donantes/pacientes, pero no tenemos una opcion

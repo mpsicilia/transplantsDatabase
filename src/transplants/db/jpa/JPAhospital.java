@@ -30,20 +30,8 @@ public class JPAhospital {
 		}
 		return false;
 	}
-	//NEW: este METODO NO TE HACE FALTA MIRAR UI ORAN
-	public boolean updateHospitalofPatient(Patient pat, Hospital hosp) {
-		try {
-			jpaManager.getEManager().getTransaction().begin();
-			pat.setHospital(hosp);
-			hosp.addPatient(pat);
-			jpaManager.getEManager().getTransaction().commit();
-			return true;
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return false;
-	}
+
+	//ESTE HAY QUE BORRARLO
 	public Hospital hospitalofpatient(String namepat){
 		Hospital hospital=new Hospital();
 		try{
