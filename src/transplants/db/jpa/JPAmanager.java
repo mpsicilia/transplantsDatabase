@@ -353,7 +353,7 @@ public class JPAmanager implements DBManagerInterface {
 		return patients;
 	}
 
-	// used in unmarshall
+	//M: used in unmarshall, unmarshall is not functioning that way so maybe in the future won't be neccesary
 	public Patient getPatientById(Integer idP) {
 		Patient pat = new Patient();
 		try {

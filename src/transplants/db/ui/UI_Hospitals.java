@@ -178,6 +178,7 @@ public class UI_Hospitals {
 		return listpatients;
 	}
 
+	//M: used
 	public void javaToXmlDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data) {
 		try {
 
@@ -189,8 +190,7 @@ public class UI_Hospitals {
 			int counterH = 1;
 			while (itH.hasNext()) {
 				Hospital h = itH.next();
-				// print all the hospitals in order to see if all of them are
-				// being marshalled
+				// print all the hospitals in order to see if all of them are being marshalled
 				System.out.println(counterH + ". Hospital: " + h.getName());
 				List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(h.getName());
 				Iterator<Doctor> itD = doctorsOfHosp.iterator();
@@ -225,7 +225,7 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-
+	//M: used
 	public void xmlToJavaDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase dataUnmarsh) {
 		try {
 			XMLmanager dataXml = new XMLmanager();

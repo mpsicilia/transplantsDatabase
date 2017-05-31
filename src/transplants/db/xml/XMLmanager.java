@@ -33,6 +33,7 @@ public class XMLmanager {
 		}
 		
 	}
+	//M: used
 	//marshalling method!
 	public boolean marshalDatabase (TransplantDatabase dataHosp){
 		try{
@@ -43,7 +44,7 @@ public class XMLmanager {
 		}
 		return false;
 	}
-	
+	//M: used
 	//unmarshaling method
 	public TransplantDatabase unmarshalDatabase (TransplantDatabase database){
 		try{

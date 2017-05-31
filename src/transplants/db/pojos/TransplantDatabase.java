@@ -34,7 +34,7 @@ public class TransplantDatabase implements Serializable {
 		hospitalsOfDatabase = new ArrayList<Hospital>();
 	}
 	
-
+	//M: used
 	public List<Hospital> getAllHospOFDatabase() {
 		return hospitalsOfDatabase;
 	}
