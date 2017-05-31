@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
-
+//ll
 
 public class SQL_Organ {
 	
@@ -184,27 +184,25 @@ public class SQL_Organ {
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
+
 			String sql ="SELECT * FROM Patients JOIN Requested_organs ON Patients.id = Requested_organs.patient_id"
-					+"WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND Patients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
-				+ "AND Requested_organs.maxWeight >= '" + organ.getWeight() + "' AND Requested_organs.minWeight <= '" + organ.getWeight() + 
+					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND Patients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
+				+ " AND Requested_organs.maxWeight >= '" + organ.getWeight() + "' AND Requested_organs.minWeight <= '" + organ.getWeight() + 
 				 "' ORDER BY  Patients.score DESC";
 
 			ResultSet rs= stmt.executeQuery(sql);
 			while (rs.next()) {
 				int id = rs.getInt(1);
 				String namePatient = rs.getString(2);
-				String birthString = rs.getString(3);
-				Date dob = Date.valueOf(birthString);
+				Date dob = rs.getDate(3);
 				Float weight = rs.getFloat(4);
 				Float height = rs.getFloat(5);
 				String gen = rs.getString(6);
 				String patho =  rs.getString(7);
 				String bt = rs.getString(8);
-				String addString = rs.getString(9);				
-				Date doa = Date.valueOf(addString);
-				String lifeExp = rs.getString(10);
-				Date lifeExpectancy= Date.valueOf(lifeExp);
-				
+				Date doa = rs.getDate(9);
+				Date lifeExpectancy = rs.getDate(10);
+								
 				Patient patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt,  doa, lifeExpectancy);
 				compatiblePatients.add(patientToShow);
 			}

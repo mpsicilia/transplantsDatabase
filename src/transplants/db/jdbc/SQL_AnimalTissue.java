@@ -44,8 +44,8 @@ public class SQL_AnimalTissue {
 				String nameAnimalT = rs.getString("name");
 				String typeOfTissue = rs.getString("typeOfTissue");
 				String pathology = rs.getString("pathology");
-				String lifeExpTis= rs.getString("lifeExpTissue");
-				Date lifeExpTissue= Date.valueOf(lifeExpTis);
+				Date lifeExpTissue= rs.getDate("lifeExpTissue");
+				
 				Animal_tissue animalTiToShow = new Animal_tissue(id, nameAnimalT, typeOfTissue, pathology, lifeExpTissue);
 				lookForAnimalT.add(animalTiToShow);
 			}
