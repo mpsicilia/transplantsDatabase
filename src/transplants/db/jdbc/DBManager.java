@@ -128,12 +128,6 @@ public class DBManager implements DBManagerInterface {
 	}
 	
 
-	/*//create database
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase.git
-	public boolean createDatabase (TransplantDatabase td){
-		return hosp.createDatabase(td);
-	}*/
-
 	// PKs
 	@Override
 	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2) {

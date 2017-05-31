@@ -234,7 +234,7 @@ public class UI_Hospitals {
 		}
 	}
 	
-	public void xmlToJavaDatabase (DBManager dbManager, TransplantDatabase dataUnmarsh){
+	public void xmlToJavaDatabase (DBManager dbManager, JPAmanager jpaManager, TransplantDatabase dataUnmarsh){
 		try{
 			XMLmanager dataXml = new XMLmanager();
 			dataUnmarsh  = dataXml.unmarshalDatabase(dataUnmarsh);
@@ -247,6 +247,21 @@ public class UI_Hospitals {
 					if(docUpdate){
 						System.out.println("Doctor " + d.getNameOfDoctor() + " updated.");
 					}
+				}
+				List <Patient> patsUnmarsh = h.getPatients();
+				for (Patient p: patsUnmarsh){
+					Patient temp = jpaManager.getPatientById(p.getId());
+					temp.setName(p.getName());
+					temp.setBirthDate(p.getBirthDate());
+					temp.setWeight(p.getWeight());
+					temp.setHeight(p.getHeight());
+					temp.setGender(p.getGender());
+					temp.setBloodType(p.getBloodType());
+					temp.setLifeExpectancy(p.getLifeExpectancy());
+					temp.setPathology(p.getPathology());
+					temp.setAdditionDate(p.getAdditionDate());
+					temp.setScore(p.getScore());
+					System.out.println("Patient " + temp.getName() + " updated.");
 				}
 				boolean hospUpdate = dbManager.update(h);
 				if(hospUpdate){
