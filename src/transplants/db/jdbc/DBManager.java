@@ -94,6 +94,7 @@ public class DBManager implements DBManagerInterface {
 
 	// insertions
 	//M: used by doctor
+	//C: USED in animal,req
 	@Override
 	public boolean insert(Object obj) {
 
@@ -142,13 +143,15 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	@Override
-	public boolean insertPrimaryKeyRequestedAnimal(Integer idRequest, Integer idAnimal) {
+	//C: USED from ui_animal
+	public boolean assigmentRequestedAnimal(Integer idRequest, Integer idAnimal) {
 		return animalT.insertRequestedAnimal(idRequest, idAnimal);
 	}
-
+	
 	// FKs
+	//C: USED from ui_req
 	@Override
-	public boolean insertFKinRequestedOrgan(int patID, int reqOrg) {
+	public boolean assigmentPatientRequest(int patID, int reqOrg) {
 		return req.insertPatientFK(patID, reqOrg);
 	}
 
@@ -338,12 +341,12 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 
-	// METHODS IN ORDER TO GET THE ID
 	@Override
 	public Integer getIdPatient(Patient patient) {//delete from here once we have it in jpa
 		return pat.getPatientID(patient);
 	}
-
+	
+	//C:USED from ui_requested and ui_animal
 	@Override
 	public Integer idRequestedOrgan(Requested_organ r) {
 		Integer id = 0;
@@ -365,6 +368,7 @@ public class DBManager implements DBManagerInterface {
 		}
 		return id;
 	}
+	//C: USED from ui_animal
 	public Integer idOfAnimal(Animal_tissue animalTissue){
 		Integer id = 0;
 		try {

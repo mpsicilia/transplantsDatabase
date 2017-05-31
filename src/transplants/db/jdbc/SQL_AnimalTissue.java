@@ -16,7 +16,7 @@ public class SQL_AnimalTissue {
 	public SQL_AnimalTissue(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-
+	//C: USED from insert of DBMAnager
 	public boolean insertAnimalTissue(Animal_tissue animalT) {
 		try {
 			Statement stmt = dbManager.getC().createStatement();
@@ -109,7 +109,7 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-
+	//C: USED from idOfAnimal(Animal_tissue animalTissue)of DBMAnager
 	public Integer getAnimalId(Animal_tissue animalT){
 		Animal_tissue animalToShow= new Animal_tissue();
 		try {

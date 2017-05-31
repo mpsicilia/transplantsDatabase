@@ -26,8 +26,8 @@ public interface DBManagerInterface {
 	//I think that all these inserts are not supposed to be in the interface
 	public boolean assigmentDoctorHospital(Integer id1, Integer id2);	
 	public boolean assigmentDoctorPatient(Integer id1, Integer id2);	
-	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2);//falta hacerla
-	public boolean insertFKinRequestedOrgan (int patID, int reqOrg);
+	public boolean assigmentRequestedAnimal(Integer id1, Integer id2);
+	public boolean assigmentPatientRequest (int patID, int reqOrg);
 	public boolean insertFKInPatient (Integer patID, Integer hospID);
 	public boolean donorFKinOrgan (Integer idD, Integer idO);
 	public boolean requestedFKinOrgan (int idR, int idO);

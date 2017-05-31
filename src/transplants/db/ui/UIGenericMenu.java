@@ -122,6 +122,7 @@ public class UIGenericMenu {
 								newreq.add(organ);
 								System.out.println("The "+counter+" Requested Organ is: " + organ);
 								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager,organname);
+
 							}
 						}				
 
