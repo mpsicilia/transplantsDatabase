@@ -337,13 +337,14 @@ public class UIGenericMenu {
 									case 4:
 										break;
 									}
-								}
-								System.out.println("\nThis donor hasn't got any organs.");
-								System.out.println("Do you then want to introduce a new organ? [yes/no]");
-								if ((console.readLine()).equalsIgnoreCase("yes")) {
-									uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager);
-									break;
-								}
+								}if (organsOfDon==null){
+									System.out.println("\nThis donor hasn't got any organs.");
+									System.out.println("Do you then want to introduce a new organ? [yes/no]");
+									if ((console.readLine()).equalsIgnoreCase("yes")) {
+										uiOrgan.introduceNewOrgan(donOrg, dbManager, jpaManager);
+										break;
+									}
+								}								
 								break;
 							case 4:
 								break;
