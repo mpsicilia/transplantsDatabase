@@ -106,7 +106,7 @@ public class UIGenericMenu {
 
 					case 4:
 						Patient p = uiPatient.introduceNewPatient(jpaManager, dbManager);
-						System.out.println("Introduce the organ that the patient needs.");
+						System.out.println("Introduce the organ the patient needs.");
 						List<Requested_organ> reqOrg = uiRequested.introduceNewReqOrgan(p, dbManager, jpaManager);
 						Iterator<Requested_organ> it = reqOrg.iterator();
 
@@ -121,7 +121,7 @@ public class UIGenericMenu {
 								counter++;
 								newreq.add(organ);
 								System.out.println("The "+counter+" Requested Organ is: " + organ);
-								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);
+								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager,organname);
 
 							}
 
@@ -135,10 +135,10 @@ public class UIGenericMenu {
 					break;
 
 				case 2: {
-					System.out.print("\n1. Check the information of a specific hospital.");
-					System.out.print("\n2. Check the information of a specific doctor. ");
-					System.out.print("\n3. Check the information of a specific donor. ");
-					System.out.print("\n4. Check the information of a specific patient. ");
+					System.out.print("\n1. Check the information of a hospital.");
+					System.out.print("\n2. Check the information of a doctor. ");
+					System.out.print("\n3. Check the information of a donor. ");
+					System.out.print("\n4. Check the information of a patient. ");
 					System.out.print("\n5. Check the characteristics of an organ. ");
 
 					System.out.println("\nChoose an option[1-5]:");
@@ -459,6 +459,7 @@ public class UIGenericMenu {
 						break;
 					case 5:
 						System.out.println("Introduce the name of the organ. ");
+						//CCUANDO IDREQUESTED ORGAN SEA NULL
 						// TODO lo que habia pensado era que tenemos la
 						// posibilidad de buscar organos atraves
 						// de sus donantes/pacientes, pero no tenemos una opcion
