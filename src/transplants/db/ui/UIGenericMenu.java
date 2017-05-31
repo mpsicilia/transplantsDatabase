@@ -67,6 +67,7 @@ public class UIGenericMenu {
 			} else {
 				System.out.println("Tables should be already created");
 			}*/
+			//
 
 			while (true) {
 				System.out.println("\n\n\n");
@@ -116,18 +117,36 @@ public class UIGenericMenu {
 						System.out.println("Introduce the organ that the patient needs.");
 						List<Requested_organ> reqOrg = uiRequested.introduceNewReqOrgan(p, dbManager, jpaManager);
 						Iterator<Requested_organ> it = reqOrg.iterator();
-						//cometado pq sino al introducir un paciente directamene te llevaa a introducir un tissue aunque no quieras!!
-						//ask the user if the patient needs a tissue
-						/*List<Requested_organ> newreq = new ArrayList<>();
+						
+						
+						List<Requested_organ> newreq = new ArrayList<>();
+						boolean okey=false;
 						while (it.hasNext()) {
 							Requested_organ organ = it.next();
-							if (organ.getName().equalsIgnoreCase("collagen") || organ.getName().equalsIgnoreCase("skin")) {
+							String organname=organ.getName();
+							System.out.println("ESTE ES EL NOMBRE DEL REQORGAN: "+organname);
+							if (organname.equalsIgnoreCase("collagen") || organname.equalsIgnoreCase("skin")) {
 								newreq.add(organ);
+								okey=true;
+								System.out.println("SE ME HA METIDO EN EL IF DE COLLAGEN Y SKIN");
+								System.out.println("OKEY ES: "+okey);
 							}
 
 						}
-						uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);*/
-
+						
+						if(okey=true){
+						System.out.println("INSERTING AS ANIMAL TISSUE");
+						uiAnimalT.introduceNewAnimalTissue(newreq, dbManager);
+						
+						}
+						
+						Iterator<Requested_organ> it2 = newreq.iterator();
+						while(it2.hasNext()){
+							Requested_organ organ = it2.next();
+							System.out.println(organ);
+						}
+						
+					
 						
 
 						break;
