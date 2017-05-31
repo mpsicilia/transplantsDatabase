@@ -135,7 +135,7 @@ public class Organ implements Serializable{
 	@Override
 	public String toString() {
 		return "Organ [id=" + id + ", name=" + name + ", weight=" + weight + ", typeOfDonation=" + typeOfDonation
-				+ ", lifeOfOrgan=" + lifeOfOrgan + ", requested_organ=" + requested_organ + ", donor=" + donor + "]";
+				+ ", lifeOfOrgan=" + lifeOfOrgan + "]";
 	}
 	
 	
