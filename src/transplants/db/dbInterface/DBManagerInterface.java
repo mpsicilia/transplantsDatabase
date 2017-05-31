@@ -27,7 +27,7 @@ public interface DBManagerInterface {
 	public List<Patient> dbCompatibilityTest(Organ organ);
 	
 	//I think that all these inserts are not supposed to be in the interface
-	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2);	
+	public boolean assigmentDoctorHospital(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyDoctorPatient(Integer id1, Integer id2);	
 	public boolean insertPrimaryKeyRequestedAnimal(Integer id1, Integer id2);//falta hacerla
 	public boolean insertFKinRequestedOrgan (int patID, int reqOrg);

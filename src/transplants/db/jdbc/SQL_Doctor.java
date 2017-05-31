@@ -38,8 +38,8 @@ public class SQL_Doctor {
 			Statement stmt = dbManager.getC().createStatement();
 			String sql = "SELECT id FROM Doctors "
 					+ "WHERE name LIKE '%" + doctor.getNameOfDoctor() + "%' AND registrationNumber"
-							+ " LIKE '" + doctor.getRegistrationNumber()+ "' AND specialization "
-							+ "LIKE '" + doctor.getSpecialization()+ "'";
+					+ " LIKE '" + doctor.getRegistrationNumber()+ "' AND specialization "
+					+ "LIKE '" + doctor.getSpecialization()+ "'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Integer id = rs.getInt("id");

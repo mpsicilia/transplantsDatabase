@@ -2,11 +2,8 @@ package transplants.db.jdbc;
 
 import java.sql.*;
 import java.util.*;
-
-import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Hospital;
-import transplants.db.pojos.Organ;
-import transplants.db.pojos.TransplantDatabase;
+
 
 public class SQL_Hospital {
 
@@ -15,8 +12,8 @@ public class SQL_Hospital {
 	public SQL_Hospital(DBManager dbmanager) {
 		this.dmanager = dbmanager;
 	}
-
-	public boolean insertHospital(Hospital hospital) {
+	//C: no lo usamos pq introducimos hospital con jpa
+	/*public boolean insertHospital(Hospital hospital) {
 		try {
 			Statement stmt = dmanager.getC().createStatement();
 			String sql = "INSERT INTO Hospitals (name, phoneNumber, address, city, postcode, country) VALUES ('"
@@ -31,7 +28,7 @@ public class SQL_Hospital {
 			e.printStackTrace();
 		}
 		return false;
-	}
+	}*/
 
 	//M: in use
 	public List<Hospital> searchHospital(String name) {

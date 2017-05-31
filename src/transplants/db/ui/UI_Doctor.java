@@ -35,32 +35,32 @@ public class UI_Doctor {
 
 			// get the id of the doctor, to use it when introducing FK
 			Integer id = dbManager.getIdOfDoctor(doct);
-			System.out.println("In how many hospitals is going to work the doctor?");
+			System.out.println("\nIn how many hospitals is going to work the doctor?");
 			int times = Integer.parseInt(console.readLine());
 			int count = 0;
+			int counterNum=1;
 			boolean ok2 = false;
-			// List<Hospital> listHospital = doct.getHospital();
-
-			do {
-				// first we show to the user all the hospitals
-				List<Hospital> listHosp = dbManager.selectAllHospitals();
-				Iterator<Hospital> itH = listHosp.iterator();
-				while (itH.hasNext()) {
-					Hospital hosp = itH.next();
-					System.out.println(hosp);
-				}
-				System.out.print("Introduce the id of the hospital in which the doctor works: ");
+			// first we show to the user all the hospitals
+			List<Hospital> listHosp = dbManager.selectAllHospitals();
+			Iterator<Hospital> itH = listHosp.iterator();
+			while (itH.hasNext()) {
+				Hospital hosp = itH.next();
+				System.out.println(counterNum +". " + hosp);
+				counterNum++;
+			}
+			counterNum=1;
+			do {				
+				System.out.print("Introduce the id of the "+ counterNum +"º hospital in which the doctor works: ");
 				Integer idHospYouChoose = Integer.parseInt(console.readLine());
-				ok2 = dbManager.insertPrimaryKeyDoctorHospital(idHospYouChoose, id);
-
+				ok2 = dbManager.assigmentDoctorHospital(idHospYouChoose, id);
+				counterNum++;
 				count++;
-
 			} while (count < times);
 				
 			if (ok && ok2) {
-				System.out.print("The doctor has been introduced correctly");
+				System.out.print("The doctor has been introduced correctly.");
 			} else {
-				System.out.print("The doctor has NOT been introduced");
+				System.out.print("The doctor has NOT been introduced.");
 			}
 
 		} catch (IOException ex) {

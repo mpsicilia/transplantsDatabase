@@ -14,16 +14,13 @@ import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
-import transplants.db.pojos.TransplantDatabase;
 
 public class JPAmanager implements DBManagerInterface {
 
 	private EntityManager em;
 	private JPApatient pat = new JPApatient(this);
 	private JPAdonor don = new JPAdonor(this);
-	// RODRIGO: BEGIN
 	private JPAorgan org = new JPAorgan(this);
-	// RODRIGO: END
 	private JPAhospital hosp = new JPAhospital(this);
 
 	public JPAmanager() {
@@ -48,37 +45,28 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
-	//M: used  by hosp, donor, organ
+	// M: used by hosp, donor, organ
 	@Override
 	public boolean insert(Object obj) {
 		try {
 			if (Hospital.class == obj.getClass()) {
 				Hospital hospital = (Hospital) obj;
-
-				boolean r = hosp.insert(hospital);
-				return r;
+				return hosp.insert(hospital);
 			}
 
 			if (Patient.class == obj.getClass()) {
 				Patient patient = (Patient) obj;
-
-				boolean r = pat.insert(patient);
-				return r;
+				return pat.insert(patient);
 			}
 			if (Donor.class == obj.getClass()) {
 				Donor donor = (Donor) obj;
-				
-				boolean r = don.insert(donor);
-				return r;
+				return don.insert(donor);
 			}
-			// RODRIGO: BEGIN
+
 			if (Organ.class == obj.getClass()) {
 				Organ organ = (Organ) obj;
-
-				boolean r = org.insert(organ);
-				return r;
+				return org.insert(organ);
 			}
-			// RODRIGO: END
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,24 +92,22 @@ public class JPAmanager implements DBManagerInterface {
 		return false;
 	}
 
-	
-	//NEW
-	public Integer getIdpatient(Patient patient){
+	// NEW
+	public Integer getIdpatient(Patient patient) {
 		Integer patid;
-		try{
-			patid=pat.getIdpatient(patient);
-			
+		try {
+			patid = pat.getIdpatient(patient);
 			return patid;
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-		 catch (Exception ex) {
-				ex.printStackTrace();
-			}
 		return null;
-		
+
 	}
 
 	@Override
-	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2) {
+	public boolean assigmentDoctorHospital(Integer id1, Integer id2) {
 		// DONE IN JDBC
 		return false;
 	}
@@ -161,19 +147,14 @@ public class JPAmanager implements DBManagerInterface {
 		return hospital;
 	}
 
-	/*public Patient getPatient(Patient patient) {
-		Patient patito = new Patient();
-		try {
-			patito = pat.getPatient(patient);
-			return patito;
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return patito;
-	}*/
-	//NEW
-	public Hospital getHospital (Hospital hospital){
+	/*
+	 * public Patient getPatient(Patient patient) { Patient patito = new
+	 * Patient(); try { patito = pat.getPatient(patient); return patito;
+	 * 
+	 * } catch (Exception ex) { ex.printStackTrace(); } return patito; }
+	 */
+	// NEW
+	public Hospital getHospital(Hospital hospital) {
 		Hospital hospi = new Hospital();
 		try {
 			hospi = hosp.getHospital(hospital);
@@ -184,7 +165,6 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return hospi;
 	}
-	
 
 	public boolean donorFKinOrgan(Integer idD, Integer idO) {
 		// TODO Auto-generated method stub
@@ -193,7 +173,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	public List<Organ> organOfADonor(Integer donorId) {
 		return don.selectOrgan(donorId);
-		
+
 	}
 
 	@Override
@@ -220,7 +200,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
-	//M: used
+	// M: used
 	@Override
 	public List<Donor> searchDonor(String name) {
 		try {
@@ -248,9 +228,9 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return null;
 	}
-	
-	//M: used
-	public List<Patient> searchallpatients(Hospital hospital){
+
+	// M: used
+	public List<Patient> searchallpatients(Hospital hospital) {
 		try {
 			List<Patient> patients = hosp.searchAllPatients(hospital);
 			return patients;
@@ -267,18 +247,15 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	@Override
-	//DONE WITH JDBC
-	
+	// DONE WITH JDBC
+
 	public List<Hospital> selectAllHospitals() {
-		/*try {
-			List<Hospital> list = hosp.selectAllHospitals();
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+		/*
+		 * try { List<Hospital> list = hosp.selectAllHospitals(); return list; }
+		 * catch (Exception e) { e.printStackTrace(); }
+		 */
 		return null;
 
-		
 	}
 
 	@Override
@@ -299,7 +276,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
-	//used by organ, donor
+	// used by organ, donor
 	@Override
 	public boolean update(Object obj) {
 		em.getTransaction().begin();
@@ -307,7 +284,7 @@ public class JPAmanager implements DBManagerInterface {
 		return true;
 	}
 
-	//used by donor, organ
+	// used by donor, organ
 	@Override
 	public boolean delete(Object obj) {
 		if (Donor.class == obj.getClass()) {
@@ -324,71 +301,69 @@ public class JPAmanager implements DBManagerInterface {
 			boolean r = org.delete(organ);
 			return r;
 		}
-		if(Hospital.class== obj.getClass()){
-			Hospital hospital=(Hospital) obj;
-			boolean r=  hosp.removeHospital(hospital);
+		if (Hospital.class == obj.getClass()) {
+			Hospital hospital = (Hospital) obj;
+			boolean r = hosp.removeHospital(hospital);
 			return r;
 		}
 		return false;
 	}
+
 	@Override
 	public String hospitalOfPatient(String pName) {
-		Hospital hospital=new Hospital();
-		try{
-			
-			hospital=hosp.hospitalofpatient(pName);
-			
+		Hospital hospital = new Hospital();
+		try {
+
+			hospital = hosp.hospitalofpatient(pName);
+
 			return hospital.getName();
-		
-	}
-		catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return hospital.getName();
-		}
-		
-  //FOR WHAT DO I USE IT?
+	}
+
+	// FOR WHAT DO I USE IT?
 	@Override
 	public Integer idPatient(Patient patient) {
-		
-		 
-		 Integer id = 30; 
-		 try { 
-			 id = pat.getIdpatient(patient);
-		  return id; 
-		  } 
-		 catch (Exception e) {
-		  e.printStackTrace(); 
-		  } 
-		 return id;
-		 
+
+		Integer id = 30;
+		try {
+			id = pat.getIdpatient(patient);
+			return id;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
 
 	}
-	public List<Patient> searchPatbyname(String name){
-		//Patient patient=new Patient();
-		List<Patient> patients=new ArrayList<>();
-		 try { 
-			 patients=pat.searchPatientbyname(name);
-			 return patients;
-			
-		  } 
-		 catch (Exception e) {
-		  e.printStackTrace(); 
-		  } 
-		
+
+	public List<Patient> searchPatbyname(String name) {
+		// Patient patient=new Patient();
+		List<Patient> patients = new ArrayList<>();
+		try {
+			patients = pat.searchPatientbyname(name);
+			return patients;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return patients;
 	}
-	//used in unmarshall
-	public Patient getPatientById (Integer idP){
+
+	// used in unmarshall
+	public Patient getPatientById(Integer idP) {
 		Patient pat = new Patient();
-		try{
-			
-		}catch (Exception e){
+		try {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return pat;
 	}
-	
+
 	@Override
 	public Integer idRequestedOrgan(Requested_organ r) {
 		// TODO Auto-generated method stub
@@ -402,15 +377,14 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 	@Override
-	public Integer idDonor(Donor d) {//por ahora este metodo no lo usamos
+	public Integer idDonor(Donor d) {// por ahora este metodo no lo usamos
 		// TODO Auto-generated method stub
 		// don.getIdOfDonor(d);
 		return null;
 	}
 
-	
 	public Integer getIdOfDoctor(Doctor doct) {
-		//DONE WITH JDBC
+		// DONE WITH JDBC
 		return null;
 	}
 
@@ -437,8 +411,6 @@ public class JPAmanager implements DBManagerInterface {
 		// DONE WITH JDBC
 		return null;
 	}
-
-	
 
 	@Override
 	public List<Doctor> doctorOfPatient(String pName) {

@@ -21,9 +21,7 @@ public class JPAhospital {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			jpaManager.getEManager().persist(hosp);
-			jpaManager.getEManager().getTransaction().commit();
-
-			
+			jpaManager.getEManager().getTransaction().commit();			
 			return true;
 
 		} catch (Exception e) {

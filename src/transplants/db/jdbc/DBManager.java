@@ -98,11 +98,11 @@ public class DBManager implements DBManagerInterface {
 	public boolean insert(Object obj) {
 
 		try {
-
-			if (Hospital.class == obj.getClass()) {
+			//C: Done in jpa
+			/*if (Hospital.class == obj.getClass()) {
 				Hospital hospital = (Hospital) obj;
 				return hosp.insertHospital(hospital);
-			}
+			}*/
 
 			if (Doctor.class == obj.getClass()) {
 				Doctor doctor = (Doctor) obj;
@@ -132,7 +132,7 @@ public class DBManager implements DBManagerInterface {
 	// PKs
 	//M: used
 	@Override
-	public boolean insertPrimaryKeyDoctorHospital(Integer id1, Integer id2) {
+	public boolean assigmentDoctorHospital(Integer id1, Integer id2) {
 		return hosp.insertHospitalsDoctors(id1, id2);
 	}
 
