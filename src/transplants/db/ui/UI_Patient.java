@@ -126,6 +126,7 @@ public class UI_Patient {
 		return null;
 	}
 
+	//M: used by case 4/ case 1
 	public void updatePatient(Patient p, JPAmanager jpaManager) {
 		boolean again = true;
 		try {
@@ -196,7 +197,7 @@ public class UI_Patient {
 
 	}
 
-	
+	//M: used from case 4/ case 2, the req organ was been deleted with jpa and thats no possible, i change it to jdbc
 	public void deletePatient(Patient pat, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			
@@ -205,7 +206,7 @@ public class UI_Patient {
 			List <Requested_organ> reqorgans = pat.getRequested_organ();
 		
 			for (Requested_organ reqorgan : reqorgans) {
-				reqorgansdeleted= jpaManager.delete(reqorgan);
+				reqorgansdeleted= dbmanager.delete(reqorgan);
 			}						
 			boolean patientDeleted = jpaManager.delete(pat);		
 			
@@ -221,7 +222,7 @@ public class UI_Patient {
 		}
 	}
 
-
+	//M: used in case 4/ case 3
 	public void patientHospitalAndDoctor(String ptName, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			List<Patient> patients=new ArrayList<>();

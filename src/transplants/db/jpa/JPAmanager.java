@@ -201,7 +201,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
-	// M: used
+	// M: used by uidonor: searchDonor
 	@Override
 	public List<Donor> searchDonor(String name) {
 		try {
@@ -231,7 +231,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
-	// M: used
+	// M: used in uihosps: seeallpatients
 	public List<Patient> searchallpatients(Hospital hospital) {
 		try {
 			List<Patient> patients = hosp.searchAllPatients(hospital);
@@ -286,7 +286,7 @@ public class JPAmanager implements DBManagerInterface {
 		return true;
 	}
 
-	// used by donor, organ
+	// used by donor, organ, patient, reqorgan-->WTF
 	@Override
 	public boolean delete(Object obj) {
 		if (Donor.class == obj.getClass()) {
@@ -310,7 +310,7 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return false;
 	}
-
+	//M: used from uipatient: patientHospitalAndDoctor
 	@Override
 	public String hospitalOfPatient(String pName) {
 		Hospital hospital = new Hospital();
@@ -325,9 +325,8 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return hospital.getName();
 	}
-
+	//M: used by uipatient: patientHospitalAndDoctor
 	public List<Patient> searchPatbyname(String name) {
-		// Patient patient=new Patient();
 		List<Patient> patients = new ArrayList<>();
 		try {
 			patients = pat.searchPatientbyname(name);

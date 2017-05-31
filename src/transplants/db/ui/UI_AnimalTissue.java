@@ -15,7 +15,7 @@ public class UI_AnimalTissue {
 	
 	public UI_AnimalTissue(){		
 	}	
-	
+	//M: used generic case1/csae4
 	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager, String typetissue){
 		try{
 			System.out.print("Name of the animal where the tissue come from: ");

@@ -64,7 +64,7 @@ public class SQL_Organ {
 		}
 		return lookForOrgan;
 	}
-	//M: used
+	//M: used from dbamanger: update
 	public boolean updateOrgan (Organ organ){
 		try {
 			String sql = "UPDATE Organs SET name=?, weight=?, typeOfDonation =?, lifeOfOrgan=? WHERE id=?";

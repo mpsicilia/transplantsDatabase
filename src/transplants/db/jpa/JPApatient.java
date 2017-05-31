@@ -53,6 +53,7 @@ public class JPApatient {
 		return patient;
 	}*/
 
+	//M: used from jpaManager: delete
 	public boolean removePatient(Patient patient) {
 
 		try {
@@ -109,7 +110,7 @@ public class JPApatient {
 		}
 		return 30;
 	}
-	//NEW
+	//M: used by jpamanager: searchPatByName
 	public List<Patient> searchPatientbyname(String name){
 		//Patient patient = new Patient();
 		List<Patient> patients=new ArrayList<>();

@@ -30,7 +30,8 @@ public class JPAhospital {
 		return false;
 	}
 
-	//ESTE HAY QUE BORRARLO
+	//ESTE HAY QUE BORRARLO. M: WTF!!! ESTA SIENDO USADO, XQ BORRAR? NO FUNCIONA?
+	//M: used by jpamanager: hospitalOfPatient
 	public Hospital hospitalofpatient(String namepat){
 		Hospital hospital=new Hospital();
 		try{
@@ -99,7 +100,7 @@ public class JPAhospital {
 		}
 		return false;
 	}
-	//M: used
+	//M: used in jpamanager: searchAllPatients
 	//it returns all the patients a hospital has
 	public List<Patient> searchAllPatients(Hospital hospit){
 		List<Patient> patients = new ArrayList<Patient>();

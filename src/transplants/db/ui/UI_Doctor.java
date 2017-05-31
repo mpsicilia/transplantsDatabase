@@ -17,7 +17,7 @@ public class UI_Doctor {
 	public UI_Doctor() {
 	}
 
-	//M: used ;)
+	//M: used from uigeneric: case1/ case2
 	// This class is going to work with JDBC
 	public void introduceNewDoctor(DBManager dbManager) {
 		try {
@@ -69,7 +69,7 @@ public class UI_Doctor {
 		}
 	}
 
-	//M: used
+	//M: used by case2/case2
 	public List<Doctor> searchDoctor(DBManager dbManager) {
 		try {
 			System.out.println("Introduce the name of the doctor: ");
@@ -82,7 +82,7 @@ public class UI_Doctor {
 		return null;
 	}
 
-	//M: used
+	//M: used in case2/cae2/case1
 	public void updateDoctor(Doctor doct, DBManager dbManager) {
 		boolean again = true;
 		try {
@@ -124,7 +124,7 @@ public class UI_Doctor {
 		}
 	}
 
-	//M: used
+	//M: used case2/case2/case2
 	public void deleteDoctor(Doctor doc, DBManager dbManager) {
 		try {
 			boolean deleted = dbManager.delete(doc);

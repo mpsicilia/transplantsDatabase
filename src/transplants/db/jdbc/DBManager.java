@@ -131,7 +131,7 @@ public class DBManager implements DBManagerInterface {
 	
 
 	// PKs
-	//M: used
+	//M: used from uidoctor:introducenewdoctor
 	@Override
 	public boolean assigmentDoctorHospital(Integer id1, Integer id2) {
 		return hosp.insertHospitalsDoctors(id1, id2);
@@ -172,7 +172,7 @@ public class DBManager implements DBManagerInterface {
 
 	// searches
 	@Override
-	//M: in use
+	//M: in use by uihosp: searchHospital
 	public List<Hospital> searchHosp(String name) {
 
 		try {
@@ -196,7 +196,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}*/
 
-	//M: used
+	//M: used in uidoctor: searchDoctor
 	@Override
 	public List<Doctor> searchDoctor(String name) {
 		try {
@@ -257,7 +257,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	//M: used by uipatient: introducenewpatient
+	//M: used by uipatient: introducenewpatient/ uidoctor:introducenewdoctor
 	@Override
 	public List<Hospital> selectAllHospitals() {
 		return hosp.selectAllHospitals();
@@ -280,7 +280,7 @@ public class DBManager implements DBManagerInterface {
 		return org.CompatibilityTest(organ);
 	}
 
-	//M: using hospital and doctor, organ
+	//M: using hospital and doctor, organ, reqorgan
 	@Override
 	public boolean update(Object obj) {
 		try {
@@ -311,7 +311,7 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 
-	//M: hospital uses it + doctor
+	//M: hospital uses it + doctor +reqOrgan
 	@Override
 	public boolean delete(Object obj) {
 		try {
@@ -385,7 +385,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	//M: used
+	//M: used from uidoctor: insertnewdoctor
 	@Override
 	public Integer getIdOfDoctor(Doctor doctor) {
 		return doct.getIdOfLastDoctor(doctor);
@@ -402,7 +402,7 @@ public class DBManager implements DBManagerInterface {
 		}
 		return namePat;
 	}
-
+	//M: used by uirequOrgan: characteristicsOfReqOrg
 	@Override
 	// given a patient is going to return its requests
 	public List<Requested_organ> characteristicsOfRequestedOrgans(int idPatient) {
@@ -426,7 +426,7 @@ public class DBManager implements DBManagerInterface {
 		}
 		return orgsOfDonor;
 	}
-
+	//M: used by uipatient: patientHospitalAndDoctor
 	@Override
 	public List<Doctor> doctorOfPatient(String pName) {
 		List<Doctor> doctor = new ArrayList<Doctor>();
@@ -451,7 +451,7 @@ public class DBManager implements DBManagerInterface {
 	
 
 	@Override
-	//M: in use
+	//M: in use by uihosps: doctroHospital
 	public List<Hospital> hospitalsOfDoctor(String name) {
 		List<Hospital> hospitals = new ArrayList<Hospital>();
 		try {

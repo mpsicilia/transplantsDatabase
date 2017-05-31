@@ -95,7 +95,7 @@ public class SQL_AnimalTissue {
 
 		return false;
 	}
-
+	//M: useed form dbmanager: assignmentReqAnimal
 	public boolean insertRequestedAnimal(Integer id_requested, Integer id_animal) {
 		try {
 			Statement st = dbManager.getC().createStatement();
