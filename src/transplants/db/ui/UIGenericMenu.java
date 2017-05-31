@@ -67,6 +67,7 @@ public class UIGenericMenu {
 			} else {
 				System.out.println("Tables should be already created");
 			}*/
+			//
 
 			while (true) {
 				System.out.println("\n\n\n");
