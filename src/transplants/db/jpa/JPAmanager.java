@@ -135,7 +135,7 @@ public class JPAmanager implements DBManagerInterface {
 	public boolean insertFKInPatient(Integer patID, Integer hospID) {
 		return false;
 	}
-
+	//M: used from uipatient: introduceNewPatient
 	public Hospital getHospitalPatient(Integer idhosp) {
 		Hospital hospital = new Hospital();
 
@@ -219,6 +219,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
+	//M: used from uipatient: searchPatient (jpamanager)
 	@Override
 	public List<Patient> searchPatient(String name) {
 		try {
@@ -277,7 +278,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
-	// used by organ, donor
+	// used by organ, donor, patietn, hospital
 	@Override
 	public boolean update(Object obj) {
 		em.getTransaction().begin();

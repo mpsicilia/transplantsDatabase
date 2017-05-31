@@ -14,7 +14,7 @@ public class JPApatient {
 		this.jpaManager = jpamanager;
 
 	}
-
+	//M: used from jpamanager: insert
 	public boolean insert(Patient patient) {
 
 		try {
@@ -129,7 +129,7 @@ public class JPApatient {
 	}
 
 	
-
+	//M: used from jpaManager: searchPatient (name)
 	public List<Patient> searchPatient(String name) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {

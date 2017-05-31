@@ -219,6 +219,8 @@ public class SQL_Doctor {
 			e.printStackTrace();
 		}
 	}
+	
+	//M: used from dbmanager: assignmentDoctorPatient
 	public boolean insertDoctorPatientTable(Integer patId, Integer doctId){
 		try {
 			Statement stmt= dbManager.getC().createStatement();

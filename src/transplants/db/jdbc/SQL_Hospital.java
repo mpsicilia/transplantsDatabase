@@ -170,7 +170,7 @@ public class SQL_Hospital {
 		return false;
 	}
 
-	//M: used
+	//M: used from dbmanager: selectAllHospitals
 	public List<Hospital> selectAllHospitals() {
 		List<Hospital> lookForHospital = new ArrayList<Hospital>();
 		try {

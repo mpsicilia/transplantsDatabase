@@ -254,12 +254,13 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	//M: used
+	//M: used by uipatient: introducenewpatient
 	@Override
 	public List<Hospital> selectAllHospitals() {
 		return hosp.selectAllHospitals();
 	}
 
+	//M: used by uipatient: introduceNewPatient
 	@Override
 	public List<Doctor> selectAllDoctors() {
 		return doct.selectAllDoctors();

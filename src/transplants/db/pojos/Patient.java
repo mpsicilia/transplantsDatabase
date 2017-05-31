@@ -61,7 +61,7 @@ public class Patient extends Person implements Serializable {
 		requested_organ=new ArrayList<Requested_organ>();
 	}
 	
-
+	//M: used
 	public Patient(String name, Date birthDate,Float weight, Float height, String gender, String pathology, String bloodType, 
 			 Date additionDate,Date lifeExpectancy){
 		super(name, birthDate,weight,height,gender, bloodType);

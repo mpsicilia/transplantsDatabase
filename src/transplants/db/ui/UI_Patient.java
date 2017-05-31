@@ -22,7 +22,7 @@ public class UI_Patient {
 
 	public UI_Patient() {
 	}
-
+	//M: used by case 2/ case 4
 	public Patient introduceNewPatient(JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			List<Hospital> hosps = dbmanager.selectAllHospitals();
@@ -113,7 +113,7 @@ public class UI_Patient {
 		}
 		return null;
 	}
-
+	//M: used from case2->case4
 	public List<Patient> searchPatient(JPAmanager jpaManager) {
 		try {
 			System.out.println("Introduce the name of the patient: ");
