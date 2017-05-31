@@ -89,9 +89,9 @@ public class UI_Patient {
 			Integer counter = 1;
 			Integer doctId = 0;
 			boolean introduced2 = false;
-
 			Integer patId = jpaManager.getIdpatient(p);
 			Integer counterdoct=1;
+			
 			do {
 				System.out.print("Introduce the id of the "+ counterdoct + "º doctor that is going to take care of the patient: ");
 				doctId = Integer.parseInt(console.readLine());
