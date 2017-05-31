@@ -17,9 +17,7 @@ public class JPAorgan {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			jpaManager.getEManager().persist(organ);
-			jpaManager.getEManager().getTransaction().commit();
-
-			
+			jpaManager.getEManager().getTransaction().commit();			
 			return true;
 
 		} catch (Exception e) {

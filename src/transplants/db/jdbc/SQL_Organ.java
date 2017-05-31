@@ -19,8 +19,8 @@ public class SQL_Organ {
 	public SQL_Organ(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-	
-	public boolean insertOrgan(Organ organ){
+	//C: NOT USE: We are inserting the organ with JPA
+	/*public boolean insertOrgan(Organ organ){
 		try{
 			Statement stmt = dbManager.getC().createStatement();
 			String sql = "INSERT INTO Organs (name, weight, typeOfDonation, lifeOfOrgan) "
@@ -34,7 +34,7 @@ public class SQL_Organ {
 			e.printStackTrace();
 		}
 		return false;
-	}
+	}*/
 	
 	
 	

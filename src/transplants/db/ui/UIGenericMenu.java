@@ -98,9 +98,9 @@ public class UIGenericMenu {
 						break;
 
 					case 3:
-						// we are doing donor in JPA, bur organ in JDBC
+						// we are doing donor in JPA, but organ in JDBC
 						Donor d = uiDonor.introduceNewDonor(jpaManager);
-						System.out.println("Introduce the organ that the donor donates. ");
+						System.out.println("\nIntroduce the organ that the donor donates. ");
 						uiOrgan.introduceNewOrgan(d, dbManager, jpaManager);
 						break;
 
@@ -124,10 +124,7 @@ public class UIGenericMenu {
 								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager,organname);
 
 							}
-
-						}
-
-					
+						}				
 
 						break;
 					}

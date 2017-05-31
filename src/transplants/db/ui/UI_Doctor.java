@@ -40,6 +40,7 @@ public class UI_Doctor {
 			int count = 0;
 			int counterNum=1;
 			boolean ok2 = false;
+			
 			// first we show to the user all the hospitals
 			List<Hospital> listHosp = dbManager.selectAllHospitals();
 			Iterator<Hospital> itH = listHosp.iterator();

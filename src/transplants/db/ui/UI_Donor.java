@@ -45,15 +45,14 @@ public class UI_Donor {
 			System.out.print("Blood Type: ");
 			String bloodType = console.readLine();
 			
-			donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType); 	
+			donor= new Donor(name, birthDate, weight, height, gender, deadAlive, bloodType);
 			
 			boolean ok=jpaManager.insert(donor);
 			if (ok){
 				System.out.println("Donor has been introduced");
 			}else{
 				System.out.println("Donor has NOT been introduced");
-			}
-		
+			}		
 			
 		}catch(IOException ex){
 			ex.printStackTrace();

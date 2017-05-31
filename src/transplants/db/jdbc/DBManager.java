@@ -108,11 +108,11 @@ public class DBManager implements DBManagerInterface {
 				Doctor doctor = (Doctor) obj;
 				return doct.insertDoctor(doctor);
 			}
-
-			if (Organ.class == obj.getClass()) {
+			//C: NOT USE, yes IN JPA
+			/*if (Organ.class == obj.getClass()) {
 				Organ organ = (Organ) obj;
 				return org.insertOrgan(organ);
-			}
+			}*/
 			if (Animal_tissue.class == obj.getClass()) {
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.insertAnimalTissue(animalTi);

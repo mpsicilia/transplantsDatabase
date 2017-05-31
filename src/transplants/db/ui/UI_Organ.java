@@ -51,9 +51,8 @@ public class UI_Organ {
 				boolean okUpdateOrgan = jpaManager.update(organ);
 				boolean okUpdateDonor = jpaManager.update(donor);
 
-				// Changed OK booleans
 				if (ok && okUpdateOrgan && okUpdateDonor) {
-					System.out.println("Organ has been introduced");
+					System.out.println("Organ has been introduced\n");
 					uiCompatibilityTest(organ, dbManager);
 				} else {
 					System.out.println("Organ has NOT been introduced");
