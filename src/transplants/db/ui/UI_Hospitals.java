@@ -76,7 +76,7 @@ public class UI_Hospitals {
 	}
 
 	// M: in use by uigeneric: case2/case1/case1
-	public void updateHospital(Hospital hosp, JPAmanager jpaManager) {
+	public void updateHospital(Hospital hosp, DBManager dbManager) {
 		boolean again = true;
 		try {
 			while (again) {
@@ -120,7 +120,7 @@ public class UI_Hospitals {
 				}
 			}
 
-			boolean updated = jpaManager.update(hosp);
+			boolean updated = dbManager.update(hosp);
 			if (updated) {
 				System.out.println("Hospital has been updated. \n" + hosp.toString());
 			} else {
@@ -178,37 +178,41 @@ public class UI_Hospitals {
 		return listpatients;
 	}
 
-	//marshal
+	//M: used
 	public void javaToXmlDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data) {
 		try {
 
 			// Get all the hospitals to marshal
 			List<Hospital> hospsToMarshall = data.getAllHospOFDatabase();
 			Iterator<Hospital> itH = hospsToMarshall.iterator();
-			// get the doctors and patients of the hospital and add them to the hospital in order to marshal them
+			// get the doctors and patients of the hospital and add them to the
+			// hospital
 			int counterH = 1;
 			while (itH.hasNext()) {
 				Hospital h = itH.next();
-				//Printing in order to see if all the hospitals, doctors and patients are being properly marhsalled
+				// print all the hospitals in order to see if all of them are being marshalled
 				System.out.println(counterH + ". Hospital: " + h.getName());
 				List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(h.getName());
 				Iterator<Doctor> itD = doctorsOfHosp.iterator();
 				while (itD.hasNext()) {
 					Doctor d = itD.next();
 					boolean doctorOK = h.addDoctor(d);
-					System.out.println("Doctor " + d.getNameOfDoctor() + " added: " + doctorOK);
+					System.out.println("Doctor " + d.getNameOfDoctor() + " added: " + doctorOK); // checking
+																									// addition
 				}
 				List<Patient> patientsOfHosp = jpaManager.searchAllPatients(h);
 				Iterator<Patient> itP = patientsOfHosp.iterator();
 				while (itP.hasNext()) {
 					Patient p = itP.next();
 					boolean patientOK = h.addPatient(p);
-					System.out.println("Patient " + p.getName() + " added:" + patientOK);
+					System.out.println("Patient " + p.getName() + " added:" + patientOK); // checking
+																							// addition
 				}
 				counterH++;
 			}
 
 			XMLmanager hospXml = new XMLmanager();
+			System.out.println("Starting marshal.");
 			boolean xmlOK = hospXml.marshalDatabase(data);
 
 			if (xmlOK) {
@@ -221,13 +225,13 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-
-	//unmarshal
+	//M: used
 	public void xmlToJavaDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase dataUnmarsh) {
 		try {
 			XMLmanager dataXml = new XMLmanager();
 			dataUnmarsh = dataXml.unmarshalDatabase(dataUnmarsh);
-			
+			// update everything on the tables, update with jdbc bc it doesn't
+			// function with jpa
 			List<Hospital> hospUnmarsh = dataUnmarsh.getAllHospOFDatabase();
 			for (Hospital h : hospUnmarsh) {
 				List<Doctor> docsUnmarsh = h.getDoctors();
@@ -258,7 +262,7 @@ public class UI_Hospitals {
 					jpaManager.update(h);
 					System.out.println("Patient " + temp.getName() + " updated.");
 				}
-				boolean hospUpdate = dbManager.updateUnmarshalledHosp(h);
+				boolean hospUpdate = dbManager.update(h);
 				if (hospUpdate) {
 					System.out.println("Hospital " + h.getName() + " updated.");
 				}
@@ -268,8 +272,7 @@ public class UI_Hospitals {
 
 		}
 	}
-	
-	//HTML
+	//M: used
 	public void xmlToHtml(String sourcePath, String xsltPath, String resultDir) {
 		XMLmanager hospXml = new XMLmanager();
 		hospXml.simpleTransform(sourcePath, xsltPath, resultDir);

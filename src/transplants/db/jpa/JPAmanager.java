@@ -170,11 +170,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 	
-	@Override
-	public Patient searchPatient (Integer idPat){
-		//DONE in JDBC
-		return null;
-	}
+
 	
 	@Override
 	public List<Organ> searchOrgan(String name) {
