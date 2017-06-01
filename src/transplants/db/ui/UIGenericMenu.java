@@ -483,18 +483,17 @@ public class UIGenericMenu {
 					int opt = Integer.parseInt(console.readLine());
 
 					switch (opt) {
-					case 1:
+					case 1: //marshal the database into an XML file
 						List<Hospital> hosps = dbManager.selectAllHospitals();
 						for (Hospital hospital : hosps) {
 							database.addHospital(hospital);
 						}
 						uiHospital.javaToXmlDatabase(dbManager, jpaManager, database);
 						break;
-					case 2:
+					case 2: //unmarshal the information of the XML file into the database
 						uiHospital.xmlToJavaDatabase(dbManager, jpaManager, database);
 						break;
-					case 3:
-						// Hay que coger los paths
+					case 3: //create the HTML based on the XSLT
 						uiHospital.xmlToHtml("./xmlFiles/TransplantsDatabase.xml", "./xmlFiles/TransplantDB.xslt",
 								"./xmlFiles/ExternalDatabase.html");
 					}

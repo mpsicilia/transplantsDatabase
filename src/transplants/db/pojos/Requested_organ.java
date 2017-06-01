@@ -22,7 +22,7 @@ public class Requested_organ implements Serializable {
 	private String name;
 	private Float maxWeight;
 	private Float minWeight;
-	//DIDNT PUT FETCHTYPE
+
 	@ManyToOne
 	@JoinColumn(name = "patient_id") // the FK
 	private Patient patient;
@@ -45,14 +45,12 @@ public class Requested_organ implements Serializable {
 	}
 	
 	public Requested_organ(Integer id, String name, Float maxWeight, Float minWeight) {
-		//super();
 		this.id = id;
 		this.name = name;
 		this.maxWeight = maxWeight;
 		this.minWeight = minWeight;
 	}
 	public Requested_organ(String name, Float maxWeight, Float minWeight) {
-		//super();
 		this.name = name;
 		this.maxWeight = maxWeight;
 		this.minWeight = minWeight;

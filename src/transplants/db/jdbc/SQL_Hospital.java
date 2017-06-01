@@ -127,7 +127,7 @@ public class SQL_Hospital {
 		return hosp;
 	}
 
-	//M: used from dbmanager: update
+	//M: used from dbmanager: update, only used when unmarshalling
 	public boolean updateHospital(Hospital hosp) {
 		try {
 			String sql = "UPDATE Hospitals SET name=?, phoneNumber=?, address=?,"

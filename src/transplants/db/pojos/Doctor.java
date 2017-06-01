@@ -39,13 +39,13 @@ public class Doctor implements Serializable{
 		hospital= new ArrayList<Hospital>();
 		patients =new ArrayList<Patient>();
 	}
-	//M: used
+
 	public Doctor(String nameOfDoctor,String registrationNumber, String specialization){
 		this.name=nameOfDoctor;
 		this.registrationNumber=registrationNumber;
 		this.specialization=specialization;		
 	}
-	//M: used
+
 	public Doctor(Integer id, String nameOfDoctor,String registrationNumber, String specialization){
 		this.id=id;
 		this.name=nameOfDoctor;
@@ -121,7 +121,7 @@ public class Doctor implements Serializable{
 		this.hospital = hospital;
 	}
 	
-	// Additional method to add to a list
+	// Additional method to add a patient to the list of patients
 	public boolean addPatient(Patient patient) {
 		if (!patients.contains(patient)) {
 			return this.patients.add(patient);
@@ -129,7 +129,7 @@ public class Doctor implements Serializable{
 		else return false;
 	}
 
-	// Additional method to remove from a list
+	// Additional method to remove a patient from the list of patients
 	public boolean removePatient(Patient patient) {
 		if (patients.contains(patient)) {
 			return this.patients.remove(patient);

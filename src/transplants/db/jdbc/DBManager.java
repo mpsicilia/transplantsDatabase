@@ -452,4 +452,14 @@ public class DBManager implements DBManagerInterface {
 		}
 		return docs;
 	}
+	
+	//M: used by unmarshal in uihospital
+	public boolean updateUnmarshalledHosp (Hospital h){
+		try{
+			return hosp.updateHospital(h);
+		}catch (Exception e){
+			
+		}
+		return false;
+	}
 }

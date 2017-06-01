@@ -21,7 +21,7 @@ public class Animal_tissue implements Serializable {
 	private String pathology;
 	private Date lifeExpTissue;
 	
-	@ManyToMany(mappedBy = "animalTissues") //bc it is mapped by the list of the other class. ver apuntes
+	@ManyToMany(mappedBy = "animalTissues")
 	private List<Requested_organ> requested_organs;
 	
 	
@@ -130,7 +130,7 @@ public class Animal_tissue implements Serializable {
 		}
 	}
 
-	// Additional method to remove from a list
+	
 	public void removeRequestedOrgan(Requested_organ requested_organ) {
 		if (requested_organs.contains(requested_organ)) {
 			this.requested_organs.remove(requested_organ);

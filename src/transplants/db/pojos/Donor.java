@@ -16,11 +16,11 @@ public class Donor extends Person implements Serializable{
    
 	@OneToMany(mappedBy="donor") 
 	private List<Organ> organs;
-	//M: used
+
 	public Donor() {
 		organs=new ArrayList<Organ>();
 	}
-	//M: used
+
 	public Donor (String name, Date birthDate, Float weight, Float height, String gender, 
 			      String deadOrAlive, String bloodType){
 		super(name, birthDate, weight, height, gender, bloodType);

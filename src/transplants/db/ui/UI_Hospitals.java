@@ -178,41 +178,37 @@ public class UI_Hospitals {
 		return listpatients;
 	}
 
-	//M: used
+	//marshal
 	public void javaToXmlDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data) {
 		try {
 
 			// Get all the hospitals to marshal
 			List<Hospital> hospsToMarshall = data.getAllHospOFDatabase();
 			Iterator<Hospital> itH = hospsToMarshall.iterator();
-			// get the doctors and patients of the hospital and add them to the
-			// hospital
+			// get the doctors and patients of the hospital and add them to the hospital in order to marshal them
 			int counterH = 1;
 			while (itH.hasNext()) {
 				Hospital h = itH.next();
-				// print all the hospitals in order to see if all of them are being marshalled
+				//Printing in order to see if all the hospitals, doctors and patients are being properly marhsalled
 				System.out.println(counterH + ". Hospital: " + h.getName());
 				List<Doctor> doctorsOfHosp = dbManager.workingDoctorsInHosp(h.getName());
 				Iterator<Doctor> itD = doctorsOfHosp.iterator();
 				while (itD.hasNext()) {
 					Doctor d = itD.next();
 					boolean doctorOK = h.addDoctor(d);
-					System.out.println("Doctor " + d.getNameOfDoctor() + " added: " + doctorOK); // checking
-																									// addition
+					System.out.println("Doctor " + d.getNameOfDoctor() + " added: " + doctorOK);
 				}
 				List<Patient> patientsOfHosp = jpaManager.searchAllPatients(h);
 				Iterator<Patient> itP = patientsOfHosp.iterator();
 				while (itP.hasNext()) {
 					Patient p = itP.next();
 					boolean patientOK = h.addPatient(p);
-					System.out.println("Patient " + p.getName() + " added:" + patientOK); // checking
-																							// addition
+					System.out.println("Patient " + p.getName() + " added:" + patientOK);
 				}
 				counterH++;
 			}
 
 			XMLmanager hospXml = new XMLmanager();
-			System.out.println("Starting marshal.");
 			boolean xmlOK = hospXml.marshalDatabase(data);
 
 			if (xmlOK) {
@@ -225,13 +221,13 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	//M: used
+
+	//unmarshal
 	public void xmlToJavaDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase dataUnmarsh) {
 		try {
 			XMLmanager dataXml = new XMLmanager();
 			dataUnmarsh = dataXml.unmarshalDatabase(dataUnmarsh);
-			// update everything on the tables, update with jdbc bc it doesn't
-			// function with jpa
+			
 			List<Hospital> hospUnmarsh = dataUnmarsh.getAllHospOFDatabase();
 			for (Hospital h : hospUnmarsh) {
 				List<Doctor> docsUnmarsh = h.getDoctors();
@@ -262,7 +258,7 @@ public class UI_Hospitals {
 					jpaManager.update(h);
 					System.out.println("Patient " + temp.getName() + " updated.");
 				}
-				boolean hospUpdate = dbManager.update(h);
+				boolean hospUpdate = dbManager.updateUnmarshalledHosp(h);
 				if (hospUpdate) {
 					System.out.println("Hospital " + h.getName() + " updated.");
 				}
@@ -272,7 +268,8 @@ public class UI_Hospitals {
 
 		}
 	}
-	//M: used
+	
+	//HTML
 	public void xmlToHtml(String sourcePath, String xsltPath, String resultDir) {
 		XMLmanager hospXml = new XMLmanager();
 		hospXml.simpleTransform(sourcePath, xsltPath, resultDir);
