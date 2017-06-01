@@ -31,7 +31,6 @@ public class JPAhospital {
 		return false;
 	}
 
-	//ESTE HAY QUE BORRARLO. M: WTF!!! ESTA SIENDO USADO, XQ BORRAR? NO FUNCIONA?
 	//M: used by jpamanager: hospitalOfPatient
 	public Hospital hospitalofpatient(String namepat){
 		Hospital hospital=new Hospital();

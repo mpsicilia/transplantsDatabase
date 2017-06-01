@@ -209,12 +209,6 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	
 	@Override
-	public List<Patient> selectAllPatients() {
-		//In jdbc
-		return null;
-	}
-	
-	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
 		// Done in jdbc
 		return null;

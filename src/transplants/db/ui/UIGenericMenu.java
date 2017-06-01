@@ -10,6 +10,7 @@ import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
+import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Doctor;
 import transplants.db.pojos.Donor;
 import transplants.db.pojos.Hospital;
@@ -392,8 +393,6 @@ public class UIGenericMenu {
 								System.out.println("Introduce the number of the patient: ");
 								int numPat4 = Integer.parseInt(console.readLine());
 								Patient patReq = pat.get(numPat4 - 1);
-								// TODO mirar como esta gecho donor, se puede
-								// hacer m�s simple
 								List<Requested_organ> reqs = uiRequested
 										.characteristicsOfRequestedOrgans(patReq.getId(), dbManager);
 								System.out.println("Patient: " + patReq.getName() + " needs the following organs: \n");
@@ -404,7 +403,8 @@ public class UIGenericMenu {
 									System.out.println(countReq + ". " + r);
 									countReq++;
 								}
-								if (reqs != null) {
+								if (reqs != null) { //Each requested organ can be supplied by a human or an animal
+														//So in each option we check where the organ comes from
 									System.out.print("\nRELATED WITH THE ORGANS:");
 									System.out.print("\n1.Introduce a new request.");
 									System.out.print("\n2.Update information of requested organ.");
@@ -416,28 +416,51 @@ public class UIGenericMenu {
 									int numOrg = 0;
 									switch (opOrgan) {
 									case 1:
-										uiRequested.introduceNewReqOrgan(patReq, dbManager, jpaManager);
-										// TODO ver si es de animal....
+										List<Requested_organ> newReqs = new ArrayList<Requested_organ>();
+										newReqs = uiRequested.introduceNewReqOrgan(patReq, dbManager, jpaManager);
+										
+										Iterator<Requested_organ> itR = newReqs.iterator();
+										Integer count=0;
+										List<Requested_organ> reqAnimal = new ArrayList<Requested_organ>();
+
+										while (itR.hasNext()) {
+											Requested_organ organ = itR.next();
+											String organname = organ.getName();
+
+											if (organname.equalsIgnoreCase("collagen") || organname.equalsIgnoreCase("skin")) {
+												count++;
+												reqAnimal.add(organ);
+												System.out.println("The "+count+" Requested Organ is: " + organ);
+												uiAnimalT.introduceNewAnimalTissue(reqAnimal, dbManager,organname);
+											}
+										}
+										
 										break;
 
 									case 2:
 										System.out.println("Introduce the number of the organ: ");
 										numOrg = Integer.parseInt(console.readLine());
 										Requested_organ orgUp = reqs.get(numOrg - 1);
-										uiRequested.updateReqOrgan(orgUp, dbManager);
-										// TODO Podriamos ponerle que despues de
-										// que haya actualizo la info se la
-										// muestre
-										// al usuario y que aqui le diga si le
-										// ha tocado organo de animal o de
-										// persona???
+										if(orgUp.getName().equalsIgnoreCase("collagen") || orgUp.getName().equalsIgnoreCase("skin")){
+											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgUp.getId(), dbManager);
+											uiAnimalT.updateAnimalTissue(animalT, dbManager);
+										}
+										else {
+											uiRequested.updateReqOrgan(orgUp, dbManager);
+										}
 										break;
 
 									case 3:
 										System.out.println("Introduce the number of the organ: ");
 										numOrg = Integer.parseInt(console.readLine());
 										Requested_organ orgDe = reqs.get(numOrg - 1);
-										uiRequested.deleteRequestOrgan(orgDe, dbManager);
+										if(orgDe.getName().equalsIgnoreCase("collagen") || orgDe.getName().equalsIgnoreCase("skin")){
+											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgDe.getId(), dbManager);
+											uiAnimalT.deleteAnimalTissue(animalT, dbManager);
+										}
+										else {
+											uiRequested.deleteRequestOrgan(orgDe, dbManager);
+										}
 										break;
 									case 4:
 										break;

@@ -113,21 +113,7 @@ public class Requested_organ implements Serializable {
 	
 	public void setAnimalTissues(List<Animal_tissue> animalTissues){
 		this.animalTissues=animalTissues;
-	}
-
-	// Additional method to add to a list
-		public void addAnimalTissue(Animal_tissue animalTissue) {
-			if (!animalTissues.contains(animalTissue)) {
-				this.animalTissues.add(animalTissue);
-			}
-		}
-
-		// Additional method to remove from a list
-		public void removeAnimalTissue(Animal_tissue animalTissue) {
-			if (animalTissues.contains(animalTissue)) {
-				this.animalTissues.remove(animalTissue);
-			}
-		}
+	}	
 
 		@Override
 		public String toString() {

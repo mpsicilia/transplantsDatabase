@@ -12,24 +12,7 @@ public class SQL_Hospital {
 	public SQL_Hospital(DBManager dbmanager) {
 		this.dmanager = dbmanager;
 	}
-	//C: no lo usamos pq introducimos hospital con jpa
-	/*public boolean insertHospital(Hospital hospital) {
-		try {
-			Statement stmt = dmanager.getC().createStatement();
-			String sql = "INSERT INTO Hospitals (name, phoneNumber, address, city, postcode, country) VALUES ('"
-					+ hospital.getName() + "', '" + hospital.getPhone_number() + "'," + " '" + hospital.getAddress()
-					+ "', '" + hospital.getCity() + "', '" + hospital.getPostcode() + "', '" + hospital.getCountry()
-					+ "');";
-			stmt.executeUpdate(sql);
-			stmt.close();
-			return true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}*/
-
+	
 	//M: in use by dbamanger: searchHosp
 	public List<Hospital> searchHospital(String name) {
 		List<Hospital> lookForHospital = new ArrayList<Hospital>();
@@ -50,31 +33,12 @@ public class SQL_Hospital {
 			}
 			rs.close();
 			stmt.close();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
 		return lookForHospital;
 	}
-
-	// new method that searches for a hospital with an id-->to use in UIDOCTOR
-	/*public String Hospitalofdoctor(Integer idhosp) {
-		String hosp = "";
-		try {
-			Statement stmt = dmanager.getC().createStatement();
-			String searchSql = "SELECT name FROM Hospitals " + "WHERE id = " + idhosp + "";
-			ResultSet rs = stmt.executeQuery(searchSql);
-
-			while (rs.next()) {
-				hosp = rs.getString("name");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return hosp;
-	}*/
 
 	//M: used by dbmanager: hospitalsofdocotr
 	// method that tell us given a specific doctor, in which hospital he works
@@ -107,25 +71,6 @@ public class SQL_Hospital {
 		return hosps;
 	}
 
-	// given a patient name is going to return the hospital in which the patient
-	// is
-	public String hospitalOfPatient(String patName) {
-		String hosp = "";
-		try {
-			Statement stmt = dmanager.getC().createStatement();
-			String searchSql = "SELECT * FROM Hospitals " + "AS Hosp JOIN Patients AS Pat ON Hosp.id=Pat.hospital_id "
-					+ "WHERE Pat.name LIKE '%" + patName + "%'";
-			ResultSet rs = stmt.executeQuery(searchSql);
-
-			while (rs.next()) {
-				hosp = rs.getString(2);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return hosp;
-	}
 
 	//M: used from dbmanager: update, only used when unmarshalling
 	public boolean updateHospital(Hospital hosp) {
