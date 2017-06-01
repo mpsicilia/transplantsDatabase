@@ -1,6 +1,7 @@
 package transplants.db.jpa;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -92,13 +93,11 @@ public class JPAhospital {
 	public List<Patient> searchAllPatients(Hospital hospit){
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
-			jpaManager.getEManager().getTransaction().begin();
+			jpaManager.getEManager().getTransaction().begin();	
 			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Patients AS Pat JOIN Hospitals AS Hosp "
-					+ "ON Pat.hospital_id=Hosp.id WHERE Hosp.name LIKE ?", Patient.class);
-			q.setParameter(1,hospit.getName());
-			patients = ((List<Patient>) q.getResultList());
-			jpaManager.getEManager().getTransaction().commit();
-
+					+ "ON Pat.hospital_id=Hosp.id WHERE Hosp.id= '" + hospit.getId() + "'", Patient.class);
+			patients = (List<Patient>) q.getResultList();
+			jpaManager.getEManager().getTransaction().commit();	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

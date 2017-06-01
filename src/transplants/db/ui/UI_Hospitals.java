@@ -164,18 +164,23 @@ public class UI_Hospitals {
 	}
 
 	// M: useddd by case2/case1/case3
-	public List<Patient> seeallpatients(JPAmanager jpamanager, Hospital hosp) {
-		List<Patient> listpatients = new ArrayList<Patient>();
+	public void seeallpatients(Hospital hosp, JPAmanager jpaM) {
+		
 		try {
-			listpatients = jpamanager.searchAllPatients(hosp);
-			return listpatients;
-
+			List<Patient> listpatients = new ArrayList<Patient>();
+			System.out.println("The patients that this hospital has: ");
+			listpatients = jpaM.searchAllPatients(hosp);
+			Iterator<Patient> it = listpatients.iterator();
+			int count = 1;
+			while (it.hasNext()) {
+				System.out.println(count + ". " + it.next());
+				count++;
+			}		
+		
 		}
-
 		catch (Exception e) {
 			e.printStackTrace();
-		}
-		return listpatients;
+		}	
 	}
 
 	//M: used
