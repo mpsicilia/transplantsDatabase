@@ -205,6 +205,7 @@ public class UI_Organ {
 			//tiene que coger el paciente, despues el id del organo(requested) que tiene el mismo nombre que este organo
 			
 			int idR = dbManager.reqIdByPatIdAndDonOrg(patientId, organ.getName());
+			System.out.println("Id del organ requested: "+idR+ "/n Id del organ donante: " + organ.getId());
 			dbManager.requestedFKinOrgan(idR, organ.getId());
 			}
 			
