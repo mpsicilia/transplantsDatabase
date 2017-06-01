@@ -371,13 +371,13 @@ public class JPAmanager implements DBManagerInterface {
 
 	// used in unmarshall
 	public Patient getPatientById(Integer idP) {
-		Patient pat = new Patient();
+		Patient p = new Patient();
 		try {
-
+			p=pat.searchPatientById(idP);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return pat;
+		return p;
 	}
 
 }
