@@ -248,14 +248,4 @@ public class UI_Patient {
 			e.printStackTrace();
 		}
 	}
-
-	public List<Patient> allPatients(JPAmanager jpaManager) {
-		List<Patient> patList = new ArrayList<Patient>();
-		try {
-			patList = jpaManager.selectAllPatients();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return patList;
-	}
 }
