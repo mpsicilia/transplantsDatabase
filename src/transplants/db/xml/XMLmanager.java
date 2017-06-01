@@ -20,7 +20,7 @@ public class XMLmanager {
 	private Unmarshaller unmarshaller;
 	private File xmlFile = new File ("./xmlFiles/TransplantsDatabase.xml");
 	
-	private XMLDatabase XMLhosp = new XMLDatabase (this);
+	private XMLDatabase XMLData = new XMLDatabase (this);
 	
 	public XMLmanager (){
 		try{
@@ -31,31 +31,30 @@ public class XMLmanager {
 		}catch(JAXBException ex){
 			ex.printStackTrace();
 		}
-		
 	}
-	//M: used
-	//marshalling method!
+	
+	//marshalling method
 	public boolean marshalDatabase (TransplantDatabase dataHosp){
 		try{
-			return XMLhosp.javaToXmlDatabase(marshaller, dataHosp, xmlFile);
+			return XMLData.javaToXmlDatabase(marshaller, dataHosp, xmlFile);
 			
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 		return false;
 	}
-	//M: used
-	//unmarshaling method
+	
+	//unmarshalling method
 	public TransplantDatabase unmarshalDatabase (TransplantDatabase database){
 		try{
-			database = XMLhosp.xmlToJavaDatabase(unmarshaller, xmlFile, database);
+			database = XMLData.xmlToJavaDatabase(unmarshaller, xmlFile, database);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 		return database;		
 	}
-	//M: used
-	//method in order to transform an xml into a html
+
+	//method in order to transform the XML into a HTML by the xslt
 	public void simpleTransform(String sourcePath, String xsltPath,String resultDir) {
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		try {

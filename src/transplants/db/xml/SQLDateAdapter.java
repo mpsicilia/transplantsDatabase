@@ -5,7 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.sql.Date;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-
+//XML annotations in patient and person
+//we use this class to get the dates from the XMLFile and to put the dates in the XMLFile
 public class SQLDateAdapter extends XmlAdapter<String, Date> {
 	
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
