@@ -32,7 +32,7 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-
+	//not used, are we going to need it?
 	public List<Animal_tissue> searchAnimalTissue(String name) {
 		List<Animal_tissue> lookForAnimalT = new ArrayList<Animal_tissue>();
 		try {

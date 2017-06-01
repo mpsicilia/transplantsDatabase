@@ -136,7 +136,7 @@ public class SQL_Organ {
 		}
 		return false;
 	}
-	
+	//C: TODAVIA NO LO USAMOS, VAMOS A USARLO PAU?¿?
 	public boolean insertRequestedFK (int idReq, int idOrg){
 		try{
 			String sql = "UPDATE Organs SET requested_id=? WHERE id=" + idOrg;
