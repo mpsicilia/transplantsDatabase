@@ -239,7 +239,7 @@ public class UI_Hospitals {
 				}
 				List<Patient> patsUnmarsh = h.getPatients();
 				for (Patient p : patsUnmarsh) {
-					Patient temp = jpaManager.getPatientById(p.getId());
+					Patient temp = dbManager.searchPatient(p.getId());
 		
 					temp.setName(p.getName());
 					temp.setBirthDate(p.getBirthDate());

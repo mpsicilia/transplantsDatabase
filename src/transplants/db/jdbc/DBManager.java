@@ -204,7 +204,7 @@ public class DBManager implements DBManagerInterface {
 	//M: used
 	@Override
 	public Patient searchPatient (Integer idPat){
-		return pat.searchPatientById(idPat);
+	return null;	//return pat.searchPatientById(idPat);
 	}
 	
 	@Override
