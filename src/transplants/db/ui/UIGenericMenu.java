@@ -122,7 +122,6 @@ public class UIGenericMenu {
 								newreq.add(organ);
 								System.out.println("The "+counter+" Requested Organ is: " + organ);
 								uiAnimalT.introduceNewAnimalTissue(newreq, dbManager,organname);
-
 							}
 						}				
 
@@ -189,14 +188,7 @@ public class UIGenericMenu {
 								System.out.println("Introduce the number of the hospital: ");
 								int num2 = Integer.parseInt(console.readLine());
 								Hospital hospital = hosps.get(num2 - 1);
-								List<Patient> listpatients = new ArrayList<Patient>();
-								Iterator<Patient> it2 = listpatients.iterator();
-								listpatients = uiHospital.seeallpatients(jpaManager, hospital);
-								while (it2.hasNext()) {
-									Patient patient = it2.next();
-									System.out.println(patient);
-								}
-
+								uiHospital.seeallpatients(hospital, jpaManager);
 							case 4:
 								break;
 							}
