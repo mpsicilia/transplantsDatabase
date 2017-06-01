@@ -87,19 +87,6 @@ public class JPAhospital {
 		return hospi;
 	}
 
-	public boolean removeHospital(Hospital hosp) {
-
-		try {
-			jpaManager.getEManager().getTransaction().begin();
-			jpaManager.getEManager().remove(hosp);
-			jpaManager.getEManager().getTransaction().commit();
-			return true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 	//M: used in jpamanager: searchAllPatients
 	//it returns all the patients a hospital has
 	public List<Patient> searchAllPatients(Hospital hospit){

@@ -76,7 +76,7 @@ public class UI_Hospitals {
 	}
 
 	// M: in use by uigeneric: case2/case1/case1
-	public void updateHospital(Hospital hosp, DBManager dbManager) {
+	public void updateHospital(Hospital hosp, JPAmanager jpaManager) {
 		boolean again = true;
 		try {
 			while (again) {
@@ -120,7 +120,7 @@ public class UI_Hospitals {
 				}
 			}
 
-			boolean updated = dbManager.update(hosp);
+			boolean updated = jpaManager.update(hosp);
 			if (updated) {
 				System.out.println("Hospital has been updated. \n" + hosp.toString());
 			} else {
@@ -167,7 +167,7 @@ public class UI_Hospitals {
 	public List<Patient> seeallpatients(JPAmanager jpamanager, Hospital hosp) {
 		List<Patient> listpatients = new ArrayList<Patient>();
 		try {
-			listpatients = jpamanager.searchallpatients(hosp);
+			listpatients = jpamanager.searchAllPatients(hosp);
 			return listpatients;
 
 		}
@@ -198,7 +198,7 @@ public class UI_Hospitals {
 					boolean doctorOK = h.addDoctor(d);
 					System.out.println("Doctor " + d.getNameOfDoctor() + " added: " + doctorOK);
 				}
-				List<Patient> patientsOfHosp = jpaManager.searchallpatients(h);
+				List<Patient> patientsOfHosp = jpaManager.searchAllPatients(h);
 				Iterator<Patient> itP = patientsOfHosp.iterator();
 				while (itP.hasNext()) {
 					Patient p = itP.next();
