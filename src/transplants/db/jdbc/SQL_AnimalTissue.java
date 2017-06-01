@@ -143,7 +143,7 @@ public class SQL_AnimalTissue {
 					+ " ON at.id = roat.animal_id JOIN Requested_organs AS ro ON roat.requested_id = ro.id "
 					+ " WHERE ro.id = " + idReq + "";
 			ResultSet rs = stm.executeQuery(sql);
-			
+			while (rs.next()){
 				Integer id = rs.getInt(1);
 				String nameAnimalT = rs.getString(2);
 				String typeOfTissue = rs.getString(3);
@@ -151,6 +151,7 @@ public class SQL_AnimalTissue {
 				Date lifeExpTissue= rs.getDate(5);
 				
 			animal = new Animal_tissue(id, nameAnimalT, typeOfTissue, pathology, lifeExpTissue);
+			}
 			rs.close();
 			stm.close();
 			
