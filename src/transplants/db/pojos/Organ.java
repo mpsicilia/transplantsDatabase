@@ -32,16 +32,14 @@ public class Organ implements Serializable{
 	}
 	
 	public Organ(Integer id,String name, Float weight, String typeOfDonation, Date lifeOfOrgan) {
-		//super();
 		this.id=id;
 		this.name = name;
 		this.weight = weight;
 		this.lifeOfOrgan= lifeOfOrgan;
 		this.typeOfDonation = typeOfDonation;
 	}
-	//M: used
+	
 	public Organ(String name, Float weight, String typeOfDonation,Date lifeOfOrgan) {
-		//super();
 		this.name = name;
 		this.weight = weight;
 		this.lifeOfOrgan= lifeOfOrgan;
@@ -137,9 +135,6 @@ public class Organ implements Serializable{
 		return "Organ [id=" + id + ", name=" + name + ", weight=" + weight + ", typeOfDonation=" + typeOfDonation
 				+ ", lifeOfOrgan=" + lifeOfOrgan + "]";
 	}
-	
-	
-
 	
 }
 

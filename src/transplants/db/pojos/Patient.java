@@ -47,7 +47,7 @@ public class Patient extends Person implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)//only get the hospital when u ask for it (with gethospital)
 	@JoinColumn(name = "hospital_id") // the FK
-	//Hospitals have list of patients and patient contains hospital, I made it transient to avoid an infinite loop
+	//Hospitals have list of patients and patient contains hospital, made it transient to avoid an infinite loop
 	//Each hospital shows its patients
 	@XmlTransient 
 	private Hospital hospital;
@@ -55,15 +55,16 @@ public class Patient extends Person implements Serializable {
 	@OneToMany(mappedBy="patient")
 	@XmlTransient
 	private List<Requested_organ> requested_organ;
-	//M: used
+	
+	
 	public Patient(){
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
 	}
 	
-	//M: used
 	public Patient(String name, Date birthDate,Float weight, Float height, String gender, String pathology, String bloodType, 
 			 Date additionDate,Date lifeExpectancy){
+		
 		super(name, birthDate,weight,height,gender, bloodType);
 		this.pathology = pathology;
 		this.lifeExpectancy=lifeExpectancy;
@@ -72,11 +73,11 @@ public class Patient extends Person implements Serializable {
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
 	}
-	//M: used
+
 	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
 			String bloodType, Date additionDate, Date lifeExpectancy){
+		
 		super(id, name, birthDate,weight,height,gender, bloodType);
-//		this.id= id;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
 		this.generateScore();
@@ -86,14 +87,16 @@ public class Patient extends Person implements Serializable {
 	
 	public Patient(Integer id, String name, Date birthDate,Float weight, Float height, String gender, String pathology, 
 			String bloodType, Date additionDate, Date lifeExpectancy, Long score){
+		
 		super(id, name, birthDate,weight,height,gender, bloodType);
-//		this.id= id;
 		this.lifeExpectancy=lifeExpectancy;
 		this.additionDate=additionDate;
 		this.score= score;
 		doctors= new ArrayList<Doctor>();
 		requested_organ=new ArrayList<Requested_organ>();
 	}
+	
+	
 	public void generateScore(){
 		LocalDate localLifeExp= lifeExpectancy.toLocalDate();
 		LocalDate localAdditionDate= additionDate.toLocalDate();
@@ -108,13 +111,12 @@ public class Patient extends Person implements Serializable {
 		
 	}
 	public long getScore(){
-		
 		return score;
 	}
 	public void setScore(long score){
 		this.score= score;
 	}
-	//what about the parent class?? Do we create them in the parent class??
+	
 	public Date getLifeExpectancy() {
 		return lifeExpectancy;
 	}
@@ -156,7 +158,7 @@ public class Patient extends Person implements Serializable {
 	public Hospital getHospital() {
 		return hospital;
 	}
-	//C used from generic
+
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 	}

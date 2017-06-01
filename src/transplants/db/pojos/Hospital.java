@@ -28,15 +28,10 @@ public class Hospital implements Serializable{
 	@XmlElement
 	private String address;
 	@XmlElement (name = "City")
-	//@XmlElementWrapper (name="Cities") 
-	//lo dejo comentado igual que wrapper de country para no volver a cometer el fallo
-	//no van a ser wrappers xq no envuelven nada, cada hosp tiene una ciudad y un country
-	//wrapper son doctors y patients pq cada hosp tiene varios
 	private String city;
 	@XmlElement
 	private String postcode;
 	@XmlElement(name = "Country")
-	//@XmlElementWrapper (name="Countries")
 	private String country;
 	//Hospital is related with doctor and patient
 	//with doctors is an n-n because one doctor can work at many hospitals and 1 hospital can have many doctors
@@ -54,13 +49,12 @@ public class Hospital implements Serializable{
 	private List<Patient> patients;
 	
 	
-	
 	public Hospital (){
 		super();
 		this.doctors= new ArrayList<Doctor>();
 		this.patients= new ArrayList<Patient>();
 		}
-	//M: useede
+
 	public Hospital(String name, String phone_number, String address, String city, String postcode,
 			String country) {
 		this.name = name;
@@ -74,10 +68,6 @@ public class Hospital implements Serializable{
 		this.patients= new ArrayList<Patient>();
 	}	
 	
-	public Hospital (String name){
-		this.name=name;
-	}
-	//M: it's obvious but used :)
 	public Hospital(int id, String name, String phone_number, String address, String city, String postcode,
 			String country) {
 		this.id=id;
@@ -205,7 +195,6 @@ public class Hospital implements Serializable{
 			else return false;
 		}
 		
-		//C:used from hospital.addPatient(p) in generic menu
 		// Additional method to add to a list
 		public boolean addPatient(Patient patient) {
 			if (!patients.contains(patient)) {
