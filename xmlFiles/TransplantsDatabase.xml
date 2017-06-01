@@ -16,6 +16,22 @@
                     <specialization>obstetrics</specialization>
                     <registrationNumber>9087</registrationNumber>
                 </Doctor>
+                <Doctor id="6" name="cris">
+                    <specialization>neurology</specialization>
+                    <registrationNumber>7524</registrationNumber>
+                </Doctor>
+                <Doctor id="7" name="luchi">
+                    <specialization>urology</specialization>
+                    <registrationNumber>2121</registrationNumber>
+                </Doctor>
+                <Doctor id="8" name="pau">
+                    <specialization>plastics</specialization>
+                    <registrationNumber>8512</registrationNumber>
+                </Doctor>
+                <Doctor id="9" name="maria">
+                    <specialization>paediatrics</specialization>
+                    <registrationNumber>1954</registrationNumber>
+                </Doctor>
             </Doctors>
             <Patients>
                 <Patient id="2" name="rodrigo">
@@ -40,6 +56,17 @@
                     <lifeExpectancy>2020-04-07</lifeExpectancy>
                     <score>-21</score>
                 </Patient>
+                <Patient id="152" name="gabriel">
+                    <birthDate>1977-08-09</birthDate>
+                    <gender>male</gender>
+                    <weight>75.0</weight>
+                    <height>197.0</height>
+                    <bloodType>a+</bloodType>
+                    <pathology>cardiomegaly</pathology>
+                    <additionDate>2017-06-01</additionDate>
+                    <lifeExpectancy>2070-09-07</lifeExpectancy>
+                    <score>0</score>
+                </Patient>
             </Patients>
         </Hospital>
         <Hospital id="3" name="boadillalovers">
@@ -52,6 +79,22 @@
                 <Doctor id="3" name="abraham">
                     <specialization>obstetrics</specialization>
                     <registrationNumber>9087</registrationNumber>
+                </Doctor>
+                <Doctor id="6" name="cris">
+                    <specialization>neurology</specialization>
+                    <registrationNumber>7524</registrationNumber>
+                </Doctor>
+                <Doctor id="7" name="luchi">
+                    <specialization>urology</specialization>
+                    <registrationNumber>2121</registrationNumber>
+                </Doctor>
+                <Doctor id="8" name="pau">
+                    <specialization>plastics</specialization>
+                    <registrationNumber>8512</registrationNumber>
+                </Doctor>
+                <Doctor id="9" name="maria">
+                    <specialization>paediatrics</specialization>
+                    <registrationNumber>1954</registrationNumber>
                 </Doctor>
             </Doctors>
             <Patients>

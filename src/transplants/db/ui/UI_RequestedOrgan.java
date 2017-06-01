@@ -40,7 +40,8 @@ public class UI_RequestedOrgan {
 				
 				//get the id of the  requested organ
 				int idRequested =  dbManager.idRequestedOrgan(reqOrgan);				
-				boolean okFK = dbManager.assigmentPatientRequest(idPatient, idRequested);
+				//boolean okFK = dbManager.assigmentPatientRequest(idPatient, idRequested);
+				boolean okFK = jpam.assigmentPatientRequest(idPatient, idRequested);
 				boolean organAdded=reqOrg.add(reqOrgan);
 				
 				if (ok && okFK && organAdded){
