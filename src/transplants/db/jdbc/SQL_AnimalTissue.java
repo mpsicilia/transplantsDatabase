@@ -58,7 +58,7 @@ public class SQL_AnimalTissue {
 		}
 		return lookForAnimalT;
 	}
-
+//M: used
 	public boolean updateAnimalTissue(Animal_tissue animalTi) {
 		try {
 			String sql = "UPDATE Animal_tissue SET name=?, typeOfTissue=?, pathology=?, time=? WHERE id=?";
@@ -78,10 +78,10 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-
+	//M: used when deletin animal tisue
 	public boolean deleteAnimalTissue(Animal_tissue animalT) {
 		try {
-			String sql = "DELETE FROM Animal_tissue WHERE id=?";
+			String sql = "DELETE FROM Animal_tissues WHERE id=?";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
 			prep.setInt(1, animalT.getId());
 			prep.executeUpdate();
@@ -133,8 +133,33 @@ public class SQL_AnimalTissue {
 
 		}
 		return animalToShow.getId();
-		
 	}
+	//M: used in uodate animaltissue
+	public Animal_tissue getAnimalOfRequestedOrgan (Integer idReq){
+		Animal_tissue animal = new Animal_tissue(); 
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Animal_tissues AS at JOIN RequestedOrgan_AnimalsTissues AS roat "
+					+ " ON at.id = roat.animal_id JOIN Requested_organs AS ro ON roat.requested_id = ro.id "
+					+ " WHERE ro.id = " + idReq + "";
+			ResultSet rs = stm.executeQuery(sql);
+			
+				Integer id = rs.getInt(1);
+				String nameAnimalT = rs.getString(2);
+				String typeOfTissue = rs.getString(3);
+				String pathology = rs.getString(4);
+				Date lifeExpTissue= rs.getDate(5);
+				
+			animal = new Animal_tissue(id, nameAnimalT, typeOfTissue, pathology, lifeExpTissue);
+			rs.close();
+			stm.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return animal;
+	}
+	
 	public void createTable() {
 		try {
 
