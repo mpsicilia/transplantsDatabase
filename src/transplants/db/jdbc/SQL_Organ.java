@@ -162,20 +162,28 @@ public class SQL_Organ {
 		}
 		return orgs;
 	}
+	
 	//M: used
 	public List<Patient> CompatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
-			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
+			Statement stmt1= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
-
-			String sql ="SELECT * FROM Patients JOIN Requested_organs ON Patients.id = Requested_organs.patient_id"
+			
+			
+			String sql1= "CREATE VIEW  DisponiblePatients AS SELECT * FROM Patients JOIN Requested_organs ON Patients.id=Requested_organs.patient_id" 
+		+" WHERE Requested_organs.id NOT LIKE (SELECT requested_id  FROM organs)";
+			
+			stmt1.executeQuery(sql1);
+			
+			Statement stmt2= dbManager.getC().createStatement();
+			String sql2 ="SELECT * FROM DisponiblePatients JOIN Requested_organs ON Patients.id = Requested_organs.patient_id"
 					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND Patients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
 				+ " AND Requested_organs.maxWeight >= '" + organ.getWeight() + "' AND Requested_organs.minWeight <= '" + organ.getWeight() + 
 				 "' ORDER BY  Patients.score DESC";
 
-			ResultSet rs= stmt.executeQuery(sql);
+			ResultSet rs= stmt2.executeQuery(sql2);
 			while (rs.next()) {
 				int id = rs.getInt(1);
 				String namePatient = rs.getString(2);
@@ -192,7 +200,7 @@ public class SQL_Organ {
 				compatiblePatients.add(patientToShow);
 			}
 			rs.close();
-			stmt.close();
+			stmt2.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
