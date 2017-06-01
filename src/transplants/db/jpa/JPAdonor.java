@@ -30,8 +30,8 @@ public class JPAdonor {
 		return false;
 
 	}
-	
-	public List<Organ> selectOrgan (Integer id){
+	//same thing in jdbc...
+	/*public List<Organ> selectOrgan (Integer id){
 		List <Organ> newOrgan =new ArrayList < Organ> ();
 		try{				
 			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Organs WHERE id = ? ", Organ.class);
@@ -42,7 +42,7 @@ public class JPAdonor {
 			e.printStackTrace();
 		}
 		return newOrgan;
-	}
+	}*/
 	
 	//M: used by jpamanager:searchdonor
 	public List <Donor> searchDonor (String name){
@@ -92,7 +92,7 @@ public class JPAdonor {
 		}
 		return donor.getId();
 	}*/
-	
+	//not used...
 	public Donor getDonorOfOrgan (String name){
 		
 			Donor donor = new Donor();

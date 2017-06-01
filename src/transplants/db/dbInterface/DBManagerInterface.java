@@ -25,7 +25,7 @@ public interface DBManagerInterface {
 	public boolean assigmentRequestedAnimal(Integer id1, Integer id2);
 	public boolean assigmentPatientRequest (int patID, int reqOrg);
 	public boolean requestedFKinOrgan (int idR, int idO);//vamos a usarlo?
-	public int reqIdByPatIdAndDonOrg (int patId, String Org);
+	public int reqIdByPatIdAndDonOrg (int patId, String org);
 	
 	public List<Hospital> searchHosp(String name); 
 	public List<Doctor> searchDoctor(String name); 
@@ -54,13 +54,14 @@ public interface DBManagerInterface {
 	
 	public Hospital getHospitalPatient(Integer idhosp);
 	public String patientReq (Requested_organ req);//not used....
-
-	
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient);
 	public List<Organ> organsOfDonor (int idDonor);
 	public List<Hospital> hospitalsOfDoctor(String name);
 	public String hospitalOfPatient(String pName);
+	
 	public List<Doctor> doctorOfPatient(String pName);
-	public Donor getDonorOfOrg (String nameO);
+	public Donor getDonorOfOrg (String nameO);//no usamos todavia...
+	public List<Doctor> workingDoctorsInHosp (String hospName);
+	public boolean updateUnmarshalledHosp (Hospital h);
 	
 }
