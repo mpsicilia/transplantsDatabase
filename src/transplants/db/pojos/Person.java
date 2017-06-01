@@ -1,8 +1,7 @@
 package transplants.db.pojos;
 
-import java.io.Serializable;
+
 import java.sql.Date;
-import java.time.LocalDate;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -15,8 +14,6 @@ import transplants.db.xml.SQLDateAdapter;
 @XmlType (propOrder = {"id", "name", "birthDate", "gender", "weight", "height", "bloodType"})
 public abstract class Person {
 	
-	private static final long serialVersionUID = 6256446381306555938L;
-
 	@Id
 	@GeneratedValue(generator="Patients")
 	@TableGenerator(name="Patients", table="sqlite_sequence",

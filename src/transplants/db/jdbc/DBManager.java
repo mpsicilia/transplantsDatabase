@@ -242,11 +242,6 @@ public class DBManager implements DBManagerInterface {
 		return doct.selectAllDoctors();
 	}
 
-	@Override
-	public List<Patient> selectAllPatients() {
-		return pat.selectAllPatients();
-	}
-
 	//M: used
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
@@ -420,13 +415,8 @@ public class DBManager implements DBManagerInterface {
 	}
 	@Override
 	public String hospitalOfPatient(String pName) {
-		String hospital = "";
-		try {
-			hospital = hosp.hospitalOfPatient(pName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return hospital;
+		//done in jpa
+		return null;
 	}
 	//M: used by uipatient: patientHospitalAndDoctor
 	@Override

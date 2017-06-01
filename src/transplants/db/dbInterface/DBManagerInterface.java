@@ -38,7 +38,6 @@ public interface DBManagerInterface {
 	
 	public List <Hospital> selectAllHospitals();	
 	public List <Doctor> selectAllDoctors();
-	public List<Patient> selectAllPatients();//este habria que borralo
 	public List<Patient> dbCompatibilityTest(Organ organ);
 	
 	public boolean update (Object obj);	
