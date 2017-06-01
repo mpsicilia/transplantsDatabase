@@ -74,9 +74,6 @@ public class SQL_Patient {
 	}
 	
 	
-
-	
-	
 	public boolean updatePatient (Patient p){
 		try{
 			String sql = "UPDATE Patients SET name=?, birthDate=?, weight=?, height=?, gender=?, pathology=?,"

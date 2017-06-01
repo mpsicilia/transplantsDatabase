@@ -499,12 +499,13 @@ public class UIGenericMenu {
 					System.out.println("The program has been closed.");
 					System.exit(0);
 				}
-
 			}
+			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-
+		dbManager.disconnect();
+		jpaManager.disconnect();
 	}
 }
