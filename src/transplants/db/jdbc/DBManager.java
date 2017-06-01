@@ -93,27 +93,14 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	// insertions
-	//M: used by doctor
-	//C: USED in animal,req
 	@Override
 	public boolean insert(Object obj) {
 
 		try {
-			//C: Done in jpa
-			/*if (Hospital.class == obj.getClass()) {
-				Hospital hospital = (Hospital) obj;
-				return hosp.insertHospital(hospital);
-			}*/
-
 			if (Doctor.class == obj.getClass()) {
 				Doctor doctor = (Doctor) obj;
 				return doct.insertDoctor(doctor);
 			}
-			//C: NOT USE, yes IN JPA
-			/*if (Organ.class == obj.getClass()) {
-				Organ organ = (Organ) obj;
-				return org.insertOrgan(organ);
-			}*/
 			if (Animal_tissue.class == obj.getClass()) {
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.insertAnimalTissue(animalTi);
@@ -154,18 +141,15 @@ public class DBManager implements DBManagerInterface {
 	public boolean assigmentPatientRequest(int patID, int reqOrg) {
 		return req.insertPatientFK(patID, reqOrg);
 	}
-
+	//c: USED
 	@Override
-	public boolean insertFKInPatient(Integer patID, Integer hospID) {
-		return pat.insertHospitalFK(patID, hospID);
+	public Hospital getHospitalPatient(Integer id){
+		//done in JPA
+		return null;
 	}
 
 	@Override
-	public boolean donorFKinOrgan(Integer idD, Integer idO) {
-		return org.insertDonorFK(idD, idO);
-	}
-
-	@Override
+	//C: TODAVIA NO LO USAMOS, PAU LO VAMOS A USAR??¿????¿
 	public boolean requestedFKinOrgan(int idR, int idO) {
 		return org.insertRequestedFK(idR, idO);
 	}
@@ -174,7 +158,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	//M: in use by uihosp: searchHospital
 	public List<Hospital> searchHosp(String name) {
-
 		try {
 			List<Hospital> hospList = hosp.searchHospital(name);
 			return hospList;
@@ -183,18 +166,6 @@ public class DBManager implements DBManagerInterface {
 		}
 		return null;
 	}
-
-	/*
-	public String searchHospital(Integer id) {
-		try {
-			hosp = new SQL_Hospital(this); 
-			String namehosp = hosp.Hospitalofdoctor(id);
-			return namehosp;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}*/
 
 	//M: used in uidoctor: searchDoctor
 	@Override
@@ -209,6 +180,7 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	@Override
+	//C: not used, are we going to need it?
 	public List<Animal_tissue> searchAnimalTissue(String name) {
 		try {
 			List<Animal_tissue> animalTList = animalT.searchAnimalTissue(name);
@@ -231,6 +203,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 	//M: used
+	@Override
 	public Patient searchPatient (Integer idPat){
 		return pat.searchPatientById(idPat);
 	}
@@ -254,6 +227,11 @@ public class DBManager implements DBManagerInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	@Override
+	public List<Patient> searchAllPatients(Hospital hospital){
+		//done in jpa
 		return null;
 	}
 
@@ -284,10 +262,11 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public boolean update(Object obj) {
 		try {
-			if (Hospital.class == obj.getClass()) {
+			//we update with jpa
+			/*if (Hospital.class == obj.getClass()) {
 				Hospital hospital = (Hospital) obj;
 				return hosp.updateHospital(hospital);
-			}
+			}*/
 			if (Doctor.class == obj.getClass()) {
 				Doctor doctor = (Doctor) obj;
 				return doct.updateDoctor(doctor);
@@ -296,10 +275,10 @@ public class DBManager implements DBManagerInterface {
 				Organ organ = (Organ) obj;
 				return org.updateOrgan(organ);
 			}
-			if (Animal_tissue.class == obj.getClass()) {
+			/*if (Animal_tissue.class == obj.getClass()) {
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.updateAnimalTissue(animalTi);
-			}
+			}*/
 			if (Requested_organ.class == obj.getClass()) {
 				Requested_organ reqOrgan = (Requested_organ) obj;
 				return req.updateReqOrgan(reqOrgan);

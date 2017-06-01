@@ -17,36 +17,42 @@ public interface DBManagerInterface {
 	
 	public boolean createTables();
 	public boolean dropTables();
+	
 	//insert para jpa y para jdbc
 	public boolean insert(Object obj);
-	
-
-	public List<Patient> dbCompatibilityTest(Organ organ);
-	
-	//I think that all these inserts are not supposed to be in the interface
 	public boolean assigmentDoctorHospital(Integer id1, Integer id2);	
 	public boolean assigmentDoctorPatient(Integer id1, Integer id2);	
 	public boolean assigmentRequestedAnimal(Integer id1, Integer id2);
 	public boolean assigmentPatientRequest (int patID, int reqOrg);
-	public boolean insertFKInPatient (Integer patID, Integer hospID);
-	public boolean donorFKinOrgan (Integer idD, Integer idO);
-	public boolean requestedFKinOrgan (int idR, int idO);
+	public boolean requestedFKinOrgan (int idR, int idO);//vamos a usarlo?
 	
 	public List<Hospital> searchHosp(String name); 
-	//public String searchHospital(Integer id);
-	public List<Animal_tissue> searchAnimalTissue(String name); 
 	public List<Doctor> searchDoctor(String name); 
+	public List<Animal_tissue> searchAnimalTissue(String name); //are we going to use it?
 	public List<Donor> searchDonor(String name); 
-	public List<Organ> searchOrgan(String name); 
 	public List<Patient> searchPatient(String name); 
-	public List<Requested_organ> searchRequest(String name); 
+	public Patient searchPatient (Integer idPat);
+	public List<Organ> searchOrgan(String name); //not used(jdbc)...gonna need it?
+	public List<Requested_organ> searchRequest(String name); //not used(jdbc)...gonna need it?
+	public List<Patient> searchAllPatients(Hospital hospital);
 	
 	public List <Hospital> selectAllHospitals();	
 	public List <Doctor> selectAllDoctors();
-	public List<Patient> selectAllPatients();
+	public List<Patient> selectAllPatients();//este habria que borralo
+	public List<Patient> dbCompatibilityTest(Organ organ);
 	
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);
+	
+	public Hospital getHospitalPatient(Integer idhosp);
+	
+
+			
+	
+	
+	
+	
+	
 	
 	//I think all these methods the same
 	public Integer getIdPatient (Patient patient);

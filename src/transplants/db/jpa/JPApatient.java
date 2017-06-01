@@ -68,21 +68,6 @@ public class JPApatient {
 		return false;
 	}
 
-	 
-
-
-	public List<Patient> selectAllPatients() {
-		try {
-			jpaManager.getEManager().getTransaction().begin();
-			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Patients", Patient.class);
-			List<Patient> allpatients = (List<Patient>) q1.getResultList();
-			jpaManager.getEManager().getTransaction().commit();
-			return allpatients;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	//C: used from getIdpatient(Patient patient)from JPA
 	public Integer getIdpatient(Patient pat){
 		

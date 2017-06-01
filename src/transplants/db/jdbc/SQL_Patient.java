@@ -200,7 +200,7 @@ public class SQL_Patient {
 		}
 		return patient.getId();
 	}
-	
+	/**Creo que en ningun momento queremos mostrar todos los pacientes de la base de datos...; lo borramos no?*/
 	public List<Patient> selectAllPatients() {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
