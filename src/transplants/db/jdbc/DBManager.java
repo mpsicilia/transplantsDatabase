@@ -154,7 +154,10 @@ public class DBManager implements DBManagerInterface {
 		return org.insertRequestedFK(idR, idO);
 	}
 
-	
+	public int reqIdByPatIdAndDonOrg (int patId, String org){
+		return req.reqIdByPatIdAndDonOrg(patId, org);
+	}
+
 	
 	// searches
 	@Override
