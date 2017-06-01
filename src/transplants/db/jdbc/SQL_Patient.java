@@ -72,38 +72,6 @@ public class SQL_Patient {
 		}
 		return lookForPatient;
 	}
-	//M: used
-	public Patient searchPatientById (Integer idPat) {
-		Patient patientToShow= new Patient();
-		try {
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Patients WHERE id LIKE '%" + idPat + "%'";
-			ResultSet rs = stmt.executeQuery(sql);
-			//We don´t do the while because we asume that there is only one patient with that id
-				int id = rs.getInt("id");
-				String namePatient = rs.getString("name");
-				Date dob = rs.getDate("birthDate");				
-				Float weight = rs.getFloat("weight");
-				Float height = rs.getFloat("height");
-				String gen = rs.getString("gender");
-				String patho =  rs.getString("pathology");
-				String bt = rs.getString("bloodType");
-				Date doa = rs.getDate("additionDate");				
-				Date lifeExpectancy= rs.getDate("lifeExpectancy");				
-				
-				
-				patientToShow = new Patient(id,namePatient,dob, weight, height, gen, patho, bt, doa, lifeExpectancy);
-				
-			rs.close();
-			stmt.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return patientToShow;
-	
-	}
 	
 	
 

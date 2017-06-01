@@ -32,7 +32,6 @@ public interface DBManagerInterface {
 	public List<Animal_tissue> searchAnimalTissue(String name); //are we going to use it?
 	public List<Donor> searchDonor(String name); 
 	public List<Patient> searchPatient(String name); 
-	public Patient searchPatient (Integer idPat);
 	public List<Organ> searchOrgan(String name); //not used(jdbc)...gonna need it?
 	public List<Requested_organ> searchRequest(String name); //not used(jdbc)...gonna need it?
 	public List<Patient> searchAllPatients(Hospital hospital);

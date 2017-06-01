@@ -203,9 +203,9 @@ public class UI_Organ {
 			}while(it.hasNext());
 			int patientId=Integer.parseInt(console.readLine());
 			//tiene que coger el paciente, despues el id del organo(requested) que tiene el mismo nombre que este organo
-			Patient luckyPatient= dbManager.searchPatient(patientId);
 			
-			//dbManager.requestedFKinOrgan(idR, idO)
+			int idR = dbManager.reqIdByPatIdAndDonOrg(patientId, organ.getName());
+			dbManager.requestedFKinOrgan(idR, organ.getId());
 			}
 			
 		} catch (Exception e) {
