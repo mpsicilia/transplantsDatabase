@@ -391,8 +391,6 @@ public class UIGenericMenu {
 								System.out.println("Introduce the number of the patient: ");
 								int numPat4 = Integer.parseInt(console.readLine());
 								Patient patReq = pat.get(numPat4 - 1);
-								// TODO mirar como esta gecho donor, se puede
-								// hacer m�s simple
 								List<Requested_organ> reqs = uiRequested
 										.characteristicsOfRequestedOrgans(patReq.getId(), dbManager);
 								System.out.println("Patient: " + patReq.getName() + " needs the following organs: \n");
@@ -415,8 +413,25 @@ public class UIGenericMenu {
 									int numOrg = 0;
 									switch (opOrgan) {
 									case 1:
-										uiRequested.introduceNewReqOrgan(patReq, dbManager, jpaManager);
-										// TODO ver si es de animal....
+										List<Requested_organ> newReqs = new ArrayList<Requested_organ>();
+										newReqs = uiRequested.introduceNewReqOrgan(patReq, dbManager, jpaManager);
+										
+										Iterator<Requested_organ> itR = newReqs.iterator();
+										Integer count=0;
+										List<Requested_organ> reqAnimal = new ArrayList<Requested_organ>();
+
+										while (itR.hasNext()) {
+											Requested_organ organ = itR.next();
+											String organname = organ.getName();
+
+											if (organname.equalsIgnoreCase("collagen") || organname.equalsIgnoreCase("skin")) {
+												count++;
+												reqAnimal.add(organ);
+												System.out.println("The "+count+" Requested Organ is: " + organ);
+												uiAnimalT.introduceNewAnimalTissue(reqAnimal, dbManager,organname);
+											}
+										}
+										
 										break;
 
 									case 2:

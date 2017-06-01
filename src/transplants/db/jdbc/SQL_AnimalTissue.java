@@ -152,7 +152,7 @@ public class SQL_AnimalTissue {
 					+ " PRIMARY KEY (requested_id,animal_id))";
 			stmt9.executeUpdate(requested_animals);
 			stmt9.close();
-			// Should we initialized the second table?
+			
 			Statement stmtSeq8 = dbManager.getC().createStatement();
 			String sqlSeq8 = "INSERT INTO sqlite_sequence (name, seq) VALUES ('Animal_tissues', 1)";
 			stmtSeq8.executeUpdate(sqlSeq8);
