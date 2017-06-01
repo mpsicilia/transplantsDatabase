@@ -105,10 +105,7 @@ public class Patient extends Person implements Serializable {
 		float s1= (float) daysSinceAddition.getDays();
 		Period daysLifeExp= Period.between(today, localLifeExp);		
 		float s2= (float) daysLifeExp.getDays();
-		System.out.println("Days since addition: " +s1);
-		System.out.println("DaysLifeExp: " +s2);
 		int score= (int)(s1+ (1/s2)*1000);
-		System.out.println("score:" +score);
 		this.score = score;
 
 		
