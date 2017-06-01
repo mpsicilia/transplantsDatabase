@@ -15,13 +15,13 @@ public class SQL_Request {
 	public SQL_Request(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-
+//
 	// C: USED from insert from DBMANGER
 	public boolean insertRequest(Requested_organ organ) {
 		try {
 			Statement stmt = dbManager.getC().createStatement();
-			String sql = "INSERT INTO Requested_organs (name, maxWeight, minWeight) " + "VALUES ('" + organ.getName()
-					+ "','" + organ.getMaxWeight() + "' , '" + organ.getMinWeight() + "');";
+			String sql = "INSERT INTO Requested_organs (name, maxWeight, minWeight) " + " VALUES ('" + organ.getName()
+					+ "','" + organ.getMaxWeight() + "' , '" + organ.getMinWeight() + "')";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			return true;
@@ -171,7 +171,7 @@ public class SQL_Request {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ro.getId();
+		return idR;
 	}
 
 	public void createTable() {

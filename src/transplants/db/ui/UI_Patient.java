@@ -226,7 +226,7 @@ public class UI_Patient {
 			List<Patient> patients=new ArrayList<>();
 			List<Doctor> patDoctors=new ArrayList<>();
 			String nameOfHosp = jpaManager.hospitalOfPatient(ptName);
-			patients = jpaManager.searchPatbyname(ptName);
+			patients = jpaManager.searchPatient(ptName);
 			Iterator<Patient> it1 = patients.iterator();
 			while(it1.hasNext()){
 				Patient p=it1.next();
