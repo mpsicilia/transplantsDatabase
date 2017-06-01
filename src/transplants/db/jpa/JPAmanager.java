@@ -122,6 +122,11 @@ public class JPAmanager implements DBManagerInterface {
 		//done in jdbc
 		return false;
 	}
+	@Override
+	public int reqIdByPatIdAndDonOrg (int patId, String Org){
+		//done in jdbc
+		return 0;
+	}
 	
 	@Override
 	public List<Hospital> searchHosp(String name) {
@@ -227,7 +232,7 @@ public class JPAmanager implements DBManagerInterface {
 		return true;
 	}
 	
-	// used by donor, organ, patient, reqorgan-->WTF
+	// used by donor, organ, patient
 		@Override
 		public boolean delete(Object obj) {
 			if (Donor.class == obj.getClass()) {
@@ -240,11 +245,52 @@ public class JPAmanager implements DBManagerInterface {
 			}
 			if (Organ.class == obj.getClass()) {
 				Organ organ = (Organ) obj;
-				return org.delete(organ);
-				
+				return org.delete(organ);				
 			}
 			return false;
-		}
+		}		
+		
+	// C: used from ui_patient
+	@Override
+	public Integer getIdPatient(Patient patient) {
+			Integer patid;
+			try {
+				patid = pat.getIdpatient(patient);
+				return patid;
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			return null;
+	}
+	@Override
+	public Integer getIdOfDoctor(Doctor doct) {
+		// DONE WITH JDBC
+		return null;
+	}
+	@Override
+	public Integer idRequestedOrgan(Requested_organ r) {
+		// Done in jdbc
+		return null;
+	}
+	
+	@Override
+	public Integer idOrgan(Organ o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Integer idOfAnimal(Animal_tissue animalTissue){
+		//done in jdbc
+		return null;
+	}
+
+	@Override
+	public Integer idDonor(Donor d) {// por ahora este metodo no lo usamos
+		// TODO Auto-generated method stub
+		// don.getIdOfDonor(d);
+		return null;
+	}
 	
 	//M: used from uipatient: introduceNewPatient
 	@Override
@@ -258,51 +304,73 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return hospital;
 	}
+	@Override
+	public String patientReq(Requested_organ req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Requested_organ> characteristicsOfRequestedOrgans(int idPatient) {
+		// Done in jdbc
+		return null;
+	}
+	
+	@Override
+	public List<Organ> organsOfDonor(int idDonor) {
+		// Done in JDBC
+		return null;
+	}
+	@Override
+	public List<Hospital> hospitalsOfDoctor(String name){
+		//done in jdbc
+		return null;
+	}
+	//M: used from uipatient: patientHospitalAndDoctor
+	@Override
+	public String hospitalOfPatient(String pName) {
+		Hospital hospital = new Hospital();
+			try {
+				hospital = hosp.hospitalofpatient(pName);
+				return hospital.getName();
 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return hospital.getName();
+	}
+		
+	@Override
+	public List<Doctor> doctorOfPatient(String pName) {
+			// Done in JDBC
+			return null;
+	}
+		
+	@Override
+	public Donor getDonorOfOrg(String nameO) {
+			return don.getDonorOfOrgan(nameO);
+	}
+	@Override
+	public List<Doctor> workingDoctorsInHosp (String hospName){
+		//done in jdbc
+		return null;
+	}
+	@Override
+	public boolean updateUnmarshalledHosp (Hospital h){
+		//done in jdbc
+		return false;
+	}
+
+	
 	// NEW
 	public Hospital getHospital(Hospital hospital) {
 		Hospital hospi = new Hospital();
 		try {
 			hospi = hosp.getHospital(hospital);
 			return hospi;
-
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return hospi;
-	}
-
-	public List<Organ> organOfADonor(Integer donorId) {
-		return don.selectOrgan(donorId);
-
-	}
-
-	
-	//M: used from uipatient: patientHospitalAndDoctor
-	@Override
-	public String hospitalOfPatient(String pName) {
-		Hospital hospital = new Hospital();
-		try {
-			hospital = hosp.hospitalofpatient(pName);
-			return hospital.getName();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return hospital.getName();
-	}
-	//M: used by uipatient: patientHospitalAndDoctor
-	public List<Patient> searchPatbyname(String name) {
-		List<Patient> patients = new ArrayList<>();
-		try {
-			patients = pat.searchPatientbyname(name);
-			return patients;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return patients;
 	}
 
 	// used in unmarshall
@@ -314,81 +382,6 @@ public class JPAmanager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 		return pat;
-	}
-
-	@Override
-	public Integer idRequestedOrgan(Requested_organ r) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer idOrgan(Organ o) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer idDonor(Donor d) {// por ahora este metodo no lo usamos
-		// TODO Auto-generated method stub
-		// don.getIdOfDonor(d);
-		return null;
-	}
-
-	public Integer getIdOfDoctor(Doctor doct) {
-		// DONE WITH JDBC
-		return null;
-	}
-
-	@Override
-	public String patientReq(Requested_organ req) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Requested_organ> characteristicsOfRequestedOrgans(int idPatient) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Organ> organsOfDonor(int idDonor) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Hospital> hospitalsOfDoctor(String name) {
-		// DONE WITH JDBC
-		return null;
-	}
-
-	@Override
-	public List<Doctor> doctorOfPatient(String pName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Donor getDonorOfOrg(String nameO) {
-		return don.getDonorOfOrgan(nameO);
-	}
-
-
-	
-	// C: used from ui_patient
-	public Integer getIdPatient(Patient patient) {
-		Integer patid;
-		try {
-			patid = pat.getIdpatient(patient);
-			return patid;
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return null;
-
 	}
 
 }

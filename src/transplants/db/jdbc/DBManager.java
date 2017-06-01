@@ -141,19 +141,18 @@ public class DBManager implements DBManagerInterface {
 	public boolean assigmentPatientRequest(int patID, int reqOrg) {
 		return req.insertPatientFK(patID, reqOrg);
 	}
-	//c: USED
-	@Override
-	public Hospital getHospitalPatient(Integer id){
-		//done in JPA
-		return null;
-	}
 
 	@Override
 	//C: TODAVIA NO LO USAMOS, PAU LO VAMOS A USAR??¿????¿
 	public boolean requestedFKinOrgan(int idR, int idO) {
 		return org.insertRequestedFK(idR, idO);
 	}
+	@Override
+	public int reqIdByPatIdAndDonOrg (int patId, String org){
+		return req.reqIdByPatIdAndDonOrg(patId, org);
+	}
 
+	
 	// searches
 	@Override
 	//M: in use by uihosp: searchHospital
@@ -262,11 +261,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public boolean update(Object obj) {
 		try {
-			//we update with jpa
-			/*if (Hospital.class == obj.getClass()) {
-				Hospital hospital = (Hospital) obj;
-				return hosp.updateHospital(hospital);
-			}*/
 			if (Doctor.class == obj.getClass()) {
 				Doctor doctor = (Doctor) obj;
 				return doct.updateDoctor(doctor);
@@ -302,10 +296,6 @@ public class DBManager implements DBManagerInterface {
 				Doctor doctor = (Doctor) obj;
 				return doct.deleteDoctor(doctor);
 			}
-			if (Organ.class == obj.getClass()) {
-				Organ organ = (Organ) obj;
-				return org.deleteOrgan(organ);
-			}
 			if (Animal_tissue.class == obj.getClass()) {
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.deleteAnimalTissue(animalTi);
@@ -322,7 +312,14 @@ public class DBManager implements DBManagerInterface {
 
 	@Override
 	public Integer getIdPatient(Patient patient) {//delete from here once we have it in jpa
-		return pat.getPatientID(patient);
+		//return pat.getPatientID(patient);
+		//done in JPA
+		return 0;
+	}
+	//M: used from uidoctor: insertnewdoctor
+	@Override
+	public Integer getIdOfDoctor(Doctor doctor) {
+		return doct.getIdOfLastDoctor(doctor);
 	}
 	
 	//C:USED from ui_requested and ui_animal
@@ -363,11 +360,12 @@ public class DBManager implements DBManagerInterface {
 		//DONE IN JPA
 		return null;
 	}
-
-	//M: used from uidoctor: insertnewdoctor
+	
+	//c: USED
 	@Override
-	public Integer getIdOfDoctor(Doctor doctor) {
-		return doct.getIdOfLastDoctor(doctor);
+	public Hospital getHospitalPatient(Integer id){
+		//done in JPA
+		return null;
 	}
 
 	@Override
@@ -381,8 +379,9 @@ public class DBManager implements DBManagerInterface {
 		}
 		return namePat;
 	}
-	//M: used by uirequOrgan: characteristicsOfReqOrg
+	
 	@Override
+	//M: used by uirequOrgan: characteristicsOfReqOrg
 	// given a patient is going to return its requests
 	public List<Requested_organ> characteristicsOfRequestedOrgans(int idPatient) {
 		List<Requested_organ> reqsOfPat = new ArrayList<Requested_organ>();
@@ -405,30 +404,7 @@ public class DBManager implements DBManagerInterface {
 		}
 		return orgsOfDonor;
 	}
-	//M: used by uipatient: patientHospitalAndDoctor
-	@Override
-	public List<Doctor> doctorOfPatient(String pName) {
-		List<Doctor> doctor = new ArrayList<Doctor>();
-		try {
-			doctor = doct.doctorsAttendingPatient(pName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return doctor;
-	}
-
-	@Override
-	public String hospitalOfPatient(String pName) {
-		String hospital = "";
-		try {
-			hospital = hosp.hospitalOfPatient(pName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return hospital;
-	}
 	
-
 	@Override
 	//M: in use by uihosps: doctroHospital
 	public List<Hospital> hospitalsOfDoctor(String name) {
@@ -442,6 +418,27 @@ public class DBManager implements DBManagerInterface {
 		}
 		return hospitals;
 	}
+	@Override
+	public String hospitalOfPatient(String pName) {
+		String hospital = "";
+		try {
+			hospital = hosp.hospitalOfPatient(pName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return hospital;
+	}
+	//M: used by uipatient: patientHospitalAndDoctor
+	@Override
+	public List<Doctor> doctorOfPatient(String pName) {
+		List<Doctor> doctor = new ArrayList<Doctor>();
+		try {
+			doctor = doct.doctorsAttendingPatient(pName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return doctor;
+	}
 
 	@Override
 	public Donor getDonorOfOrg(String nameO) {
@@ -449,6 +446,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 	//M: used
+	@Override
 	public List<Doctor> workingDoctorsInHosp (String hospName){
 		List<Doctor> docs = new ArrayList<Doctor> ();
 		try{
@@ -461,12 +459,12 @@ public class DBManager implements DBManagerInterface {
 	}
 	
 	//M: used by unmarshal in uihospital
+	@Override
 	public boolean updateUnmarshalledHosp (Hospital h){
 		try{
 			return hosp.updateHospital(h);
-		}catch (Exception e){
-			
+		}catch (Exception e){			
 		}
 		return false;
-	}
-}
+
+}}

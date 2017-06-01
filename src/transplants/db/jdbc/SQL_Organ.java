@@ -85,22 +85,6 @@ public class SQL_Organ {
 		return false;
 	}
 	
-	public boolean deleteOrgan(Organ organ){
-		try{
-			String sql = "DELETE FROM Organs WHERE id=?";
-			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
-			prep.setInt(1, organ.getId());
-			prep.executeUpdate();
-			prep.close();
-			
-			return true;
-			
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
 	
 	public int getOrganId(Organ org){
 		int idO = 0;
@@ -149,7 +133,8 @@ public class SQL_Organ {
 			e.printStackTrace();
 		}
 		return false;
-	}
+	}	
+	
 	
 	public List<Organ> organOfDonor (int idD){
 		List <Organ> orgs = new ArrayList<Organ>();

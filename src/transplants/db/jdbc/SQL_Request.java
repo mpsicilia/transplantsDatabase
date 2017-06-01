@@ -45,6 +45,11 @@ public class SQL_Request {
 		}
 		return false;
 	}
+	
+	public int reqIdByPatIdAndDonOrg (int Patid, String name){
+		int a=5;
+		return a;
+	}
 
 	public List<Requested_organ> searchReqOrgan(String name) {
 		List<Requested_organ> lookForReqOrgan = new ArrayList<Requested_organ>();

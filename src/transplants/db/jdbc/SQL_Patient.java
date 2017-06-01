@@ -146,6 +146,7 @@ public class SQL_Patient {
 		}
 		return false;
 	}
+	//NOT USED yet....
 	//given a requested organ returns the patient that needs it
 	public String patientRequested (int idReq){
 		String nameP = "";
@@ -177,8 +178,9 @@ public class SQL_Patient {
 		}
 		return false;
 	}
+	//LO tenemos en JPA, tambien lo queremos en JDBC??????
 	
-	public Integer getPatientID (Patient p){
+	/*public Integer getPatientID (Patient p){
 		
 		Patient patient =  new Patient();
 		try{
@@ -199,7 +201,7 @@ public class SQL_Patient {
 			e.printStackTrace();
 		}
 		return patient.getId();
-	}
+	}*/
 	/**Creo que en ningun momento queremos mostrar todos los pacientes de la base de datos...; lo borramos no?*/
 	public List<Patient> selectAllPatients() {
 		List<Patient> patients = new ArrayList<Patient>();
