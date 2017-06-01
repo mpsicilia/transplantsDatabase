@@ -44,16 +44,15 @@ public interface DBManagerInterface {
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);
 	
-	public Hospital getHospitalPatient(Integer idhosp);
-	
-	
-	//I think all these methods the same
 	public Integer getIdPatient (Patient patient);
-	public Integer idRequestedOrgan (Requested_organ r);
-	public Integer idOrgan (Organ o);
-	public Integer idDonor (Donor d);
-	
 	public Integer getIdOfDoctor(Doctor doct);
+	public Integer idRequestedOrgan (Requested_organ r);
+	public Integer idOrgan (Organ o);//este todavia no lo usamos....
+	public Integer idOfAnimal(Animal_tissue animalTissue);
+	public Integer idDonor (Donor d);//este todavia no lo usamos (jpa)
+	
+	public Hospital getHospitalPatient(Integer idhosp);
+
 	public String patientReq (Requested_organ req);
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient);
 	public List<Organ> organsOfDonor (int idDonor);

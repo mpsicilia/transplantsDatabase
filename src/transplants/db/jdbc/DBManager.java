@@ -141,12 +141,7 @@ public class DBManager implements DBManagerInterface {
 	public boolean assigmentPatientRequest(int patID, int reqOrg) {
 		return req.insertPatientFK(patID, reqOrg);
 	}
-	//c: USED
-	@Override
-	public Hospital getHospitalPatient(Integer id){
-		//done in JPA
-		return null;
-	}
+
 
 	@Override
 	//C: TODAVIA NO LO USAMOS, PAU LO VAMOS A USAR??¿????¿
@@ -262,11 +257,6 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public boolean update(Object obj) {
 		try {
-			//we update with jpa
-			/*if (Hospital.class == obj.getClass()) {
-				Hospital hospital = (Hospital) obj;
-				return hosp.updateHospital(hospital);
-			}*/
 			if (Doctor.class == obj.getClass()) {
 				Doctor doctor = (Doctor) obj;
 				return doct.updateDoctor(doctor);
@@ -302,14 +292,10 @@ public class DBManager implements DBManagerInterface {
 				Doctor doctor = (Doctor) obj;
 				return doct.deleteDoctor(doctor);
 			}
-			if (Organ.class == obj.getClass()) {
-				Organ organ = (Organ) obj;
-				return org.deleteOrgan(organ);
-			}
-			if (Animal_tissue.class == obj.getClass()) {
+			/*if (Animal_tissue.class == obj.getClass()) {
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.deleteAnimalTissue(animalTi);
-			}
+			}*/
 			if (Requested_organ.class == obj.getClass()) {
 				Requested_organ reqOrgan = (Requested_organ) obj;
 				return req.deleteReqOrgan(reqOrgan);
@@ -321,8 +307,15 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	@Override
-	public Integer getIdPatient(Patient patient) {//delete from here once we have it in jpa
-		return pat.getPatientID(patient);
+	public Integer getIdPatient(Patient patient) {
+		//return pat.getPatientID(patient);
+		//done in JPA
+		return null;
+	}
+	//M: used from uidoctor: insertnewdoctor
+	@Override
+	public Integer getIdOfDoctor(Doctor doctor) {
+		return doct.getIdOfLastDoctor(doctor);
 	}
 	
 	//C:USED from ui_requested and ui_animal
@@ -348,6 +341,7 @@ public class DBManager implements DBManagerInterface {
 		return id;
 	}
 	//C: USED from ui_animal
+	@Override
 	public Integer idOfAnimal(Animal_tissue animalTissue){
 		Integer id = 0;
 		try {
@@ -357,17 +351,16 @@ public class DBManager implements DBManagerInterface {
 		}
 		return id;
 	}
-
 	@Override
 	public Integer idDonor(Donor d) {
 		//DONE IN JPA
 		return null;
 	}
-
-	//M: used from uidoctor: insertnewdoctor
+	//c: USED
 	@Override
-	public Integer getIdOfDoctor(Doctor doctor) {
-		return doct.getIdOfLastDoctor(doctor);
+	public Hospital getHospitalPatient(Integer id){
+		//done in JPA
+		return null;
 	}
 
 	@Override

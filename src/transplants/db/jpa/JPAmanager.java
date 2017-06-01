@@ -227,7 +227,7 @@ public class JPAmanager implements DBManagerInterface {
 		return true;
 	}
 	
-	// used by donor, organ, patient, reqorgan-->WTF
+	// used by donor, organ, patient
 		@Override
 		public boolean delete(Object obj) {
 			if (Donor.class == obj.getClass()) {
@@ -240,11 +240,51 @@ public class JPAmanager implements DBManagerInterface {
 			}
 			if (Organ.class == obj.getClass()) {
 				Organ organ = (Organ) obj;
-				return org.delete(organ);
-				
+				return org.delete(organ);				
 			}
 			return false;
-		}
+		}		
+		
+	// C: used from ui_patient
+	public Integer getIdPatient(Patient patient) {
+			Integer patid;
+			try {
+				patid = pat.getIdpatient(patient);
+				return patid;
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			return null;
+	}
+	@Override
+	public Integer getIdOfDoctor(Doctor doct) {
+		// DONE WITH JDBC
+		return null;
+	}
+	@Override
+	public Integer idRequestedOrgan(Requested_organ r) {
+		// Done in jdbc
+		return null;
+	}
+	
+	@Override
+	public Integer idOrgan(Organ o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Integer idOfAnimal(Animal_tissue animalTissue){
+		//done in jdbc
+		return null;
+	}
+
+	@Override
+	public Integer idDonor(Donor d) {// por ahora este metodo no lo usamos
+		// TODO Auto-generated method stub
+		// don.getIdOfDonor(d);
+		return null;
+	}
 	
 	//M: used from uipatient: introduceNewPatient
 	@Override
@@ -265,7 +305,6 @@ public class JPAmanager implements DBManagerInterface {
 		try {
 			hospi = hosp.getHospital(hospital);
 			return hospi;
-
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -316,29 +355,12 @@ public class JPAmanager implements DBManagerInterface {
 		return pat;
 	}
 
-	@Override
-	public Integer idRequestedOrgan(Requested_organ r) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Integer idOrgan(Organ o) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Integer idDonor(Donor d) {// por ahora este metodo no lo usamos
-		// TODO Auto-generated method stub
-		// don.getIdOfDonor(d);
-		return null;
-	}
 
-	public Integer getIdOfDoctor(Doctor doct) {
-		// DONE WITH JDBC
-		return null;
-	}
+
+
+
 
 	@Override
 	public String patientReq(Requested_organ req) {
@@ -376,19 +398,6 @@ public class JPAmanager implements DBManagerInterface {
 	}
 
 
-	
-	// C: used from ui_patient
-	public Integer getIdPatient(Patient patient) {
-		Integer patid;
-		try {
-			patid = pat.getIdpatient(patient);
-			return patid;
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return null;
 
-	}
 
 }

@@ -197,12 +197,10 @@ public class UI_Patient {
 
 	}
 
-	//M: used from case 4/ case 2, the req organ was been deleted with jpa and thats no possible, i change it to jdbc
+	//M: used from case 4/ case 2
 	public void deletePatient(Patient pat, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
-			
-		  boolean reqorgansdeleted=false;
-			
+			boolean reqorgansdeleted=false;
 			List <Requested_organ> reqorgans = pat.getRequested_organ();
 		
 			for (Requested_organ reqorgan : reqorgans) {
@@ -210,7 +208,7 @@ public class UI_Patient {
 			}						
 			boolean patientDeleted = jpaManager.delete(pat);		
 			
-			if(patientDeleted && reqorgans.isEmpty()){
+			if(patientDeleted && (reqorgans.isEmpty() || reqorgansdeleted)){
 				System.out.println("Patient has been deleted.");
 			}
 			else{
