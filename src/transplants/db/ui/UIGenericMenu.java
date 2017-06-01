@@ -362,8 +362,7 @@ public class UIGenericMenu {
 							System.out.print("\nRELATED WITH THE PATIENT THAT YOU JUST LOOKED FOR:");
 							System.out.print("\n1. Update information.");
 							System.out.print("\n2. Delete information.");
-							System.out.print(
-									"\n3. See where the patient is hospitalised and the doctors that treat him. ");
+							System.out.print("\n3. See where the patient is hospitalised and the doctors that treat him. ");
 							System.out.print("\n4. See the organ/s that the patient needs. ");
 							System.out.print("\n5. Go back to the menu. ");
 							System.out.print("\nChoose an option[1-5]:");

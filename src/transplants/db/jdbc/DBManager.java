@@ -201,7 +201,7 @@ public class DBManager implements DBManagerInterface {
 		//DONE IN JPA
 		return null;
 	}
-
+	
 	
 	@Override
 	public List<Organ> searchOrgan(String name) {
@@ -257,6 +257,10 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public boolean update(Object obj) {
 		try {
+			if (Hospital.class == obj.getClass()) {
+				Hospital hospi = (Hospital) obj;
+				return hosp.updateHospital(hospi);
+			}			
 			if (Doctor.class == obj.getClass()) {
 				Doctor doctor = (Doctor) obj;
 				return doct.updateDoctor(doctor);

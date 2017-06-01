@@ -123,7 +123,7 @@ public class JPApatient {
 			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Patients WHERE name LIKE '%" + name + "%'", Patient.class);
 			//q.setParameter(1, name);
 			patients = (List<Patient>) q.getResultList();
-
+			jpaManager.getEManager().getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

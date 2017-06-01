@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 import transplants.db.pojos.Donor;
-import transplants.db.pojos.Organ;
 
 public class JPAdonor {
 	private JPAmanager jpaManager;
