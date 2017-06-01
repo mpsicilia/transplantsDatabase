@@ -163,27 +163,43 @@ public class SQL_Organ {
 		return orgs;
 	}
 	
+	//this method is used in order to get all the patients who's requested organs 
+	//have not yet been assigned to an organ of a donor
+	
+	public void ViewDisponiblePatients(){
+		try{
+		Statement stmt1= dbManager.getC().createStatement();
+		String sql1= "DROP VIEW DisponiblePatients";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+		
+		
+		Statement stmt2= dbManager.getC().createStatement();
+		String sql= "CREATE VIEW  DisponiblePatients AS SELECT * FROM Patients JOIN Requested_organs ON Patients.id=Requested_organs.patient_id" 
+				+" WHERE Requested_organs.id NOT LIKE (SELECT requested_id  FROM organs)";
+		stmt2.executeUpdate(sql);
+		
+		stmt2.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
 	//M: used
 	public List<Patient> CompatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
-			Statement stmt1= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
+			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
-			
-			
-			String sql1= "CREATE VIEW  DisponiblePatients AS SELECT * FROM Patients JOIN Requested_organs ON Patients.id=Requested_organs.patient_id" 
-		+" WHERE Requested_organs.id NOT LIKE (SELECT requested_id  FROM organs)";
-			
-			stmt1.executeQuery(sql1);
-			
-			Statement stmt2= dbManager.getC().createStatement();
-			String sql2 ="SELECT * FROM DisponiblePatients JOIN Requested_organs ON Patients.id = Requested_organs.patient_id"
-					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND Patients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
+				
+			String sql ="SELECT * FROM DisponiblePatients JOIN Requested_organs ON DisponiblePatients.id = Requested_organs.patient_id"
+					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND DisponiblePatients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
 				+ " AND Requested_organs.maxWeight >= '" + organ.getWeight() + "' AND Requested_organs.minWeight <= '" + organ.getWeight() + 
-				 "' ORDER BY  Patients.score DESC";
+				 "' ORDER BY  DisponiblePatients.score DESC";
 
-			ResultSet rs= stmt2.executeQuery(sql2);
+			ResultSet rs= stmt.executeQuery(sql);
 			while (rs.next()) {
 				int id = rs.getInt(1);
 				String namePatient = rs.getString(2);
@@ -200,7 +216,7 @@ public class SQL_Organ {
 				compatiblePatients.add(patientToShow);
 			}
 			rs.close();
-			stmt2.close();
+			stmt.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
