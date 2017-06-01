@@ -103,9 +103,12 @@ public class Patient extends Person implements Serializable {
 		LocalDate today= LocalDate.now();
 		Period daysSinceAddition= Period.between(today, localAdditionDate);
 		long s1= daysSinceAddition.getDays();
-		Period daysLifeExp= Period.between(today, localLifeExp);		
+		Period daysLifeExp= Period.between(localLifeExp, today);		
 		long s2= daysLifeExp.getDays();
-		long score= s1+ 1/s2*100;		
+		System.out.println("Days since addition: " +s1);
+		System.out.println("DaysLifeExp: " +s2);
+		long score= s1+ 1/s2*1000;
+		System.out.println("score:" +score);
 		this.score = score;
 
 		
@@ -182,8 +185,8 @@ public class Patient extends Person implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Patient [lifeExpectancy=" + lifeExpectancy + ", pathology=" + pathology + ", additionDate="
-					+ additionDate + ", score=" + score + ", name=" + name + ", birthDate=" + birthDate + ", weight="
+			return "Patient [ name=" + name + ", pathology=" + pathology +" lifeExpectancy=" + lifeExpectancy +  ", additionDate="
+					+ additionDate + ", score=" + score + ", birthDate=" + birthDate + ", weight="
 					+ weight + ", height=" + height + ", gender=" + gender + ", bloodType=" + bloodType + "]";
 		}
 	
