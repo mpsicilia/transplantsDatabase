@@ -186,25 +186,30 @@ public class UI_Organ {
 	//M: used
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
-
+		List<Patient> patients= new ArrayList<Patient>();
 		try {
 			compatiblePatients = dbManager.dbCompatibilityTest(organ);
-			Iterator<Patient> it = compatiblePatients.iterator();
+			Iterator<Patient> patientIterator = compatiblePatients.iterator();
+			
 			int counterPat = 1;
-			Boolean hasNext= it.hasNext();
+			Boolean hasNext= patientIterator.hasNext();
 			if(!hasNext){
 				System.out.println("At this moment there are no compatible patients.");
 			}
-			if(hasNext){ System.out.println("Choose the id of the patient that is going to recieve the organ");
+			if(hasNext){ System.out.println("Choose the number of the patient that is going to recieve the organ");
+			
 			do {
-				Patient p = it.next();
+				Patient p = patientIterator.next();
 				System.out.println(counterPat + ". " + p);
+				patients.add(p);
 				counterPat++;
-			}while(it.hasNext());
-			int patientId=Integer.parseInt(console.readLine());
+			}while(patientIterator.hasNext());
+			int numPat=Integer.parseInt(console.readLine());
+			Patient pat= patients.get(numPat - 1);
+			
 			//tiene que coger el paciente, despues el id del organo(requested) que tiene el mismo nombre que este organo
 			
-			int idR = dbManager.reqIdByPatIdAndDonOrg(patientId, organ.getName());
+			int idR = dbManager.reqIdByPatIdAndDonOrg(pat.getId(), organ.getName());
 			System.out.println("Id del organ requested: "+idR+ "/n Id del organ donante: " + organ.getId());
 			dbManager.requestedFKinOrgan(idR, organ.getId());
 			}
