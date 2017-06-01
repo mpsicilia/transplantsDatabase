@@ -201,7 +201,7 @@ public class DBManager implements DBManagerInterface {
 		//DONE IN JPA
 		return null;
 	}
-
+	
 	
 	@Override
 	public List<Organ> searchOrgan(String name) {
