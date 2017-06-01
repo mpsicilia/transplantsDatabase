@@ -146,6 +146,7 @@ public class SQL_Patient {
 		}
 		return false;
 	}
+	//NOT USED yet....
 	//given a requested organ returns the patient that needs it
 	public String patientRequested (int idReq){
 		String nameP = "";

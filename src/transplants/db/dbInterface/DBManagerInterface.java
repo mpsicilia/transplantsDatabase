@@ -52,8 +52,9 @@ public interface DBManagerInterface {
 	public Integer idDonor (Donor d);//este todavia no lo usamos (jpa)
 	
 	public Hospital getHospitalPatient(Integer idhosp);
+	public String patientReq (Requested_organ req);//not used....
 
-	public String patientReq (Requested_organ req);
+	
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient);
 	public List<Organ> organsOfDonor (int idDonor);
 	public List<Hospital> hospitalsOfDoctor(String name);

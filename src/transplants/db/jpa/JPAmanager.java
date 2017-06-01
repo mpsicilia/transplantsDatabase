@@ -298,6 +298,11 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return hospital;
 	}
+	@Override
+	public String patientReq(Requested_organ req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	// NEW
 	public Hospital getHospital(Hospital hospital) {
@@ -362,11 +367,7 @@ public class JPAmanager implements DBManagerInterface {
 
 
 
-	@Override
-	public String patientReq(Requested_organ req) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public List<Requested_organ> characteristicsOfRequestedOrgans(int idPatient) {
