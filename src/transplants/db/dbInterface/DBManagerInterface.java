@@ -46,13 +46,6 @@ public interface DBManagerInterface {
 	
 	public Hospital getHospitalPatient(Integer idhosp);
 	
-
-			
-	
-	
-	
-	
-	
 	
 	//I think all these methods the same
 	public Integer getIdPatient (Patient patient);

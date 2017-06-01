@@ -243,11 +243,6 @@ public class JPAmanager implements DBManagerInterface {
 				return org.delete(organ);
 				
 			}
-			if (Hospital.class == obj.getClass()) {
-				Hospital hospital = (Hospital) obj;
-				return hosp.removeHospital(hospital);
-				
-			}
 			return false;
 		}
 	
