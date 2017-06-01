@@ -177,7 +177,7 @@ public class UIGenericMenu {
 								System.out.println("Introduce the number of the hospital: ");
 								int numHosp = Integer.parseInt(console.readLine());
 								Hospital hospUp = hosps.get(numHosp - 1);
-								uiHospital.updateHospital(hospUp, jpaManager);
+								uiHospital.updateHospital(hospUp, dbManager);
 								break;
 							case 2:
 								System.out.println("Introduce the number of the hospital: ");

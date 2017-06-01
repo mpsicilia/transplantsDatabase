@@ -201,10 +201,10 @@ public class DBManager implements DBManagerInterface {
 		//DONE IN JPA
 		return null;
 	}
-	//M: used
-	@Override
+	//M: used confirmamos
+	
 	public Patient searchPatient (Integer idPat){
-	return null;	//return pat.searchPatientById(idPat);
+		return pat.searchPatientById(idPat);
 	}
 	
 	@Override
