@@ -62,7 +62,7 @@ public class UI_AnimalTissue {
 		return null; 
 	}
 	
-	
+	//M:used for sure
 	public void updateAnimalTissue(Animal_tissue animalT, DBManager dbManager){
 		boolean again = true;	
 		try{
@@ -125,6 +125,16 @@ public class UI_AnimalTissue {
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
+	}
+	//M: used when uodating animaltissue
+	public Animal_tissue animalTissueOfRequested (Integer idReq, DBManager dbManager){
+		Animal_tissue at = new Animal_tissue();
+		try{
+			at = dbManager.animalTissueByIdReq(idReq);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return at;
 	}
 	
 }

@@ -189,6 +189,16 @@ public class DBManager implements DBManagerInterface {
 		}
 		return null;
 	}
+	
+	//M: used in updateanimaltissue
+	public Animal_tissue animalTissueByIdReq (int idr){
+		try{
+			return animalT.getAnimalOfRequestedOrgan(idr);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Override
 	public List<Donor> searchDonor(String name) {
@@ -248,7 +258,7 @@ public class DBManager implements DBManagerInterface {
 		return org.CompatibilityTest(organ);
 	}
 
-	//M: using hospital and doctor, organ, reqorgan
+	//M: using hospital and doctor, organ, reqorgan, animal
 	@Override
 	public boolean update(Object obj) {
 		try {
@@ -264,10 +274,10 @@ public class DBManager implements DBManagerInterface {
 				Organ organ = (Organ) obj;
 				return org.updateOrgan(organ);
 			}
-			/*if (Animal_tissue.class == obj.getClass()) {
+			if (Animal_tissue.class == obj.getClass()) {
 				Animal_tissue animalTi = (Animal_tissue) obj;
 				return animalT.updateAnimalTissue(animalTi);
-			}*/
+			}
 			if (Requested_organ.class == obj.getClass()) {
 				Requested_organ reqOrgan = (Requested_organ) obj;
 				return req.updateReqOrgan(reqOrgan);
@@ -279,7 +289,7 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 
-	//M: hospital uses it + doctor +reqOrgan
+	//M: hospital uses it + doctor +reqOrgan +animal
 	@Override
 	public boolean delete(Object obj) {
 		try {
