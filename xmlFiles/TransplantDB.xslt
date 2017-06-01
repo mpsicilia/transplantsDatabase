@@ -26,12 +26,14 @@
 	   	 	<th>name</th>
 	   	 	<th>specialization</th>
 	   	    <th>registrationNumber</th>
+	   	    	<xsl:for-each select= "Doctors/Doctor">
 	   	 		<tr>
-	   	 			<td><i><xsl:value-of select ="Doctors/Doctor/@id"/></i></td>
-			   		<td><i><xsl:value-of select ="Doctors/Doctor/@name"/></i></td>
-			   		<td><i><xsl:value-of select ="Doctors/Doctor/specialization"/></i></td>
-			   		<td><i><xsl:value-of select ="Doctors/Doctor/registrationNumber"/></i></td>
-	   	 		</tr>	   						
+	   	 			<td><i><xsl:value-of select ="@id"/></i></td>
+			   		<td><i><xsl:value-of select ="@name"/></i></td>
+			   		<td><i><xsl:value-of select ="specialization"/></i></td>
+			   		<td><i><xsl:value-of select ="registrationNumber"/></i></td>
+	   	 		</tr>
+	   	 		</xsl:for-each>	   						
    			</table>
    		<br/>
    		<p>Contains the following patients: </p>
@@ -47,19 +49,21 @@
 			   	 <th>additionDate</th>
 			   	 <th>lifeExpectancy</th>
 			   	 <th>score</th>
+			   	 <xsl:for-each select= "Patients/Patient">
 		   	 	<tr>
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/@id"/></i></td>
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/@name"/></i></td>
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/birthDate"/></i></td>
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/gender"/></i></td>
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/weight"/></i></td>
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/height"/></i></td>
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/bloodType"/></i></td> 	   	
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/pathology"/></i></td> 
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/additionDate"/></i></td> 
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/lifeExpectancy"/></i></td> 
-   			 	   <td><i><xsl:value-of select ="Patients/Patient/score"/></i></td>	 	 	 		 	   		
+   			 	   <td><i><xsl:value-of select ="@id"/></i></td>
+   			 	   <td><i><xsl:value-of select ="@name"/></i></td>
+   			 	   <td><i><xsl:value-of select ="birthDate"/></i></td>
+   			 	   <td><i><xsl:value-of select ="gender"/></i></td>
+   			 	   <td><i><xsl:value-of select ="weight"/></i></td>
+   			 	   <td><i><xsl:value-of select ="height"/></i></td>
+   			 	   <td><i><xsl:value-of select ="bloodType"/></i></td> 	   	
+   			 	   <td><i><xsl:value-of select ="pathology"/></i></td> 
+   			 	   <td><i><xsl:value-of select ="additionDate"/></i></td> 
+   			 	   <td><i><xsl:value-of select ="lifeExpectancy"/></i></td> 
+   			 	   <td><i><xsl:value-of select ="score"/></i></td>	 	 	 		 	   		
    			 	</tr>
+   			 	</xsl:for-each>
    			 	</table>
    			 <br/>
    			 <br/>
