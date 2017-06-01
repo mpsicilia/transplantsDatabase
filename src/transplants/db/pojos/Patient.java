@@ -102,10 +102,10 @@ public class Patient extends Person implements Serializable {
 		LocalDate localAdditionDate= additionDate.toLocalDate();
 		LocalDate today= LocalDate.now();
 		Period daysSinceAddition= Period.between(today, localAdditionDate);
-		long s1= daysSinceAddition.getDays();
+		float s1= (float) daysSinceAddition.getDays();
 		Period daysLifeExp= Period.between(today, localLifeExp);		
-		long s2= daysLifeExp.getDays();
-		long score= s1+ 1/s2*100;		
+		float s2= (float) daysLifeExp.getDays();
+		int score= (int)(s1+ (1/s2)*1000);
 		this.score = score;
 
 		
@@ -182,8 +182,8 @@ public class Patient extends Person implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Patient [lifeExpectancy=" + lifeExpectancy + ", pathology=" + pathology + ", additionDate="
-					+ additionDate + ", score=" + score + ", name=" + name + ", birthDate=" + birthDate + ", weight="
+			return "Patient [ name=" + name + ", pathology=" + pathology +" lifeExpectancy=" + lifeExpectancy +  ", additionDate="
+					+ additionDate + ", score=" + score + ", birthDate=" + birthDate + ", weight="
 					+ weight + ", height=" + height + ", gender=" + gender + ", bloodType=" + bloodType + "]";
 		}
 	
