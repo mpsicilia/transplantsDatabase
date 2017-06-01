@@ -25,6 +25,7 @@ public interface DBManagerInterface {
 	public boolean assigmentRequestedAnimal(Integer id1, Integer id2);
 	public boolean assigmentPatientRequest (int patID, int reqOrg);
 	public boolean requestedFKinOrgan (int idR, int idO);//vamos a usarlo?
+	public int reqIdByPatIdAndDonOrg (int patId, String Org);
 	
 	public List<Hospital> searchHosp(String name); 
 	public List<Doctor> searchDoctor(String name); 
