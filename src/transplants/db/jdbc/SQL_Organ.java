@@ -5,7 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import transplants.db.pojos.Organ;
@@ -19,26 +20,9 @@ public class SQL_Organ {
 
 	public SQL_Organ(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-	}
-	//C: NOT USE: We are inserting the organ with JPA
-	/*public boolean insertOrgan(Organ organ){
-		try{
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "INSERT INTO Organs (name, weight, typeOfDonation, lifeOfOrgan) "
-					+ "VALUES ('"+ organ.getName() + "','" + organ.getWeight() + "' , '" 
-					+ organ.getTypeOfDonation() + "','" +organ.getLifeOfOrgan()+"');";
-			stmt.executeUpdate(sql);			
-			stmt.close();
-			return true;
-					
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}*/
+	}	
 	
-	
-	
+	//LO Utilizamos???????????????????????????????????????
 	public List <Organ> searchOrgan(String name){
 		List<Organ> lookForOrgan = new ArrayList<Organ>();
 		try {
@@ -86,7 +70,7 @@ public class SQL_Organ {
 		return false;
 	}
 	
-	
+	//LO VAMOS A USAR???
 	public int getOrganId(Organ org){
 		int idO = 0;
 		Organ o = new Organ();
@@ -108,20 +92,7 @@ public class SQL_Organ {
 		return o.getId();
 	}
 	
-	public boolean insertDonorFK (int idDonor, int idOrg){
-		try{
-			String sql = "UPDATE Organs SET donor_id=? WHERE id=" + idOrg;
-			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
-			prep.setInt(1, idDonor);
-			prep.executeUpdate();
-			prep.close();
-			return true;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}
-	//C: TODAVIA NO LO USAMOS, VAMOS A USARLO PAU?¿?
+	//C: USADO
 	public boolean insertRequestedFK (int idReq, int idOrg){
 		try{
 			String sql = "UPDATE Organs SET requested_id=? WHERE id=" + idOrg;
@@ -158,7 +129,7 @@ public class SQL_Organ {
 		return org;
 	}
 	
-	
+	//LO vamos a usar?????
 	public List<Organ> organOfDonor (int idD){
 		List <Organ> orgs = new ArrayList<Organ>();
 		try{
@@ -189,17 +160,13 @@ public class SQL_Organ {
 	//this method is used in order to get all the patients who's requested organs 
 	//have not yet been assigned to an organ of a donor
 	
-	public void ViewDisponiblePatients(){
+	public void viewAvailablePatients(){
 		try{
-		Statement stmt1= dbManager.getC().createStatement();
-		String sql1= "DROP VIEW DisponiblePatients";
-		stmt1.executeUpdate(sql1);
-		stmt1.close();
-		
-		
+				
 		Statement stmt2= dbManager.getC().createStatement();
-		String sql= "CREATE VIEW  DisponiblePatients AS SELECT * FROM Patients JOIN Requested_organs ON Patients.id=Requested_organs.patient_id" 
-				+" WHERE Requested_organs.id NOT LIKE (SELECT requested_id  FROM organs)";
+		String sql= "CREATE VIEW AvailablePatients AS SELECT * FROM patients AS p JOIN requested_organs AS req ON "
+				+ "p.id = req.patient_id  WHERE req.id NOT IN (SELECT requested_id FROM organs "
+				+ "WHERE requested_id IS NOT NULL);";
 		stmt2.executeUpdate(sql);
 		
 		stmt2.close();
@@ -210,17 +177,27 @@ public class SQL_Organ {
 		
 	}
 	//M: used
-	public List<Patient> CompatibilityTest(Organ organ){
+	public List<Patient> compatibilityTest(Organ organ){
+		
+		//1. En caso de que ya hayais hecho lo que dije antes, haced primero this.dropViewAvailablePatients() y
+		//despues la instruccion 2.
+		
+		//2. si no os habiais creado ya la view, haced solo
+		//this.viewAvailablePatients(); HACEDLO SOLO UNA VEZ Y BORRAIS TODOS ESTOS COMENTS
+		
+		
+		
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
+			this.viewAvailablePatients();
 			Statement stmt= dbManager.getC().createStatement();//Tendrï¿½a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
 				
-			String sql ="SELECT * FROM DisponiblePatients JOIN Requested_organs ON DisponiblePatients.id = Requested_organs.patient_id"
-					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND DisponiblePatients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
+			String sql ="SELECT * FROM AvailablePatients JOIN Requested_organs ON AvailablePatients.id = Requested_organs.patient_id"
+					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND AvailablePatients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
 				+ " AND Requested_organs.maxWeight >= '" + organ.getWeight() + "' AND Requested_organs.minWeight <= '" + organ.getWeight() + 
-				 "' ORDER BY  DisponiblePatients.score DESC";
+				 "' ORDER BY  AvailablePatients.score DESC";
 
 			ResultSet rs= stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -247,6 +224,17 @@ public class SQL_Organ {
 		}
 		return compatiblePatients;	
 		}
+	/*
+	public void deleteExpiredOrgans(){
+		try{
+			Statement stmt= dbManager.getC().createStatement();
+			String sql= "DELETE * FROM Organs WHERE";
+			LocalDate localAdditionDate= additionDate.toLocalDate();
+			LocalDate today= LocalDate.now();
+			Period daysSinceAddition= Period.between(today, localAdditionDate);
+		}
+	}*/
+	
 	public void createTable(){
 		try{
 			
@@ -281,6 +269,19 @@ public class SQL_Organ {
 			stm.executeUpdate(drop);
 			stm.close();
 		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void dropViewAvailablePatients(){
+		try{
+		Statement stmt1= dbManager.getC().createStatement();
+		String sql1= "DROP VIEW DisponiblePatients";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+		}
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}

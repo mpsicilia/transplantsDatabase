@@ -46,12 +46,10 @@ public class JPAdonor {
 	//M: used by jpamanager:searchdonor
 	public List <Donor> searchDonor (String name){
 		List<Donor> donorList = new ArrayList<Donor>();
-		try{
-			jpaManager.getEManager().getTransaction().begin();
+		try{			
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Donors WHERE "
 					+ " name LIKE '%" + name + "%'", Donor.class);
-			donorList = (List<Donor>) q1.getResultList();
-			jpaManager.getEManager().getTransaction().commit();		
+			donorList = (List<Donor>) q1.getResultList();	
 			
 		}catch (Exception ex){
 			ex.printStackTrace();

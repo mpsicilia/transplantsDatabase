@@ -1,7 +1,6 @@
 package transplants.db.jpa;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -18,7 +17,6 @@ public class JPAhospital {
 	}
 	//M: used
 	public boolean insert(Hospital hosp) {
-
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			jpaManager.getEManager().persist(hosp);
@@ -34,13 +32,10 @@ public class JPAhospital {
 	//M: used by jpamanager: hospitalOfPatient
 	public Hospital hospitalofpatient(String namepat){
 		Hospital hospital=new Hospital();
-		try{
-			jpaManager.getEManager().getTransaction().begin();
+		try{			
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Hospitals AS Hosp JOIN Patients AS Pat ON Hosp.id=Pat.hospital_id"
 					+ " WHERE Pat.name LIKE '" + namepat + "'" ,Hospital.class);
-			//q1.setParameter(1, namepat);
 			hospital=(Hospital) q1.getSingleResult();
-			jpaManager.getEManager().getTransaction().commit();
 			return hospital;
 		}
 		catch (Exception e) {
@@ -52,11 +47,9 @@ public class JPAhospital {
 	public Hospital getHospitalbyid(Integer idhosp) {
 		Hospital hosp = new Hospital();
 		try {
-			jpaManager.getEManager().getTransaction().begin();
 			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Hospitals WHERE id = ? ",Hospital.class);
 			q1.setParameter(1, idhosp);
 			hosp = (Hospital) q1.getSingleResult();
-			jpaManager.getEManager().getTransaction().commit();
 			return hosp;
 
 		} catch (Exception e) {
@@ -64,56 +57,19 @@ public class JPAhospital {
 		}
 		return hosp;
 	}
-	
-	public Hospital getHospital(Hospital hosp) {
-		Hospital hospi = new Hospital();
-		try {
-			Query q1 = jpaManager.getEManager().createNativeQuery(
-					"SELECT * FROM Hospitals WHERE name LIKE ? AND phoneNumber LIKE ? AND address LIKE ? AND city LIKE ? AND postcode"
-							+ " LIKE ? AND country LIKE ? ",Hospital.class);
-						
-			q1.setParameter(1, hosp.getName());
-			q1.setParameter(2, hosp.getPhone_number());
-			q1.setParameter(3, hosp.getAddress());
-			q1.setParameter(4, hosp.getCity());
-			q1.setParameter(5, hosp.getPostcode());
-			q1.setParameter(6, hosp.getCountry());
-		
-			hospi = (Hospital) q1.getSingleResult();
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return hospi;
-	}
 
 	//M: used in jpamanager: searchAllPatients
 	//it returns all the patients a hospital has
 	public List<Patient> searchAllPatients(Hospital hospit){
 		List<Patient> patients = new ArrayList<Patient>();
-		try {
-			jpaManager.getEManager().getTransaction().begin();	
+		try {			
 			Query q = jpaManager.getEManager().createNativeQuery("SELECT * FROM Patients AS Pat JOIN Hospitals AS Hosp "
 					+ "ON Pat.hospital_id=Hosp.id WHERE Hosp.id= '" + hospit.getId() + "'", Patient.class);
 			patients = (List<Patient>) q.getResultList();
-			jpaManager.getEManager().getTransaction().commit();	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return patients;
 	}
-
-	/*public List<Hospital> selectAllHospitals() {
-		try {
-			jpaManager.getEManager().getTransaction().begin();
-			Query q1 = jpaManager.getEManager().createNativeQuery("SELECT * FROM Hospitals", Hospital.class);
-			List<Hospital> allhospitals = (List<Hospital>) q1.getResultList();
-			jpaManager.getEManager().getTransaction().commit();
-			return allhospitals;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}*/
 
 }

@@ -1,5 +1,6 @@
 package transplants.db.jdbc;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -45,12 +46,27 @@ public class SQL_Request {
 		}
 		return false;
 	}
-	
+	//used from dbManger(from ui_organ)
 	public int reqIdByPatIdAndDonOrg (int Patid, String name){
-		int a=5;
-		return a;
+		int id=0;
+		try{
+		Statement stmt= dbManager.getC().createStatement();
+		String sql= "SELECT id FROM Requested_organs WHERE patient_id= '"+ Patid + "' AND name= '"+name+"'";
+		ResultSet rs= stmt.executeQuery(sql);
+		while (rs.next()){
+			id= rs.getInt("id");
+		}
+		
+		stmt.close();
+		rs.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return id;
+		
 	}
-
+	//LO VAMOs a usar??????
 	public List<Requested_organ> searchReqOrgan(String name) {
 		List<Requested_organ> lookForReqOrgan = new ArrayList<Requested_organ>();
 		try {

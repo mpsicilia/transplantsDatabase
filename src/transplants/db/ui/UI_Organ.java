@@ -165,15 +165,6 @@ public class UI_Organ {
 		return matchByNameOrgs;
 	}
 
-	public boolean insertRequestedFKinOrgan(int idReq, int idOrg, DBManager dbManager) {
-		try {
-			return dbManager.requestedFKinOrgan(idReq, idOrg);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
 	//M: used
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
@@ -193,7 +184,7 @@ public class UI_Organ {
 				Patient p = patientIterator.next();
 				System.out.println(counterPat + ". " + p);
 				patients.add(p);
-				System.out.println("POSICION EN LA LISTA:" +patients.indexOf(p));
+				
 				counterPat++;
 			}while(patientIterator.hasNext());
 			int numPat=Integer.parseInt(console.readLine());

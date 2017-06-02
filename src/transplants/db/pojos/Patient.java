@@ -101,11 +101,9 @@ public class Patient extends Person implements Serializable {
 		LocalDate localLifeExp= lifeExpectancy.toLocalDate();
 		LocalDate localAdditionDate= additionDate.toLocalDate();
 		LocalDate today= LocalDate.now();
-		Period daysSinceAddition= Period.between(today, localAdditionDate);
-		float s1= (float) daysSinceAddition.getDays();
-		Period daysLifeExp= Period.between(today, localLifeExp);		
-		float s2= (float) daysLifeExp.getDays();
-		int score= (int)(s1+ (1/s2)*1000);
+		float s1 = ChronoUnit.DAYS.between(today, localAdditionDate);
+		float s2 = ChronoUnit.DAYS.between(today, localLifeExp);
+		int score= (int)(s1+ (1/s2)*10000);
 		this.score = score;
 
 		

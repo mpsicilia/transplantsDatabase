@@ -350,19 +350,6 @@ public class JPAmanager implements DBManagerInterface {
 		return false;
 	}
 
-	
-	// NEW
-	public Hospital getHospital(Hospital hospital) {
-		Hospital hospi = new Hospital();
-		try {
-			hospi = hosp.getHospital(hospital);
-			return hospi;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return hospi;
-	}
-
 	// used in unmarshall
 	public Patient getPatientById(Integer idP) {
 		Patient p = new Patient();

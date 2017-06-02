@@ -61,7 +61,7 @@ public class DBManager implements DBManagerInterface {
 			pat.createTable();
 			animalT.createTable();
 			org.createTable();
-			org.ViewDisponiblePatients();
+			org.viewAvailablePatients();
 			don.createTable();
 			req.createTable();
 
@@ -81,6 +81,7 @@ public class DBManager implements DBManagerInterface {
 			pat.dropTable();
 			animalT.dropTable();
 			org.dropTable();
+			org.dropViewAvailablePatients();
 			don.dropTable();
 			req.dropTable();
 
@@ -144,10 +145,11 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	@Override
-	//C: TODAVIA NO LO USAMOS, PAU LO VAMOS A USAR??¿????¿
+	//USED
 	public boolean requestedFKinOrgan(int idR, int idO) {
 		return org.insertRequestedFK(idR, idO);
 	}
+	//used
 	@Override
 	public int reqIdByPatIdAndDonOrg (int patId, String org){
 		return req.reqIdByPatIdAndDonOrg(patId, org);
@@ -256,7 +258,7 @@ public class DBManager implements DBManagerInterface {
 	//M: used
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
-		return org.CompatibilityTest(organ);
+		return org.compatibilityTest(organ);
 	}
 
 	//M: using hospital and doctor, organ, reqorgan, animal
