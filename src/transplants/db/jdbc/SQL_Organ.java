@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
@@ -179,14 +181,9 @@ public class SQL_Organ {
 	//M: used
 	public List<Patient> compatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
+		
 		try{
-<<<<<<< HEAD
-			
-=======
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
-			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
-			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
-			//Could COLLATE NOCASE be used also for bloodtype... ?
+			Statement stmt= dbManager.getC().createStatement();
 				
 			String sql ="SELECT * FROM AvailablePatients JOIN Requested_organs ON AvailablePatients.id = Requested_organs.patient_id"
 					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND AvailablePatients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
@@ -218,15 +215,34 @@ public class SQL_Organ {
 		}
 		return compatiblePatients;	
 		}
-	
+	//C: USED
 	public void deleteExpiredOrgans(){
+		List<Integer> organsExpired = new ArrayList<Integer>();
 		try{
+			Statement stmt= dbManager.getC().createStatement();			
+			String sql ="SELECT id,lifeOfOrgan FROM Organs";
 			
-			LocalDate today= LocalDate.now();
-			Statement stmt= dbManager.getC().createStatement();
-			String sql= "DELETE FROM Organs WHERE lifeOfOrgan < '" + today +"'";
-			stmt.executeUpdate(sql);
-			stmt.close();
+			ResultSet rs= stmt.executeQuery(sql);
+			while(rs.next()){
+				Integer id= rs.getInt("id");
+				Date lifeOrg = rs.getDate("lifeOfOrgan");
+				LocalDate localExpDate= lifeOrg.toLocalDate();
+				LocalDate today= LocalDate.now();
+				float expiredDate = ChronoUnit.DAYS.between(today, localExpDate);
+				if (expiredDate<0){
+					//here we are creating a list with the dates of the organs that have expired
+					organsExpired.add(id);
+				}				
+			}
+			stmt.close();		
+			
+			for (Integer idOrgan: organsExpired){
+				Statement stmt2=dbManager.getC().createStatement();
+				String sql2= "DELETE FROM Organs WHERE id = " + idOrgan+ " AND requested_id IS NULL";
+				stmt2.executeUpdate(sql2);
+				stmt2.close();
+			}			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}

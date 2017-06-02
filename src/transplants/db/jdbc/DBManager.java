@@ -52,6 +52,9 @@ public class DBManager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 	}
+	public void expired(){
+		org.deleteExpiredOrgans();
+	}
 
 	@Override
 	public boolean createTables() {
