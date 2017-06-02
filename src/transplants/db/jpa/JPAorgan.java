@@ -11,7 +11,7 @@ public class JPAorgan {
 		this.jpaManager = jpamanager;
 
 	}
-	//M: used from jpamanager.insert
+	/*M: used from jpamanager.insert*/
 	public boolean insert(Organ organ) {
 
 		try {
@@ -25,7 +25,7 @@ public class JPAorgan {
 		}
 		return false;
 	}
-	//M: used from jpamanager.delete
+	//M: used from jpamanager.delete*/
 	public boolean delete(Organ organ) {
 
 		try {

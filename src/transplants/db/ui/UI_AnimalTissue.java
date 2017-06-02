@@ -15,7 +15,7 @@ public class UI_AnimalTissue {
 	
 	public UI_AnimalTissue(){		
 	}	
-	//M: used generic case1/csae4
+	//M: used generic case1/csae4*/
 	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager, String typetissue){
 		try{
 			System.out.print("Name of the animal where the tissue come from: ");
@@ -62,7 +62,7 @@ public class UI_AnimalTissue {
 		return null; 
 	}
 	
-	//M:used for sure
+	//M:used for sure*/
 	public void updateAnimalTissue(Animal_tissue animalT, DBManager dbManager){
 		boolean again = true;	
 		try{
@@ -112,7 +112,7 @@ public class UI_AnimalTissue {
 			}
 	}
 	
-	
+	/*m:used*/
 	public void deleteAnimalTissue (Animal_tissue animalT, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(animalT);
@@ -126,7 +126,7 @@ public class UI_AnimalTissue {
 			ex.printStackTrace();
 		}
 	}
-	//M: used when uodating animaltissue
+	//M: used when uodating animaltissue*/
 	public Animal_tissue animalTissueOfRequested (Integer idReq, DBManager dbManager){
 		Animal_tissue at = new Animal_tissue();
 		try{

@@ -14,7 +14,7 @@ public class JPApatient {
 		this.jpaManager = jpamanager;
 
 	}
-	//M: used from jpamanager: insert
+	//M: used from jpamanager: insert*/
 	public boolean insert(Patient patient) {
 
 		try {
@@ -53,7 +53,7 @@ public class JPApatient {
 		return patient;
 	}*/
 
-	//M: used from jpaManager: delete
+	//M: used from jpaManager: delete*/
 	public boolean removePatient(Patient patient) {
 
 		try {
@@ -68,7 +68,7 @@ public class JPApatient {
 		return false;
 	}
 
-	//C: used from getIdpatient(Patient patient)from JPA
+	//C: used from getIdpatient(Patient patient)from JPA*/
 	public Integer getIdpatient(Patient pat){
 		
 		Patient patient=new Patient();
@@ -97,7 +97,7 @@ public class JPApatient {
 	}
 
 	
-	//M: used from jpaManager: searchPatient (name)
+	//M: used from jpaManager: searchPatient (name)*/
 	public List<Patient> searchPatient(String name) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {			

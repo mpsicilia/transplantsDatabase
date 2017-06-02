@@ -95,7 +95,7 @@ public class SQL_Organ {
 		return fkReq;
 	}	
 	
-	//M: used from dbamanger: update
+	//M: used from dbamanger: update*/
 	public boolean updateOrgan (Organ organ){
 		try {
 			String sql = "UPDATE Organs SET name=?, weight=?, typeOfDonation =?, lifeOfOrgan=? WHERE id=?";
@@ -138,7 +138,7 @@ public class SQL_Organ {
 		return o.getId();
 	}
 	
-	//C: USADO
+	//C: USADO*/
 	public boolean insertRequestedFK (int idReq, int idOrg){
 		try{
 			String sql = "UPDATE Organs SET requested_id=? WHERE id=" + idOrg;
@@ -153,7 +153,7 @@ public class SQL_Organ {
 		return false;
 	}	
 	
-	//M:used in case2/case5
+	//M:used in case2/case5*/
 	public Organ organThatSuppliesRequest (Requested_organ request){
 		Organ org = new Organ();
 		try{
@@ -222,7 +222,7 @@ public class SQL_Organ {
 		}
 		
 	}
-	//M: used
+	//M: used*/
 	public List<Patient> compatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 	
@@ -263,7 +263,7 @@ public class SQL_Organ {
 		}
 		return compatiblePatients;	
 		}
-	//C: USED
+	//C: USED*/
 	public void deleteExpiredOrgans(){
 		List<Integer> organsExpired = new ArrayList<Integer>();
 		try{

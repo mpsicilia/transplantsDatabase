@@ -47,6 +47,7 @@ public class JPAmanager implements DBManagerInterface {
 
 	// M: used by hosp, donor, organ
 	//C: and pat
+	/*M: used by hosp*/
 	@Override
 	public boolean insert(Object obj) {
 		try {
@@ -146,7 +147,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 	
-	// M: used by uidonor: searchDonor
+	// M: used by uidonor: searchDonor*/
 	@Override
 	public List<Donor> searchDonor(String name) {
 		try {
@@ -158,7 +159,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 	
-	//M: used from uipatient: searchPatient (jpamanager)
+	//M: used from uipatient: searchPatient (jpamanager)*/
 	@Override
 	public List<Patient> searchPatient(String name) {
 		try {
@@ -184,7 +185,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 	
-	// M: used in uihosps: seeallpatients
+	// M: used in uihosps: seeallpatients*/
 	@Override
 	public List<Patient> searchAllPatients(Hospital hospital) {
 		try {
@@ -214,7 +215,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 	
-	// used by organ, donor, patietn, hospital
+	/*M: used by organ, donor, patietn, hospital*/
 	@Override
 	public boolean update(Object obj) {
 		em.getTransaction().begin();
@@ -222,7 +223,7 @@ public class JPAmanager implements DBManagerInterface {
 		return true;
 	}
 	
-	// used by donor, organ, patient
+	// used by donor, organ, patient*/
 		@Override
 		public boolean delete(Object obj) {
 			if (Donor.class == obj.getClass()) {
@@ -240,7 +241,7 @@ public class JPAmanager implements DBManagerInterface {
 			return false;
 		}		
 		
-	// C: used from ui_patient
+	// C: used from ui_patient*/
 	@Override
 	public Integer getIdPatient(Patient patient) {
 			Integer patid;
@@ -282,7 +283,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 	
-	//M: used from uipatient: introduceNewPatient
+	//M: used from uipatient: introduceNewPatient*/
 	@Override
 	public Hospital getHospitalPatient(Integer idhosp) {
 		Hospital hospital = new Hospital();
@@ -315,7 +316,7 @@ public class JPAmanager implements DBManagerInterface {
 		//done in jdbc
 		return null;
 	}
-	//M: used from uipatient: patientHospitalAndDoctor
+	//M: used from uipatient: patientHospitalAndDoctor*/
 	@Override
 	public String hospitalOfPatient(String pName) {
 		Hospital hospital = new Hospital();

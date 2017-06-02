@@ -19,7 +19,7 @@ public class UI_Donor {
 		
 	}
 
-	//M: used uigenr: case1/case3
+	/*M: used uigenr: case1/case3*/
 	public Donor introduceNewDonor(JPAmanager jpaManager){
 		Donor donor = new Donor();
 		try{
@@ -59,7 +59,7 @@ public class UI_Donor {
 		}
 		return donor;
 	}
-	//M: used case2/case3
+	//M: used case2/case3*/
 	public List<Donor> searchDonor(JPAmanager jpaManager){
 		try{
 			System.out.println("Introduce the name of the donor: ");
@@ -71,7 +71,7 @@ public class UI_Donor {
 		}
 		return null; 
 	}
-	//M: used by case2/case3/case1
+	//M: used by case2/case3/case1*/
 	public void updateDonor(Donor donor, JPAmanager jpaManager){
 		boolean again = true;	
 		try{
@@ -134,7 +134,7 @@ public class UI_Donor {
 				ex.printStackTrace();
 			}
 	}
-	//M: used form case2/case3/case2
+	//M: used form case2/case3/case2*/
 	public void deleteDonor (Donor donor, JPAmanager jpaManager){
 		try{
 			boolean organsDeleted=false;

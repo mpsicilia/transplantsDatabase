@@ -15,7 +15,7 @@ public class JPAhospital {
 		this.jpaManager = jpamanager;
 
 	}
-	//M: used
+	/*M: used*/
 	public boolean insert(Hospital hosp) {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
@@ -29,7 +29,7 @@ public class JPAhospital {
 		return false;
 	}
 
-	//M: used by jpamanager: hospitalOfPatient
+	//M: used by jpamanager: hospitalOfPatient*/
 	public Hospital hospitalofpatient(String namepat){
 		Hospital hospital=new Hospital();
 		try{			
@@ -43,7 +43,7 @@ public class JPAhospital {
 		}
 		return hospital;
 	}
-	//C: used from: getHospitalPatient in JPAManager
+	//C: used from: getHospitalPatient in JPAManager*/
 	public Hospital getHospitalbyid(Integer idhosp) {
 		Hospital hosp = new Hospital();
 		try {
@@ -58,7 +58,7 @@ public class JPAhospital {
 		return hosp;
 	}
 
-	//M: used in jpamanager: searchAllPatients
+	//M: used in jpamanager: searchAllPatients*/
 	//it returns all the patients a hospital has
 	public List<Patient> searchAllPatients(Hospital hospit){
 		List<Patient> patients = new ArrayList<Patient>();
