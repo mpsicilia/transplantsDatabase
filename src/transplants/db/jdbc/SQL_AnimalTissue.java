@@ -51,23 +51,7 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-	//Used when deleting animal tissue
-	public boolean deleteAnimalTissue(Animal_tissue animalT) {
-		try {
-			String sql = "DELETE FROM Animal_tissues WHERE id=? ";
-			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
-			prep.setInt(1, animalT.getId());
-			prep.executeUpdate();
-			prep.close();
 
-			return true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return false;
-	}
 	//In order to link a request organ with an animal
 	public boolean insertRequestedAnimal(Integer id_requested, Integer id_animal) {
 		try {

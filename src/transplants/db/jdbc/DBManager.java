@@ -277,7 +277,7 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 
-	//M: hospital uses it + doctor +reqOrgan +animal*/
+	//M: hospital uses it + doctor +reqOrgan*/
 	@Override
 	public boolean delete(Object obj) {
 		try {
@@ -288,10 +288,6 @@ public class DBManager implements DBManagerInterface {
 			if (Doctor.class == obj.getClass()) {
 				Doctor doctor = (Doctor) obj;
 				return doct.deleteDoctor(doctor);
-			}
-			if (Animal_tissue.class == obj.getClass()) {
-				Animal_tissue animalTi = (Animal_tissue) obj;
-				return animalT.deleteAnimalTissue(animalTi);
 			}
 			if (Requested_organ.class == obj.getClass()) {
 				Requested_organ reqOrgan = (Requested_organ) obj;

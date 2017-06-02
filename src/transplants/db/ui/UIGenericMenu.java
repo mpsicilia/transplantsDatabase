@@ -461,15 +461,8 @@ public class UIGenericMenu {
 										System.out.println("Introduce the number of the organ: ");
 										numOrg = Integer.parseInt(console.readLine());
 										Requested_organ orgDe = reqs.get(numOrg - 1);
-										//If the requested organ is supplied by an animal, we delete also the animal tissue
-										if(orgDe.getName().equalsIgnoreCase("collagen") || orgDe.getName().equalsIgnoreCase("skin")){
-											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgDe.getId(), dbManager);
-											uiAnimalT.deleteAnimalTissue(animalT, dbManager);
-											uiRequested.deleteRequestOrgan(orgDe, dbManager);
-										}
-										else {
-											uiRequested.deleteRequestOrgan(orgDe, dbManager);
-										}
+										uiRequested.deleteRequestOrgan(orgDe, dbManager);
+										
 										break;
 								
 									case 4:
