@@ -63,24 +63,6 @@ public class UI_RequestedOrgan {
 		}
 		return null;
 	}
-	public boolean OrganComingFromDonor(Requested_organ req){
-		//mirariamos si nuestro request esta entre los organos que se van a donar. 
-		//de serlo relacionariamos con la FK el request y el organo!!!!
-		    // devolveriamos true y le mostrariamos al usuario que su organo es humano
-		//despues de ello le preguntariamos sobre el compatibility test que si lo queeria hacer.
-		    //en caso de ser compatibles guay, se podria llevar a cabo la operacion
-			//en  caso de no serlo, llamar al metodo que busque otro organo que sea compatible
-                  //si no hubiese organo hacer una lista de espera, ordenada por el addition date
-		return false;
-		
-	}
-	public boolean OrganComingFromAnimal(Requested_organ req){
-		//mirariamos si nuestro request esta entre los tejidos de animales. 
-		//de serlo relacionariamos con la FK tabla entre animal y request!!!!!!!
-		    // devolveriamos true y le mostrariamos al usuario que su organo es de animal
-		//...mismo proceso que arriba
-		return false;
-	}
 	
 	public List<Requested_organ> searchReqOrgan(DBManager dbManager){
 		try{
