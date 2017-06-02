@@ -499,37 +499,31 @@ public class UIGenericMenu {
 
 						break;
 					case 5:
-						//show the patient and its requested, who supplies the request and the donated organ
+						System.out.println("\n\n\tCOMPATIBILITY TEST RESULTS:");
 						//get all the hospitals in order to get all the patients
 						List<Hospital> hospitals = dbManager.selectAllHospitals();
 						for(Hospital hosp : hospitals){
 							List<Patient> patsInHosp = jpaManager.searchAllPatients(hosp);
 							for (Patient p : patsInHosp){
-								System.out.println("Patient: " + p.getName());
+								System.out.println("\nPatient: " + p.getName());
 								List<Requested_organ> reqsOfPat = uiRequested.characteristicsOfRequestedOrgans(p.getId(), dbManager);
 								for (Requested_organ ro : reqsOfPat){
 									Organ organOfRequested = dbManager.organOfRequested(ro);
-									List<Organ> organsNotNull = dbManager.selectAllOrgans();
 									
-									if(organOfRequested != null){
-										//Donor donorOfOrgan = jpaManager.getDonorOfOrg(ro.getId());
-										System.out.println("\tRequested organ: " + ro.getName() 
-												+ " ----> Compatible organ: " + organOfRequested.getName() );
-												//+ " {Donor: " + donorOfOrgan.getName() + "}");
-										
+									if(organOfRequested.getName() == null){
+										System.out.println("\t Is waiting for a " + ro.getName() + " transplant.");
 									}
-									else{
-										System.out.println("\tThere are no compatible organs for the requested organ " + ro.getName() + ".");
+									if(organOfRequested.getName() != null){
+										System.out.println("\t Has received a " + organOfRequested.getName() + " transplant.");		
 									}
 									
 								}
 							}
 						}
-
 						break;
 					}
 				}
-					break;
+				break;
 
 				case 3:
 					System.out.println("1. Save the database information in the XML file.");
