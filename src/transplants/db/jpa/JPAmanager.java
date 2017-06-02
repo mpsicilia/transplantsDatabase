@@ -371,6 +371,17 @@ public class JPAmanager implements DBManagerInterface {
 	public void expired() {
 		// DONE IN JDBC
 		
+
+	public List<Organ> selectAllOrgans() {
+		//M: DONE IN JDC
+		return null;
+	}
+
+	@Override
+	public Integer getFKrequested(Organ org) {
+		//M: DONE IN JDBC
+		return null;
+
 	}
 
 }

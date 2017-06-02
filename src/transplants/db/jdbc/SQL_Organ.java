@@ -24,7 +24,7 @@ public class SQL_Organ {
 		this.dbManager = dbmanager;
 	}	
 	
-	//LO Utilizamos???????????????????????????????????????
+	//LO Utilizamos???????????????????????????????????????//PAULA LO UTILIZAA
 	public List <Organ> searchOrgan(String name){
 		List<Organ> lookForOrgan = new ArrayList<Organ>();
 		try {
@@ -51,6 +51,50 @@ public class SQL_Organ {
 		}
 		return lookForOrgan;
 	}
+	
+	public List <Organ> allOrgans(){
+		List<Organ> lookForOrgan = new ArrayList<Organ>();
+		try {
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Organs WHERE requested_id IS NOT NULL";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String nameOrgan = rs.getString("name");
+				Float weight = rs.getFloat("weight");
+				String typeOfDonation= rs.getString("typeOfDonation");
+				Date lifeOfOrgan = rs.getDate("lifeOfOrgan");
+				
+				Organ organToShow = new Organ(id, nameOrgan, weight, typeOfDonation, lifeOfOrgan );
+				lookForOrgan.add(organToShow);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return lookForOrgan;
+	}
+
+	
+	public Integer getFKofRequested (Organ organ){
+		Integer fkReq = 0;
+		try{
+			Statement stmt = dbManager.getC().createStatement();
+			String sql = "SELECT requested_id FROM Organs WHERE id=" + organ.getId();
+			ResultSet rs = stmt.executeQuery(sql);
+			fkReq = rs.getInt(6);
+			
+			rs.close();
+			stmt.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return fkReq;
+	}	
+	
 	//M: used from dbamanger: update
 	public boolean updateOrgan (Organ organ){
 		try {
@@ -114,7 +158,7 @@ public class SQL_Organ {
 		Organ org = new Organ();
 		try{
 			Statement stm = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Organs WHERE requested_id = " + request.getId();
+			String sql = "SELECT * FROM Organs WHERE requested_id = " + request.getId() + " IS NOT NULL";
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()){
 				Integer id = rs.getInt(1);
@@ -183,6 +227,8 @@ public class SQL_Organ {
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 	
 		try{
+		
+
 
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not

@@ -509,14 +509,17 @@ public class UIGenericMenu {
 								List<Requested_organ> reqsOfPat = uiRequested.characteristicsOfRequestedOrgans(p.getId(), dbManager);
 								for (Requested_organ ro : reqsOfPat){
 									Organ organOfRequested = dbManager.organOfRequested(ro);
-									if(organOfRequested == null){
-										System.out.println("\tThere are no compatible organs for the requested organ " + ro.getName() + ".");
+									List<Organ> organsNotNull = dbManager.selectAllOrgans();
+									
+									if(organOfRequested != null){
+										//Donor donorOfOrgan = jpaManager.getDonorOfOrg(ro.getId());
+										System.out.println("\tRequested organ: " + ro.getName() 
+												+ " ----> Compatible organ: " + organOfRequested.getName() );
+												//+ " {Donor: " + donorOfOrgan.getName() + "}");
+										
 									}
 									else{
-										Donor donorOfOrgan = jpaManager.getDonorOfOrg(ro.getId());
-										System.out.println("\tRequested organ: " + ro.getName() 
-												+ " ----> Compatible organ: " + organOfRequested.getName() 
-												+ " {Donor: " + donorOfOrgan.getName() + "}");
+										System.out.println("\tThere are no compatible organs for the requested organ " + ro.getName() + ".");
 									}
 									
 								}

@@ -95,7 +95,8 @@ public class JPAdonor {
 			Donor donor = new Donor();
 		try{				
 			Query q1= jpaManager.getEManager().createNativeQuery("SELECT * FROM Donors AS Don JOIN Organs "
-					+ " AS Org ON Don.id = Org.donor_id WHERE Org.id = " + orgId + "", Donor.class);
+					+ " AS Org ON Don.id = Org.donor_id WHERE Org.id = ?", Donor.class);
+			q1.setParameter(1, orgId);
 			donor = (Donor) q1.getSingleResult();
 		}catch (Exception ex){
 			ex.printStackTrace();
