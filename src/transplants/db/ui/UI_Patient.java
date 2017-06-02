@@ -61,16 +61,18 @@ public class UI_Patient {
 			Patient p = new Patient(name, birthDate, weight, height, gender, path, bt, addition, life);
 
 			boolean introduced = jpaManager.insert(p);			
-			
-			System.out.println("\nIntroduce the id of the hospital in which the patient is hospitalized. ");
+			Integer counterTimes=1;
+			System.out.println("\nIntroduce the number of the hospital in which the patient is hospitalized. ");
 			Iterator<Hospital> itH = hosps.iterator();
 			while (itH.hasNext()) {
 				Hospital h = itH.next();
-				System.out.println(h);
+				System.out.println(counterTimes + ". " +h);
+				counterTimes++;
 			}
 			
-			Integer idHosp = Integer.parseInt(console.readLine());
-			Hospital hospital = jpaManager.getHospitalPatient(idHosp);         
+			Integer numHosp = Integer.parseInt(console.readLine());
+			Hospital hospital=hosps.get(numHosp-1);
+			hospital = jpaManager.getHospitalPatient(hospital.getId());         
 		
 			hospital.addPatient(p);
 			p.setHospital(hospital);
@@ -79,23 +81,25 @@ public class UI_Patient {
 
 			// RELATIONSHIP BETWEEN DOCTOR AND PATIENT			
 			System.out.println("How many doctors are attending the patient?");
-			
+			counterTimes=1;
 			Iterator<Doctor> itD = docs.iterator();
 			while (itD.hasNext()) {
 				Doctor d = itD.next();
-				System.out.println(d);
+				System.out.println(counterTimes+ ". "+ d);
+				counterTimes++;
 			}
 			Integer Xtimes = Integer.parseInt(console.readLine());
 			Integer counter = 1;
-			Integer doctId = 0;
+			Integer doctNum = 0;
 			boolean introduced2 = false;
 			Integer patId = jpaManager.getIdPatient(p);
 			Integer counterdoct=1;
 			
 			do {
-				System.out.print("Introduce the id of the "+ counterdoct + "º doctor that is going to take care of the patient: ");
-				doctId = Integer.parseInt(console.readLine());
-				introduced2 = dbmanager.assigmentDoctorPatient(patId, doctId);
+				System.out.print("Introduce the number of the "+ counterdoct + "º doctor that is going to take care of the patient: ");
+				doctNum = Integer.parseInt(console.readLine());
+				Doctor doct= docs.get(doctNum-1);
+				introduced2 = dbmanager.assigmentDoctorPatient(patId, doct.getId());
 				counter++;
 				counterdoct++;
 			} while (counter <= Xtimes);
