@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TransplantDatabase nameOfDatabase="TransplantDatabase">
     <Hospitals>
-        <Hospital id="2" name="cuchh">
-            <phoneNumber>09</phoneNumber>
+        <Hospital id="2" name="cuchiland">
+            <phoneNumber>4366547</phoneNumber>
             <address>monteprincipe</address>
             <City>boadilla</City>
             <postcode>4923</postcode>
             <Country>spain</Country>
             <Doctors>
                 <Doctor id="2" name="rafa">
-                    <specialization>cardio</specialization>
-                    <registrationNumber>3245948</registrationNumber>
-                </Doctor>
-                <Doctor id="3" name="abraham">
-                    <specialization>obstetrics</specialization>
-                    <registrationNumber>9087</registrationNumber>
-                </Doctor>
-                <Doctor id="6" name="cris">
-                    <specialization>neurology</specialization>
-                    <registrationNumber>7524</registrationNumber>
+                    <specialization>cardiology</specialization>
+                    <registrationNumber>3245</registrationNumber>
                 </Doctor>
                 <Doctor id="7" name="luchi">
                     <specialization>urology</specialization>
                     <registrationNumber>2121</registrationNumber>
                 </Doctor>
                 <Doctor id="8" name="pau">
-                    <specialization>plastics</specialization>
+                    <specialization>traumatology</specialization>
                     <registrationNumber>8512</registrationNumber>
                 </Doctor>
                 <Doctor id="9" name="maria">
@@ -39,10 +31,10 @@
                     <gender>m</gender>
                     <weight>58.0</weight>
                     <height>178.0</height>
-                    <bloodType>a</bloodType>
+                    <bloodType>a+</bloodType>
                     <pathology>nephritis</pathology>
                     <additionDate>2001-04-07</additionDate>
-                    <lifeExpectancy>2018-04-07</lifeExpectancy>
+                    <lifeExpectancy>2050-09-08</lifeExpectancy>
                     <score>-22</score>
                 </Patient>
                 <Patient id="52" name="pol">
@@ -67,29 +59,32 @@
                     <lifeExpectancy>2070-09-07</lifeExpectancy>
                     <score>0</score>
                 </Patient>
+                <Patient id="552" name="alvaro">
+                    <birthDate>2011-09-09</birthDate>
+                    <gender>m</gender>
+                    <weight>25.0</weight>
+                    <height>132.0</height>
+                    <bloodType>a+</bloodType>
+                    <pathology>leukemia</pathology>
+                    <additionDate>2017-06-01</additionDate>
+                    <lifeExpectancy>2031-06-05</lifeExpectancy>
+                    <score>250</score>
+                </Patient>
             </Patients>
         </Hospital>
         <Hospital id="3" name="boadillalovers">
-            <phoneNumber>349</phoneNumber>
+            <phoneNumber>345</phoneNumber>
             <address>bbt</address>
-            <City>ny</City>
+            <City>mad</City>
             <postcode>248</postcode>
             <Country>usa</Country>
             <Doctors>
-                <Doctor id="3" name="abraham">
-                    <specialization>obstetrics</specialization>
-                    <registrationNumber>9087</registrationNumber>
-                </Doctor>
-                <Doctor id="6" name="cris">
-                    <specialization>neurology</specialization>
-                    <registrationNumber>7524</registrationNumber>
-                </Doctor>
                 <Doctor id="7" name="luchi">
                     <specialization>urology</specialization>
                     <registrationNumber>2121</registrationNumber>
                 </Doctor>
                 <Doctor id="8" name="pau">
-                    <specialization>plastics</specialization>
+                    <specialization>traumatology</specialization>
                     <registrationNumber>8512</registrationNumber>
                 </Doctor>
                 <Doctor id="9" name="maria">
@@ -108,6 +103,17 @@
                     <additionDate>2015-04-06</additionDate>
                     <lifeExpectancy>2018-05-06</lifeExpectancy>
                     <score>-24</score>
+                </Patient>
+                <Patient id="852" name="abraham">
+                    <birthDate>1978-05-06</birthDate>
+                    <gender>m</gender>
+                    <weight>69.0</weight>
+                    <height>178.0</height>
+                    <bloodType>b-</bloodType>
+                    <pathology>pancreatitis</pathology>
+                    <additionDate>2017-06-02</additionDate>
+                    <lifeExpectancy>2018-01-01</lifeExpectancy>
+                    <score>46</score>
                 </Patient>
             </Patients>
         </Hospital>
