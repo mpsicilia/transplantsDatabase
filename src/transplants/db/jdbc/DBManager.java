@@ -444,7 +444,7 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	@Override
-	public Donor getDonorOfOrg(String nameO) {
+	public Donor getDonorOfOrg(Integer idOrgan) {
 		//DONE IN JPA
 		return null;
 	}
@@ -469,5 +469,16 @@ public class DBManager implements DBManagerInterface {
 		}catch (Exception e){			
 		}
 		return false;
-
-}}
+	}
+	
+	//M: used by cacse2/case5
+	public Organ organOfRequested (Requested_organ req){
+		Organ o = new Organ();
+		try{
+			o = org.organThatSuppliesRequest(req);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return o;
+	}
+}

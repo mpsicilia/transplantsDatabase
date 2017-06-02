@@ -26,13 +26,13 @@ public class Animal_tissue implements Serializable {
 	
 	
 	public Animal_tissue() {
-		super();
+		//super();
 		requested_organs=new ArrayList<Requested_organ>();
 	}
 	
 		
 	public Animal_tissue(Integer id, String name, String typeOfTissue, String pathology, Date lifeExpTissue) {
-		super();
+		//super();
 		this.id = id;
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
@@ -41,7 +41,7 @@ public class Animal_tissue implements Serializable {
 	}
 	
 	public Animal_tissue(String name, String typeOfTissue, String pathology, Date lifeExpTissue) {
-		super();
+		//super();
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
 		this.pathology = pathology;

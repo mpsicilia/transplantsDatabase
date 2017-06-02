@@ -98,16 +98,17 @@ public class UI_RequestedOrgan {
 	//PORQUE TAMBIEN TIENE LAS CARACTERISTICAS DEL REQ
 	public void updateReqOrgan(Requested_organ reqOrgan, DBManager dbManager){
 		boolean again = true;	
-		Animal_tissue animalT=new Animal_tissue();
-		UI_AnimalTissue uianimal=new UI_AnimalTissue();
+		//Animal_tissue animalT=new Animal_tissue();
+		//UI_AnimalTissue uianimal=new UI_AnimalTissue();
 		try{
-			if(reqOrgan.getName().equalsIgnoreCase("collagen") || reqOrgan.getName().equalsIgnoreCase("skin")){
-				System.out.println(reqOrgan.getId());
+			/*if(reqOrgan.getName().equalsIgnoreCase("collagen") || reqOrgan.getName().equalsIgnoreCase("skin")){
+				System.out.println(reqOrgan.getId()); //lo hace
 				animalT=uianimal.animalTissueOfRequested(reqOrgan.getId(), dbManager);
+				System.out.println(animalT);
 				
 				boolean ok=dbManager.update(animalT);
-				}
-			else{ 
+				}*/
+			//else{ 
 				while(again){
 			
 				System.out.println("Choose the information that is going to be updated [1-3]: ");
@@ -145,7 +146,7 @@ public class UI_RequestedOrgan {
 			else{
 				System.out.println(" Request Organ has NOT been updated. ");
 			}
-			}
+			//}
 			}catch (IOException ex){
 				ex.printStackTrace();
 			}
