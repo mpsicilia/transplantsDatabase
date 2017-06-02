@@ -144,7 +144,7 @@ public class DBManager implements DBManagerInterface {
 	}
 
 	@Override
-	//C: TODAVIA NO LO USAMOS, PAU LO VAMOS A USAR??¿????¿
+	//USED
 	public boolean requestedFKinOrgan(int idR, int idO) {
 		return org.insertRequestedFK(idR, idO);
 	}
