@@ -49,6 +49,8 @@ public class UI_RequestedOrgan {
 				
 				if (ok && okFK && organAdded){
 					System.out.println("The request Organ has been introduced.\n");
+					dbManager.expired();
+					uiCompatiblePatientOrgans(reqOrgan, dbManager);
 				}else{
 					System.out.println("The request Organ has NOT been introduced. \n");
 				}
@@ -126,7 +128,8 @@ public class UI_RequestedOrgan {
 			if(updated){
 				System.out.println("Request Organ has been updated and it comes from . \n"
 						+ reqOrgan.toString());//see the toString
-				System.out.println();
+				dbManager.expired();
+				uiCompatiblePatientOrgans(reqOrgan, dbManager);
 			}
 			else{
 				System.out.println(" Request Organ has NOT been updated. ");
