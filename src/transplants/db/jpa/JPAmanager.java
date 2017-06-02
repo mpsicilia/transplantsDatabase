@@ -367,4 +367,16 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
+	@Override
+	public List<Organ> selectAllOrgans() {
+		//M: DONE IN JDC
+		return null;
+	}
+
+	@Override
+	public Integer getFKrequested(Organ org) {
+		//M: DONE IN JDBC
+		return null;
+	}
+
 }
