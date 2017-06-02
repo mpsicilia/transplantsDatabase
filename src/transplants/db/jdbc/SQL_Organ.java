@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
+import transplants.db.pojos.Requested_organ;
 
 
 public class SQL_Organ {
@@ -134,6 +135,28 @@ public class SQL_Organ {
 		}
 		return false;
 	}	
+	
+	//M:used in case2/case5
+	public Organ organThatSuppliesRequest (Requested_organ request){
+		Organ org = new Organ();
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Organs WHERE requested_id = " + request.getId();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()){
+				Integer id = rs.getInt(1);
+				String nameOrgan = rs.getString(2);
+				Float weight = rs.getFloat(3);
+				String typeDon = rs.getString(4);
+				Date lifeOfOrgan= rs.getDate("lifeOfOrgan");
+				
+				org = new Organ(id, nameOrgan, weight, typeDon, lifeOfOrgan);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return org;
+	}
 	
 	
 	public List<Organ> organOfDonor (int idD){

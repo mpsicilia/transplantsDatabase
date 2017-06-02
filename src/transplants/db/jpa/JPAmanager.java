@@ -336,8 +336,8 @@ public class JPAmanager implements DBManagerInterface {
 	}
 		
 	@Override
-	public Donor getDonorOfOrg(String nameO) {
-			return don.getDonorOfOrgan(nameO);
+	public Donor getDonorOfOrg(Integer idOrgan) {
+			return don.getDonorOfOrgan(idOrgan);
 	}
 	@Override
 	public List<Doctor> workingDoctorsInHosp (String hospName){
@@ -372,6 +372,12 @@ public class JPAmanager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 		return p;
+	}
+
+	@Override
+	public Organ organOfRequested(Requested_organ req) {
+		//M:DONE IN JDBC
+		return null;
 	}
 
 }

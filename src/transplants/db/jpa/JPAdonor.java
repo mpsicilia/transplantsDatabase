@@ -91,13 +91,13 @@ public class JPAdonor {
 		}
 		return donor.getId();
 	}*/
-	//not used...
-	public Donor getDonorOfOrgan (String name){
+	//not used...M: used now by the show results of compt test
+	public Donor getDonorOfOrgan (Integer orgId){
 		
 			Donor donor = new Donor();
 		try{				
 			Query q1= jpaManager.getEManager().createNativeQuery("SELECT * FROM Donors AS Don JOIN Organs "
-					+ "AS Org ON Don.id = Org.donor_id WHERE Org.name LIKE '" + name + "'", Donor.class);
+					+ " AS Org ON Don.id = Org.donor_id WHERE Org.id = " + orgId + "", Donor.class);
 			donor = (Donor) q1.getSingleResult();
 		}catch (Exception ex){
 			ex.printStackTrace();

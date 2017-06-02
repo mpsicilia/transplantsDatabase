@@ -174,15 +174,6 @@ public class UI_Organ {
 		return false;
 	}
 
-	public Donor getDonorOfOrgan(Organ org, JPAmanager jpaManager) {
-		Donor don = new Donor();
-		try {
-			don = jpaManager.getDonorOfOrg(org.getName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return don;
-	}
 	//M: used
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
