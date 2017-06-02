@@ -190,6 +190,7 @@ public class SQL_Organ {
 	public List<Patient> CompatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
+			this.ViewDisponiblePatients();
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
