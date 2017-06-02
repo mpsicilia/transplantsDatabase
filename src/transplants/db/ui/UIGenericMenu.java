@@ -72,7 +72,8 @@ public class UIGenericMenu {
 				System.out.println("3. Work with XML. ");
 				System.out.println("4. Exit from the database. ");
 				System.out.println("____________________________________________________");
-
+	
+				
 				do {
 					System.out.println("\nChoose an option[1-4]:");
 					String read = console.readLine();
