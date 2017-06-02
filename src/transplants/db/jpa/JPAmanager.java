@@ -335,10 +335,6 @@ public class JPAmanager implements DBManagerInterface {
 	}
 		
 	@Override
-	public Donor getDonorOfOrg(Integer idOrgan) {
-			return don.getDonorOfOrgan(idOrgan);
-	}
-	@Override
 	public List<Doctor> workingDoctorsInHosp (String hospName){
 		//done in jdbc
 		return null;

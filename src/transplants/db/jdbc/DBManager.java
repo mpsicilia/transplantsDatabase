@@ -464,11 +464,6 @@ public class DBManager implements DBManagerInterface {
 		return doctor;
 	}
 
-	@Override
-	public Donor getDonorOfOrg(Integer idOrgan) {
-		//DONE IN JPA
-		return null;
-	}
 	//M: used
 	@Override
 	public List<Doctor> workingDoctorsInHosp (String hospName){
