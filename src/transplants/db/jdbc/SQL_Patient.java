@@ -35,45 +35,6 @@ public class SQL_Patient {
 		}
 		return nameP;
 	}
-	//public SQL_Request 
-	public boolean insertHospitalFK(Integer patID, Integer hospID){
-		try{
-			String sql = "UPDATE Patients SET hospital_id=? WHERE id=" + patID;
-			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
-			prep.setInt(1, hospID);
-			prep.executeUpdate();
-			prep.close();
-			return true;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}
-	//LO tenemos en JPA, tambien lo queremos en JDBC??????
-	
-	/*public Integer getPatientID (Patient p){
-		
-		Patient patient =  new Patient();
-		try{
-			Statement stm = dbManager.getC().createStatement();
-			String sql ="SELECT id FROM Patients WHERE (name LIKE '" + p.getName() + "') AND (weight = " + p.getWeight() + ")"
-					+ " AND (height = " + p.getHeight() + ") AND (gender LIKE '" + p.getGender() + "') AND "
-							+ "(pathology LIKE '" + p.getPathology() + "') AND (bloodType LIKE '" + p.getBloodType() + "')"
-									+ "AND (lifeExpectancy = " + p.getLifeExpectancy() + ")";
-			ResultSet rs = stm.executeQuery(sql);
-			while(rs.next()){
-			int idP = rs.getInt("id");
-			patient = new Patient ( idP, p.getName(), p.getBirthDate(), p.getWeight(), p.getHeight(), p.getGender(), p.getPathology(), p.getBloodType(), p.getAdditionDate(), p.getLifeExpectancy());
-			System.out.println("ID "+idP);
-			}
-			rs.close();
-			stm.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return patient.getId();
-	}*/
-	
 	public void createTable(){
 		try{			
 			Statement stmt3 = dbManager.getC().createStatement();

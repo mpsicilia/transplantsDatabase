@@ -165,15 +165,6 @@ public class UI_Organ {
 		return matchByNameOrgs;
 	}
 
-	public boolean insertRequestedFKinOrgan(int idReq, int idOrg, DBManager dbManager) {
-		try {
-			return dbManager.requestedFKinOrgan(idReq, idOrg);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
 	public Donor getDonorOfOrgan(Organ org, JPAmanager jpaManager) {
 		Donor don = new Donor();
 		try {

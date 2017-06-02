@@ -19,25 +19,8 @@ public class SQL_Organ {
 	public SQL_Organ(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-	//C: NOT USE: We are inserting the organ with JPA
-	/*public boolean insertOrgan(Organ organ){
-		try{
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "INSERT INTO Organs (name, weight, typeOfDonation, lifeOfOrgan) "
-					+ "VALUES ('"+ organ.getName() + "','" + organ.getWeight() + "' , '" 
-					+ organ.getTypeOfDonation() + "','" +organ.getLifeOfOrgan()+"');";
-			stmt.executeUpdate(sql);			
-			stmt.close();
-			return true;
-					
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}*/
 	
-	
-	
+	//LO Utilizamos???????????????????????????????????????
 	public List <Organ> searchOrgan(String name){
 		List<Organ> lookForOrgan = new ArrayList<Organ>();
 		try {
@@ -85,7 +68,7 @@ public class SQL_Organ {
 		return false;
 	}
 	
-	
+	//LO VAMOS A USAR???
 	public int getOrganId(Organ org){
 		int idO = 0;
 		Organ o = new Organ();
@@ -107,20 +90,7 @@ public class SQL_Organ {
 		return o.getId();
 	}
 	
-	public boolean insertDonorFK (int idDonor, int idOrg){
-		try{
-			String sql = "UPDATE Organs SET donor_id=? WHERE id=" + idOrg;
-			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
-			prep.setInt(1, idDonor);
-			prep.executeUpdate();
-			prep.close();
-			return true;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
-	}
-	//C: TODAVIA NO LO USAMOS, VAMOS A USARLO PAU?¿?
+	//C: USADO
 	public boolean insertRequestedFK (int idReq, int idOrg){
 		try{
 			String sql = "UPDATE Organs SET requested_id=? WHERE id=" + idOrg;
@@ -135,7 +105,7 @@ public class SQL_Organ {
 		return false;
 	}	
 	
-	
+	//LO vamos a usar?????
 	public List<Organ> organOfDonor (int idD){
 		List <Organ> orgs = new ArrayList<Organ>();
 		try{
