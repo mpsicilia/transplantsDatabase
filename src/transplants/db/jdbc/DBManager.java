@@ -61,7 +61,7 @@ public class DBManager implements DBManagerInterface {
 			pat.createTable();
 			animalT.createTable();
 			org.createTable();
-			org.ViewDisponiblePatients();
+			org.viewAvailablePatients();
 			don.createTable();
 			req.createTable();
 
@@ -258,7 +258,7 @@ public class DBManager implements DBManagerInterface {
 	//M: used
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
-		return org.CompatibilityTest(organ);
+		return org.compatibilityTest(organ);
 	}
 
 	//M: using hospital and doctor, organ, reqorgan, animal
