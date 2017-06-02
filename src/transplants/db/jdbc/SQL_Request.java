@@ -182,16 +182,19 @@ public class SQL_Request {
 		List<Donor> compatibleDonors= new ArrayList<Donor>();
 		try{
 			Statement stmt1=dbManager.getC().createStatement();
-			Statement stmt3= dbManager.getC().createStatement();			
+			String sql1= "SELECT Patients.bloodType FROM Patients JOIN requested_organs "
+					+ "ON requested_organs.patient_id= Patients.id WHERE requested_organs.id= '"+reqOrgan.getId()+"'";
+			stmt1.executeQuery(sql1);
+			stmt1.close();
 			
-				
-			String sql3 ="SELECT * FROM AvailableDonors AS ad JOIN organs AS org ON ad.id= org.donor_id " 
-						+"WHERE org.name LIKE '%" +reqOrgan.getName()+"%' AND ad.bloodType LIKE '%" +reqOrgan.getPatient().getBloodType()+ 
+			Statement stmt2= dbManager.getC().createStatement();				
+			String sql2 ="SELECT * FROM AvailableDonors AS ad JOIN organs AS org ON ad.id= org.donor_id " 
+						+"WHERE org.name LIKE '%" +reqOrgan.getName()+"%' AND ad.bloodType LIKE '%" +sql1+ 
 						"%' AND org.weight <= '"+reqOrgan.getMaxWeight()+"' AND org.weight >= '"+reqOrgan.getMinWeight()+"'";
 
 		
 			
-			ResultSet rs= stmt3.executeQuery(sql3);
+			ResultSet rs= stmt2.executeQuery(sql2);
 			while (rs.next()) {
 				int id = rs.getInt(1);				
 				String name = rs.getString(2);				
@@ -215,7 +218,7 @@ public class SQL_Request {
 				compatibleDonors.add(donorsToShow);
 			}
 			rs.close();
-			stmt3.close();
+			stmt2.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
