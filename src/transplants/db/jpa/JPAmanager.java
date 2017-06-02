@@ -367,4 +367,10 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
+	@Override
+	public void expired() {
+		// DONE IN JDBC
+		
+	}
+
 }

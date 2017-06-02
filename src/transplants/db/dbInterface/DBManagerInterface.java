@@ -17,6 +17,7 @@ public interface DBManagerInterface {
 	
 	public boolean createTables();
 	public boolean dropTables();
+	public void expired();
 	
 	//insert para jpa y para jdbc
 	public boolean insert(Object obj);
