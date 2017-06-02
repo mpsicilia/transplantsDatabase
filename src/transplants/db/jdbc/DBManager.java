@@ -64,6 +64,7 @@ public class DBManager implements DBManagerInterface {
 			org.viewAvailablePatients();
 			don.createTable();
 			req.createTable();
+			req.viewAvailableDonors();
 
 			return true;
 
@@ -84,6 +85,7 @@ public class DBManager implements DBManagerInterface {
 			org.dropViewAvailablePatients();
 			don.dropTable();
 			req.dropTable();
+			req.dropViewAvailableDonors();
 
 			return true;
 
@@ -153,6 +155,10 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public int reqIdByPatIdAndDonOrg (int patId, String org){
 		return req.reqIdByPatIdAndDonOrg(patId, org);
+	}
+	
+	public void uiDeleteExpiredOrgans(){
+		org.deleteExpiredOrgans();
 	}
 
 	

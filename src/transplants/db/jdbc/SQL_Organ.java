@@ -222,18 +222,11 @@ public class SQL_Organ {
 	}
 	//M: used
 	public List<Patient> compatibilityTest(Organ organ){
-		
-		//1. En caso de que ya hayais hecho lo que dije antes, haced primero this.dropViewAvailablePatients() y
-		//despues la instruccion 2.
-		
-		//2. si no os habiais creado ya la view, haced solo
-		//this.viewAvailablePatients(); HACEDLO SOLO UNA VEZ Y BORRAIS TODOS ESTOS COMENTS
-		
-		
-		
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
-			//this.viewAvailablePatients();
+		
+
+
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
@@ -268,16 +261,19 @@ public class SQL_Organ {
 		}
 		return compatiblePatients;	
 		}
-	/*
+	
 	public void deleteExpiredOrgans(){
 		try{
-			Statement stmt= dbManager.getC().createStatement();
-			String sql= "DELETE * FROM Organs WHERE";
-			LocalDate localAdditionDate= additionDate.toLocalDate();
+			
 			LocalDate today= LocalDate.now();
-			Period daysSinceAddition= Period.between(today, localAdditionDate);
+			Statement stmt= dbManager.getC().createStatement();
+			String sql= "DELETE FROM Organs WHERE lifeOfOrgan < '" + today +"'";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-	}*/
+	}
 	
 	public void createTable(){
 		try{
@@ -318,10 +314,11 @@ public class SQL_Organ {
 		
 	}
 	
+	//used
 	public void dropViewAvailablePatients(){
 		try{
 		Statement stmt1= dbManager.getC().createStatement();
-		String sql1= "DROP VIEW DisponiblePatients";
+		String sql1= "DROP VIEW AvailablePatients";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 		}

@@ -187,7 +187,6 @@ public class UI_Hospitals {
 	//M: used
 	public void javaToXmlDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data) {
 		try {
-
 			// Get all the hospitals to marshal
 			List<Hospital> hospsToMarshall = data.getAllHospOFDatabase();
 			Iterator<Hospital> itH = hospsToMarshall.iterator();
@@ -249,8 +248,7 @@ public class UI_Hospitals {
 				}
 				List<Patient> patsUnmarsh = h.getPatients();
 				for (Patient p : patsUnmarsh) {
-					Patient temp = jpaManager.getPatientById(p.getId());
-		
+					Patient temp = jpaManager.getPatientById(p.getId());		
 					temp.setName(p.getName());
 					temp.setBirthDate(p.getBirthDate());
 					temp.setWeight(p.getWeight());

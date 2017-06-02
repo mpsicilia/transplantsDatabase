@@ -173,6 +173,24 @@ public class SQL_Request {
 		return idR;
 	}
 
+	//used
+	public void viewAvailableDonors(){
+		try{
+				
+		Statement stmt2= dbManager.getC().createStatement();
+		String sql= "CREATE VIEW AvailableDonors AS SELECT * FROM Donors AS d JOIN Organs AS "
+				+ "org ON org.donor_id= d.id WHERE org.id NOT IN (SELECT id FROM organs WHERE "
+				+ "requested_id IS NOT NULL)";
+		stmt2.executeUpdate(sql);
+		
+		stmt2.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void createTable() {
 		try {
 
@@ -203,4 +221,17 @@ public class SQL_Request {
 			e.printStackTrace();
 		}
 	}
+	
+	//used
+		public void dropViewAvailableDonors(){
+			try{
+			Statement stmt1= dbManager.getC().createStatement();
+			String sql1= "DROP VIEW AvailableDonors";
+			stmt1.executeUpdate(sql1);
+			stmt1.close();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 }
