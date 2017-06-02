@@ -181,31 +181,41 @@ public class SQL_Request {
 	public List<Donor> compatiblePatientOrgans(Requested_organ reqOrgan){
 		List<Donor> compatibleDonors= new ArrayList<Donor>();
 		try{
-
-			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
-			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
-			//Could COLLATE NOCASE be used also for bloodtype... ?
+			Statement stmt1=dbManager.getC().createStatement();
+			Statement stmt3= dbManager.getC().createStatement();			
+			
 				
-			String sql ="SELECT * FROM AvailableDonors AS ad JOIN organs AS org ON ad.id= org.donor_id " 
-						+"WHERE org.name LIKE '%" +reqOrgan.getName()+"%' AND ad.bloodType LIKE '" +reqOrgan.getPatient().getBloodType()+ 
-						"' AND org.weight <= '"+reqOrgan.getMaxWeight()+"' AND org.weight >= '"+reqOrgan.getMinWeight()+"'";
+			String sql3 ="SELECT * FROM AvailableDonors AS ad JOIN organs AS org ON ad.id= org.donor_id " 
+						+"WHERE org.name LIKE '%" +reqOrgan.getName()+"%' AND ad.bloodType LIKE '%" +reqOrgan.getPatient().getBloodType()+ 
+						"%' AND org.weight <= '"+reqOrgan.getMaxWeight()+"' AND org.weight >= '"+reqOrgan.getMinWeight()+"'";
 
-			ResultSet rs= stmt.executeQuery(sql);
+		
+			
+			ResultSet rs= stmt3.executeQuery(sql3);
 			while (rs.next()) {
-				int id = rs.getInt(1);
-				String name = rs.getString(2);
-				Date dob = rs.getDate(3);
-				Float weight = rs.getFloat(4);
+				int id = rs.getInt(1);				
+				String name = rs.getString(2);				
+				Date dob = rs.getDate(3);				
+				Float weight = rs.getFloat(4);				
 				Float height = rs.getFloat(5);
 				String gen = rs.getString(6);
 				String deadAlive = rs.getString(7);
 				String bloodType = rs.getString(8);
-								
+				
+				System.out.println("Id:" +id);	
+				System.out.println("name:" +name);
+				System.out.println("dob: "+dob);
+				System.out.println("weight:"+weight);
+				System.out.println("height:"+height);
+				System.out.println("gen:"+gen);
+				System.out.println("deadAlive:"+deadAlive);
+				System.out.println("bloodType:"+bloodType);
+				
 				Donor donorsToShow = new Donor(id,name,dob, weight, height, gen, deadAlive, bloodType);
 				compatibleDonors.add(donorsToShow);
 			}
 			rs.close();
-			stmt.close();
+			stmt3.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();

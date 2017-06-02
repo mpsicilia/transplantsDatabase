@@ -73,7 +73,6 @@ public class UIGenericMenu {
 				System.out.println("4. Exit from the database. ");
 				System.out.println("____________________________________________________");
 	
-				
 				do {
 					System.out.println("\nChoose an option[1-4]:");
 					String read = console.readLine();
@@ -109,7 +108,7 @@ public class UIGenericMenu {
 
 					case 4:
 						Patient p = uiPatient.introduceNewPatient(jpaManager, dbManager);
-						System.out.println("\nIntroduce the organ the patient needs.");
+						System.out.println("\nIntroduce the organ the patient needs.");						
 						List<Requested_organ> reqOrg = uiRequested.introduceNewReqOrgan(p, dbManager, jpaManager);
 						Iterator<Requested_organ> it = reqOrg.iterator();
 
