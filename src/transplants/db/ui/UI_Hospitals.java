@@ -20,13 +20,12 @@ public class UI_Hospitals {
 	public UI_Hospitals() {
 	}
 
-	/* M: used from uigeneric; case1/case1*/
+	//Insertion of a hospital
 	public void introduceNewHospital(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data) {
 		try {
 			System.out.print("Name: ");
 			String name = console.readLine();
-			// We are going to make phone number, address and postcode Strings
-			// to give the user more freedom for ex: (216)444-2200
+			//Phone number and post code are Strings to give the user more freedom
 			System.out.print("Phone number: ");
 			String phone_number = console.readLine();
 
@@ -44,16 +43,14 @@ public class UI_Hospitals {
 
 			Hospital hosp = new Hospital(name, phone_number, address, city, post_code, country);
 			
-			// The insert of a hospital is going to be done with jpa
+			//The insert of a hospital is going to be done with jpa
 			boolean ok = jpaManager.insert(hosp);
-			//Because is not a real relation, and we use the DataBase just to store the hospitals we just
-			//do the following
+			//We use the class TransplantDatabase just to store the hospitals
+			//Is not a real relation so we do the following
 			boolean okDatabase = data.addHospital(hosp);
 
 			if (ok && okDatabase) {
-
 				System.out.print("Hospital has been introduced");
-
 			} else {
 				System.out.print("Hospital has NOT been introduced");
 			}
@@ -62,7 +59,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	// M:used by case 2*/
+	//Get a hospital by its name
 	public List<Hospital> searchHospital(DBManager dbManager) {
 		try {
 			System.out.println("Introduce the name of the hospital: ");
@@ -75,7 +72,7 @@ public class UI_Hospitals {
 		return null;
 	}
 
-	// M: in use by uigeneric: case2/case1/case1*/
+	//Update the information of a hospital
 	public void updateHospital(Hospital hosp, DBManager dbManager) {
 		boolean again = true;
 		try {
@@ -132,7 +129,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	// M: useddd by case2/cae1/case2*/
+	//Delete a hospital
 	public void deleteHospital(Hospital hosp, DBManager dbManager) {
 		try {
 			boolean deleted = dbManager.delete(hosp);
@@ -146,7 +143,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	// M: used case2/case2/case3*/
+	//This method is used to see in which hospital(s) works a given doctor
 	public void DoctorHospital(String docName, DBManager dbManager) {
 		try {
 			List<Hospital> hospitals = dbManager.hospitalsOfDoctor(docName);
@@ -163,7 +160,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	// M: useddd by case2/case1/case3*/
+	//This method shows all the patients that are admitted in a hospital
 	public void seeallpatients(Hospital hosp, JPAmanager jpaM) {		
 		try {
 			List<Patient> listpatients = new ArrayList<Patient>();
@@ -184,14 +181,13 @@ public class UI_Hospitals {
 		}	
 	}
 
-	//M: used
+	//Method that stores some information of the database into a XML file
 	public void javaToXmlDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data) {
 		try {
 			// Get all the hospitals to marshal
 			List<Hospital> hospsToMarshall = data.getAllHospOFDatabase();
 			Iterator<Hospital> itH = hospsToMarshall.iterator();
-			// get the doctors and patients of the hospital and add them to the
-			// hospital
+			//Get the doctors and patients of the hospital and add them to the hospital
 			int counterH = 1;
 			while (itH.hasNext()) {
 				Hospital h = itH.next();
@@ -230,13 +226,15 @@ public class UI_Hospitals {
 			e.printStackTrace();
 		}
 	}
-	//M: used
+	
+	//Method that gets the information from the XML file
 	public void xmlToJavaDatabase(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase dataUnmarsh) {
 		try {
 			XMLmanager dataXml = new XMLmanager();
 			dataUnmarsh = dataXml.unmarshalDatabase(dataUnmarsh);
-			// update everything on the tables, update with jdbc bc it doesn't
-			// function with jpa
+			//All the information is contained in a transplantDatabase object
+			//So we get all the hospitals from it, and then the doctors and patients from each hospital
+			//And then update the information from the XML to the database
 			List<Hospital> hospUnmarsh = dataUnmarsh.getAllHospOFDatabase();
 			for (Hospital h : hospUnmarsh) {
 				List<Doctor> docsUnmarsh = h.getDoctors();
@@ -276,7 +274,8 @@ public class UI_Hospitals {
 
 		}
 	}
-	//M: used
+	
+	//Method from which the HTML is obtained
 	public void xmlToHtml(String sourcePath, String xsltPath, String resultDir) {
 		XMLmanager hospXml = new XMLmanager();
 		hospXml.simpleTransform(sourcePath, xsltPath, resultDir);

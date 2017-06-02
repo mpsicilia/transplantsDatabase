@@ -22,7 +22,11 @@ public class UI_Patient {
 
 	public UI_Patient() {
 	}
-	//M: used by case 2/ case 4*/
+	
+	//Introduction of a patient 
+	//Selection of the hospital in which the patient is hospitalized
+	//And the doctors that attend the patient
+	//If there are not hospitals or doctors is not possible to introduce a patient
 	public Patient introduceNewPatient(JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			List<Hospital> hosps = dbmanager.selectAllHospitals();
@@ -31,35 +35,37 @@ public class UI_Patient {
 				System.out.println("There are no hospitals or doctors");
 				System.out.println("You can not introduce a patient");
 			}
-			System.out.print("Name: ");
-			String name = console.readLine();
+			else{
+				System.out.print("Name: ");
+				String name = console.readLine();
 
-			System.out.print("Birth date [yyyy-mm-dd]: ");
-			String birth = console.readLine();
-			Date birthDate = Date.valueOf(birth);
+				System.out.print("Birth date [yyyy-mm-dd]: ");
+				String birth = console.readLine();
+				Date birthDate = Date.valueOf(birth);
 
-			System.out.print("Weight (kg): ");
-			Float weight = Float.parseFloat(console.readLine());
+				System.out.print("Weight (kg): ");
+				Float weight = Float.parseFloat(console.readLine());
 
-			System.out.print("Height (cm): ");
-			Float height = Float.parseFloat(console.readLine());
+				System.out.print("Height (cm): ");
+				Float height = Float.parseFloat(console.readLine());
 
-			System.out.print("Gender: ");
-			String gender = console.readLine();
+				System.out.print("Gender: ");
+				String gender = console.readLine();
 
-			System.out.print("Pathology: ");
-			String path = console.readLine();
+				System.out.print("Pathology: ");
+				String path = console.readLine();
 
-			System.out.print("Blood type: ");
-			String bt = console.readLine();
+				System.out.print("Blood type: ");
+				String bt = console.readLine();
 
-			System.out.print("Life expectancy [yyyy-mm-dd]: ");
-			Date life = Date.valueOf(console.readLine());
-			LocalDate doa= LocalDate.now();
-			Date addition= Date.valueOf(doa);
-			System.out.println("Date of adition: " +addition);
-			Patient p = new Patient(name, birthDate, weight, height, gender, path, bt, addition, life);
+				System.out.print("Life expectancy [yyyy-mm-dd]: ");
+				Date life = Date.valueOf(console.readLine());
+				LocalDate doa= LocalDate.now();
+				Date addition= Date.valueOf(doa);
+				System.out.println("Date of adition: " +addition);
+				Patient p = new Patient(name, birthDate, weight, height, gender, path, bt, addition, life);
 
+<<<<<<< HEAD
 			boolean introduced = jpaManager.insert(p);			
 			Integer counterTimes=1;
 			System.out.println("\nIntroduce the number of the hospital in which the patient is hospitalized. ");
@@ -68,7 +74,57 @@ public class UI_Patient {
 				Hospital h = itH.next();
 				System.out.println(counterTimes + ". " +h);
 				counterTimes++;
+=======
+				boolean introduced = jpaManager.insert(p);			
+				
+				// RELATIONSHIP BETWEEN HOSPITAL AND PATIENT, A PATIENT CAN BE ONLY IN ONE HOSPITAL
+				System.out.println("\nIntroduce the id of the hospital in which the patient is hospitalized. ");
+				Iterator<Hospital> itH = hosps.iterator();
+				while (itH.hasNext()) {
+					Hospital h = itH.next();
+					System.out.println(h);
+				}
+				
+				Integer idHosp = Integer.parseInt(console.readLine());
+				Hospital hospital = jpaManager.getHospitalPatient(idHosp);         
+			
+				hospital.addPatient(p);
+				p.setHospital(hospital);
+				boolean okUpdatepatient = jpaManager.update(p);
+				boolean okUpdatehospital = jpaManager.update(hospital);
+
+				// RELATIONSHIP BETWEEN DOCTOR AND PATIENT, A PATIENT CAN BE ATTENDED BY MANY DOCTORS	
+				System.out.println("How many doctors are attending the patient?");
+				
+				Iterator<Doctor> itD = docs.iterator();
+				while (itD.hasNext()) {
+					Doctor d = itD.next();
+					System.out.println(d);
+				}
+				Integer Xtimes = Integer.parseInt(console.readLine());
+				Integer counter = 1;
+				Integer doctId = 0;
+				boolean introduced2 = false;
+				Integer patId = jpaManager.getIdPatient(p);
+				Integer counterdoct=1;
+				
+				do {
+					System.out.print("Introduce the id of the "+ counterdoct + "º doctor that is going to take care of the patient: ");
+					doctId = Integer.parseInt(console.readLine());
+					introduced2 = dbmanager.assigmentDoctorPatient(patId, doctId);
+					counter++;
+					counterdoct++;
+				} while (counter <= Xtimes);
+
+				if (introduced && introduced2 && okUpdatepatient && okUpdatehospital) {
+					System.out.println("Patient has been introduced. ");
+				} else {
+					System.out.println("Patient has NOT been introduced. ");
+				}
+				return p;
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
 			}
+<<<<<<< HEAD
 			
 			Integer numHosp = Integer.parseInt(console.readLine());
 			Hospital hospital=hosps.get(numHosp-1);
@@ -111,13 +167,16 @@ public class UI_Patient {
 			}
 
 			return p;
+=======
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 		return null;
 	}
-	//M: used from case2->case4*/
+	
+	//Look for a patient by his/her name
 	public List<Patient> searchPatient(JPAmanager jpaManager) {
 		try {
 			System.out.println("Introduce the name of the patient: ");
@@ -130,7 +189,7 @@ public class UI_Patient {
 		return null;
 	}
 
-	//M: used by case 4/ case 1*/
+	//Update the information of a patient
 	public void updatePatient(Patient p, JPAmanager jpaManager) {
 		boolean again = true;
 		try {
@@ -201,7 +260,7 @@ public class UI_Patient {
 
 	}
 
-	//M: used from case 4/ case 2*/
+	//Deletion of a patient and his/her requested organs
 	public void deletePatient(Patient pat, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			boolean reqorgansdeleted=false;
@@ -224,7 +283,8 @@ public class UI_Patient {
 		}
 	}
 
-	//M: used in case 4/ case 3*/
+	//This method shows the hospital in which the patient is hospitalized
+	//And the doctors that are taking care of him/her
 	public void patientHospitalAndDoctor(String ptName, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			List<Patient> patients=new ArrayList<>();

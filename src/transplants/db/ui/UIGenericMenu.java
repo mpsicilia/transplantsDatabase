@@ -458,7 +458,7 @@ public class UIGenericMenu {
 									}
 									break;
 
-									case 3://M: deja entonces solo la ultimma linnea y haz opcion aparte con el animallll
+									case 3:
 										System.out.println("Introduce the number of the organ: ");
 										numOrg = Integer.parseInt(console.readLine());
 										Requested_organ orgDe = reqs.get(numOrg - 1);
