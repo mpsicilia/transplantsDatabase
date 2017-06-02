@@ -61,7 +61,7 @@ public class SQL_AnimalTissue {
 //M: used
 	public boolean updateAnimalTissue(Animal_tissue animalTi) {
 		try {
-			String sql = "UPDATE Animal_tissue SET name=?, typeOfTissue=?, pathology=?, time=? WHERE id=?";
+			String sql = "UPDATE Animal_tissues SET name=?, typeOfTissue=?, pathology=?, lifeExpTissue=? WHERE id=? ";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
 			prep.setString(1, animalTi.getName());
 			prep.setString(2, animalTi.getTypeOfTissue());
@@ -69,7 +69,7 @@ public class SQL_AnimalTissue {
 			prep.setDate(4, animalTi.getLifeExpTissue());
 			prep.setInt(5, animalTi.getId());
 			prep.executeUpdate();
-			prep.close();
+			prep.close();//
 			return true;
 
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class SQL_AnimalTissue {
 	//M: used when deletin animal tisue
 	public boolean deleteAnimalTissue(Animal_tissue animalT) {
 		try {
-			String sql = "DELETE FROM Animal_tissues WHERE id=?";
+			String sql = "DELETE FROM Animal_tissues WHERE id=? ";
 			PreparedStatement prep = dbManager.getC().prepareStatement(sql);
 			prep.setInt(1, animalT.getId());
 			prep.executeUpdate();
@@ -151,6 +151,7 @@ public class SQL_AnimalTissue {
 				Date lifeExpTissue= rs.getDate(5);
 				
 			animal = new Animal_tissue(id, nameAnimalT, typeOfTissue, pathology, lifeExpTissue);
+			
 			}
 			rs.close();
 			stm.close();

@@ -61,6 +61,7 @@ public class DBManager implements DBManagerInterface {
 			pat.createTable();
 			animalT.createTable();
 			org.createTable();
+			org.ViewDisponiblePatients();
 			don.createTable();
 			req.createTable();
 
