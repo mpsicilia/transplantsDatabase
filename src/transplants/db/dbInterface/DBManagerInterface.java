@@ -28,6 +28,7 @@ public interface DBManagerInterface {
 	public boolean requestedFKinOrgan (int idR, int idO);
 	public int reqIdByPatIdAndDonOrg (int patId, String org);
 	public int orgIdByDonIdAndReqOrg (int donId, String reqOrg);
+	public int getIdFromLastReqOrg(Requested_organ reqOrgan);
 	
 	public List<Hospital> searchHosp(String name); 
 	public List<Doctor> searchDoctor(String name); 

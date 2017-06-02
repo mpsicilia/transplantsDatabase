@@ -359,6 +359,10 @@ public class DBManager implements DBManagerInterface {
 		return doct.getIdOfLastDoctor(doctor);
 	}
 	
+	public int getIdFromLastReqOrg(Requested_organ reqOrgan){
+		return req.getIdFromLastReqOrg(reqOrgan);
+	}
+	
 	//C:USED from ui_requested and ui_animal*/
 	@Override
 	public Integer idRequestedOrgan(Requested_organ r) {

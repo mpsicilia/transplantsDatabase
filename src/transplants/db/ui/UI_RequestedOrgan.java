@@ -55,7 +55,7 @@ public class UI_RequestedOrgan {
 					if(reqOrgan.getName().equalsIgnoreCase("collagen") || reqOrgan.getName().equalsIgnoreCase("skin")){
 						break;
 					}
-					else{
+					else{						
 						uiCompatiblePatientOrgans(reqOrgan, dbManager);
 					}
 				}else{
@@ -181,8 +181,10 @@ public class UI_RequestedOrgan {
 			Donor don= donors.get(numDon - 1);
 			
 			int idO = dbManager.orgIdByDonIdAndReqOrg(don.getId(), reqOrgan.getName());
+			
+			System.out.println("REQID:"+dbManager.getIdFromLastReqOrg(reqOrgan));
 		
-			dbManager.requestedFKinOrgan(reqOrgan.getId(), idO);
+			dbManager.requestedFKinOrgan(dbManager.getIdFromLastReqOrg(reqOrgan), idO);
 			}
 			
 		} catch (Exception e) {

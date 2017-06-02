@@ -128,6 +128,11 @@ public class JPAmanager implements DBManagerInterface {
 		return 0;
 	}
 	
+	public int getIdFromLastReqOrg(Requested_organ reqOrgan){
+		//done in jdbc
+		return 0;
+	}
+	
 	@Override
 	public List<Hospital> searchHosp(String name) {
 		// DONE WITH JDBC
