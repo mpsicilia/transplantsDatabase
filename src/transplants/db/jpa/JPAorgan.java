@@ -2,22 +2,23 @@ package transplants.db.jpa;
 
 import transplants.db.pojos.Organ;
 
-
 public class JPAorgan {
 
+	// ATTRIBUTES
 	private JPAmanager jpaManager;
 
+	// METHODS
 	public JPAorgan(JPAmanager jpamanager) {
 		this.jpaManager = jpamanager;
 
 	}
-	//M: used from jpamanager.insert
-	public boolean insert(Organ organ) {
 
+	// This is used in order to insert an organ
+	public boolean insert(Organ organ) {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			jpaManager.getEManager().persist(organ);
-			jpaManager.getEManager().getTransaction().commit();			
+			jpaManager.getEManager().getTransaction().commit();
 			return true;
 
 		} catch (Exception e) {
@@ -25,13 +26,14 @@ public class JPAorgan {
 		}
 		return false;
 	}
-	//M: used from jpamanager.delete
+
+	// This is used in order to delete an organ
 	public boolean delete(Organ organ) {
 
 		try {
 			jpaManager.getEManager().getTransaction().begin();
 			jpaManager.getEManager().remove(organ);
-			jpaManager.getEManager().getTransaction().commit();			
+			jpaManager.getEManager().getTransaction().commit();
 			return true;
 
 		} catch (Exception e) {
@@ -41,4 +43,3 @@ public class JPAorgan {
 	}
 
 }
-

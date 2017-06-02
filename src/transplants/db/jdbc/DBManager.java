@@ -23,7 +23,7 @@ public class DBManager implements DBManagerInterface {
 	private SQL_Organ org= new SQL_Organ(this);
 	private SQL_Donor don= new SQL_Donor(this);
 	private SQL_Request req = new SQL_Request(this);
-
+	
 	public DBManager() {
 		super();
 		connect();
@@ -52,7 +52,7 @@ public class DBManager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 	}
-	@Override
+	@Override/*m:used*/
 	public void expired(){
 		org.deleteExpiredOrgans();
 	}
@@ -126,36 +126,36 @@ public class DBManager implements DBManagerInterface {
 	
 
 	// PKs
-	//M: used from uidoctor:introducenewdoctor
+	/*M: used from uidoctor:introducenewdoctor*/
 	@Override
 	public boolean assigmentDoctorHospital(Integer id1, Integer id2) {
 		return hosp.insertHospitalsDoctors(id1, id2);
 	}
-	//C: used from ui_gen
+	//C: used from ui_gen*/
 	@Override
 	public boolean assigmentDoctorPatient(Integer patId, Integer doctId) {
 		return doct.insertDoctorPatientTable(patId, doctId);
 	}
 
 	@Override
-	//C: USED from ui_animal
+	//C: USED from ui_animal*/
 	public boolean assigmentRequestedAnimal(Integer idRequest, Integer idAnimal) {
 		return animalT.insertRequestedAnimal(idRequest, idAnimal);
 	}
 	
 	// FKs
-	//C: USED from ui_req
+	//C: USED from ui_req*/
 	@Override
 	public boolean assigmentPatientRequest(int patID, int reqOrg) {
 		return req.insertPatientFK(patID, reqOrg);
 	}
 
 	@Override
-	//USED
+	//USED*/
 	public boolean requestedFKinOrgan(int idR, int idO) {
 		return org.insertRequestedFK(idR, idO);
 	}
-	//used
+	//used*/
 	@Override
 	public int reqIdByPatIdAndDonOrg (int patId, String org){
 		return req.reqIdByPatIdAndDonOrg(patId, org);
@@ -172,7 +172,7 @@ public class DBManager implements DBManagerInterface {
 	
 	// searches
 	@Override
-	//M: in use by uihosp: searchHospital
+	//M: in use by uihosp: searchHospital*/
 	public List<Hospital> searchHosp(String name) {
 		try {
 			List<Hospital> hospList = hosp.searchHospital(name);
@@ -183,7 +183,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	//M: used in uidoctor: searchDoctor
+	//M: used in uidoctor: searchDoctor*/
 	@Override
 	public List<Doctor> searchDoctor(String name) {
 		try {
@@ -207,7 +207,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 	
-	//M: used in updateanimaltissue
+	//M: used in updateanimaltissue*/
 	public Animal_tissue animalTissueByIdReq (int idr){
 		try{
 			return animalT.getAnimalOfRequestedOrgan(idr);
@@ -257,19 +257,19 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	//M: used by uipatient: introducenewpatient/ uidoctor:introducenewdoctor
+	/*M: used by uipatient: introducenewpatient/ uidoctor:introducenewdoctor*/
 	@Override
 	public List<Hospital> selectAllHospitals() {
 		return hosp.selectAllHospitals();
 	}
 
-	//M: used by uipatient: introduceNewPatient
+	//M: used by uipatient: introduceNewPatient*/
 	@Override
 	public List<Doctor> selectAllDoctors() {
 		return doct.selectAllDoctors();
 	}
 
-	//M: used
+	//M: used*/
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
 		return org.compatibilityTest(organ);
@@ -290,7 +290,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	//M: using hospital and doctor, organ, reqorgan, animal
+	//M: using hospital and doctor, organ, reqorgan, animal*/
 	@Override
 	public boolean update(Object obj) {
 		try {
@@ -321,7 +321,7 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 
-	//M: hospital uses it + doctor +reqOrgan +animal
+	//M: hospital uses it + doctor +reqOrgan +animal*/
 	@Override
 	public boolean delete(Object obj) {
 		try {
@@ -353,13 +353,13 @@ public class DBManager implements DBManagerInterface {
 		//done in JPA
 		return 0;
 	}
-	//M: used from uidoctor: insertnewdoctor
+	/*M: used from uidoctor: insertnewdoctor*/
 	@Override
 	public Integer getIdOfDoctor(Doctor doctor) {
 		return doct.getIdOfLastDoctor(doctor);
 	}
 	
-	//C:USED from ui_requested and ui_animal
+	//C:USED from ui_requested and ui_animal*/
 	@Override
 	public Integer idRequestedOrgan(Requested_organ r) {
 		Integer id = 0;
@@ -381,7 +381,7 @@ public class DBManager implements DBManagerInterface {
 		}
 		return id;
 	}
-	//C: USED from ui_animal
+	//C: USED from ui_animal*/
 	public Integer idOfAnimal(Animal_tissue animalTissue){
 		Integer id = 0;
 		try {
@@ -418,7 +418,7 @@ public class DBManager implements DBManagerInterface {
 	}
 	
 	@Override
-	//M: used by uirequOrgan: characteristicsOfReqOrg
+	//M: used by uirequOrgan: characteristicsOfReqOrg*/
 	// given a patient is going to return its requests
 	public List<Requested_organ> characteristicsOfRequestedOrgans(int idPatient) {
 		List<Requested_organ> reqsOfPat = new ArrayList<Requested_organ>();
@@ -443,7 +443,7 @@ public class DBManager implements DBManagerInterface {
 	}
 	
 	@Override
-	//M: in use by uihosps: doctroHospital
+	//M: in use by uihosps: doctroHospital*/
 	public List<Hospital> hospitalsOfDoctor(String name) {
 		List<Hospital> hospitals = new ArrayList<Hospital>();
 		try {
@@ -460,7 +460,7 @@ public class DBManager implements DBManagerInterface {
 		//done in jpa
 		return null;
 	}
-	//M: used by uipatient: patientHospitalAndDoctor
+	//M: used by uipatient: patientHospitalAndDoctor*/
 	@Override
 	public List<Doctor> doctorOfPatient(String pName) {
 		List<Doctor> doctor = new ArrayList<Doctor>();
@@ -472,11 +472,6 @@ public class DBManager implements DBManagerInterface {
 		return doctor;
 	}
 
-	@Override
-	public Donor getDonorOfOrg(Integer idOrgan) {
-		//DONE IN JPA
-		return null;
-	}
 	//M: used
 	@Override
 	public List<Doctor> workingDoctorsInHosp (String hospName){
@@ -500,7 +495,7 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 	
-	//M: used by cacse2/case5, AHORA YA NOO
+	//M: used by cacse2/case5*/
 	public Organ organOfRequested (Requested_organ req){
 		try{
 			Organ o = org.organThatSuppliesRequest(req);

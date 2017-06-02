@@ -21,7 +21,7 @@ public class UI_RequestedOrgan {
 	public UI_RequestedOrgan(){
 		
 	}
-	//M: used by uigeneric: case4/case4/case1
+	//M: used by uigeneric: case4/case4/case1*/
 	public List<Requested_organ> introduceNewReqOrgan(Patient p, DBManager dbManager, JPAmanager jpam){
 		List<Requested_organ> reqOrg= new ArrayList<>();
 		try{
@@ -80,22 +80,10 @@ public class UI_RequestedOrgan {
 		}
 		return null; //
 	}
-	//M: used from case4/ case4/case 2
-	//ML: MARIA SI NO FUNCIONA EL PRIMER IF, PODEMOS HACER QUE TODOS SEAN DE ANIMAL O NO SE METAN EN REQ NORMAL
-	//PORQUE TAMBIEN TIENE LAS CARACTERISTICAS DEL REQ
+	//M: used from case4/ case4/case 2*/
 	public void updateReqOrgan(Requested_organ reqOrgan, DBManager dbManager){
-		boolean again = true;	
-		//Animal_tissue animalT=new Animal_tissue();
-		//UI_AnimalTissue uianimal=new UI_AnimalTissue();
+		boolean again = true;
 		try{
-			/*if(reqOrgan.getName().equalsIgnoreCase("collagen") || reqOrgan.getName().equalsIgnoreCase("skin")){
-				System.out.println(reqOrgan.getId()); //lo hace
-				animalT=uianimal.animalTissueOfRequested(reqOrgan.getId(), dbManager);
-				System.out.println(animalT);
-				
-				boolean ok=dbManager.update(animalT);
-				}*/
-			//else{ 
 				while(again){
 			
 				System.out.println("Choose the information that is going to be updated [1-3]: ");
@@ -139,7 +127,7 @@ public class UI_RequestedOrgan {
 				ex.printStackTrace();
 			}
 	}
-	//M: case4/case4/case3
+	//M: case4/case4/case3*/
 	public void deleteRequestOrgan (Requested_organ reqOrgan, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(reqOrgan);
@@ -163,7 +151,7 @@ public class UI_RequestedOrgan {
 		}
 		return namePat;
 	}
-	//M: used by case4/case 4
+	//M: used by case4/case 4*/
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPat, DBManager dbManager){
 		List<Requested_organ> requests = new ArrayList<Requested_organ>();
 		try{

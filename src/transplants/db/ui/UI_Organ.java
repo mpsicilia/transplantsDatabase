@@ -20,7 +20,7 @@ public class UI_Organ {
 	public UI_Organ() {
 
 	}
-	//M: used from uigenruc: case1/case3
+	/*M: used from uigenruc: case1/case3*/
 	public void introduceNewOrgan(Donor donor, DBManager dbManager, JPAmanager jpaManager) {
 		try {
 			boolean more = true;// one patient can request many organs so...
@@ -68,7 +68,7 @@ public class UI_Organ {
 			ex.printStackTrace();
 		}
 	}
-	//M: used case2/case3/case3/case2
+	//M: used case2/case3/case3/case2*/
 	public void updateOrgan(Organ organ, DBManager dbManager) {
 		boolean again = true;
 		try {
@@ -118,7 +118,7 @@ public class UI_Organ {
 		}
 	}
 
-	//M: used by case2/case3/case3/case3
+	//M: used by case2/case3/case3/case3*/
 	public void deleteOrgan(Donor donor, Organ organ, JPAmanager jpaManager) {
 		try {
 			donor.removeOrgan(organ);
@@ -138,7 +138,7 @@ public class UI_Organ {
 
 	}
 
-	//M: used by case2/case3/case3
+	//M: used by case2/case3/case3*/
 	public List<Organ> organsOfDonor(Donor d, JPAmanager jpaManager) {
 		try {
 			List<Organ> organs = d.getOrgans();
@@ -169,7 +169,7 @@ public class UI_Organ {
 	}
 
 
-	//M: used
+	/*M: used*/
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
 		List<Patient> patients= new ArrayList<Patient>();

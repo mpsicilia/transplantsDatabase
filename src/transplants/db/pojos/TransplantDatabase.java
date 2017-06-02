@@ -31,7 +31,7 @@ public class TransplantDatabase implements Serializable {
 	public TransplantDatabase (){
 		hospitalsOfDatabase = new ArrayList<Hospital>();
 	}
-	
+	/*M: used from uigeneric*/
 	public TransplantDatabase (String name){
 		this.nameOfDatabase = name;
 		hospitalsOfDatabase = new ArrayList<Hospital>();
@@ -42,7 +42,7 @@ public class TransplantDatabase implements Serializable {
 		return hospitalsOfDatabase;
 	}
 
-
+/*M: used introducenewhops*/
 	// Addition of Hospitals
 	public boolean addHospital(Hospital hosp) {
 		if (!hospitalsOfDatabase.contains(hosp)) {

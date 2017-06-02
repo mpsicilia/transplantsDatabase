@@ -14,8 +14,9 @@ public class UI_AnimalTissue {
 	BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
 	
 	public UI_AnimalTissue(){		
-	}	
-	//M: used generic case1/csae4
+	}
+	
+	//Insertion of an animal tissue
 	public void introduceNewAnimalTissue(List<Requested_organ> reOrg, DBManager dbManager, String typetissue){
 		try{
 			System.out.print("Name of the animal where the tissue come from: ");
@@ -49,20 +50,18 @@ public class UI_AnimalTissue {
 		}
 	}
 	
-		
-	public List<Animal_tissue> searchAnimalTissue(DBManager dbManager){
+	//Getting the animal tissue that supplies the requested organ
+	public Animal_tissue animalTissueOfRequested (Integer idReq, DBManager dbManager){
+		Animal_tissue at = new Animal_tissue();
 		try{
-			System.out.println("Introduce the name of the animal Tissue: ");
-	 		String name = console.readLine();	 	
-			List<Animal_tissue> animalT = dbManager.searchAnimalTissue(name);
-	 		return animalT;
-		}catch (IOException ex){
-			ex.printStackTrace();
+			at = dbManager.animalTissueByIdReq(idReq);
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		return null; 
+		return at;
 	}
 	
-	//M:used for sure
+	//Update of the information of an animal tissue
 	public void updateAnimalTissue(Animal_tissue animalT, DBManager dbManager){
 		boolean again = true;	
 		try{
@@ -112,7 +111,7 @@ public class UI_AnimalTissue {
 			}
 	}
 	
-	
+	//Deletion of one animal tissue
 	public void deleteAnimalTissue (Animal_tissue animalT, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(animalT);
@@ -125,16 +124,6 @@ public class UI_AnimalTissue {
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
-	}
-	//M: used when uodating animaltissue
-	public Animal_tissue animalTissueOfRequested (Integer idReq, DBManager dbManager){
-		Animal_tissue at = new Animal_tissue();
-		try{
-			at = dbManager.animalTissueByIdReq(idReq);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return at;
 	}
 	
 }

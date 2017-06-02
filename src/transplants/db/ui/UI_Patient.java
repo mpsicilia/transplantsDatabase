@@ -22,7 +22,7 @@ public class UI_Patient {
 
 	public UI_Patient() {
 	}
-	//M: used by case 2/ case 4
+	//M: used by case 2/ case 4*/
 	public Patient introduceNewPatient(JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			List<Hospital> hosps = dbmanager.selectAllHospitals();
@@ -113,7 +113,7 @@ public class UI_Patient {
 		}
 		return null;
 	}
-	//M: used from case2->case4
+	//M: used from case2->case4*/
 	public List<Patient> searchPatient(JPAmanager jpaManager) {
 		try {
 			System.out.println("Introduce the name of the patient: ");
@@ -126,7 +126,7 @@ public class UI_Patient {
 		return null;
 	}
 
-	//M: used by case 4/ case 1
+	//M: used by case 4/ case 1*/
 	public void updatePatient(Patient p, JPAmanager jpaManager) {
 		boolean again = true;
 		try {
@@ -197,7 +197,7 @@ public class UI_Patient {
 
 	}
 
-	//M: used from case 4/ case 2
+	//M: used from case 4/ case 2*/
 	public void deletePatient(Patient pat, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			boolean reqorgansdeleted=false;
@@ -220,7 +220,7 @@ public class UI_Patient {
 		}
 	}
 
-	//M: used in case 4/ case 3
+	//M: used in case 4/ case 3*/
 	public void patientHospitalAndDoctor(String ptName, JPAmanager jpaManager, DBManager dbmanager) {
 		try {
 			List<Patient> patients=new ArrayList<>();

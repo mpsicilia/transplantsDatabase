@@ -62,7 +62,6 @@ public interface DBManagerInterface {
 	public String hospitalOfPatient(String pName);
 	
 	public List<Doctor> doctorOfPatient(String pName);
-	public Donor getDonorOfOrg (Integer idOrgan);//no usamos todavia... //M:ya lo utilizo yo :P
 	public List<Doctor> workingDoctorsInHosp (String hospName);
 	public boolean updateUnmarshalledHosp (Hospital h);
 	public Organ organOfRequested (Requested_organ req); //M: used to show the organ that supplies the requested. SHOW RESULT OF COMPT TEST

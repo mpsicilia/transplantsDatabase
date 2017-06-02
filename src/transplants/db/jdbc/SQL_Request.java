@@ -21,7 +21,7 @@ public class SQL_Request {
 		this.dbManager = dbmanager;
 	}
 //
-	// C: USED from insert from DBMANGER
+	// C: USED from insert from DBMANGER*/
 	public boolean insertRequest(Requested_organ organ) {
 		try {
 			Statement stmt = dbManager.getC().createStatement();
@@ -36,7 +36,7 @@ public class SQL_Request {
 		}
 		return false;
 	}
-	//M: used from dbamanger: assignmentPatientRequest
+	//M: used from dbamanger: assignmentPatientRequest*/
 	public boolean insertPatientFK(int idPat, int idReq) {
 		try {
 			String sql = "UPDATE Requested_organs SET patient_id=? WHERE id=" + idReq;
@@ -50,7 +50,7 @@ public class SQL_Request {
 		}
 		return false;
 	}
-	//used from dbManger(from ui_organ)
+	//used from dbManger(from ui_organ)*/
 	public int reqIdByPatIdAndDonOrg (int Patid, String name){
 		int id=0;
 		try{
@@ -94,7 +94,7 @@ public class SQL_Request {
 		}
 		return lookForReqOrgan;
 	}
-	//M: used from dbamanger:update
+	//M: used from dbamanger:update*/
 	public boolean updateReqOrgan(Requested_organ organ) {
 		try {
 			String sql = "UPDATE Requested_organs SET name=?, maxWeight=?, minWeight =? WHERE id=?";
@@ -113,7 +113,7 @@ public class SQL_Request {
 		}
 		return false;
 	}
-	//M: used from dbmanager: delete
+	//M: used from dbmanager: delete*/
 	public boolean deleteReqOrgan(Requested_organ organ) {
 		try {
 			String sql = "DELETE FROM Requested_organs WHERE id=?";
@@ -130,7 +130,7 @@ public class SQL_Request {
 
 		return false;
 	}
-	//M: used by dbamanager: characteristicsOfReqOrg
+	//M: used by dbamanager: characteristicsOfReqOrg*/
 	public List<Requested_organ> characteristicsOfRequests(int idPat) {
 		List<Requested_organ> reqs = new ArrayList<Requested_organ>();
 		try {
@@ -155,7 +155,7 @@ public class SQL_Request {
 		return reqs;
 	}
 
-	// C: USED from dbManager idRequestedOrgan(Requested_organ r)
+	// C: USED from dbManager idRequestedOrgan(Requested_organ r)*/
 	public int getRequestedId(Requested_organ request) {
 		int idR = 0;
 		Requested_organ ro = new Requested_organ();

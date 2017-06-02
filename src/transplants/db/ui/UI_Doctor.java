@@ -17,8 +17,7 @@ public class UI_Doctor {
 	public UI_Doctor() {
 	}
 
-	//M: used from uigeneric: case1/ case2
-	// This class is going to work with JDBC
+	//Insertion of a new doctor
 	public void introduceNewDoctor(DBManager dbManager) {
 		try {
 			System.out.print("Name of the doctor: ");
@@ -33,7 +32,7 @@ public class UI_Doctor {
 			Doctor doct = new Doctor(name, regNumber, specializ);
 			boolean ok = dbManager.insert(doct);
 
-			// get the id of the doctor, to use it when introducing FK
+			//Get the id of the doctor, to use it when introducing the foreign keys
 			Integer id = dbManager.getIdOfDoctor(doct);
 			System.out.println("\nIn how many hospitals is going to work the doctor?");
 			int times = Integer.parseInt(console.readLine());
@@ -41,7 +40,7 @@ public class UI_Doctor {
 			int counterNum=1;
 			boolean ok2 = false;
 			
-			// first we show to the user all the hospitals
+			//Show the user all the hospitals to choose the ones in which the doctor works
 			List<Hospital> listHosp = dbManager.selectAllHospitals();
 			Iterator<Hospital> itH = listHosp.iterator();
 			while (itH.hasNext()) {
@@ -69,7 +68,7 @@ public class UI_Doctor {
 		}
 	}
 
-	//M: used by case2/case2
+	//Getting doctor(s) by its name
 	public List<Doctor> searchDoctor(DBManager dbManager) {
 		try {
 			System.out.println("Introduce the name of the doctor: ");
@@ -82,7 +81,7 @@ public class UI_Doctor {
 		return null;
 	}
 
-	//M: used in case2/cae2/case1
+	//Update information of a doctor
 	public void updateDoctor(Doctor doct, DBManager dbManager) {
 		boolean again = true;
 		try {
@@ -124,7 +123,7 @@ public class UI_Doctor {
 		}
 	}
 
-	//M: used case2/case2/case2
+	//Deletion of a doctor
 	public void deleteDoctor(Doctor doc, DBManager dbManager) {
 		try {
 			boolean deleted = dbManager.delete(doc);
