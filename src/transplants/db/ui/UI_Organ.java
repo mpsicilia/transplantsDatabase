@@ -20,10 +20,11 @@ public class UI_Organ {
 	public UI_Organ() {
 
 	}
-	/*M: used from uigenruc: case1/case3*/
+	//Insertion of donated organs
+	//One donor can donate many organs so we give the option to introduce more organs
 	public void introduceNewOrgan(Donor donor, DBManager dbManager, JPAmanager jpaManager) {
 		try {
-			boolean more = true;// one patient can request many organs so...
+			boolean more = true;
 			while (more) {
 
 				System.out.print("Name: ");
@@ -40,11 +41,10 @@ public class UI_Organ {
 				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);	
 
 				Organ organ = new Organ(name, weight, typeOfDonation, lifeOfOrgan);
-						
-				// Organ needs to be inserted with JPA
+				
 				boolean ok = jpaManager.insert(organ);
 				
-				// Need to link both sides
+				//Link both sides
 				donor.addOrgan(organ);
 				organ.setDonor(donor);
 				// And update both sides
@@ -68,7 +68,8 @@ public class UI_Organ {
 			ex.printStackTrace();
 		}
 	}
-	//M: used case2/case3/case3/case2*/
+	
+	//Update the information of an organ
 	public void updateOrgan(Organ organ, DBManager dbManager) {
 		boolean again = true;
 		try {
@@ -107,6 +108,8 @@ public class UI_Organ {
 			boolean updated = dbManager.update(organ);
 			if (updated) {
 				System.out.println("Organ has been updated. \n" + organ.toString());
+				//When the organ is updated, we check if it's no longer valid in order to delete it
+				//or if it's now compatible with any requested organ
 				dbManager.expired();
 				uiCompatibilityTest(organ, dbManager);
 			} else {
@@ -118,7 +121,7 @@ public class UI_Organ {
 		}
 	}
 
-	//M: used by case2/case3/case3/case3*/
+	//Deletion of an organ
 	public void deleteOrgan(Donor donor, Organ organ, JPAmanager jpaManager) {
 		try {
 			donor.removeOrgan(organ);
@@ -138,7 +141,7 @@ public class UI_Organ {
 
 	}
 
-	//M: used by case2/case3/case3*/
+	//Get the organs that a donor donates
 	public List<Organ> organsOfDonor(Donor d, JPAmanager jpaManager) {
 		try {
 			List<Organ> organs = d.getOrgans();
@@ -157,19 +160,9 @@ public class UI_Organ {
 		}
 		return null;
 	}
-
-	public List<Organ> organsThatMatchRequestByName(String reqName, DBManager dbManager) {
-		List<Organ> matchByNameOrgs = new ArrayList<Organ>();
-		try {
-			matchByNameOrgs = dbManager.searchOrgan(reqName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return matchByNameOrgs;
-	}
-
-
-	/*M: used*/
+	
+	//Method that given a donated organ checks all the requested organs from the database
+	//Looking for compatibility with the requested organs and its patients
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
 		List<Patient> patients= new ArrayList<Patient>();
@@ -205,16 +198,4 @@ public class UI_Organ {
 
 	}
 	
-	public List<Organ> searchOrgan(DBManager dbManager) {
-		try {
-			System.out.println("Introduce the name of the organ: ");
-			String name = console.readLine();
-			List<Organ> organ = dbManager.searchOrgan(name);
-			return organ;
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		return null;
-	}
-
 }

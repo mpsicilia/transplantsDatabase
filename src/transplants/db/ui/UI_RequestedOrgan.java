@@ -21,11 +21,12 @@ public class UI_RequestedOrgan {
 	public UI_RequestedOrgan(){
 		
 	}
-	//M: used by uigeneric: case4/case4/case1*/
+	
+	//Introduction of a requested organ, one patient will be able to ask for many requests
 	public List<Requested_organ> introduceNewReqOrgan(Patient p, DBManager dbManager, JPAmanager jpam){
 		List<Requested_organ> reqOrg= new ArrayList<>();
 		try{
-			boolean more = true;//one patient can request many organs so...
+			boolean more = true;
 			while (more){
 				System.out.print("Name: ");
 				String name = console.readLine();
@@ -37,8 +38,9 @@ public class UI_RequestedOrgan {
 				Float minWeight = Float.parseFloat(console.readLine());
 				
 				Requested_organ reqOrgan= new Requested_organ(name, maxWeight, minWeight); 
-				boolean ok=dbManager.insert(reqOrgan);
+				boolean ok=dbManager.insert(reqOrgan);			
 				
+				//RELATIONSHIP BETWEEN PATIENT AND REQUESTED ORGAN, one patient has many requested organs
 				//get the id of the patient
 				int idPatient =jpam.getIdPatient(p);
 				
@@ -71,18 +73,7 @@ public class UI_RequestedOrgan {
 		return null;
 	}
 	
-	public List<Requested_organ> searchReqOrgan(DBManager dbManager){
-		try{
-			System.out.println("Introduce the name of the requested organ: ");
-	 		String name = console.readLine();	 	
-			List<Requested_organ> reqOrgan = dbManager.searchRequest(name);
-	 		return reqOrgan;
-		}catch (IOException ex){
-			ex.printStackTrace();
-		}
-		return null; //
-	}
-	//M: used from case4/ case4/case 2*/
+	//Update the information of a requested organ
 	public void updateReqOrgan(Requested_organ reqOrgan, DBManager dbManager){
 		boolean again = true;
 		try{
@@ -116,20 +107,23 @@ public class UI_RequestedOrgan {
 			
 			boolean updated = dbManager.update(reqOrgan);
 			if(updated){
-				System.out.println("Request Organ has been updated and it comes from . \n"
-						+ reqOrgan.toString());//see the toString
+				System.out.println("Request Organ has been updated.\n" + 
+							reqOrgan.toString() + "\nIt comes from . \n");
+				//When the requested organ is updated, we check if it has expired to delete it
+				//Or if it's now compatible with some donated organ
 				dbManager.expired();
 				uiCompatiblePatientOrgans(reqOrgan, dbManager);
 			}
 			else{
 				System.out.println(" Request Organ has NOT been updated. ");
 			}
-			//}
+			
 			}catch (IOException ex){
 				ex.printStackTrace();
 			}
 	}
-	//M: case4/case4/case3*/
+	
+	//Remove a requested organ
 	public void deleteRequestOrgan (Requested_organ reqOrgan, DBManager dbManager){
 		try{
 			boolean deleted = dbManager.delete(reqOrgan);
@@ -144,16 +138,8 @@ public class UI_RequestedOrgan {
 		}
 	
 	}
-	public String patientOfRequested (Requested_organ reqOrg, DBManager dbManager) {
-		String namePat = "";
-		try{
-			namePat = dbManager.patientReq(reqOrg);
-		}catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return namePat;
-	}
-	//M: used by case4/case 4*/
+	
+	//Show the requested organs of a given patient
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPat, DBManager dbManager){
 		List<Requested_organ> requests = new ArrayList<Requested_organ>();
 		try{
@@ -164,7 +150,9 @@ public class UI_RequestedOrgan {
 		return requests;
 	}
 	
-	//used
+	//This methods checks if an organ that is requested by a patient is compatible with any donated organ.
+	//It's going to look for compatibility between the patient and the donor apart from 
+	//checking the compatibility of the organs
 	public void uiCompatiblePatientOrgans(Requested_organ reqOrgan, DBManager dbManager) {
 		List<Donor> compatibleDonors = new ArrayList<Donor>();
 		List<Donor> donors= new ArrayList<Donor>();

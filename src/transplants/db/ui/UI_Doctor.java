@@ -33,9 +33,10 @@ public class UI_Doctor {
 			boolean ok = dbManager.insert(doct);
 
 			//Get the id of the doctor, to use it when introducing the foreign keys
+			//First we have to show all the hospitals so the user knows in how many
+			//hospitals can work.
 			Integer id = dbManager.getIdOfDoctor(doct);
 			System.out.println("\nIn how many hospitals is going to work the doctor?");
-			int times = Integer.parseInt(console.readLine());
 			int count = 0;
 			int counterNum=1;
 			boolean ok2 = false;
@@ -48,11 +49,14 @@ public class UI_Doctor {
 				System.out.println(counterNum +". " + hosp);
 				counterNum++;
 			}
+			System.out.print("Number of hospitals: ");
+			int times = Integer.parseInt(console.readLine());
 			counterNum=1;
 			do {				
-				System.out.print("Introduce the id of the "+ counterNum +"º hospital in which the doctor works: ");
-				Integer idHospYouChoose = Integer.parseInt(console.readLine());
-				ok2 = dbManager.assigmentDoctorHospital(idHospYouChoose, id);
+				System.out.print("Introduce the number of the "+ counterNum +"º hospital in which the doctor works: ");
+				Integer numYouChoose = Integer.parseInt(console.readLine());
+				Hospital hospitalWork=listHosp.get(numYouChoose-1);
+				ok2 = dbManager.assigmentDoctorHospital(hospitalWork.getId(), id);
 				counterNum++;
 				count++;
 			} while (count < times);
