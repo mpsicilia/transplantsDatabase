@@ -6,10 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
@@ -24,7 +22,7 @@ public class SQL_Organ {
 		this.dbManager = dbmanager;
 	}	
 		
-	//M: Used to update
+	
 	public boolean updateOrgan (Organ organ){
 		try {
 			String sql = "UPDATE Organs SET name=?, weight=?, typeOfDonation =?, lifeOfOrgan=? WHERE id=?";
@@ -45,7 +43,7 @@ public class SQL_Organ {
 		return false;
 	}
 	
-	//C: used to relate a requested
+	
 	public boolean insertRequestedFK (int idReq, int idOrg){
 		try{
 			String sql = "UPDATE Organs SET requested_id=? WHERE id=" + idOrg;
@@ -60,7 +58,7 @@ public class SQL_Organ {
 		return false;
 	}	
 	
-	//M:used in case2/case5*/
+	
 	public Organ organThatSuppliesRequest (Requested_organ request){
 		Organ org = new Organ();
 		try{
@@ -100,15 +98,13 @@ public class SQL_Organ {
 		}
 		
 	}
-	//M: used*/
+	//In order to look for a compatible patient for a donor
 	public List<Patient> compatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 	
 		try{
 
-			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
-			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
-			//Could COLLATE NOCASE be used also for bloodtype... 				
+			Statement stmt= dbManager.getC().createStatement();				
 			String sql ="SELECT * FROM AvailablePatients JOIN Requested_organs ON AvailablePatients.id = Requested_organs.patient_id"
 					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND AvailablePatients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
 				+ " AND Requested_organs.maxWeight >= '" + organ.getWeight() + "' AND Requested_organs.minWeight <= '" + organ.getWeight() + 
@@ -139,7 +135,7 @@ public class SQL_Organ {
 		}
 		return compatiblePatients;	
 		}
-	//C: USED*/
+	
 	public void deleteExpiredOrgans(){
 		List<Integer> organsExpired = new ArrayList<Integer>();
 		try{
@@ -172,7 +168,7 @@ public class SQL_Organ {
 		}
 	}
 	
-	//used
+	
 	public int orgIdByDonIdAndReqOrg (int donId, String reqOrg){
 		int id=0;
 		try{
@@ -231,7 +227,7 @@ public class SQL_Organ {
 		
 	}
 	
-	//used
+
 	public void dropViewAvailablePatients(){
 		try{
 		Statement stmt1= dbManager.getC().createStatement();

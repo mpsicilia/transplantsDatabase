@@ -9,9 +9,7 @@ import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
-import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Donor;
-import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
@@ -55,7 +53,8 @@ public class UI_RequestedOrgan {
 					if(reqOrgan.getName().equalsIgnoreCase("collagen") || reqOrgan.getName().equalsIgnoreCase("skin")){
 						break;
 					}
-					else{						
+					else{
+						//In order to find a compatible Donor for Patient
 						uiCompatiblePatientOrgans(reqOrgan, dbManager);
 					}
 				}else{
@@ -153,9 +152,9 @@ public class UI_RequestedOrgan {
 		return requests;
 	}
 	
-	//This methods checks if an organ that is requested by a patient is compatible with any donated organ.
-	//It's going to look for compatibility between the patient and the donor apart from 
-	//checking the compatibility of the organs
+
+	//This is a method is going to do a reverse compatibility, this means that we are going to look
+	//for a compatible donor for a patient instead of looking for a compatible patient for a donor
 	public void uiCompatiblePatientOrgans(Requested_organ reqOrgan, DBManager dbManager) {
 		List<Donor> compatibleDonors = new ArrayList<Donor>();
 		List<Donor> donors= new ArrayList<Donor>();
