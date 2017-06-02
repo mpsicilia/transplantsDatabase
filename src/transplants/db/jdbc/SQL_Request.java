@@ -1,6 +1,5 @@
 package transplants.db.jdbc;
 
-import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import transplants.db.pojos.Doctor;
+
 import transplants.db.pojos.Donor;
-import transplants.db.pojos.Organ;
-import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
 public class SQL_Request {
@@ -71,30 +68,7 @@ public class SQL_Request {
 		return id;
 		
 	}
-	//LO VAMOs a usar??????
-	public List<Requested_organ> searchReqOrgan(String name) {
-		List<Requested_organ> lookForReqOrgan = new ArrayList<Requested_organ>();
-		try {
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Requested_organs WHERE name LIKE '%" + name + "%'";
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				String nameReqOrgan = rs.getString("name");
-				Float maxWeight = rs.getFloat("maxWeight");
-				Float minWeight = rs.getFloat("minWeight");
-				Requested_organ reqOrganToShow = new Requested_organ(id, nameReqOrgan, maxWeight, minWeight);
-				lookForReqOrgan.add(reqOrganToShow);
-			}
-			rs.close();
-			stmt.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return lookForReqOrgan;
-	}
+	
 	//M: used from dbamanger:update*/
 	public boolean updateReqOrgan(Requested_organ organ) {
 		try {
@@ -178,6 +152,7 @@ public class SQL_Request {
 		return idR;
 	}
 	
+	//This is a method that gives us the id of the requested organ that is passed
 	public int getIdFromLastReqOrg(Requested_organ reqOrgan){
 		int idReq=0;
 		try{
@@ -198,17 +173,18 @@ public class SQL_Request {
 		return idReq;
 	}
 	
-	//used
+	//In this method we passed a requested organ and it searches for a  compatible donor, so when
+	//a requested organ is introduced it checks if there is an organ available in the database
 	public List<Donor> compatiblePatientOrgans(Requested_organ reqOrgan){
 		List<Donor> compatibleDonors= new ArrayList<Donor>();
 		
 		String blood="";
 		try{		
 			
-			
+			//first we get the id of the requested organ
 			int idReq= getIdFromLastReqOrg(reqOrgan);	
 			
-				
+			//then we get the blood type of the requested organ (by getting the blood type of its owner, the patient)
 			Statement stmt2=dbManager.getC().createStatement();
 			String sql2= "SELECT Patients.bloodType FROM Patients JOIN requested_organs "
 					+ "ON requested_organs.patient_id= Patients.id WHERE requested_organs.id LIKE '%"+idReq+"%'";
@@ -220,7 +196,7 @@ public class SQL_Request {
 			r1.close();
 			stmt2.close();
 			
-			
+			//we get the compatible donors
 			Statement stmt3= dbManager.getC().createStatement();				
 			String sql3 ="SELECT * FROM AvailableDonors AS ad JOIN organs AS org ON ad.id= org.donor_id " 
 						+"WHERE org.name LIKE '%" +reqOrgan.getName()+"%' AND ad.bloodType LIKE '%" +blood+ 
@@ -253,7 +229,7 @@ public class SQL_Request {
 		return compatibleDonors;	
 		}
 
-	//used
+	//In order to select all the donors who's organ has not yet been assigned to a requested organ 
 	public void viewAvailableDonors(){
 		try{
 				
