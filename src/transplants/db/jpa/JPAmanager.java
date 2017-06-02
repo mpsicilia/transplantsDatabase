@@ -380,4 +380,16 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
+	@Override
+	public int orgIdByDonIdAndReqOrg(int donId, String reqOrg) {
+		// DONE IN JDBC
+		return 0;
+	}
+
+	@Override
+	public List<Donor> dbCompatiblePatientOrgans(Requested_organ reqOrgan) {
+		// DONE IN JDBC
+		return null;
+	}
+
 }
