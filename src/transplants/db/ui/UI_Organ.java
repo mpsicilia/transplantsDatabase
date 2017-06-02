@@ -194,8 +194,6 @@ public class UI_Organ {
 			int numPat=Integer.parseInt(console.readLine());
 			Patient pat= patients.get(numPat - 1);
 			
-			//tiene que coger el paciente, despues el id del organo(requested) que tiene el mismo nombre que este organo
-			
 			int idR = dbManager.reqIdByPatIdAndDonOrg(pat.getId(), organ.getName());
 		
 			dbManager.requestedFKinOrgan(idR, organ.getId());

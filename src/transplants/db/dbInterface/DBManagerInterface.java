@@ -27,6 +27,7 @@ public interface DBManagerInterface {
 	public boolean assigmentPatientRequest (int patID, int reqOrg);
 	public boolean requestedFKinOrgan (int idR, int idO);
 	public int reqIdByPatIdAndDonOrg (int patId, String org);
+	public int orgIdByDonIdAndReqOrg (int donId, String reqOrg);
 	
 	public List<Hospital> searchHosp(String name); 
 	public List<Doctor> searchDoctor(String name); 
@@ -39,7 +40,8 @@ public interface DBManagerInterface {
 	
 	public List <Hospital> selectAllHospitals();	
 	public List <Doctor> selectAllDoctors();
-	public List<Patient> dbCompatibilityTest(Organ organ);
+	public List<Patient> dbCompatibilityTest(Organ organ); //used
+	public List<Donor> dbCompatiblePatientOrgans(Requested_organ reqOrgan); //used
 	public List<Organ> selectAllOrgans(); //not used(jdbc)...gonna need it? //M: now i use it
 	
 	public boolean update (Object obj);	
@@ -60,7 +62,6 @@ public interface DBManagerInterface {
 	public String hospitalOfPatient(String pName);
 	
 	public List<Doctor> doctorOfPatient(String pName);
-	public Donor getDonorOfOrg (Integer idOrgan);//no usamos todavia... //M:ya lo utilizo yo :P
 	public List<Doctor> workingDoctorsInHosp (String hospName);
 	public boolean updateUnmarshalledHosp (Hospital h);
 	public Organ organOfRequested (Requested_organ req); //M: used to show the organ that supplies the requested. SHOW RESULT OF COMPT TEST

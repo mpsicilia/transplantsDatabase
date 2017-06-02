@@ -4,11 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
 import transplants.db.pojos.Animal_tissue;
+import transplants.db.pojos.Donor;
+import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
@@ -154,5 +157,41 @@ public class UI_RequestedOrgan {
 			e.printStackTrace();
 		}
 		return requests;
+	}
+	
+	//used
+	public void uiCompatiblePatientOrgans(Requested_organ reqOrgan, DBManager dbManager) {
+		List<Donor> compatibleDonors = new ArrayList<Donor>();
+		List<Donor> donors= new ArrayList<Donor>();
+		try {
+			compatibleDonors = dbManager.dbCompatiblePatientOrgans(reqOrgan);
+			Iterator<Donor> donorIterator = compatibleDonors.iterator();
+			
+			int counterDon = 1;
+			Boolean hasNext= donorIterator.hasNext();
+			if(!hasNext){
+				System.out.println("At this moment there are no compatible donors.");
+			}
+			if(hasNext){ System.out.println("Choose the number of the donor that is going to donate the organ.");
+			
+			do {
+				Donor d = donorIterator.next();
+				System.out.println(counterDon + ". " + d);
+				donors.add(d);
+				
+				counterDon++;
+			}while(donorIterator.hasNext());
+			int numDon=Integer.parseInt(console.readLine());
+			Donor don= donors.get(numDon - 1);
+			
+			int idO = dbManager.orgIdByDonIdAndReqOrg(don.getId(), reqOrgan.getName());
+		
+			dbManager.requestedFKinOrgan(reqOrgan.getId(), idO);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }

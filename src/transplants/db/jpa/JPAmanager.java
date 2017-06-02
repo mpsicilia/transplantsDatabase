@@ -1,6 +1,5 @@
 package transplants.db.jpa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -336,10 +335,6 @@ public class JPAmanager implements DBManagerInterface {
 			return null;
 	}
 		
-	@Override
-	public Donor getDonorOfOrg(Integer idOrgan) {
-			return don.getDonorOfOrgan(idOrgan);
-	}
 	@Override
 	public List<Doctor> workingDoctorsInHosp (String hospName){
 		//done in jdbc

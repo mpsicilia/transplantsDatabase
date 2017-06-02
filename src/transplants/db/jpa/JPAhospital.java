@@ -9,13 +9,17 @@ import transplants.db.pojos.Hospital;
 import transplants.db.pojos.Patient;
 
 public class JPAhospital {
+	
+	//ATTRIBUTES
 	private JPAmanager jpaManager;
 
+	//METHODS
 	public JPAhospital(JPAmanager jpamanager) {
 		this.jpaManager = jpamanager;
 
 	}
-	/*M: used*/
+	
+	//This is used in order to insert a hospital
 	public boolean insert(Hospital hosp) {
 		try {
 			jpaManager.getEManager().getTransaction().begin();
@@ -29,7 +33,7 @@ public class JPAhospital {
 		return false;
 	}
 
-	//M: used by jpamanager: hospitalOfPatient*/
+	//We are using this method to look for a hospital of a patient
 	public Hospital hospitalofpatient(String namepat){
 		Hospital hospital=new Hospital();
 		try{			
@@ -43,7 +47,9 @@ public class JPAhospital {
 		}
 		return hospital;
 	}
-	//C: used from: getHospitalPatient in JPAManager*/
+	
+	//We are using this method so we can search for a specific hospital; that is why we are 
+	//searching by id
 	public Hospital getHospitalbyid(Integer idhosp) {
 		Hospital hosp = new Hospital();
 		try {
@@ -58,8 +64,8 @@ public class JPAhospital {
 		return hosp;
 	}
 
-	//M: used in jpamanager: searchAllPatients*/
-	//it returns all the patients a hospital has
+	
+	//We are using this method so we return all the patients that a hospital has
 	public List<Patient> searchAllPatients(Hospital hospit){
 		List<Patient> patients = new ArrayList<Patient>();
 		try {			

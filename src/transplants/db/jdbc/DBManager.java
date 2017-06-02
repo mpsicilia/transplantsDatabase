@@ -161,6 +161,10 @@ public class DBManager implements DBManagerInterface {
 		return req.reqIdByPatIdAndDonOrg(patId, org);
 	}
 	
+	public int orgIdByDonIdAndReqOrg (int donId, String reqOrg){
+		return org.orgIdByDonIdAndReqOrg(donId, reqOrg);
+	}
+	
 	public void uiDeleteExpiredOrgans(){
 		org.deleteExpiredOrgans();
 	}
@@ -269,6 +273,10 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
 		return org.compatibilityTest(organ);
+	}
+	
+	public List<Donor> dbCompatiblePatientOrgans(Requested_organ reqOrgan){
+		return req.compatiblePatientOrgans(reqOrgan);
 	}
 	//M: used
 	@Override
@@ -464,11 +472,6 @@ public class DBManager implements DBManagerInterface {
 		return doctor;
 	}
 
-	@Override
-	public Donor getDonorOfOrg(Integer idOrgan) {
-		//DONE IN JPA
-		return null;
-	}
 	//M: used
 	@Override
 	public List<Doctor> workingDoctorsInHosp (String hospName){

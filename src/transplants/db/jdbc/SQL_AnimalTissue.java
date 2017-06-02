@@ -150,6 +150,7 @@ public class SQL_AnimalTissue {
 				String pathology = rs.getString(4);
 				Date lifeExpTissue= rs.getDate("lifeExpTissue");
 			animal = new Animal_tissue(id, nameAnimalT, typeOfTissue, pathology, lifeExpTissue);
+			System.out.println("ANIMAL"+animal);
 			
 			}
 			rs.close();
