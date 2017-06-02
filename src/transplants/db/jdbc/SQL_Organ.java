@@ -296,6 +296,26 @@ public class SQL_Organ {
 		}
 	}
 	
+	//used
+	public int orgIdByDonIdAndReqOrg (int donId, String reqOrg){
+		int id=0;
+		try{
+		Statement stmt= dbManager.getC().createStatement();
+		String sql= "SELECT id FROM Organs WHERE donor_id= '"+ donId + "' AND name= '"+reqOrg+"'";
+		ResultSet rs= stmt.executeQuery(sql);
+		while (rs.next()){
+			id= rs.getInt("id");
+		}
+		
+		stmt.close();
+		rs.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
 	public void createTable(){
 		try{
 			
