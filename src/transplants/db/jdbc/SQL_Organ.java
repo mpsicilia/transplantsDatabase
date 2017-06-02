@@ -155,18 +155,8 @@ public class SQL_Organ {
 	}
 	//M: used
 	public List<Patient> compatibilityTest(Organ organ){
-		
-		//1. En caso de que ya hayais hecho lo que dije antes, haced primero this.dropViewAvailablePatients() y
-		//despues la instruccion 2.
-		
-		//2. si no os habiais creado ya la view, haced solo
-		//this.viewAvailablePatients(); HACEDLO SOLO UNA VEZ Y BORRAIS TODOS ESTOS COMENTS
-		
-		
-		
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
-			this.viewAvailablePatients();
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?

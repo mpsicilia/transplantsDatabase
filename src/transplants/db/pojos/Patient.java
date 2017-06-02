@@ -10,9 +10,7 @@ import transplants.db.xml.SQLDateAdapter;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 
@@ -105,9 +103,8 @@ public class Patient extends Person implements Serializable {
 		float s2 = ChronoUnit.DAYS.between(today, localLifeExp);
 		int score= (int)(s1+ (1/s2)*10000);
 		this.score = score;
-
-		
 	}
+	
 	public long getScore(){
 		return score;
 	}
