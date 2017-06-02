@@ -8,6 +8,7 @@ import java.util.List;
 
 import transplants.db.jdbc.DBManager;
 import transplants.db.jpa.JPAmanager;
+import transplants.db.pojos.Animal_tissue;
 import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
@@ -93,10 +94,22 @@ public class UI_RequestedOrgan {
 		return null; 
 	}
 	//M: used from case4/ case4/case 2
+	//ML: MARIA SI NO FUNCIONA EL PRIMER IF, PODEMOS HACER QUE TODOS SEAN DE ANIMAL O NO SE METAN EN REQ NORMAL
+	//PORQUE TAMBIEN TIENE LAS CARACTERISTICAS DEL REQ
 	public void updateReqOrgan(Requested_organ reqOrgan, DBManager dbManager){
 		boolean again = true;	
+		Animal_tissue animalT=new Animal_tissue();
+		UI_AnimalTissue uianimal=new UI_AnimalTissue();
 		try{
-			while(again){
+			if(reqOrgan.getName().equalsIgnoreCase("collagen") || reqOrgan.getName().equalsIgnoreCase("skin")){
+				System.out.println(reqOrgan.getId());
+				animalT=uianimal.animalTissueOfRequested(reqOrgan.getId(), dbManager);
+				
+				boolean ok=dbManager.update(animalT);
+				}
+			else{ 
+				while(again){
+			
 				System.out.println("Choose the information that is going to be updated [1-3]: ");
 				System.out.println("1. Name");
 				System.out.println("2. Maximum Weight");
@@ -122,6 +135,7 @@ public class UI_RequestedOrgan {
 				}
 			}
 			
+			
 			boolean updated = dbManager.update(reqOrgan);
 			if(updated){
 				System.out.println("Request Organ has been updated and it comes from . \n"
@@ -131,7 +145,7 @@ public class UI_RequestedOrgan {
 			else{
 				System.out.println(" Request Organ has NOT been updated. ");
 			}
-			
+			}
 			}catch (IOException ex){
 				ex.printStackTrace();
 			}
