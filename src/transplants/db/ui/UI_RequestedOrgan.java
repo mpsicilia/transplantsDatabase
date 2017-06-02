@@ -52,8 +52,11 @@ public class UI_RequestedOrgan {
 				if (ok && okFK && organAdded){
 					System.out.println("The request Organ has been introduced.\n");
 					dbManager.expired();					
-					if(reqOrgan.getName().equalsIgnoreCase("collagen")|| reqOrgan.getName().equalsIgnoreCase("skin")){
-					uiCompatiblePatientOrgans(reqOrgan, dbManager);
+					if(reqOrgan.getName().equalsIgnoreCase("collagen") || reqOrgan.getName().equalsIgnoreCase("skin")){
+						break;
+					}
+					else{
+						uiCompatiblePatientOrgans(reqOrgan, dbManager);
 					}
 				}else{
 					System.out.println("The request Organ has NOT been introduced. \n");
