@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 //We created this class in order to have a root element for our XML file. Is not a real entity as
-//we can see that is why is only annotated with xml.This root element is going to contain a list
+//we can see that is why is only annotated with xml. This root element is going to contain a list
 //of hospitals.
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "TransplantDatabase")
@@ -31,18 +31,16 @@ public class TransplantDatabase implements Serializable {
 	public TransplantDatabase (){
 		hospitalsOfDatabase = new ArrayList<Hospital>();
 	}
-	/*M: used from uigeneric*/
+	
 	public TransplantDatabase (String name){
 		this.nameOfDatabase = name;
 		hospitalsOfDatabase = new ArrayList<Hospital>();
 	}
 	
-	
 	public List<Hospital> getAllHospOFDatabase() {
 		return hospitalsOfDatabase;
 	}
 
-/*M: used introducenewhops*/
 	// Addition of Hospitals
 	public boolean addHospital(Hospital hosp) {
 		if (!hospitalsOfDatabase.contains(hosp)) {
