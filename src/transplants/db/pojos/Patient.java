@@ -10,9 +10,7 @@ import transplants.db.xml.SQLDateAdapter;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 
@@ -101,20 +99,12 @@ public class Patient extends Person implements Serializable {
 		LocalDate localLifeExp= lifeExpectancy.toLocalDate();
 		LocalDate localAdditionDate= additionDate.toLocalDate();
 		LocalDate today= LocalDate.now();
-		Period daysSinceAddition= Period.between(today, localAdditionDate);
-//		float s1= (float) daysSinceAddition.getDays();
 		float s1 = ChronoUnit.DAYS.between(today, localAdditionDate);
-		System.out.println("Days since adition: "+s1);
-		Period daysLifeExp= Period.between(today, localLifeExp);		
-//		float s2= (float) daysLifeExp.getDays();
 		float s2 = ChronoUnit.DAYS.between(today, localLifeExp);
-		System.out.println("Days life exp:" +s2);
-		int score= (int)(s1+ (1/s2)*1000);
-		System.out.println("Score:" +score );
+		int score= (int)(s1+ (1/s2)*10000);
 		this.score = score;
-
-		
 	}
+	
 	public long getScore(){
 		return score;
 	}

@@ -43,16 +43,16 @@ public class UIGenericMenu {
 		try {
 					 
 			/* DISCOMMENT IF NEEDED */
-			/*
+			/* DROP TABLES
 			 * System.out.println("Temporary option: DROP ALL THE TABLES? [Y/N]"
 			 * ); String drop = console.readLine(); if
 			 * (drop.equalsIgnoreCase("Y")) { boolean dropped =
 			 * dbManager.dropTables(); if (dropped) {
 			 * System.out.println("Tables have been dropped. "); } else {
 			 * System.out.println("Tables have not been dropped. "); }
-			 * 
 			 * }
 			 * 
+			 * CREATE TABLES
 			 * System.out.println("Do you want to create the tables?: [yes/no]"
 			 * ); String decider = console.readLine(); if
 			 * (decider.equals("yes")) { boolean created =
@@ -61,7 +61,7 @@ public class UIGenericMenu {
 			 * System.out.println("Tables have not been created. "); } } else {
 			 * System.out.println("Tables should be already created"); }
 			 */
-			//
+			
 
 			while (true) {
 				System.out.println("\n\n\n");
@@ -137,7 +137,7 @@ public class UIGenericMenu {
 					System.out.print("\n2. Check the information of a doctor. ");
 					System.out.print("\n3. Check the information of a donor. ");
 					System.out.print("\n4. Check the information of a patient. ");
-					System.out.print("\n5. Check the characteristics of an organ. ");
+					System.out.print("\n5. Show the results of the compatibility test. ");
 
 					System.out.println("\nChoose an option[1-5]:");
 					String read2 = console.readLine();
@@ -403,7 +403,7 @@ public class UIGenericMenu {
 									System.out.println(countReq + ". " + r);
 									countReq++;
 								}
-								if (reqs != null) { //Each requested organ can be supplied by a human or an animal
+								if (!reqs.isEmpty()) { //Each requested organ can be supplied by a human or an animal
 														//So in each option we check where the organ comes from
 									System.out.print("\nRELATED WITH THE ORGANS:");
 									System.out.print("\n1.Introduce a new request.");
@@ -441,24 +441,25 @@ public class UIGenericMenu {
 										System.out.println("Introduce the number of the organ: ");
 										numOrg = Integer.parseInt(console.readLine());//
 										Requested_organ orgUp = reqs.get(numOrg - 1);
-//										if(orgUp.getName().equalsIgnoreCase("collagen") || orgUp.getName().equalsIgnoreCase("skin")){
-////											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgUp.getId(), dbManager);
-////											System.out.println("ANIMALT_"+animalT);
-////											uiAnimalT.updateAnimalTissue(animalT, dbManager);
-//										}
-										//esto lo hago dentro de updatereqorgan-->tenia mas sentido
-										
+									if(orgUp.getName().equalsIgnoreCase("collagen") || orgUp.getName().equalsIgnoreCase("skin")){
+											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgUp.getId(), dbManager);
+											System.out.println("ANIMALT_"+animalT);
+											uiAnimalT.updateAnimalTissue(animalT, dbManager);
+									}
+									else{
 										uiRequested.updateReqOrgan(orgUp, dbManager);
-										
+									}
 										break;
 
-									case 3:
+									case 3://M: deja entonces solo la ultimma linnea y haz opcion aparte con el animallll
 										System.out.println("Introduce the number of the organ: ");
 										numOrg = Integer.parseInt(console.readLine());
 										Requested_organ orgDe = reqs.get(numOrg - 1);
+										//If the requested organ is supplied by an animal, we delete also the animal tissue
 										if(orgDe.getName().equalsIgnoreCase("collagen") || orgDe.getName().equalsIgnoreCase("skin")){
 											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgDe.getId(), dbManager);
 											uiAnimalT.deleteAnimalTissue(animalT, dbManager);
+											uiRequested.deleteRequestOrgan(orgDe, dbManager);
 										}
 										else {
 											uiRequested.deleteRequestOrgan(orgDe, dbManager);
@@ -467,25 +468,59 @@ public class UIGenericMenu {
 									case 4:
 										break;
 									}
+								}if (reqs.isEmpty()){
+									System.out.println("\nThis patient hasn't got any requested organs.");
+									System.out.println("Do you then want to introduce a requested organ? [yes/no]");
+									if ((console.readLine()).equalsIgnoreCase("yes")) {
+										List<Requested_organ> newReqs = new ArrayList<Requested_organ>();
+										newReqs = uiRequested.introduceNewReqOrgan(patReq, dbManager, jpaManager);
+										
+										Iterator<Requested_organ> itR = newReqs.iterator();
+										Integer count=0;
+										List<Requested_organ> reqAnimal = new ArrayList<Requested_organ>();
+
+										while (itR.hasNext()) {
+											Requested_organ organ = itR.next();
+											String organname = organ.getName();
+
+											if (organname.equalsIgnoreCase("collagen") || organname.equalsIgnoreCase("skin")) {
+												count++;
+												reqAnimal.add(organ);
+												System.out.println("The "+count+" Requested Organ is: " + organ);
+												uiAnimalT.introduceNewAnimalTissue(reqAnimal, dbManager,organname);
+											}
+										}
+										break;
+									}
 								}
 							}
 						}
 
 						break;
 					case 5:
-						System.out.println("Introduce the name of the organ. ");
-						//CCUANDO IDREQUESTED ORGAN SEA NULL
-						// TODO lo que habia pensado era que tenemos la
-						// posibilidad de buscar organos atraves
-						// de sus donantes/pacientes, pero no tenemos una opcion
-						// que los busque directamente
-						// habia pensado pues que en esta opcion se pidiese al
-						// ususario que se introdujese
-						// el organo que desea busacar, y le aparezacan todos
-						// los organos con ese nombre
-						// el donante de cada organo, y el paciente que lo
-						// recibe?
-						// os parece?
+						//show the patient and its requested, who supplies the request and the donated organ
+						//get all the hospitals in order to get all the patients
+						List<Hospital> hospitals = dbManager.selectAllHospitals();
+						for(Hospital hosp : hospitals){
+							List<Patient> patsInHosp = jpaManager.searchAllPatients(hosp);
+							for (Patient p : patsInHosp){
+								System.out.println("Patient: " + p.getName());
+								List<Requested_organ> reqsOfPat = uiRequested.characteristicsOfRequestedOrgans(p.getId(), dbManager);
+								for (Requested_organ ro : reqsOfPat){
+									Organ organOfRequested = dbManager.organOfRequested(ro);
+									if(organOfRequested == null){
+										System.out.println("\tThere are no compatible organs for the requested organ " + ro.getName() + ".");
+									}
+									else{
+										Donor donorOfOrgan = jpaManager.getDonorOfOrg(ro.getId());
+										System.out.println("\tRequested organ: " + ro.getName() 
+												+ " ----> Compatible organ: " + organOfRequested.getName() 
+												+ " {Donor: " + donorOfOrgan.getName() + "}");
+									}
+									
+								}
+							}
+						}
 
 						break;
 					}

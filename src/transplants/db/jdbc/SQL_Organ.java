@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import transplants.db.pojos.Organ;
 import transplants.db.pojos.Patient;
+import transplants.db.pojos.Requested_organ;
 
 
 public class SQL_Organ {
@@ -19,7 +20,7 @@ public class SQL_Organ {
 
 	public SQL_Organ(DBManager dbmanager) {
 		this.dbManager = dbmanager;
-	}
+	}	
 	
 	//LO Utilizamos???????????????????????????????????????
 	public List <Organ> searchOrgan(String name){
@@ -106,6 +107,28 @@ public class SQL_Organ {
 		return false;
 	}	
 	
+	//M:used in case2/case5
+	public Organ organThatSuppliesRequest (Requested_organ request){
+		Organ org = new Organ();
+		try{
+			Statement stm = dbManager.getC().createStatement();
+			String sql = "SELECT * FROM Organs WHERE requested_id = " + request.getId();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()){
+				Integer id = rs.getInt(1);
+				String nameOrgan = rs.getString(2);
+				Float weight = rs.getFloat(3);
+				String typeDon = rs.getString(4);
+				Date lifeOfOrgan= rs.getDate("lifeOfOrgan");
+				
+				org = new Organ(id, nameOrgan, weight, typeDon, lifeOfOrgan);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return org;
+	}
+	
 	//LO vamos a usar?????
 	public List<Organ> organOfDonor (int idD){
 		List <Organ> orgs = new ArrayList<Organ>();
@@ -155,18 +178,12 @@ public class SQL_Organ {
 	}
 	//M: used
 	public List<Patient> compatibilityTest(Organ organ){
-		
-		//1. En caso de que ya hayais hecho lo que dije antes, haced primero this.dropViewAvailablePatients() y
-		//despues la instruccion 2.
-		
-		//2. si no os habiais creado ya la view, haced solo
-		//this.viewAvailablePatients(); HACEDLO SOLO UNA VEZ Y BORRAIS TODOS ESTOS COMENTS
-		
-		
-		
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
+<<<<<<< HEAD
 			
+=======
+>>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?

@@ -148,8 +148,7 @@ public class SQL_AnimalTissue {
 				String nameAnimalT = rs.getString(2);
 				String typeOfTissue = rs.getString(3);
 				String pathology = rs.getString(4);
-				Date lifeExpTissue= rs.getDate(5);
-				
+				Date lifeExpTissue= rs.getDate("lifeExpTissue");
 			animal = new Animal_tissue(id, nameAnimalT, typeOfTissue, pathology, lifeExpTissue);
 			
 			}
