@@ -11,7 +11,7 @@ import transplants.db.pojos.Requested_organ;
 
 public interface DBManagerInterface {
 	
-	//estos 4 de abajo son solo del dbmanager de jdbc
+	
 	public void connect();
 	public void disconnect();
 	
@@ -19,7 +19,6 @@ public interface DBManagerInterface {
 	public boolean dropTables();
 	public void expired();
 	
-	//insert para jpa y para jdbc
 	public boolean insert(Object obj);
 	public boolean assigmentDoctorHospital(Integer id1, Integer id2);	
 	public boolean assigmentDoctorPatient(Integer id1, Integer id2);	
@@ -32,7 +31,7 @@ public interface DBManagerInterface {
 	public List<Hospital> searchHosp(String name); 
 	public List<Doctor> searchDoctor(String name); 
 	public List<Donor> searchDonor(String name); 
-	public List<Organ> searchOrgan (String name); //paula usus
+	public List<Organ> searchOrgan (String name); 
 	public List<Patient> searchPatient(String name); 
 	public List<Patient> searchAllPatients(Hospital hospital);
 	
@@ -40,7 +39,7 @@ public interface DBManagerInterface {
 	public List <Doctor> selectAllDoctors();
 	public List<Patient> dbCompatibilityTest(Organ organ); //used
 	public List<Donor> dbCompatiblePatientOrgans(Requested_organ reqOrgan); //used
-	public List<Organ> selectAllOrgans(); //not used(jdbc)...gonna need it? //M: now i use it
+	public List<Organ> selectAllOrgans(); 
 	
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);

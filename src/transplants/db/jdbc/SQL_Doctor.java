@@ -16,7 +16,7 @@ public class SQL_Doctor {
 	public SQL_Doctor(DBManager dbmanager){
 		this.dbManager= dbmanager;
 	}
-	/*M: used dbmanager: insert*/
+	//Used in order to insert a doctor
 	public boolean insertDoctor(Doctor doctor){		
 		try {
 			Statement stmt= dbManager.getC().createStatement();
@@ -31,7 +31,7 @@ public class SQL_Doctor {
 		}
 		return false;	
 	}
-	/*M: used in dbmanager:getidofdoctor*/
+	//Used in order to get the id of the last doctor that was introduced
 	public Integer getIdOfLastDoctor(Doctor doctor){
 		Doctor doctorToShow= new Doctor();
 		try {
@@ -55,7 +55,7 @@ public class SQL_Doctor {
 		}
 		return doctorToShow.getId();
 	}
-	//M: used in dbmanager: searchDoctor*/
+	//Used to search a doctor
 	public List<Doctor> searchDoctor(String nameDoct) {
 		List<Doctor> lookForDoctor = new ArrayList<Doctor>();
 		try {
@@ -79,7 +79,7 @@ public class SQL_Doctor {
 		}
 		return lookForDoctor;
 	}
-	//M: used by dbmanager: update*/
+	//Used in order to update a doctor
 	public boolean updateDoctor (Doctor doct){		
 		try {
 			String sql = "UPDATE Doctors SET name=?, registrationNumber=?, specialization=?"
@@ -99,7 +99,7 @@ public class SQL_Doctor {
 		}
 		return false;
 	}
-	//M: in use by dbmanager.delete*/
+	//Used to delete a doctor
 	public boolean deleteDoctor (Doctor doctor){
 		try{
 			String sql = "DELETE FROM Doctors WHERE id=?";
@@ -115,7 +115,7 @@ public class SQL_Doctor {
 		
 		return false;
 	}
-	//C:used to show all doctors in ui_patient*/
+	//Used to show all the doctors
 	public List<Doctor> selectAllDoctors() {
 		List<Doctor> lookForDoctor = new ArrayList<Doctor>();
 		try {
@@ -139,7 +139,7 @@ public class SQL_Doctor {
 		}
 		return lookForDoctor;
 	}
-	//M: used
+	//Used to see what doctors are working in a specific Hospital
 	public List <Doctor> doctorsWorkingInHospital (String nameHosp){
 		List<Doctor> docsInHosp = new ArrayList<Doctor>();
 		try{
@@ -162,7 +162,7 @@ public class SQL_Doctor {
 		}
 		return docsInHosp;
 	}
-	//M: used by dbmanager: doctorOFPatient*/
+	//Show the doctors that are attending the patient
 	public List<Doctor> doctorsAttendingPatient (String patName){
 		List<Doctor> patDoctors = new ArrayList<Doctor>();
 		try{

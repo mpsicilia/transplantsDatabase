@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import transplants.db.pojos.Animal_tissue;
 
@@ -16,7 +14,7 @@ public class SQL_AnimalTissue {
 	public SQL_AnimalTissue(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-	//C: USED from insert of DBMAnager*/
+	//C: USED in order to insert an animaltissue
 	public boolean insertAnimalTissue(Animal_tissue animalT) {
 		try {
 			Statement stmt = dbManager.getC().createStatement();
@@ -32,33 +30,8 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-	//not used, are we going to need it?
-	public List<Animal_tissue> searchAnimalTissue(String name) {
-		List<Animal_tissue> lookForAnimalT = new ArrayList<Animal_tissue>();
-		try {
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Animal_tissues WHERE name LIKE '%" + name + "%'";
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				String nameAnimalT = rs.getString("name");
-				String typeOfTissue = rs.getString("typeOfTissue");
-				String pathology = rs.getString("pathology");
-				Date lifeExpTissue= rs.getDate("lifeExpTissue");
-				
-				Animal_tissue animalTiToShow = new Animal_tissue(id, nameAnimalT, typeOfTissue, pathology, lifeExpTissue);
-				lookForAnimalT.add(animalTiToShow);
-			}
-			rs.close();
-			stmt.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return lookForAnimalT;
-	}
-//M: used*/
+	
+	//used to update the animal tissue
 	public boolean updateAnimalTissue(Animal_tissue animalTi) {
 		try {
 			String sql = "UPDATE Animal_tissues SET name=?, typeOfTissue=?, pathology=?, lifeExpTissue=? WHERE id=? ";
@@ -78,7 +51,7 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-	//M: used when deletin animal tisue*/
+	//Used when deleting animal tissue
 	public boolean deleteAnimalTissue(Animal_tissue animalT) {
 		try {
 			String sql = "DELETE FROM Animal_tissues WHERE id=? ";
@@ -95,7 +68,7 @@ public class SQL_AnimalTissue {
 
 		return false;
 	}
-	//M: useed form dbmanager: assignmentReqAnimal*/
+	//In order to link a request organ with an animal
 	public boolean insertRequestedAnimal(Integer id_requested, Integer id_animal) {
 		try {
 			Statement st = dbManager.getC().createStatement();
@@ -109,7 +82,7 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-	//C: USED from idOfAnimal(Animal_tissue animalTissue)of DBMAnager*/
+	//C: USED in order to get the id of an animal Tissue
 	public Integer getAnimalId(Animal_tissue animalT){
 		Animal_tissue animalToShow= new Animal_tissue();
 		try {
@@ -134,7 +107,7 @@ public class SQL_AnimalTissue {
 		}
 		return animalToShow.getId();
 	}
-	//M: used in uodate animaltissue*/
+	//M: used in order to update animal/with requested
 	public Animal_tissue getAnimalOfRequestedOrgan (Integer idReq){
 		Animal_tissue animal = new Animal_tissue(); 
 		try{
