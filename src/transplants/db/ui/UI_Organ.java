@@ -193,7 +193,7 @@ public class UI_Organ {
 				Patient p = patientIterator.next();
 				System.out.println(counterPat + ". " + p);
 				patients.add(p);
-				System.out.println("POSICION EN LA LISTA:" +patients.indexOf(p));
+				
 				counterPat++;
 			}while(patientIterator.hasNext());
 			int numPat=Integer.parseInt(console.readLine());

@@ -137,14 +137,9 @@ public class SQL_Organ {
 	//this method is used in order to get all the patients who's requested organs 
 	//have not yet been assigned to an organ of a donor
 	
-	public void ViewDisponiblePatients(){
+	public void viewAvailablePatients(){
 		try{
-		/*Statement stmt1= dbManager.getC().createStatement();
-		String sql1= "DROP VIEW DisponiblePatients";
-		stmt1.executeUpdate(sql1);
-		stmt1.close();*/
-		
-		
+				
 		Statement stmt2= dbManager.getC().createStatement();
 		String sql= "CREATE VIEW AvailablePatients AS SELECT * FROM patients AS p JOIN requested_organs AS req ON "
 				+ "p.id = req.patient_id  WHERE req.id NOT IN (SELECT requested_id FROM organs "
@@ -159,10 +154,19 @@ public class SQL_Organ {
 		
 	}
 	//M: used
-	public List<Patient> CompatibilityTest(Organ organ){
+	public List<Patient> compatibilityTest(Organ organ){
+		
+		//1. En caso de que ya hayais hecho lo que dije antes, haced primero this.dropViewAvailablePatients() y
+		//despues la instruccion 2.
+		
+		//2. si no os habiais creado ya la view, haced solo
+		//this.viewAvailablePatients(); HACEDLO SOLO UNA VEZ Y BORRAIS TODOS ESTOS COMENTS
+		
+		
+		
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
-			this.ViewDisponiblePatients();
+			this.viewAvailablePatients();
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
