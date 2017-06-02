@@ -106,6 +106,7 @@ public class UI_Organ {
 			boolean updated = dbManager.update(organ);
 			if (updated) {
 				System.out.println("Organ has been updated. \n" + organ.toString());
+				uiCompatibilityTest(organ, dbManager);
 			} else {
 				System.out.println("Organ has NOT been updated. ");
 			}
@@ -165,7 +166,7 @@ public class UI_Organ {
 		return matchByNameOrgs;
 	}
 
-<<<<<<< HEAD
+
 	public Donor getDonorOfOrgan(Organ org, JPAmanager jpaManager) {
 		Donor don = new Donor();
 		try {
@@ -178,8 +179,7 @@ public class UI_Organ {
 	
 	
 	
-=======
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
+
 	//M: used
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
