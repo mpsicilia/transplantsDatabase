@@ -370,7 +370,7 @@ public class JPAmanager implements DBManagerInterface {
 	@Override
 	public void expired() {
 		// DONE IN JDBC
-		
+	}
 
 	public List<Organ> selectAllOrgans() {
 		//M: DONE IN JDC
