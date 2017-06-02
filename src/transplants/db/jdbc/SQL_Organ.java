@@ -139,12 +139,7 @@ public class SQL_Organ {
 	
 	public void ViewDisponiblePatients(){
 		try{
-		/*Statement stmt1= dbManager.getC().createStatement();
-		String sql1= "DROP VIEW DisponiblePatients";
-		stmt1.executeUpdate(sql1);
-		stmt1.close();*/
-		
-		
+				
 		Statement stmt2= dbManager.getC().createStatement();
 		String sql= "CREATE VIEW AvailablePatients AS SELECT * FROM patients AS p JOIN requested_organs AS req ON "
 				+ "p.id = req.patient_id  WHERE req.id NOT IN (SELECT requested_id FROM organs "
@@ -160,6 +155,15 @@ public class SQL_Organ {
 	}
 	//M: used
 	public List<Patient> CompatibilityTest(Organ organ){
+		
+		//1. En caso de que ya hayais hecho lo que dije antes, haced primero this.dropViewAvailablePatients() y
+		//despues la instruccion 2.
+		
+		//2. si no os habiais creado ya la view, haced solo
+		//this.ViewDisponiblePatients(); HACEDLO SOLO UNA VEZ Y BORRAIS TODOS ESTOS COMENTS
+		
+		
+		
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
 			this.ViewDisponiblePatients();
