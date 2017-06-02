@@ -20,7 +20,7 @@ public class UI_Hospitals {
 	public UI_Hospitals() {
 	}
 
-	// M: used from uigeneric; case1/case1
+	/* M: used from uigeneric; case1/case1*/
 	public void introduceNewHospital(DBManager dbManager, JPAmanager jpaManager, TransplantDatabase data) {
 		try {
 			System.out.print("Name: ");
@@ -62,7 +62,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	// M:used by case 2
+	// M:used by case 2*/
 	public List<Hospital> searchHospital(DBManager dbManager) {
 		try {
 			System.out.println("Introduce the name of the hospital: ");
@@ -75,7 +75,7 @@ public class UI_Hospitals {
 		return null;
 	}
 
-	// M: in use by uigeneric: case2/case1/case1
+	// M: in use by uigeneric: case2/case1/case1*/
 	public void updateHospital(Hospital hosp, DBManager dbManager) {
 		boolean again = true;
 		try {
@@ -132,7 +132,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	// M: useddd by case2/cae1/case2
+	// M: useddd by case2/cae1/case2*/
 	public void deleteHospital(Hospital hosp, DBManager dbManager) {
 		try {
 			boolean deleted = dbManager.delete(hosp);
@@ -146,7 +146,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	// M: used case2/case2/case3
+	// M: used case2/case2/case3*/
 	public void DoctorHospital(String docName, DBManager dbManager) {
 		try {
 			List<Hospital> hospitals = dbManager.hospitalsOfDoctor(docName);
@@ -163,7 +163,7 @@ public class UI_Hospitals {
 		}
 	}
 
-	// M: useddd by case2/case1/case3
+	// M: useddd by case2/case1/case3*/
 	public void seeallpatients(Hospital hosp, JPAmanager jpaM) {		
 		try {
 			List<Patient> listpatients = new ArrayList<Patient>();

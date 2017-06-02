@@ -16,7 +16,7 @@ public class SQL_AnimalTissue {
 	public SQL_AnimalTissue(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}
-	//C: USED from insert of DBMAnager
+	//C: USED from insert of DBMAnager*/
 	public boolean insertAnimalTissue(Animal_tissue animalT) {
 		try {
 			Statement stmt = dbManager.getC().createStatement();
@@ -58,7 +58,7 @@ public class SQL_AnimalTissue {
 		}
 		return lookForAnimalT;
 	}
-//M: used
+//M: used*/
 	public boolean updateAnimalTissue(Animal_tissue animalTi) {
 		try {
 			String sql = "UPDATE Animal_tissues SET name=?, typeOfTissue=?, pathology=?, lifeExpTissue=? WHERE id=? ";
@@ -78,7 +78,7 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-	//M: used when deletin animal tisue
+	//M: used when deletin animal tisue*/
 	public boolean deleteAnimalTissue(Animal_tissue animalT) {
 		try {
 			String sql = "DELETE FROM Animal_tissues WHERE id=? ";
@@ -95,7 +95,7 @@ public class SQL_AnimalTissue {
 
 		return false;
 	}
-	//M: useed form dbmanager: assignmentReqAnimal
+	//M: useed form dbmanager: assignmentReqAnimal*/
 	public boolean insertRequestedAnimal(Integer id_requested, Integer id_animal) {
 		try {
 			Statement st = dbManager.getC().createStatement();
@@ -109,7 +109,7 @@ public class SQL_AnimalTissue {
 		}
 		return false;
 	}
-	//C: USED from idOfAnimal(Animal_tissue animalTissue)of DBMAnager
+	//C: USED from idOfAnimal(Animal_tissue animalTissue)of DBMAnager*/
 	public Integer getAnimalId(Animal_tissue animalT){
 		Animal_tissue animalToShow= new Animal_tissue();
 		try {
@@ -134,7 +134,7 @@ public class SQL_AnimalTissue {
 		}
 		return animalToShow.getId();
 	}
-	//M: used in uodate animaltissue
+	//M: used in uodate animaltissue*/
 	public Animal_tissue getAnimalOfRequestedOrgan (Integer idReq){
 		Animal_tissue animal = new Animal_tissue(); 
 		try{
