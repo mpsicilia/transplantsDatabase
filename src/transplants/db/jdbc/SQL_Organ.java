@@ -158,7 +158,7 @@ public class SQL_Organ {
 		Organ org = new Organ();
 		try{
 			Statement stm = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Organs WHERE requested_id = " + request.getId() + " IS NOT NULL";
+			String sql = "SELECT * FROM Organs WHERE requested_id = " + request.getId();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()){
 				Integer id = rs.getInt(1);

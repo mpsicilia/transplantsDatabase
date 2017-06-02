@@ -21,18 +21,17 @@ public class Animal_tissue implements Serializable {
 	private String pathology;
 	private Date lifeExpTissue;
 	
+	//Because we can have many requests that are animal tissues:
 	@ManyToMany(mappedBy = "animalTissues")
 	private List<Requested_organ> requested_organs;
 	
 	
 	public Animal_tissue() {
-		//super();
 		requested_organs=new ArrayList<Requested_organ>();
 	}
 	
 		
 	public Animal_tissue(Integer id, String name, String typeOfTissue, String pathology, Date lifeExpTissue) {
-		//super();
 		this.id = id;
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
@@ -41,7 +40,6 @@ public class Animal_tissue implements Serializable {
 	}
 	
 	public Animal_tissue(String name, String typeOfTissue, String pathology, Date lifeExpTissue) {
-		//super();
 		this.name = name;
 		this.typeOfTissue = typeOfTissue;
 		this.pathology = pathology;

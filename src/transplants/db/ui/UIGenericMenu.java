@@ -301,9 +301,10 @@ public class UIGenericMenu {
 								if (organsOfDon != null) {
 									System.out.print("\nRELATED WITH THE ORGANS:");
 									System.out.print("\n1.Introduce a new organ for donating.");
-									System.out.print("\n2.Update information of an organ");
-									System.out.print("\n3.Delete an organ. ");
-									System.out.print("\n4.Go back to menu.");
+									System.out.print("\n2.Update information of an organ. ");
+									System.out.print("\n3.Delete a human organ. ");
+									
+									System.out.print("\n4.Go back to menu. ");
 									System.out.print("\nChoose an option[1-3]:");
 									String optOrgan = console.readLine();
 									int opOrgan = Integer.parseInt(optOrgan);
@@ -327,7 +328,11 @@ public class UIGenericMenu {
 										uiOrgan.deleteOrgan(donOrg, orgDe, jpaManager);
 										break;
 									case 4:
+										
+										
 										break;
+										
+									
 									}
 								}if (organsOfDon==null){
 									System.out.println("\nThis donor hasn't got any organs.");
@@ -410,7 +415,7 @@ public class UIGenericMenu {
 									System.out.print("\n1.Introduce a new request.");
 									System.out.print("\n2.Update information of requested organ.");
 									System.out.print("\n3.Delete an request. ");
-									System.out.print("\n4.Go back to menu.");
+									System.out.print("\n4.Go back to menu. ");
 									System.out.print("\nChoose an option[1-4]:");
 									String optReq = console.readLine();
 									int opOrgan = Integer.parseInt(optReq);
@@ -444,13 +449,14 @@ public class UIGenericMenu {
 										Requested_organ orgUp = reqs.get(numOrg - 1);
 									if(orgUp.getName().equalsIgnoreCase("collagen") || orgUp.getName().equalsIgnoreCase("skin")){
 											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgUp.getId(), dbManager);
-											System.out.println("ANIMALT_"+animalT);
+											
 											uiAnimalT.updateAnimalTissue(animalT, dbManager);
 									}
 									else{
 										uiRequested.updateReqOrgan(orgUp, dbManager);
+									
 									}
-										break;
+									break;
 
 									case 3://M: deja entonces solo la ultimma linnea y haz opcion aparte con el animallll
 										System.out.println("Introduce the number of the organ: ");
@@ -466,6 +472,7 @@ public class UIGenericMenu {
 											uiRequested.deleteRequestOrgan(orgDe, dbManager);
 										}
 										break;
+								
 									case 4:
 										break;
 									}
@@ -499,37 +506,31 @@ public class UIGenericMenu {
 
 						break;
 					case 5:
-						//show the patient and its requested, who supplies the request and the donated organ
+						System.out.println("\n\n\tCOMPATIBILITY TEST RESULTS:");
 						//get all the hospitals in order to get all the patients
 						List<Hospital> hospitals = dbManager.selectAllHospitals();
 						for(Hospital hosp : hospitals){
 							List<Patient> patsInHosp = jpaManager.searchAllPatients(hosp);
 							for (Patient p : patsInHosp){
-								System.out.println("Patient: " + p.getName());
+								System.out.println("\nPatient: " + p.getName());
 								List<Requested_organ> reqsOfPat = uiRequested.characteristicsOfRequestedOrgans(p.getId(), dbManager);
 								for (Requested_organ ro : reqsOfPat){
 									Organ organOfRequested = dbManager.organOfRequested(ro);
-									List<Organ> organsNotNull = dbManager.selectAllOrgans();
 									
-									if(organOfRequested != null){
-										//Donor donorOfOrgan = jpaManager.getDonorOfOrg(ro.getId());
-										System.out.println("\tRequested organ: " + ro.getName() 
-												+ " ----> Compatible organ: " + organOfRequested.getName() );
-												//+ " {Donor: " + donorOfOrgan.getName() + "}");
-										
+									if(organOfRequested.getName() == null){
+										System.out.println("\t Is waiting for a " + ro.getName() + " transplant.");
 									}
-									else{
-										System.out.println("\tThere are no compatible organs for the requested organ " + ro.getName() + ".");
+									if(organOfRequested.getName() != null){
+										System.out.println("\t Has received a " + organOfRequested.getName() + " transplant.");		
 									}
 									
 								}
 							}
 						}
-
 						break;
 					}
 				}
-					break;
+				break;
 
 				case 3:
 					System.out.println("1. Save the database information in the XML file.");
