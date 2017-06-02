@@ -164,8 +164,7 @@ public class UI_Hospitals {
 	}
 
 	// M: useddd by case2/case1/case3
-	public void seeallpatients(Hospital hosp, JPAmanager jpaM) {
-		
+	public void seeallpatients(Hospital hosp, JPAmanager jpaM) {		
 		try {
 			List<Patient> listpatients = new ArrayList<Patient>();
 			System.out.println("The patients that this hospital has: ");
@@ -175,8 +174,10 @@ public class UI_Hospitals {
 			while (it.hasNext()) {
 				System.out.println(count + ". " + it.next());
 				count++;
-			}		
-		
+			}
+			if (listpatients.isEmpty()){
+				System.out.println("This hospital doesn't have any patients yet. ");
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
