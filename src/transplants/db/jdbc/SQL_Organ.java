@@ -166,7 +166,7 @@ public class SQL_Organ {
 		
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
 		try{
-			this.viewAvailablePatients();
+			
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
@@ -201,16 +201,19 @@ public class SQL_Organ {
 		}
 		return compatiblePatients;	
 		}
-	/*
+	
 	public void deleteExpiredOrgans(){
 		try{
-			Statement stmt= dbManager.getC().createStatement();
-			String sql= "DELETE * FROM Organs WHERE";
-			LocalDate localAdditionDate= additionDate.toLocalDate();
+			
 			LocalDate today= LocalDate.now();
-			Period daysSinceAddition= Period.between(today, localAdditionDate);
+			Statement stmt= dbManager.getC().createStatement();
+			String sql= "DELETE FROM Organs WHERE lifeOfOrgan < '" + today +"'";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-	}*/
+	}
 	
 	public void createTable(){
 		try{

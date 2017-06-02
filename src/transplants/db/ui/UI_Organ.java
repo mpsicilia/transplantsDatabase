@@ -174,6 +174,9 @@ public class UI_Organ {
 		}
 		return don;
 	}
+	
+	
+	
 	//M: used
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
@@ -202,7 +205,7 @@ public class UI_Organ {
 			//tiene que coger el paciente, despues el id del organo(requested) que tiene el mismo nombre que este organo
 			
 			int idR = dbManager.reqIdByPatIdAndDonOrg(pat.getId(), organ.getName());
-			System.out.println("Id del organ requested: "+idR+ "/n Id del organ donante: " + organ.getId());
+		
 			dbManager.requestedFKinOrgan(idR, organ.getId());
 			}
 			

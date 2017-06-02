@@ -154,6 +154,10 @@ public class DBManager implements DBManagerInterface {
 	public int reqIdByPatIdAndDonOrg (int patId, String org){
 		return req.reqIdByPatIdAndDonOrg(patId, org);
 	}
+	
+	public void uiDeleteExpiredOrgans(){
+		org.deleteExpiredOrgans();
+	}
 
 	
 	// searches
