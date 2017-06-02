@@ -12,6 +12,9 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+//We created this class in order to have a root element for our XML file. Is not a real entity as
+//we can see that is why is only annotated with xml.This root element is going to contain a list
+//of hospitals.
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "TransplantDatabase")
 @XmlType(propOrder = {"nameOfDatabase", "hospitalsOfDatabase" })
