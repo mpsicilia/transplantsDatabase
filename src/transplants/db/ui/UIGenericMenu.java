@@ -301,9 +301,10 @@ public class UIGenericMenu {
 								if (organsOfDon != null) {
 									System.out.print("\nRELATED WITH THE ORGANS:");
 									System.out.print("\n1.Introduce a new organ for donating.");
-									System.out.print("\n2.Update information of an organ");
-									System.out.print("\n3.Delete an organ. ");
-									System.out.print("\n4.Go back to menu.");
+									System.out.print("\n2.Update information of an organ. ");
+									System.out.print("\n3.Delete a human organ. ");
+									
+									System.out.print("\n4.Go back to menu. ");
 									System.out.print("\nChoose an option[1-3]:");
 									String optOrgan = console.readLine();
 									int opOrgan = Integer.parseInt(optOrgan);
@@ -327,7 +328,11 @@ public class UIGenericMenu {
 										uiOrgan.deleteOrgan(donOrg, orgDe, jpaManager);
 										break;
 									case 4:
+										
+										
 										break;
+										
+									
 									}
 								}if (organsOfDon==null){
 									System.out.println("\nThis donor hasn't got any organs.");
@@ -410,7 +415,7 @@ public class UIGenericMenu {
 									System.out.print("\n1.Introduce a new request.");
 									System.out.print("\n2.Update information of requested organ.");
 									System.out.print("\n3.Delete an request. ");
-									System.out.print("\n4.Go back to menu.");
+									System.out.print("\n4.Go back to menu. ");
 									System.out.print("\nChoose an option[1-4]:");
 									String optReq = console.readLine();
 									int opOrgan = Integer.parseInt(optReq);
@@ -444,13 +449,14 @@ public class UIGenericMenu {
 										Requested_organ orgUp = reqs.get(numOrg - 1);
 									if(orgUp.getName().equalsIgnoreCase("collagen") || orgUp.getName().equalsIgnoreCase("skin")){
 											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgUp.getId(), dbManager);
-											System.out.println("ANIMALT_"+animalT);
+											
 											uiAnimalT.updateAnimalTissue(animalT, dbManager);
 									}
 									else{
 										uiRequested.updateReqOrgan(orgUp, dbManager);
+									
 									}
-										break;
+									break;
 
 									case 3://M: deja entonces solo la ultimma linnea y haz opcion aparte con el animallll
 										System.out.println("Introduce the number of the organ: ");
@@ -466,6 +472,7 @@ public class UIGenericMenu {
 											uiRequested.deleteRequestOrgan(orgDe, dbManager);
 										}
 										break;
+								
 									case 4:
 										break;
 									}
