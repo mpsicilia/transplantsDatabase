@@ -107,6 +107,14 @@ public class Requested_organ implements Serializable {
 		this.minWeight = minWeight;
 	}
 	
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
 	public List<Animal_tissue> getAnimalTissues(){
 		return animalTissues;
 	}
