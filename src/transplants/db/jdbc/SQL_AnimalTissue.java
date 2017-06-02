@@ -69,7 +69,7 @@ public class SQL_AnimalTissue {
 			prep.setDate(4, animalTi.getLifeExpTissue());
 			prep.setInt(5, animalTi.getId());
 			prep.executeUpdate();
-			prep.close();
+			prep.close();//
 			return true;
 
 		} catch (Exception e) {

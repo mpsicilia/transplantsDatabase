@@ -91,7 +91,7 @@ public class UI_RequestedOrgan {
 		}catch (IOException ex){
 			ex.printStackTrace();
 		}
-		return null; 
+		return null; //
 	}
 	//M: used from case4/ case4/case 2
 	//ML: MARIA SI NO FUNCIONA EL PRIMER IF, PODEMOS HACER QUE TODOS SEAN DE ANIMAL O NO SE METAN EN REQ NORMAL

@@ -438,7 +438,7 @@ public class UIGenericMenu {
 
 									case 2:
 										System.out.println("Introduce the number of the organ: ");
-										numOrg = Integer.parseInt(console.readLine());
+										numOrg = Integer.parseInt(console.readLine());//
 										Requested_organ orgUp = reqs.get(numOrg - 1);
 //										if(orgUp.getName().equalsIgnoreCase("collagen") || orgUp.getName().equalsIgnoreCase("skin")){
 ////											Animal_tissue animalT = uiAnimalT.animalTissueOfRequested(orgUp.getId(), dbManager);
