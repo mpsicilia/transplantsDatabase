@@ -16,22 +16,23 @@ public class XMLDatabase {
 	}
 
 	public boolean javaToXmlDatabase(Marshaller marsh, TransplantDatabase dataH, File fileXML) {
-		try{
+		try {
+			//in order to put the xml pretty
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			marsh.marshal(dataH, fileXML);
 			return true;
-			
-		}catch (Exception ex) {
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return false;
 	}
 
 	public TransplantDatabase xmlToJavaDatabase(Unmarshaller unmarsh, File fileXML, TransplantDatabase dataToUnmarsh) {
-		try{
+		try {
 			dataToUnmarsh = (TransplantDatabase) unmarsh.unmarshal(fileXML);
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dataToUnmarsh;

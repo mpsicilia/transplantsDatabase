@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--  --><!DOCTYPE TransplantDatabase [
+<!DOCTYPE TransplantDatabase [
 	<!ELEMENT TransplantDatabase (Hospitals+)>
 	<!ATTLIST TransplantDatabase nameOfDatabase CDATA #REQUIRED>
 	<!ELEMENT Hospitals (Hospital+)>
@@ -14,17 +14,16 @@
 	<!ELEMENT postcode (#PCDATA)>
 	<!ELEMENT Country (#PCDATA)>
 	<!-- bc each hospital has at least 1 doctor -->	
-	<!ELEMENT Doctors (Doctor+)> 
+	<!ELEMENT Doctors (Doctor)*> 
 	<!ELEMENT Doctor (specialization, registrationNumber)>
 	<!ATTLIST Doctor id CDATA #REQUIRED  name CDATA #REQUIRED  >
 	<!ELEMENT specialization (#PCDATA)> 
 	<!ELEMENT registrationNumber (#PCDATA)>
-	<!--This is because a hospital is going to contain one or more patients-->
-	<!ELEMENT Patients (Patient+)>
+	<!--This is because a hospital is going to contain zero or more patients-->
+	<!ELEMENT Patients (Patient)*>
 	<!ATTLIST Patient id CDATA #REQUIRED name CDATA #REQUIRED>
 	<!ELEMENT Patient (birthDate, gender, weight, height, bloodType, pathology, 
 						additionDate, lifeExpectancy, score)>
-	<!--EL DATE LO HACEMOS IGUAL??????-->
 	<!ELEMENT birthDate (#PCDATA)>
 	<!ELEMENT gender (#PCDATA)>
 	<!ELEMENT weight (#PCDATA)>

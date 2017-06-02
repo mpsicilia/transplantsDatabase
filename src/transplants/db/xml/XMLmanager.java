@@ -33,7 +33,7 @@ public class XMLmanager {
 		}
 	}
 	
-	//marshalling method
+	//marshalling method 
 	public boolean marshalDatabase (TransplantDatabase dataHosp){
 		try{
 			return XMLData.javaToXmlDatabase(marshaller, dataHosp, xmlFile);
@@ -44,7 +44,7 @@ public class XMLmanager {
 		return false;
 	}
 	
-	//unmarshalling method
+	//unmarshalling method 
 	public TransplantDatabase unmarshalDatabase (TransplantDatabase database){
 		try{
 			database = XMLData.xmlToJavaDatabase(unmarshaller, xmlFile, database);
