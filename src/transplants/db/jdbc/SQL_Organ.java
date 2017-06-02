@@ -181,18 +181,12 @@ public class SQL_Organ {
 	//M: used
 	public List<Patient> compatibilityTest(Organ organ){
 		List<Patient> compatiblePatients= new ArrayList<Patient>();
-<<<<<<< HEAD
-		
-		try{
-			Statement stmt= dbManager.getC().createStatement();
-=======
+	
 		try{
 
 			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
-			//Could COLLATE NOCASE be used also for bloodtype... ?
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
-				
+			//Could COLLATE NOCASE be used also for bloodtype... 				
 			String sql ="SELECT * FROM AvailablePatients JOIN Requested_organs ON AvailablePatients.id = Requested_organs.patient_id"
 					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND AvailablePatients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
 				+ " AND Requested_organs.maxWeight >= '" + organ.getWeight() + "' AND Requested_organs.minWeight <= '" + organ.getWeight() + 

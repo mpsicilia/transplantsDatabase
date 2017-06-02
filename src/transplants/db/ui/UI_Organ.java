@@ -165,12 +165,7 @@ public class UI_Organ {
 		}
 		return matchByNameOrgs;
 	}
-
-<<<<<<< HEAD
 	//LO USAMOS?????
-=======
-
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
 	public Donor getDonorOfOrgan(Organ org, JPAmanager jpaManager) {
 		Donor don = new Donor();
 		try {
@@ -180,13 +175,6 @@ public class UI_Organ {
 		}
 		return don;
 	}
-	
-<<<<<<< HEAD
-=======
-	
-	
-
->>>>>>> branch 'master' of https://github.com/mpsicilia/transplantsDatabase
 	//M: used
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();
