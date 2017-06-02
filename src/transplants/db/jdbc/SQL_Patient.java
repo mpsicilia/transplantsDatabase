@@ -1,13 +1,9 @@
 package transplants.db.jdbc;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-import transplants.db.pojos.Patient;
+
+import java.sql.Statement;
+
 
 public class SQL_Patient {
 
@@ -17,24 +13,7 @@ public class SQL_Patient {
 		this.dbManager = dbmanager;
 	}
 
-	//NOT USED yet....
-	//given a requested organ returns the patient that needs it
-	public String patientRequested (int idReq){
-		String nameP = "";
-		try{
-			Statement st = dbManager.getC().createStatement();
-			String sql = "SELECT name FROM Patients AS Pat JOIN Requested_organs AS Req "
-					+ "ON Pat.id = Req.patient_id WHERE Req.id = " + idReq ;
-			ResultSet rs = st.executeQuery(sql);
-			nameP = rs.getString("name");
-			
-			rs.close();
-			st.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return nameP;
-	}
+	
 	public void createTable(){
 		try{			
 			Statement stmt3 = dbManager.getC().createStatement();
