@@ -81,6 +81,7 @@ public class DBManager implements DBManagerInterface {
 			pat.dropTable();
 			animalT.dropTable();
 			org.dropTable();
+			org.dropViewAvailablePatients();
 			don.dropTable();
 			req.dropTable();
 

@@ -5,7 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import transplants.db.pojos.Organ;
@@ -138,15 +139,16 @@ public class SQL_Organ {
 	
 	public void ViewDisponiblePatients(){
 		try{
-		Statement stmt1= dbManager.getC().createStatement();
+		/*Statement stmt1= dbManager.getC().createStatement();
 		String sql1= "DROP VIEW DisponiblePatients";
 		stmt1.executeUpdate(sql1);
-		stmt1.close();
+		stmt1.close();*/
 		
 		
 		Statement stmt2= dbManager.getC().createStatement();
-		String sql= "CREATE VIEW  DisponiblePatients AS SELECT * FROM Patients JOIN Requested_organs ON Patients.id=Requested_organs.patient_id" 
-				+" WHERE Requested_organs.id NOT LIKE (SELECT requested_id  FROM organs)";
+		String sql= "CREATE VIEW AvailablePatients AS SELECT * FROM patients AS p JOIN requested_organs AS req ON "
+				+ "p.id = req.patient_id  WHERE req.id NOT IN (SELECT requested_id FROM organs "
+				+ "WHERE requested_id IS NOT NULL);";
 		stmt2.executeUpdate(sql);
 		
 		stmt2.close();
@@ -165,10 +167,10 @@ public class SQL_Organ {
 			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
 			//Could COLLATE NOCASE be used also for bloodtype... ?
 				
-			String sql ="SELECT * FROM DisponiblePatients JOIN Requested_organs ON DisponiblePatients.id = Requested_organs.patient_id"
-					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND DisponiblePatients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
+			String sql ="SELECT * FROM AvailablePatients JOIN Requested_organs ON AvailablePatients.id = Requested_organs.patient_id"
+					+" WHERE Requested_organs.name LIKE '%" + organ.getName() +"%'  AND AvailablePatients.bloodType LIKE '%" + organ.getDonor().getBloodType() + "%'" 
 				+ " AND Requested_organs.maxWeight >= '" + organ.getWeight() + "' AND Requested_organs.minWeight <= '" + organ.getWeight() + 
-				 "' ORDER BY  DisponiblePatients.score DESC";
+				 "' ORDER BY  AvailablePatients.score DESC";
 
 			ResultSet rs= stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -195,6 +197,17 @@ public class SQL_Organ {
 		}
 		return compatiblePatients;	
 		}
+	/*
+	public void deleteExpiredOrgans(){
+		try{
+			Statement stmt= dbManager.getC().createStatement();
+			String sql= "DELETE * FROM Organs WHERE";
+			LocalDate localAdditionDate= additionDate.toLocalDate();
+			LocalDate today= LocalDate.now();
+			Period daysSinceAddition= Period.between(today, localAdditionDate);
+		}
+	}*/
+	
 	public void createTable(){
 		try{
 			
@@ -229,6 +242,19 @@ public class SQL_Organ {
 			stm.executeUpdate(drop);
 			stm.close();
 		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void dropViewAvailablePatients(){
+		try{
+		Statement stmt1= dbManager.getC().createStatement();
+		String sql1= "DROP VIEW DisponiblePatients";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+		}
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
