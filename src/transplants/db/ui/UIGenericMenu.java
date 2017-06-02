@@ -162,8 +162,9 @@ public class UIGenericMenu {
 								uiHospital.introduceNewHospital(dbManager, jpaManager, database);
 								break;
 							}
+							break;
 						}
-
+						
 						if (counter != 1) {
 							System.out.print("\nRELATED WITH THE HOSPITAL THAT YOU JUST LOOKED FOR:");
 							System.out.print("\n1. Update information.");
