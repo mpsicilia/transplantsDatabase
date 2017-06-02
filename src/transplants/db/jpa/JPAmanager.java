@@ -144,12 +144,7 @@ public class JPAmanager implements DBManagerInterface {
 		// DONE WITH JDBC
 		return null;
 	}
-	
-	@Override
-	public List<Animal_tissue> searchAnimalTissue(String name) {
-		// DONE IN JDBC
-		return null;
-	}
+
 	
 	// M: used by uidonor: searchDonor*/
 	@Override
@@ -172,20 +167,6 @@ public class JPAmanager implements DBManagerInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
-	}
-	
-
-	
-	@Override
-	public List<Organ> searchOrgan(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public List<Requested_organ> searchRequest(String name) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -270,20 +251,8 @@ public class JPAmanager implements DBManagerInterface {
 	}
 	
 	@Override
-	public Integer idOrgan(Organ o) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public Integer idOfAnimal(Animal_tissue animalTissue){
 		//done in jdbc
-		return null;
-	}
-
-	@Override
-	public Integer idDonor(Donor d) {// por ahora este metodo no lo usamos
-		// TODO Auto-generated method stub
-		// don.getIdOfDonor(d);
 		return null;
 	}
 	
@@ -299,22 +268,13 @@ public class JPAmanager implements DBManagerInterface {
 		}
 		return hospital;
 	}
-	@Override
-	public String patientReq(Requested_organ req) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public List<Requested_organ> characteristicsOfRequestedOrgans(int idPatient) {
 		// Done in jdbc
 		return null;
 	}
 	
-	@Override
-	public List<Organ> organsOfDonor(int idDonor) {
-		// Done in JDBC
-		return null;
-	}
 	@Override
 	public List<Hospital> hospitalsOfDoctor(String name){
 		//done in jdbc
@@ -378,13 +338,7 @@ public class JPAmanager implements DBManagerInterface {
 		return null;
 	}
 
-	@Override
-	public Integer getFKrequested(Organ org) {
-		//M: DONE IN JDBC
-		return null;
-
-	}
-
+	
 	@Override
 	public int orgIdByDonIdAndReqOrg(int donId, String reqOrg) {
 		// DONE IN JDBC

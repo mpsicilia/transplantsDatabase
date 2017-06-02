@@ -111,19 +111,4 @@ public class UI_AnimalTissue {
 			}
 	}
 	
-	//Deletion of one animal tissue
-	public void deleteAnimalTissue (Animal_tissue animalT, DBManager dbManager){
-		try{
-			boolean deleted = dbManager.delete(animalT);
-			if(deleted){
-				System.out.println("Animal tissue has been deleted.");
-			}
-			else{
-				System.out.println("Animal tissue has NOT been deleted. ");
-			}
-		}catch (Exception ex){
-			ex.printStackTrace();
-		}
-	}
-	
 }

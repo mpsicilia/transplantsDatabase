@@ -194,18 +194,6 @@ public class DBManager implements DBManagerInterface {
 		}
 		return null;
 	}
-
-	@Override
-	//C: not used, are we going to need it?
-	public List<Animal_tissue> searchAnimalTissue(String name) {
-		try {
-			List<Animal_tissue> animalTList = animalT.searchAnimalTissue(name);
-			return animalTList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	
 	//M: used in updateanimaltissue*/
 	public Animal_tissue animalTissueByIdReq (int idr){
@@ -229,28 +217,7 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 	
-	
-	@Override //M: pau
-	public List<Organ> searchOrgan(String name) {
-		try {
-			List<Organ> organList = org.searchOrgan(name);
-			return organList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
-	@Override
-	public List<Requested_organ> searchRequest(String name) {
-		try {
-			List<Requested_organ> requestList = req.searchReqOrgan(name);
-			return requestList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	@Override
 	public List<Patient> searchAllPatients(Hospital hospital){
 		//done in jpa
@@ -277,17 +244,6 @@ public class DBManager implements DBManagerInterface {
 	
 	public List<Donor> dbCompatiblePatientOrgans(Requested_organ reqOrgan){
 		return req.compatiblePatientOrgans(reqOrgan);
-	}
-	//M: used
-	@Override
-	public List<Organ> selectAllOrgans() {
-		try {
-			List<Organ> organList = org.allOrgans();
-			return organList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	//M: using hospital and doctor, organ, reqorgan, animal*/
@@ -321,7 +277,7 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 
-	//M: hospital uses it + doctor +reqOrgan +animal*/
+	//M: hospital uses it + doctor +reqOrgan*/
 	@Override
 	public boolean delete(Object obj) {
 		try {
@@ -332,10 +288,6 @@ public class DBManager implements DBManagerInterface {
 			if (Doctor.class == obj.getClass()) {
 				Doctor doctor = (Doctor) obj;
 				return doct.deleteDoctor(doctor);
-			}
-			if (Animal_tissue.class == obj.getClass()) {
-				Animal_tissue animalTi = (Animal_tissue) obj;
-				return animalT.deleteAnimalTissue(animalTi);
 			}
 			if (Requested_organ.class == obj.getClass()) {
 				Requested_organ reqOrgan = (Requested_organ) obj;
@@ -375,16 +327,6 @@ public class DBManager implements DBManagerInterface {
 		return id;
 	}
 
-	@Override
-	public Integer idOrgan(Organ o) {
-		Integer id = 0;
-		try {
-			id = org.getOrganId(o);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return id;
-	}
 	//C: USED from ui_animal*/
 	public Integer idOfAnimal(Animal_tissue animalTissue){
 		Integer id = 0;
@@ -395,30 +337,12 @@ public class DBManager implements DBManagerInterface {
 		}
 		return id;
 	}
-
-	@Override
-	public Integer idDonor(Donor d) {
-		//DONE IN JPA
-		return null;
-	}
 	
 	//c: USED
 	@Override
 	public Hospital getHospitalPatient(Integer id){
 		//done in JPA
 		return null;
-	}
-
-	@Override
-	// given a requested organ is going to return the patient
-	public String patientReq(Requested_organ req) {
-		String namePat = "";
-		try {
-			namePat = pat.patientRequested(req.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return namePat;
 	}
 	
 	@Override
@@ -432,18 +356,6 @@ public class DBManager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 		return reqsOfPat;
-	}
-
-	@Override
-	// given a donor is going to return its organs
-	public List<Organ> organsOfDonor(int idDonor) {
-		List<Organ> orgsOfDonor = new ArrayList<Organ>();
-		try {
-			orgsOfDonor = org.organOfDonor(idDonor);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return orgsOfDonor;
 	}
 	
 	@Override
@@ -508,18 +420,6 @@ public class DBManager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-//M: used
-	@Override
-	public Integer getFKrequested(Organ organ) {
-		int fkreq = 0;
-		try{
-			fkreq = org.getFKofRequested(organ);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return fkreq;
 	}
 
 }

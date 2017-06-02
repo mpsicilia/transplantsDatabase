@@ -13,7 +13,7 @@ public class SQL_Hospital {
 		this.dmanager = dbmanager;
 	}
 	
-	//M: in use by dbamanger: searchHosp*/
+	//Used to search the hospitals with that name
 	public List<Hospital> searchHospital(String name) {
 		List<Hospital> lookForHospital = new ArrayList<Hospital>();
 		try {
@@ -40,8 +40,8 @@ public class SQL_Hospital {
 		return lookForHospital;
 	}
 
-	//M: used by dbmanager: hospitalsofdocotr*/
-	// method that tell us given a specific doctor, in which hospital he works
+	
+	// Method that tell us given a specific doctor, in which hospital he works
 	public List<Hospital> searchHospitalsOfDoctor(String doctorName) {
 		List<Hospital> hosps = new ArrayList<Hospital>();
 		try {
@@ -72,7 +72,7 @@ public class SQL_Hospital {
 	}
 
 
-	//M: used from dbmanager: update, and when unmarshalling*/
+	//Used to update a hospital and with the unmarshal
 	public boolean updateHospital(Hospital hosp) {
 		try {
 			String sql = "UPDATE Hospitals SET name=?, phoneNumber=?, address=?,"
@@ -97,7 +97,7 @@ public class SQL_Hospital {
 		return false;
 	}
 
-	//M: use in debemanger: delete*/
+	//To delete a hospital
 	public boolean deleteHospital(Hospital hospital) {
 		try {
 			String sql = "DELETE FROM Hospitals WHERE id=?";
@@ -115,7 +115,7 @@ public class SQL_Hospital {
 		return false;
 	}
 
-	/*M: used from dbmanager: selectAllHospitals*/
+	//Used to select all hospitals
 	public List<Hospital> selectAllHospitals() {
 		List<Hospital> lookForHospital = new ArrayList<Hospital>();
 		try {
@@ -143,7 +143,7 @@ public class SQL_Hospital {
 		return lookForHospital;
 	}
 
-	/*M: used from dbamanger: assignmentdoctrohosp*/
+	//used to assign a doctor into a hospital
 	public boolean insertHospitalsDoctors(Integer hospitalId, Integer doctorId) {
 		try {
 			Statement st = dmanager.getC().createStatement();

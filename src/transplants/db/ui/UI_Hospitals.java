@@ -48,7 +48,6 @@ public class UI_Hospitals {
 			//We use the class TransplantDatabase just to store the hospitals
 			//Is not a real relation so we do the following
 			boolean okDatabase = data.addHospital(hosp);
-
 			if (ok && okDatabase) {
 				System.out.print("Hospital has been introduced");
 			} else {

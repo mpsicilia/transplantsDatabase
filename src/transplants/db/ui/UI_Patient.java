@@ -68,7 +68,7 @@ public class UI_Patient {
 
 				boolean introduced = jpaManager.insert(p);			
 				Integer counterTimes=1;
-				System.out.println("\nIntroduce the number of the hospital in which the patient is hospitalized. ");
+				System.out.println("\nIntroduce the id of the hospital in which the patient is hospitalized. ");
 				
 				Iterator<Hospital> itH = hosps.iterator();
 				while (itH.hasNext()) {
@@ -78,9 +78,8 @@ public class UI_Patient {
 				}
 
 			
-			Integer numHosp = Integer.parseInt(console.readLine());
-			Hospital hospital=hosps.get(numHosp-1);
-			hospital = jpaManager.getHospitalPatient(hospital.getId());         
+			Integer idHosp = Integer.parseInt(console.readLine());
+			Hospital hospital=jpaManager.getHospitalPatient(idHosp);         
 		
 			hospital.addPatient(p);
 			p.setHospital(hospital);
@@ -98,16 +97,15 @@ public class UI_Patient {
 			}
 			Integer Xtimes = Integer.parseInt(console.readLine());
 			Integer counter = 1;
-			Integer doctNum = 0;
+			Integer doctId = 0;
 			boolean introduced2 = false;
 			Integer patId = jpaManager.getIdPatient(p);
 			Integer counterdoct=1;
 			
 			do {
-				System.out.print("Introduce the number of the "+ counterdoct + "º doctor that is going to take care of the patient: ");
-				doctNum = Integer.parseInt(console.readLine());
-				Doctor doct= docs.get(doctNum-1);
-				introduced2 = dbmanager.assigmentDoctorPatient(patId, doct.getId());
+				System.out.print("Introduce the id of the "+ counterdoct + "º doctor that is going to take care of the patient: ");
+				doctId = Integer.parseInt(console.readLine());
+				introduced2 = dbmanager.assigmentDoctorPatient(patId, doctId);
 				counter++;
 				counterdoct++;
 			} while (counter <= Xtimes);
