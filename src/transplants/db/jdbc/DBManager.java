@@ -194,18 +194,6 @@ public class DBManager implements DBManagerInterface {
 		}
 		return null;
 	}
-
-	@Override
-	//C: not used, are we going to need it?
-	public List<Animal_tissue> searchAnimalTissue(String name) {
-		try {
-			List<Animal_tissue> animalTList = animalT.searchAnimalTissue(name);
-			return animalTList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	
 	//M: used in updateanimaltissue*/
 	public Animal_tissue animalTissueByIdReq (int idr){
@@ -241,16 +229,6 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 
-	@Override
-	public List<Requested_organ> searchRequest(String name) {
-		try {
-			List<Requested_organ> requestList = req.searchReqOrgan(name);
-			return requestList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	@Override
 	public List<Patient> searchAllPatients(Hospital hospital){
 		//done in jpa
@@ -371,16 +349,6 @@ public class DBManager implements DBManagerInterface {
 		return id;
 	}
 
-	@Override
-	public Integer idOrgan(Organ o) {
-		Integer id = 0;
-		try {
-			id = org.getOrganId(o);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return id;
-	}
 	//C: USED from ui_animal*/
 	public Integer idOfAnimal(Animal_tissue animalTissue){
 		Integer id = 0;
@@ -391,30 +359,12 @@ public class DBManager implements DBManagerInterface {
 		}
 		return id;
 	}
-
-	@Override
-	public Integer idDonor(Donor d) {
-		//DONE IN JPA
-		return null;
-	}
 	
 	//c: USED
 	@Override
 	public Hospital getHospitalPatient(Integer id){
 		//done in JPA
 		return null;
-	}
-
-	@Override
-	// given a requested organ is going to return the patient
-	public String patientReq(Requested_organ req) {
-		String namePat = "";
-		try {
-			namePat = pat.patientRequested(req.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return namePat;
 	}
 	
 	@Override

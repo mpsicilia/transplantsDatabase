@@ -31,11 +31,9 @@ public interface DBManagerInterface {
 	
 	public List<Hospital> searchHosp(String name); 
 	public List<Doctor> searchDoctor(String name); 
-	public List<Animal_tissue> searchAnimalTissue(String name); //are we going to use it?
 	public List<Donor> searchDonor(String name); 
 	public List<Organ> searchOrgan (String name); //paula usus
 	public List<Patient> searchPatient(String name); 
-	public List<Requested_organ> searchRequest(String name); //not used(jdbc)...gonna need it?
 	public List<Patient> searchAllPatients(Hospital hospital);
 	
 	public List <Hospital> selectAllHospitals();	
@@ -50,12 +48,9 @@ public interface DBManagerInterface {
 	public Integer getIdPatient (Patient patient);
 	public Integer getIdOfDoctor(Doctor doct);
 	public Integer idRequestedOrgan (Requested_organ r);
-	public Integer idOrgan (Organ o);//este todavia no lo usamos....
 	public Integer idOfAnimal(Animal_tissue animalTissue);
-	public Integer idDonor (Donor d);//este todavia no lo usamos (jpa)
 	
 	public Hospital getHospitalPatient(Integer idhosp);
-	public String patientReq (Requested_organ req);//not used....
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient);
 	public List<Organ> organsOfDonor (int idDonor);
 	public List<Hospital> hospitalsOfDoctor(String name);
@@ -64,7 +59,7 @@ public interface DBManagerInterface {
 	public List<Doctor> doctorOfPatient(String pName);
 	public List<Doctor> workingDoctorsInHosp (String hospName);
 	public boolean updateUnmarshalledHosp (Hospital h);
-	public Organ organOfRequested (Requested_organ req); //M: used to show the organ that supplies the requested. SHOW RESULT OF COMPT TEST
-	public Integer getFKrequested (Organ org); //M: used
+	public Organ organOfRequested (Requested_organ req); 
+	public Integer getFKrequested (Organ org); 
 	
 }
