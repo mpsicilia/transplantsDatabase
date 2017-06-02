@@ -379,4 +379,16 @@ public class JPAmanager implements DBManagerInterface {
 
 	}
 
+	@Override
+	public int orgIdByDonIdAndReqOrg(int donId, String reqOrg) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Donor> dbCompatiblePatientOrgans(Requested_organ reqOrgan) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
