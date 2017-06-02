@@ -217,17 +217,6 @@ public class DBManager implements DBManagerInterface {
 		return null;
 	}
 	
-	
-	@Override //M: pau
-	public List<Organ> searchOrgan(String name) {
-		try {
-			List<Organ> organList = org.searchOrgan(name);
-			return organList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	@Override
 	public List<Patient> searchAllPatients(Hospital hospital){
@@ -255,17 +244,6 @@ public class DBManager implements DBManagerInterface {
 	
 	public List<Donor> dbCompatiblePatientOrgans(Requested_organ reqOrgan){
 		return req.compatiblePatientOrgans(reqOrgan);
-	}
-	//M: used
-	@Override
-	public List<Organ> selectAllOrgans() {
-		try {
-			List<Organ> organList = org.allOrgans();
-			return organList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	//M: using hospital and doctor, organ, reqorgan, animal*/
@@ -379,18 +357,6 @@ public class DBManager implements DBManagerInterface {
 		}
 		return reqsOfPat;
 	}
-
-	@Override
-	// given a donor is going to return its organs
-	public List<Organ> organsOfDonor(int idDonor) {
-		List<Organ> orgsOfDonor = new ArrayList<Organ>();
-		try {
-			orgsOfDonor = org.organOfDonor(idDonor);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return orgsOfDonor;
-	}
 	
 	@Override
 	//M: in use by uihosps: doctroHospital*/
@@ -454,18 +420,6 @@ public class DBManager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-//M: used
-	@Override
-	public Integer getFKrequested(Organ organ) {
-		int fkreq = 0;
-		try{
-			fkreq = org.getFKofRequested(organ);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return fkreq;
 	}
 
 }

@@ -23,79 +23,8 @@ public class SQL_Organ {
 	public SQL_Organ(DBManager dbmanager) {
 		this.dbManager = dbmanager;
 	}	
-	
-	//LO Utilizamos???????????????????????????????????????//PAULA LO UTILIZAA
-	public List <Organ> searchOrgan(String name){
-		List<Organ> lookForOrgan = new ArrayList<Organ>();
-		try {
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Organs WHERE name LIKE '%" + name + "%'";
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				String nameOrgan = rs.getString("name");
-				Float weight = rs.getFloat("weight");
-				String typeOfDonation= rs.getString("typeOfDonation");
-				String lifeOfOrg= rs.getString("lifeOfOrgan");
-				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);
-				
-				Organ organToShow = new Organ(id, nameOrgan, weight, typeOfDonation, lifeOfOrgan );
-				lookForOrgan.add(organToShow);
-			}
-			rs.close();
-			stmt.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return lookForOrgan;
-	}
-	
-	public List <Organ> allOrgans(){
-		List<Organ> lookForOrgan = new ArrayList<Organ>();
-		try {
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Organs WHERE requested_id IS NOT NULL";
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				String nameOrgan = rs.getString("name");
-				Float weight = rs.getFloat("weight");
-				String typeOfDonation= rs.getString("typeOfDonation");
-				Date lifeOfOrgan = rs.getDate("lifeOfOrgan");
-				
-				Organ organToShow = new Organ(id, nameOrgan, weight, typeOfDonation, lifeOfOrgan );
-				lookForOrgan.add(organToShow);
-			}
-			rs.close();
-			stmt.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return lookForOrgan;
-	}
-
-	
-	public Integer getFKofRequested (Organ organ){
-		Integer fkReq = 0;
-		try{
-			Statement stmt = dbManager.getC().createStatement();
-			String sql = "SELECT requested_id FROM Organs WHERE id=" + organ.getId();
-			ResultSet rs = stmt.executeQuery(sql);
-			fkReq = rs.getInt(6);
-			
-			rs.close();
-			stmt.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return fkReq;
-	}	
-	
-	//M: used from dbamanger: update*/
+		
+	//M: Used to update
 	public boolean updateOrgan (Organ organ){
 		try {
 			String sql = "UPDATE Organs SET name=?, weight=?, typeOfDonation =?, lifeOfOrgan=? WHERE id=?";
@@ -116,29 +45,7 @@ public class SQL_Organ {
 		return false;
 	}
 	
-	//LO VAMOS A USAR???
-	public int getOrganId(Organ org){
-		int idO = 0;
-		Organ o = new Organ();
-		try{
-			Statement stm = dbManager.getC().createStatement();
-			String sql ="SELECT id FROM Organs WHERE name LIKE '" + org.getName() 
-						+ "' AND weight LIKE '" + org.getWeight() 
-						+ "' AND typeOfDonation LIKE '" + org.getTypeOfDonation() 
-						+ "' AND lifeOfOrgan LIKE '" + org.getLifeOfOrgan() + "'";
-			ResultSet rs = stm.executeQuery(sql);
-			idO = rs.getInt("id");
-			o = new Organ (idO, org.getName(), org.getWeight(), org.getTypeOfDonation(),  org.getLifeOfOrgan());
-			
-			rs.close();
-			stm.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return o.getId();
-	}
-	
-	//C: USADO*/
+	//C: used to relate a requested
 	public boolean insertRequestedFK (int idReq, int idOrg){
 		try{
 			String sql = "UPDATE Organs SET requested_id=? WHERE id=" + idOrg;
@@ -175,37 +82,8 @@ public class SQL_Organ {
 		return org;
 	}
 	
-	//LO vamos a usar?????
-	public List<Organ> organOfDonor (int idD){
-		List <Organ> orgs = new ArrayList<Organ>();
-		try{
-			Statement st = dbManager.getC().createStatement();
-			String sql = "SELECT * FROM Organs AS Org JOIN Donors AS Don "
-					+ "ON  Org.donor_id = Don.id WHERE Org.donor_id = " + idD;
-			ResultSet rs = st.executeQuery(sql);
-			while (rs.next()){
-				Integer id = rs.getInt(1);
-				String nameOrgan = rs.getString(2);
-				Float weight = rs.getFloat(3);
-				String typeDon = rs.getString(4);
-				String lifeOfOrg= rs.getString(5);
-				Date lifeOfOrgan= Date.valueOf(lifeOfOrg);
-				
-				Organ organ = new Organ(id, nameOrgan, weight, typeDon, lifeOfOrgan);
-				orgs.add(organ);
-			}
-			
-			rs.close();
-			st.close();
-		}catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return orgs;
-	}
-	
 	//this method is used in order to get all the patients who's requested organs 
-	//have not yet been assigned to an organ of a donor
-	
+	//have not yet been assigned to an organ of a donor	
 	public void viewAvailablePatients(){
 		try{
 				

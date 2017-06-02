@@ -31,7 +31,6 @@ public interface DBManagerInterface {
 	public List<Hospital> searchHosp(String name); 
 	public List<Doctor> searchDoctor(String name); 
 	public List<Donor> searchDonor(String name); 
-	public List<Organ> searchOrgan (String name); 
 	public List<Patient> searchPatient(String name); 
 	public List<Patient> searchAllPatients(Hospital hospital);
 	
@@ -39,7 +38,6 @@ public interface DBManagerInterface {
 	public List <Doctor> selectAllDoctors();
 	public List<Patient> dbCompatibilityTest(Organ organ); //used
 	public List<Donor> dbCompatiblePatientOrgans(Requested_organ reqOrgan); //used
-	public List<Organ> selectAllOrgans(); 
 	
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);
@@ -51,7 +49,6 @@ public interface DBManagerInterface {
 	
 	public Hospital getHospitalPatient(Integer idhosp);
 	public List<Requested_organ> characteristicsOfRequestedOrgans (int idPatient);
-	public List<Organ> organsOfDonor (int idDonor);
 	public List<Hospital> hospitalsOfDoctor(String name);
 	public String hospitalOfPatient(String pName);
 	
@@ -59,6 +56,5 @@ public interface DBManagerInterface {
 	public List<Doctor> workingDoctorsInHosp (String hospName);
 	public boolean updateUnmarshalledHosp (Hospital h);
 	public Organ organOfRequested (Requested_organ req); 
-	public Integer getFKrequested (Organ org); 
 	
 }
