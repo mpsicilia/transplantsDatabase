@@ -187,9 +187,9 @@ public class SQL_Request {
 			//Could COLLATE NOCASE be used also for bloodtype... ?
 				
 			String sql ="SELECT * FROM AvailableDonors AS ad JOIN organs AS org ON ad.id= org.donor_id " 
-						+"WHERE org.name LIKE '%" +reqOrgan.getName()+"%' AND ad.bloodType LIKE '" +reqOrgan.getPatient().getBloodType()+ 
-						"' AND org.weight <= '"+reqOrgan.getMaxWeight()+"' AND org.weight >= '"+reqOrgan.getMinWeight()+"'";
-
+						+"WHERE org.name LIKE '%" + reqOrgan.getName() + "%' AND ad.bloodType LIKE '%" + reqOrgan.getPatient().getBloodType()+ 
+						"%' AND org.weight <= '" + reqOrgan.getMaxWeight() + "' AND org.weight >= '" + reqOrgan.getMinWeight() + "'";
+			
 			ResultSet rs= stmt.executeQuery(sql);
 			while (rs.next()) {
 				int id = rs.getInt(1);

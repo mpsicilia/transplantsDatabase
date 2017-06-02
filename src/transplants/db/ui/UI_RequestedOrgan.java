@@ -38,7 +38,7 @@ public class UI_RequestedOrgan {
 				Float minWeight = Float.parseFloat(console.readLine());
 				
 				Requested_organ reqOrgan= new Requested_organ(name, maxWeight, minWeight); 
-				boolean ok=dbManager.insert(reqOrgan);
+				boolean ok=dbManager.insert(reqOrgan);			
 				
 				//RELATIONSHIP BETWEEN PATIENT AND REQUESTED ORGAN, one patient has many requested organs
 				//get the id of the patient
