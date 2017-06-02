@@ -53,6 +53,7 @@ public class UI_Organ {
 
 				if (ok && okUpdateOrgan && okUpdateDonor) {
 					System.out.println("Organ has been introduced\n");
+					dbManager.expired();
 					uiCompatibilityTest(organ, dbManager);
 				} else {
 					System.out.println("Organ has NOT been introduced");
@@ -106,6 +107,7 @@ public class UI_Organ {
 			boolean updated = dbManager.update(organ);
 			if (updated) {
 				System.out.println("Organ has been updated. \n" + organ.toString());
+				dbManager.expired();
 				uiCompatibilityTest(organ, dbManager);
 			} else {
 				System.out.println("Organ has NOT been updated. ");
@@ -165,16 +167,8 @@ public class UI_Organ {
 		}
 		return matchByNameOrgs;
 	}
-	//LO USAMOS?????
-	public Donor getDonorOfOrgan(Organ org, JPAmanager jpaManager) {
-		Donor don = new Donor();
-		try {
-			don = jpaManager.getDonorOfOrg(org.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return don;
-	}
+
+
 	//M: used
 	public void uiCompatibilityTest(Organ organ, DBManager dbManager) {
 		List<Patient> compatiblePatients = new ArrayList<Patient>();

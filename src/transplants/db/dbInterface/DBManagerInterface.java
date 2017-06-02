@@ -17,6 +17,7 @@ public interface DBManagerInterface {
 	
 	public boolean createTables();
 	public boolean dropTables();
+	public void expired();
 	
 	//insert para jpa y para jdbc
 	public boolean insert(Object obj);
@@ -31,14 +32,15 @@ public interface DBManagerInterface {
 	public List<Doctor> searchDoctor(String name); 
 	public List<Animal_tissue> searchAnimalTissue(String name); //are we going to use it?
 	public List<Donor> searchDonor(String name); 
+	public List<Organ> searchOrgan (String name); //paula usus
 	public List<Patient> searchPatient(String name); 
-	public List<Organ> searchOrgan(String name); //not used(jdbc)...gonna need it?
 	public List<Requested_organ> searchRequest(String name); //not used(jdbc)...gonna need it?
 	public List<Patient> searchAllPatients(Hospital hospital);
 	
 	public List <Hospital> selectAllHospitals();	
 	public List <Doctor> selectAllDoctors();
 	public List<Patient> dbCompatibilityTest(Organ organ);
+	public List<Organ> selectAllOrgans(); //not used(jdbc)...gonna need it? //M: now i use it
 	
 	public boolean update (Object obj);	
 	public boolean delete (Object obj);
@@ -62,5 +64,6 @@ public interface DBManagerInterface {
 	public List<Doctor> workingDoctorsInHosp (String hospName);
 	public boolean updateUnmarshalledHosp (Hospital h);
 	public Organ organOfRequested (Requested_organ req); //M: used to show the organ that supplies the requested. SHOW RESULT OF COMPT TEST
+	public Integer getFKrequested (Organ org); //M: used
 	
 }

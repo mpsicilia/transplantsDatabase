@@ -1,12 +1,16 @@
 package transplants.db.jdbc;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import transplants.db.pojos.Donor;
+import transplants.db.pojos.Organ;
+import transplants.db.pojos.Patient;
 import transplants.db.pojos.Requested_organ;
 
 public class SQL_Request {
@@ -172,6 +176,43 @@ public class SQL_Request {
 		}
 		return idR;
 	}
+	
+	//used
+	public List<Donor> compatiblePatientOrgans(Requested_organ reqOrgan){
+		List<Donor> compatibleDonors= new ArrayList<Donor>();
+		try{
+
+			Statement stmt= dbManager.getC().createStatement();//Tendr�a que ser un right join no?
+			//COLLATE NOCASE is so that it does not take into account weather it is a capital letter or not
+			//Could COLLATE NOCASE be used also for bloodtype... ?
+				
+			String sql ="SELECT * FROM AvailableDonors AS ad JOIN organs AS org ON ad.id= org.donor_id " 
+						+"WHERE org.name LIKE '%" +reqOrgan.getName()+"%' AND ad.bloodType LIKE '" +reqOrgan.getPatient().getBloodType()+ 
+						"' AND org.weight <= '"+reqOrgan.getMaxWeight()+"' AND org.weight >= '"+reqOrgan.getMinWeight()+"'";
+
+			ResultSet rs= stmt.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String name = rs.getString(2);
+				Date dob = rs.getDate(3);
+				Float weight = rs.getFloat(4);
+				Float height = rs.getFloat(5);
+				String gen = rs.getString(6);
+				String deadAlive = rs.getString(7);
+				String bloodType = rs.getString(8);
+								
+				Donor donorsToShow = new Donor(id,name,dob, weight, height, gen, deadAlive, bloodType);
+				compatibleDonors.add(donorsToShow);
+			}
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return compatibleDonors;	
+		}
 
 	//used
 	public void viewAvailableDonors(){

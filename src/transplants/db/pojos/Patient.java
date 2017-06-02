@@ -32,7 +32,7 @@ public class Patient extends Person implements Serializable {
 	private long score;
 	
 	@ManyToMany
-	//the attribute above joins both tables creating doctors/patients
+	//The attribute above joins both tables creating doctors/patients
 	@JoinTable(name="doctors_patients",
 		joinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="doctor_id", referencedColumnName="id")})
@@ -40,9 +40,9 @@ public class Patient extends Person implements Serializable {
 	//inversejoincolumns makes reference to the opposite class-->doctor
 	//Patient has a list of doctors
 	//Doctor has a list of patients
-	@XmlTransient //to avoid infinite loops, bc a patient has a list of doctors and the doctor has a list of patients and this will never end
-	private List<Doctor> doctors;
-	
+	@XmlTransient //to avoid infinite loops, bc a patient has a list of doctors and 
+				//the doctor has a list of patients and this will never end.
+	private List<Doctor> doctors;	
 	@ManyToOne(fetch = FetchType.LAZY)//only get the hospital when u ask for it (with gethospital)
 	@JoinColumn(name = "hospital_id") // the FK
 	//Hospitals have list of patients and patient contains hospital, made it transient to avoid an infinite loop
@@ -94,7 +94,9 @@ public class Patient extends Person implements Serializable {
 		requested_organ=new ArrayList<Requested_organ>();
 	}
 	
-	
+	//Here we are creating a special method to generate a score for a patient. What this means
+	//is that every time that a patient is introduced we are going to assign to it a number(score)
+	//that represents the preference order when doing the compatibility test.
 	public void generateScore(){
 		LocalDate localLifeExp= lifeExpectancy.toLocalDate();
 		LocalDate localAdditionDate= additionDate.toLocalDate();

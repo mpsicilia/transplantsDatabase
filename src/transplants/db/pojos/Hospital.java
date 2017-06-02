@@ -33,16 +33,17 @@ public class Hospital implements Serializable{
 	private String postcode;
 	@XmlElement(name = "Country")
 	private String country;
-	//Hospital is related with doctor and patient
-	//with doctors is an n-n because one doctor can work at many hospitals and 1 hospital can have many doctors
+	//With doctors is an n-n because one doctor can work at many hospitals and 
+	//1 hospital can have many doctors
 	@ManyToMany
 	@JoinTable(name="HospitalsDoctors",//name of the n-n table
 	joinColumns={@JoinColumn(name="hospital_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="doctor_id", referencedColumnName="id")})
+	
 	@XmlElement (name = "Doctor")
 	@XmlElementWrapper(name = "Doctors")
 	private List<Doctor> doctors;
-	//in the case of patients we have one to many because 1 hospital can host many patients
+	//In the case of patients we have one to many because 1 hospital can host many patients
 	@OneToMany(mappedBy="hospital")
 	@XmlElement (name = "Patient")
 	@XmlElementWrapper (name = "Patients")

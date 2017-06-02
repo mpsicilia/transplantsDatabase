@@ -52,6 +52,7 @@ public class DBManager implements DBManagerInterface {
 			e.printStackTrace();
 		}
 	}
+	@Override
 	public void expired(){
 		org.deleteExpiredOrgans();
 	}
@@ -225,7 +226,7 @@ public class DBManager implements DBManagerInterface {
 	}
 	
 	
-	@Override
+	@Override //M: pau
 	public List<Organ> searchOrgan(String name) {
 		try {
 			List<Organ> organList = org.searchOrgan(name);
@@ -268,6 +269,17 @@ public class DBManager implements DBManagerInterface {
 	@Override
 	public List<Patient> dbCompatibilityTest(Organ organ) {
 		return org.compatibilityTest(organ);
+	}
+	//M: used
+	@Override
+	public List<Organ> selectAllOrgans() {
+		try {
+			List<Organ> organList = org.allOrgans();
+			return organList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	//M: using hospital and doctor, organ, reqorgan, animal
@@ -480,14 +492,27 @@ public class DBManager implements DBManagerInterface {
 		return false;
 	}
 	
-	//M: used by cacse2/case5
+	//M: used by cacse2/case5, AHORA YA NOO
 	public Organ organOfRequested (Requested_organ req){
-		Organ o = new Organ();
 		try{
-			o = org.organThatSuppliesRequest(req);
+			Organ o = org.organThatSuppliesRequest(req);
+			return o;
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return o;
+		return null;
 	}
+	
+//M: used
+	@Override
+	public Integer getFKrequested(Organ organ) {
+		int fkreq = 0;
+		try{
+			fkreq = org.getFKofRequested(organ);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return fkreq;
+	}
+
 }

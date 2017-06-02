@@ -13,7 +13,7 @@ public class Donor extends Person implements Serializable{
 
 	private static final long serialVersionUID = 6705263044123670258L;
 	private String deadAlive;
-   
+	//Because a donor can give many organs
 	@OneToMany(mappedBy="donor") 
 	private List<Organ> organs;
 
@@ -52,7 +52,7 @@ public class Donor extends Person implements Serializable{
 	public void setOrgans(List<Organ> organs){
 		this.organs=organs;
 	}
-	
+	//Additional method to add
 	public boolean addOrgan(Organ organ) {
 		if (!organs.contains(organ)) {
 			 return this.organs.add(organ);

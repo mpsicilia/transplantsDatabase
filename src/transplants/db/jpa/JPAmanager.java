@@ -1,6 +1,5 @@
 package transplants.db.jpa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -365,6 +364,23 @@ public class JPAmanager implements DBManagerInterface {
 	public Organ organOfRequested(Requested_organ req) {
 		//M:DONE IN JDBC
 		return null;
+	}
+
+	@Override
+	public void expired() {
+		// DONE IN JDBC
+	}
+
+	public List<Organ> selectAllOrgans() {
+		//M: DONE IN JDC
+		return null;
+	}
+
+	@Override
+	public Integer getFKrequested(Organ org) {
+		//M: DONE IN JDBC
+		return null;
+
 	}
 
 }
