@@ -45,12 +45,12 @@ public class SQL_Request {
 		}
 		return false;
 	}
-	
+	//used from dbManger(from ui_organ)
 	public int reqIdByPatIdAndDonOrg (int Patid, String name){
 		int a=5;
 		return a;
 	}
-
+	//LO VAMOs a usar??????
 	public List<Requested_organ> searchReqOrgan(String name) {
 		List<Requested_organ> lookForReqOrgan = new ArrayList<Requested_organ>();
 		try {

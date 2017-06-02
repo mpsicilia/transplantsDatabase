@@ -148,6 +148,7 @@ public class DBManager implements DBManagerInterface {
 	public boolean requestedFKinOrgan(int idR, int idO) {
 		return org.insertRequestedFK(idR, idO);
 	}
+	//used
 	@Override
 	public int reqIdByPatIdAndDonOrg (int patId, String org){
 		return req.reqIdByPatIdAndDonOrg(patId, org);
