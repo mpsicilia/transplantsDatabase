@@ -29,9 +29,13 @@ public class Doctor implements Serializable{
 	
 	@ManyToMany(mappedBy= "doctors") 
 	@XmlTransient
+	//Because many doctors can work in different hospitals.
+	//The xmlTransient is because we decided that we were not going to show the hospitals 
+	//from the side of the doctors; we are showing the doctors from the side of the hospitals.
 	private List<Hospital> hospital;
 	@ManyToMany(mappedBy = "doctors")
 	@XmlTransient
+	//Because a doctor can be in charge of many patients
 	private List<Patient> patients;
 
 	//our default constructor
@@ -136,14 +140,14 @@ public class Doctor implements Serializable{
 		}
 		else return false;
 	}
-	
+	// Additional method to remove a hospital from the list of hospitals
 	public boolean addHospital(Hospital hospi) {
 		if (!hospital.contains(hospi)) {
 			return this.hospital.add(hospi);
 		}
 		else return false;
 	}
-	
+	// Additional method to remove a hospital from the list of hospitals
 	public boolean removeHospital(Hospital hosp) {
 		if (hospital.contains(hosp)) {
 			return this.hospital.remove(hosp);

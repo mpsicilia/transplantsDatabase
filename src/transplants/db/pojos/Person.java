@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import transplants.db.xml.SQLDateAdapter;
 
 @Entity
+//This is our parent class for donor and patient. The way in which this inheritance is structure
+//is so in a future, a patient could be a donor and vice versa.
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType (propOrder = {"id", "name", "birthDate", "gender", "weight", "height", "bloodType"})
